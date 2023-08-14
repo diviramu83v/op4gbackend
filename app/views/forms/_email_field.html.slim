@@ -1,0 +1,9 @@
+.form-group
+  - if local_assigns[:label]
+    = form.label field, label, class: 'dashhead-subtitle'
+  - else
+    = form.label field, class: 'dashhead-subtitle'
+  - if local_assigns[:params]
+    = form.email_field field, class: 'form-control', **params
+  - else
+    = form.email_field field, class: 'form-control'

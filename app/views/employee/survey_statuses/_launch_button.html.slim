@@ -1,0 +1,7 @@
+- disabled = local_assigns.fetch :disabled, false
+- label = local_assigns.fetch(:label, 'Launch')
+
+span.mr-1
+  = link_to survey_statuses_url(survey, status: 'live'), method: :post, class: "btn btn-outline-primary #{'disabled' if disabled}" do
+    i.fa.fa-play class="#{'mr-2' unless disabled}"
+    = label unless disabled

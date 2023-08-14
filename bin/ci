@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Exit when any command fails.
+set -e
+
+export CI_BUILD_ID="$HEROKU_TEST_RUN_ID"
+export CI_NAME="heroku"
+export GIT_BRANCH="$HEROKU_TEST_RUN_BRANCH"
+export GIT_COMMIT_SHA="$HEROKU_TEST_RUN_COMMIT_VERSION"
+export GIT_COMMITTED_AT="$(date +%s)"
+
+# Run tests and save exit code.
+rails test
+export TEST_EXIT_CODE=$?
+
+# Format ruby coverage.
+./cc-test-reporter format-coverage --input-type lcov coverage/lcov/app.lcov
+
+# Send code coverage to Code Climate.
+./cc-test-reporter upload-coverage
+
+# Exit with code from test run.
+exit $TEST_EXIT_CODE

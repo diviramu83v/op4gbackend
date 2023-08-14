@@ -1,0 +1,27 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Project close-out', project_close_out_url(@project)
+  li.breadcrumb-item.active Rejected Completes IDs
+
+.mb-5
+  h2
+    span.mr-3 Add rejected IDs for this project (if any were reported)
+.mb-5
+  .mb-3
+    h3 Upload encoded UIDs
+  = form_for :rejected_completes, url: project_rejected_completes_url(@project) do |f|
+    .form-group
+      = render 'employee/cards/text_header_with_tooltip', label: 'Upload UID and Rejected Reason - CSV file', tooltip: 'Upload a CSV file with two columns, no headers. First column is encoded UIDs, second column is the rejected reason.'
+      = f.file_field :encoded_uids, class: 'form-control-file', accept: 'text/csv'
+    .row style='padding-left: 10px;'
+      button.btn.btn-primary.mr-1 type="submit" data-disable="button"
+        i.fas.fa-cloud-upload-alt.mr-2
+        = 'Save'
+      = link_to project_close_out_url(@project), class: 'btn btn-primary' do
+        i.fa.fa-arrow-circle-left.mr-1
+        | Return
+
+- if @project.onboardings.rejected.exists?
+  h5.mb-3 Previously uploaded rejected UIDs
+  .mb-5
+    - @project.onboardings.rejected.each do |onboarding|
+      div = onboarding.token

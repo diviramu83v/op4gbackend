@@ -1,0 +1,30 @@
+single_answer:
+  body: Are you well?
+  question_type: single_answer
+  passing_criteria: pass_if_any_selected
+  onboarding: standard
+  token: qrsxyz
+  status: incomplete
+  template: standard
+  answer_options: ["yes", "no"]
+  target_answers: ["yes"]
+multi_answer:
+  body: What are your favorite two colors?
+  question_type: multi_answer
+  passing_criteria: pass_if_any_selected
+  onboarding: standard
+  token: qwerty
+  status: incomplete
+  template: standard
+  answer_options: ["blue", "yellow", "white", "green"]
+  target_answers: ["blue", "green"]
+open_end:
+  body: What is your zip code?
+  question_type: open_end
+  passing_criteria: pass_if_any_selected
+  onboarding: standard
+  token: zxcvbn
+  status: incomplete
+  template: standard
+  answer_options: ["84111", "84112", "84113", "84114"]
+  target_answers: ["84111", "84112", "84113", "84114"]

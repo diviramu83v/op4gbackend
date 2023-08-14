@@ -1,0 +1,5 @@
+p Reminder: survey opportunity available.
+- if @batch.send_for_client? && @batch.email_body.present?
+  = render 'clients_expert_survey_invite_body'
+- else
+  = render 'expert_survey_invite_body'

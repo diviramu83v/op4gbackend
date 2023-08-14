@@ -1,0 +1,17 @@
+.card.mb-3
+  .card-header
+    .d-flex.justify-content-between
+      h4
+        span.mr-2 = "Onramp ID: #{onramp.id}"
+  .card-body
+    .row.mb-3
+      .col-lg-2
+        = render 'employee/cards/text_element', label: 'Category', value: onramp.category.humanize
+      .col-lg-3
+        = render 'employee/cards/text_element', label: 'Source', value: onramp.source_model_name
+    .row
+      .col-lg-10
+        table.table.table-sm
+          thead = render 'employee/survey_block_reasons/table_header'
+          - reasons_hash.each do |reason, count|
+            tbody = render 'employee/survey_block_reasons/table_row', reason: reason, count: count

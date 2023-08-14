@@ -1,0 +1,33 @@
+.card.mb-4
+  .card-header
+    .d-flex.justify-content-between
+      h4
+        span
+          span.mr-2 = survey.name
+          span.badge.mr-2 class="badge-#{survey_status_class(survey.status)}"
+            = survey.status
+          - if can?(:view_and_modify, Project)
+            span.mr-3
+              = link_to survey_url(survey), class: 'card-header-link' do
+                i.fa.fa-list-ul.mr-3
+                | Details
+  .card-body
+    .row
+      .col-2
+        .mb-4 = render 'employee/cards/text_element', label: 'Accepted ID count', value: survey.onboardings.complete.accepted.count
+      .col-2
+        .mb-4 = render 'employee/cards/text_element', label: 'Earnings count', value: survey.earnings.count
+      .col-2
+        .mb-4 = render 'employee/cards/text_element', label: 'Fraudulent ID count', value: survey.onboardings.complete.fraudulent.count
+      .col-2
+        .mb-4 = render 'employee/cards/text_element', label: 'Rejected ID count', value: survey.onboardings.complete.rejected.count
+      .col-2
+        .mb-4 = render 'employee/cards/text_element', label: 'Unaccepted count', value: survey.unaccepted_count
+      .col-2
+        .mb-4 = render 'employee/cards/text_element', label: 'Remaining ID count', value: survey.remaining_id_count
+    - survey.vendor_batches.order(:created_at).each do |vendor_batch|
+      = render 'employee/project_close_outs/vendor_stats', onramp: vendor_batch.onramp
+    - survey.disqo_quotas.each do |disqo_quota|
+      = render 'employee/project_close_outs/vendor_stats', onramp: disqo_quota.disqo_onramp
+    - survey.cint_surveys.each do |cint_survey|
+      = render 'employee/project_close_outs/vendor_stats', onramp: cint_survey.onramp

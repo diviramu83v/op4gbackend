@@ -1,0 +1,49 @@
+.mb-5
+  h2 Completes by vendor
+.mb-5
+  .row
+    .col-3
+      span
+        .mt-2
+          = form_for :report do |f|
+            .d-flex.justify-content-start
+              span.mr-1.mr-3
+                span.mr-1 = label :vendor, 'Vendor'
+                = f.select :vendor, options_from_collection_for_select(Vendor.active.order(:name), :id, :name), { prompt: 'All Vendors' }, id: 'vendor-field', class: 'form-control ml-1 mr-3'
+                span.mr-1 = label :start_date, 'Start date'
+                = f.date_field :start_date, { id: 'start-date-field', class: 'form-control ml-1 mr-3' }
+                span.mr-1 = label :end_date, 'End date'
+                = f.date_field :end_date, { id: 'end-date-field', class: 'form-control ml-1 mr-3' }
+                span#download-button.btn.btn-outline-primary.mt-2
+                  i.fas.fa-cloud-download-alt.mr-1
+                  | Download
+
+coffee:
+  $('#download-button').click ->
+    $(this).html("<i class='fa fa-spinner fa-pulse mr-2'></i>Downloading")
+    $('#download-button').addClass('disabled');
+    $('#download-button').css('pointer-events', 'none');
+    App.completes_by_vendor_download = App.cable.subscriptions.create {
+      channel: "CompletesByVendorReportDownloadChannel",
+      start_date: $('#start-date-field').val(),
+      end_date: $('#end-date-field').val(),
+      vendor: $('#vendor-field').val()
+    },
+      received: (data) ->
+        $('#download-button').html("<i class='fas fa-cloud-download-alt mr-1'></i>Download")
+        $('#download-button').removeClass('disabled');
+        $('#download-button').css('pointer-events', 'auto');
+        blob = new Blob([data['csv_file']['content']]);
+
+        # Create a link with the data and trigger click event to download the file
+        csv_download_link = document.createElement('a');
+        csv_download_link.href = window.URL.createObjectURL(blob);
+        csv_download_link.download = data['csv_file']['file_name'];
+        csv_download_link.click();
+
+        App.completes_by_vendor_download.unsubscribe()
+        App.cable.disconnect()
+        delete App.completes_by_vendor_download
+        return
+
+

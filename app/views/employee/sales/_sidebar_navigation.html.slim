@@ -1,0 +1,7 @@
+nav#sidebar.navbar.navbar-dark.justify-content-start.flex-column.align-items-start.d-none.d-lg-flex
+  h5 = link_to 'Sales', sales_dashboard_url, class: nav_link_class(sales_dashboard_url)
+  ul.navbar-nav
+    li.nav-item.mr-3 = link_to 'Projects', projects_url, class: nav_link_class(projects_url)
+    li.nav-item.mr-3 = link_to 'Feasibility tool', feasibilities_url, class: nav_link_class(feasibilities_url)
+    li.nav-item.mr-3 = link_to 'Disqo feasibility tool', disqo_feasibilities_url, class: nav_link_class(disqo_feasibilities_url)
+    li.nav-item.mr-3 = link_to 'Cint feasibility tool', cint_feasibilities_url, class: nav_link_class(cint_feasibilities_url)

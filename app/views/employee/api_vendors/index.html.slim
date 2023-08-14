@@ -1,0 +1,29 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item Vendors
+.mb-5
+  .mb-3
+    .d-flex
+      h3
+        span.mr-3 Vendors
+  table.table.table-sm.mb-0 data-sort='table'
+    thead
+      tr
+        th Name
+        th Total Projects
+        th Live Projects
+        th Closed Projects
+        th Hold Projects
+        th Total Payout
+        th Average Payout
+        th Total Revenue
+    tbody
+      - @vendors.each do |vendor|
+        tr
+          td = link_to vendor.name, api_vendor_url(vendor)
+          td = format_number(vendor.api_projects.count)
+          td = format_number(vendor.api_projects.live.count)
+          td = format_number(vendor.api_projects.finished.count)
+          td = format_number(vendor.api_projects.hold.count)
+          td = number_to_currency(vendor.total_api_payout)
+          td = number_to_currency(vendor.average_api_payout)
+          td = number_to_currency(vendor.total_api_revenue)

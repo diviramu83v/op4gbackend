@@ -1,0 +1,718 @@
+it:
+  date:
+    month_names: [~, gennaio, febbraio, marzo, aprile, maggio, giugno, luglio, agosto, settembre, ottobre, novembre, dicembre]
+    abbr_month_names: [~, genn, febbr, mar, apr, magg, giugno, luglio, ag, sett, ott, nov, dic]
+    month: "Mese"
+    day: "Giorno"
+    year: "Anno"
+  panelist:
+    header:
+      surveys_link: "sondaggio"
+      account_link: "acconto"
+      support_link: "supporto tecnico"
+      sign_out_link: "disconnessione"
+    footer:
+      terms_link: "Termini & Condizioni"
+      privacy_link: "Politica sulla riservatezza"
+    accept_terms_and_conditions:
+      show:
+        submit: "Accetta questi termini"
+    birthdates:
+      edit:
+        change_birthdate: "Cambia la data di nascita"
+        birthdate: "Data di nascita"
+        save: "Salva informazioni"
+      update:
+        success_flash: "Profilo aggiornato"
+        alert_flash: "Il profilo non può essere aggiornato"
+    landing_pages:
+      default:
+        welcome: "Benvenuto a Op4G!"
+        have_an_opinion: "Fatti pagare per condividere le tue opinioni!"
+        explanation_one: "Grazie per il tuo interesse ad aderire a Opinions4Good. Guadagna denaro fornendo feedback su una varietà di diversi argomenti di ricerca. Una volta raggiunti $ 10 di guadagni, verrai automaticamente pagato il mese successivo direttamente sul tuo conto PayPal verificato."
+        explanation_two: "Guadagna i tuoi primi $ 2 compilando il tuo profilo membro! Questo ci aiuta a inviarti sondaggi che meglio corrispondono ai tuoi interessi personali."
+        join_button: "Diventa un membro di Op4G"
+    registrations:
+      new:
+        sign_up: "Registrare"
+        form:
+          first_name_label: "Nome di battesimo"
+          last_name_label: "Cognome "
+          email_label: "E-mail"
+          password_label: "Password"
+    sessions:
+      new:
+        sign_in: "Registrati"
+        form:
+          email_label: "E-mail"
+          password_label: "Password"
+          remember_me_label: "Ricordati di me"
+          sign_in_button: "Accesso"
+    confirmations:
+      new:
+        resend_confirmation_instructions: "Si prega di inserire il Suo indirizzo e-mail in basso per il rinvio dell'e-mail di conferma."
+        resend_confirmation: "Rinvio dell'e-mail di conferma"
+    passwords:
+      new:
+        forgot_password: "Resetta la password"
+        send_reset_instructions: "Ripristino della password"
+      edit:
+        change_password: "Ripristino della password"
+        update: "Aggiorna il profilo"
+    terms_and_conditions:
+      show:
+        terms_and_conditions: "Termini & condizioni"
+    base_demographics:
+      show:
+        basic_information: "Profilo del socio"
+        address: "Indirizzo (via e numero)"
+        address_line_two: "Indirizzo"
+        city: "città"
+        state: "Provincia"
+        postal_code: "codice postale"
+        birthdate: "Data di nascita"
+        business_name: "Nome commerciale"
+        prompt: "Scegline uno"
+        save: "Salva informazioni"
+    demographics:
+      create:
+        flash:
+          no_answers: "Non sono state apportate modifiche."
+          success_some: "sono state apportate modifiche - %{count} %{subject}."
+          success_all: "Grazie per aver completato il tuo profilo."
+          answer: "Risposta"
+    demographic_categories:
+      show:
+        about-me: "À propos de moi"
+        education: "Éducation"
+        electronics: "Électronique"
+        job: "Emploi"
+        household: "Ménage"
+        purchasing: "Achat"
+        online: "En ligne"
+        food: "liments"
+        lifestyle: "Mode de vie"
+        medical: "Médical"
+        financial: "Financier"
+        politics: "Politique"
+        demographic_questionnaire: "Profilo del socio"
+        instructions: "Si prega di rispondere alle domande di seguito."
+        save: "Ricordati di me"
+        prompt: "Scegline uno"
+        gender: "Qual è il Suo genere?"
+        state: "In quale regione risiede attualmente?"
+        province: "In quale regione risiede attualmente?"
+        region: "In quale regione risiede attualmente?"
+        employment_status: "Qual è la Sua posizione lavorativa?"
+        professional_industries: "Lavora in uno dei seguenti settori?"
+        employee_count: "E, approssimativamente, quanti dipendenti lavorano per la Sua organizzazione?"
+        in_home_product_tester: "Sarebbe interessato ad unirsi a comunità centrate su argomenti specifici o a partecipare a Test su prodotti in casa?"
+        purchaser: "Prendi le decisioni di acquisto giornaliere?"
+        ethnicity: "Qual è la tua etnia?"
+        household_income: "Qual è il reddito annuale del Suo nucleo familiare?"
+        highest_level_of_education: "Qual è il più alto livello di istruzione che ha ricevuto?"
+        marital_status: "Qual è il Suo stato civile?"
+        children: "Lei ha figli?"
+        :under_6: "Quante persone nella tua famiglia hanno meno di 6 anni?"
+        :6_11: "Quante persone nella tua famiglia hanno 6-11 anni?"
+        :12_17: "Quante persone nella tua famiglia hanno 12-17 anni?"
+        :18_24: "Quante persone nella tua famiglia hanno 18-24 anni?"
+        :25: "Quante persone nella tua famiglia hanno 25 anni e più?"
+        teenager: "Suo(a) figlio(a) adolescente è disposta(a) a partecipare ai sondaggi?"
+        interests: "A quali dei seguenti partecipa/in quali dei seguenti ha interesse a partecipare?"
+        personal: "Personnel"
+        work: "Travail"
+        family: "Famille"
+    welcomes:
+      show:
+        welcome: "Benvenuto!"
+        note: "Profilo utente"
+        view_dashboard: "Vedi profilo"
+    dashboard:
+      show:
+        last_month: "Lo scorso mese"
+        this_month: "Questo mese"
+        available_surveys: "Sondaggi disponibili"
+        no_surveys_open: "Attualmente non ci sono sondaggi disponibili."
+        no_surveys_in_review: "Nessun sondaggio in revisione da mostrare ancora."
+        no_surveys_paid: "Nessun sondaggio retribuito da mostrare ancora."
+        no_surveys_rejected: "Nessun sondaggio è stato ancora respinto."
+        completed_surveys: "La mia Cronologia dei sondaggi"
+        in_review_surveys: "Sondaggi in revisione"
+        paid_surveys: "Sondaggi retribuiti"
+        rejected_surveys: "Sondaggi respinti"
+        no_surveys_completed: "Al momento attuale, Lei non ha completato alcun sondaggio.  Allora vogliamo iniziare?"
+        earnings_snapshot: "Registra delle transazioni relative ai premi"
+        current_balance: "Saldo del conto"
+        balance: "Saldo del conto"
+        additional_funds_needed: "Fondi necessari"
+        view_earnings_details: "Vedere l'account"
+        next_payout_date: "Ricompensa successiva"
+        payout_date: "Ricompensa"
+        last_months_balance: "Saldo del mese scorso"
+        current_months_balance: "saldo del mese corrente"
+        donations_snapshot: "Contributi"
+        contribution_percentage: "Contributo di beneficenza"
+        quarterly_contribution: "Contributo trimestrale"
+        total_op4g_contribution: "Contributo totale"
+        adjust_contribution: "Regola contributo"
+        title_column_header: "Sondaggio in fase di elaborazione"
+        payout_column_header: "Compenso"
+        completed_column_header: "Completato"
+        take_survey_button_label: "Inizio"
+        dismiss_survey_button_label: "Respingere"
+    accounts:
+      show:
+        navigation_header: "Vedere l'account"
+        view_earnings: "Visualizza guadagni"
+        change_email: "Cambia e-mail"
+        adjust_contribution: "Regola contributo"
+        donate: "Donare"
+        view_demographics: "Vedere l'account"
+        change_password: "Ripristino della password"
+        change_birthdate: "Cambia la data di nascita"
+        delete_account: "Supprimer votre compte"
+    emails:
+      edit:
+        change_email: "Cambia e-mail"
+        email_label: "E-mail"
+    payments:
+      show:
+        summary_header: "Registra delle transazioni relative ai premi"
+        current_balance: "Saldo del conto"
+        balance_required: "Idoneo al pagamento"
+        funds_needed: "Fondi necessari"
+        next_payout_date: "Ricompensa successiva"
+        or_next_business_day: "o il giorno lavorativo successivo"
+        details_header: "Guadagni"
+        legacy_header: "Eredità"
+        period_header: "Trimestre"
+        description_header: "Descrizione"
+        amount_header: "Cifra"
+        personal_header: "Personnel"
+        nonprofit_header: "Non lucratif"
+    account_demographics:
+      show:
+        demographic_header: "Profilo demografico"
+    contributions:
+      show:
+        adjust_contribution: "Regola contributo"
+        change_your_contribution: "Changer votre contribution"
+        change_your_nonprofit: "Changer votre but non lucratif"
+        current_contribution: "Contributo attuale"
+        select_a_nonprofit: "Sélectionnez une organisation à but non lucratif"
+        your_nonprofit_contribution: "Votre contribution à but non lucratif"
+    private:
+      show:
+        change_password: "Ripristino della password"
+        password_label: "Password"
+        current_password_label: "Password attuale"
+        new_password_label: "Nuova password"
+        confirm_password_label: "Conferma password"
+        submit_button: "Salva informazioni"
+    support:
+      show:
+        header: "Op4G Supporto tecnico"
+        hours: "Ore di operazione"
+        mon_fri: "Da lunedì a venerdì"
+        nine_to_five_eastern: "9:00 - 17:00 EST (US)"
+        contact: "E-mail"
+  forms:
+    disable_submit_with: "Salva informazioni"
+  devise:
+    links:
+      sign_in: "Accesso"
+      sign_up: "Registrare"
+      forgot_password: "Resetta la password"
+      missing_confirmation: "Reinvia mail di conferma"
+    mailer:
+      welcome: "Benvenuto"
+      hi: "Hi"
+      closing: "Migliore,"
+      interest: "Grazie per il tuo interesse a diventare un membro del panel Opinions4Good. I nostri esperti partecipano a interessanti ricerche di mercato e vengono pagati in contanti, con la possibilità di donare una parte a uno dei nostri oltre 300 partner senza scopo di lucro. La partecipazione è gratuita e la tua privacy è garantita. È una ricerca di mercato per una causa!"
+      confirm: "Prima di iniziare a partecipare ai sondaggi, abbiamo bisogno che tu confermi il tuo account. Basta cliccare qui sotto:"
+      mistake_text: "Se hai ricevuto questa e-mail per errore, eliminala semplicemente. Non sarai abbonato se non fai clic sul link di conferma sopra."
+      support_text: "Contattaci al support@op4g.com"
+      signature_text: "Op4G Team di gestione dei progetti"
+      confirmation_instructions:
+        confirm_account: "Clicca qui sotto per confermare il tuo account:"
+        confirm_account_link: "Confermare"
+      reset_password_instructions:
+        someone_has_requested: "Hai richiesto una nuova password.  Clicca sotto per continuare."
+        change_password: "Ripristino della password"
+        ignore: "Se non hai richiesto questo, puoi ignorare."
+  demo_options:
+    1_billion_to_1_4_billion: 1 milliard à 1,4 milliard
+    1_million_to_4_9_million: 1 million à 4,9 millions
+    1_to_24: 1 à 24
+    1_to_4: 1 à 4
+    1_000_000_to_1_999_999: 1 000 000 à 1 999 999
+    1_000_to_1_499: 1 000 à 1 499
+    1_5_billion_to_1_9_billion: 1,5 milliard à 1,9 milliard
+    1_500_to_4_999: 1 500 à 4 999
+    2_000_000_to_2_999_999: 2 000 000 à 2 999 999
+    25k_50k: $25k-$50k
+    5_million_to_24_million: 5 millions à 24 millions
+    5_million_to_9_9_million: 5 millions à 9,9 millions
+    5_to_24: 5 à 24
+    50k_75k: $50k-$75k
+    100k_125k: $100k-$125k
+    100_000_to_124_999: 100 000 à 124 999
+    100_000_to_499_999: 100 000 à 499 999
+    100_to_249: 100 à 249
+    10_million_to_19_9_million: 10 millions à 19,9 millions
+    125k_150k: $125k-$150k
+    125_000_to_149_999: 125 000 à 149 999
+    150k_200k: $150k-$200k
+    150_million_to_249_million: 150 millions à 249 millions
+    150_000_to_174_999: 150 000 à 174 999
+    16_000_to_49_999: 16 000 à 49 999
+    175_000_to_199_999: 175 000 à 199 999
+    2_billion_to_4_9_billion: 2 milliards à 4,9 milliards
+    200k_250k: $200-$250k
+    200_000_to_249_999: 200 000 à 249 999
+    20_million_or_more: 20 millions ou plus
+    250k: $250k+
+    250_000_eur_or_more:
+    250_000_to_299_999: 250 000 à 299 999
+    250_million_to_499_million: 250 millions à 499 millions
+    25_to_49: 25 à 49
+    25_million_to_74_million: 25 millions à 74 millions
+    25_000_or_more: 25 000 ou plus
+    25_000_to_49_999: 25 000 à 49 999
+    250_to_499: 250 à 499
+    300_000_to_399_999: 300 000 à 399 999
+    3_000_000_to_3_999_999: 3 000 000 à 3 999 999
+    400_000_to_499_999: 400 000 à 499 999
+    4_000_000_or_more: 4 000 000 ou plus
+    5_billion_to_9_9_billion: 5 milliards à 9,9 milliards
+    5_000_to_24_999: 5 000 à 24 999
+    50_to_99: 50 à 99
+    50_000_or_more: 50 000 ou plus
+    50_000_to_74_999: 50 000 à 74 999
+    50_000_to_99_999: 50 000 à 99 999
+    500_000_to_749_999: 500 000 à 749 999
+    500_000_to_999_999: 500 000 à 999 999
+    500_million_to_749_million: 500 millions à 749 millions
+    500_to_999: 500 à 999
+    750_000_to_999_999: 750 000 à 999 999
+    75k_100k: $75k-$100k
+    75_million_to_149_million: 75 millions à 149 millions
+    75_000_to_99_999: 75 000 à 99 999
+    750_million_to_999_million: 750 millions à 999 millions
+    accountant_cpa_auditor: Comptable / CPA / Auditeur
+    accounting: Comptabilité
+    administrator: Administrateur
+    advertising:
+    aerospace_defense: Aérospatial et Défense
+    african_american: Afro-américain
+    agriculture_fishing:
+    agriculture_forestry_landscaping: Agriculture / foresterie / aménagement paysager
+    american_indian_alaska_native: Indien d'Amérique / Native Alaska
+    apprenticeship:
+    architect: Architecte
+    architecture:
+    artist_designer_actor_musician: Artiste / designer / acteur / musicien
+    arts_crafts:
+    arts_entertainment_recreation: Arts / divertissement / loisirs
+    asian: Asiatique
+    asian_indian: Indien asiatique
+    associate_s_degree_earned: Diplôme d'associé obtenu
+    associate_s_degree_earned_vocational_program: Diplôme d'associé obtenu - Programme professionnel
+    associate_s_degree_earned_academic_program: Diplôme de partenaire obtenu - programme académique
+    automotive:
+    automotive_transport: Automobile / transport
+    aviation:
+    bachelor_s_or_undergraduate_degree_earned: Baccalauréat ou diplôme de premier cycle acquis
+    banking: Bancaire
+    banking_financial:
+    baseball:
+    basketball:
+    bio_tech:
+    bisexual: Bisexuel
+    black_african_american: Noir / Afro-américain
+    boating_sailing:
+    bowling:
+    british_national_party_uk: Parti national britannique (UK)
+    broadcasting_tv_radio: Radiodiffusion / télévision / radio
+    broker_dealer_trader: Courtier / revendeur / commerçant
+    brokerage:
+    builder_building_contractor: Constructeur / entrepreneur en bâtiment
+    building_construction: Bâtiment / construction
+    business_services: Les services aux entreprises
+    carpenting_electrical_installations_vvs:
+    caucasian: Caucasien
+    certified_financial_planner_cfp: Planificateur financier agréé (CFP)
+    certified_public_account_cpa: Compte public certifié (CPA)
+    chief_executive_officer_ceo: Président Directeur-Général (PDG)
+    chief_financial_officer_cfo: Dirigeant principal des finances (CFO)
+    chief_information_officer_cio: Dirigeant principal de l'information (DPI)
+    chief_marketing_officer_cmo: Directeur Marketing (CMO)
+    chief_operating_officer_coo: Chef de l'exploitation (COO)
+    chief_technology_officer_cto: Directeur Technique (CTO)
+    chemical: Chimique
+    chemicals_plastics_rubber:
+    chinese: chinois
+    civil_union_domestic_partnership: Union civile / partenariat domestique
+    clergy_other_person_at_religious_institution: Clergé / autre personne dans une institution religieuse
+    college_grad: diplômé de l'Université
+    completed_vocational_training:
+    communications_information:
+    company_offices_premises: Bureaux / locaux de l'entreprise
+    computer_hardware:
+    computer_network_services: Services informatiques / réseau
+    computer_reseller_software_hardware:
+    computer_software:
+    computers_it_electronics:
+    conservative_ca: Conservateur (CA)
+    construction:
+    consultant: Consultant
+    consultant_analyst_specialist: Consultant / analyste / spécialiste
+    consulting:
+    consumer_electronics:
+    consumer_packaged_goods:
+    continuous_travel_on_the_road: Voyage continu / sur la route
+    cosmetologist_barber_other_personal_care: Cosmétologue / coiffeur / autre soin personnel
+    cooking:
+    counselor_psychologist_therapist: Conseiller / psychologue / thérapeute
+    couponing:
+    cricket:
+    cycling:
+    democratic: Démocratique
+    dentist: Dentiste
+    department_head: Chef de département
+    designer: Designer
+    dining_out:
+    director: Réalisateur
+    divorced: Divorcé
+    doctorate: doctorat
+    doctorate_earned_phd_edd_etc: Doctorat obtenu (PhD, EdD, etc.)
+    domestic_partnership: Partenariat domestique
+    don_t_know_prefer_not_to_say:
+    drama_arts:
+    education:
+    education_professional: Professionnel de l'éducation
+    education_teaching_coaching: Education / enseignement / encadrement
+    educator_teacher_coach: Educateur / prof / entraîneur
+    employed_full_time_35_hours_per_week: Employé à temps plein (35 heures et plus par semaine)
+    employed_part_time_under_35_hours_per_week: Employé à temps partiel (moins de 35 heures par semaine)
+    energy_utilities: Energie / utilités
+    energy_utilities_oil_and_gas:
+    engineer: Ingénieur
+    engineering:
+    engineering_scientific_professional: Ingénieur / scientifique professionnel
+    engineering_services: Services d'ingénierie
+    environmental_services:
+    executive_senior_vice_president: Vice-président exécutif / senior
+    farmer_rancher: Fermier / propriétaire de ranch
+    fashion_apparel:
+    female: Femelle
+    filipino: Philippin
+    financial_securities_analyst: Analyste financier / titres
+    financial_services_investments: Services financiers / investissements
+    financial_services_professional: Professionnel des services financiers
+    fishing:
+    food_beverage:
+    football:
+    full: Complet
+    full_time_disabled: Invalides à temps plein
+    gambling:
+    gaming:
+    gardening:
+    general_manager_director: Directeur général / directeur
+    golf:
+    government_federal_state_local: Gouvernement (fédéral etat local)
+    government_public_sector:
+    guamanian_chamorro: Guamanian / Chamorro
+    habilitation:
+    health_medical_services: Santé / médical / services
+    healthcare:
+    heterosexual: Hétérosexuel
+    high_school:
+    high_school_secondary_school_graduate: Diplôme d'études secondaires
+    higher_education:
+    hiking:
+    hispanic_latino: Hispanique / Latino
+    hockey:
+    homemaker: Ménagère
+    homosexual_lesbian_gay: Homosexuel (lesbienne / gay)
+    hospitality_tourism:
+    hs: École secondaire
+    human_resources:
+    hunting:
+    i_am: je suis
+    i_don_t_know: Je ne sais pas
+    i_share_that_responsibility_with_someone_else_others: Je partage cette responsabilité avec quelqu'un d'autre
+    independent: Indépendant
+    information_technology_it:
+    insurance: Assurance
+    intermediate_school:
+    internet:
+    internet_publishing_services: Publication sur Internet
+    investment_banker: Banquier d'investissement
+    it_professional: Professionel de l'informatique
+    it_technology_software: Informatique / technologie / logiciel
+    japanese: Japonais
+    korean: coréen
+    lacrosse:
+    law_enforcement: Forces de l'ordre
+    law_enforcement_officer: Agent d'application de la loi
+    lawyer: Avocat
+    lawyer_judge: Avocat / juge
+    legal_law:
+    legal_professional: Juriste
+    legal_services: Services juridiques
+    less_than_100_000: moins de 100 000
+    less_than_hs: Inférieur à HS
+    liberal_ca: Libéral (CA)
+    male: Mâle
+    management_administration: Administration de la gestion
+    management_consulting_services: Services de conseil en gestion
+    manager: Directeur
+    manufacturing: Fabrication
+    market_research:
+    marketing: Commercialisation
+    marketing_sales:
+    married: Marié
+    master_s_degree_earned: Master obtenu
+    master_tradesman:
+    media_advertising_public_relations: Publicité dans les médias / relations publiques
+    media_entertainment:
+    medical_assistant: Assistant médical
+    medical_doctor_dentist: Médecin / dentiste
+    medical_doctor_md: Docteur en médecine
+    medical_practice: Pratique médicale
+    medical_professional_nurse_nurse_s_aid_etc: Professionnel de la santé (infirmière, infirmière auxiliaire, etc.)
+    medical_services:
+    middle_of_the_road: Milieu de la route
+    military: Militaire
+    mining_oil_gas: Mines / pétrole / gaz
+    mixed_race: Métis
+    motor_sports:
+    movies_entertainment_music:
+    native_american_pacific_islander: Amérindien / Insulaire du Pacifique
+    native_hawaiian: Hawaïen indigène
+    new_democratic_ca: Nouveau Démocratique (CA)
+    !!str no: non
+    no_current_plan_to_purchase: Aucun plan d'achat actuel
+    no_diploma_yet:
+    no_educational_qualifications:
+    non_profit_religion: Non lucratif / religion
+    non_profit_social_services:
+    none: Aucun
+    not_applicable: N'est pas applicable
+    not_currently_employed: Pas actuellement employé
+    not_currently_working_outside_the_home: Ne travaille pas actuellement à l'extérieur de la maison
+    nurse: Infirmière
+    occupy_w_no_rent_paid: Occuper sans loyer payé
+    office_administration: Bureau de l'administration
+    other: Autre
+    other_asian: Autre asiatique
+    other_chief_officer: Autre officier en chef
+    other_company_officer_board_member: Autre membre du conseil d'administration
+    other_financial_planner_investment_advisor_asset_manager_cfa_chfc_estate_planning_professional_clu_etc: Autre planificateur financier / conseiller en placement / gestionnaire d'actifs (CFA, ChFC, professionnel de la planification successorale, CLU, etc.)
+    other_health_care_technicians_etc: Autres soins de santé (techniciens, etc.)
+    other_legal_paralegals_arbitrators_etc: Autres questions juridiques (parajuristes, arbitres, etc.)
+    other_pacific_islander: Autre insulaire du Pacifique
+    outside_of_home_or_office: En dehors de la maison ou du bureau
+    over_10_billion: Plus de 10 milliards
+    own_with_loan_mortgage: Propre, avec prêt / hypothèque
+    own_no_loan_mortgage: Propre, pas de prêt / hypothèque
+    owner_partner: Propriétaire / partenaire
+    paralegal: Parajuriste
+    part_time: Temps partiel
+    personal_services:
+    pharmaceutical: Pharmaceutique
+    pharmaceuticals:
+    pharmacist: Pharmacien
+    pilot: Pilote
+    post_grad: de troisième cycle
+    postgraduate_study: Études de troisième cycle
+    prefer_not_to_say: je préfère ne pas le dire
+    president_chairman: Président / président
+    primary_school:
+    printing_publishing:
+    professional_degree_earned_md_dds_dvm_etc: Diplôme professionnel obtenu (MD, DDS, DVM, etc.)
+    public_administrator_government_worker: Administrateur public / employé du gouvernement
+    public_relations:
+    publishing_print_media: Publication / presse écrite
+    real_estate: Immobilier
+    real_estate_property:
+    registered_investment_advisor_ria: Conseiller en investissement inscrit (RIA)
+    rent: Location
+    repair_maintenance: Réparation & maintenance
+    republican: Républicain
+    restaurant_food_and_beverage_services: Services de restauration / restauration
+    retail_business: Commerce de détail
+    retail_wholesale_trade:
+    retired: Retraité
+    running_exercising_weightlifting:
+    sales_marketing_advertising: Ventes / marketing / publicité
+    salesperson: Vendeur
+    samoan: Samoan
+    scientist: Scientifique
+    security:
+    separated: Séparé
+    shipping_distribution:
+    single: Unique
+    skiing_snowboarding_winter_sports:
+    small_business_owner: Patron de PME
+    social_service_professional: Professionnel des services sociaux
+    social_services: Services sociaux
+    social_worker: Travailleur social
+    software_developer_network_specialist: Développeur logiciel / spécialiste réseau
+    someone_else: Quelqu'un d'autre
+    somewhat_conservative: Un peu conservateur
+    somewhat_liberal: Un peu libéral
+    some_high_school_secondary_school_or_less: Quelques années d'études secondaires ou moins
+    some_college: Un peu de collège
+    some_college_university_no_degree: Un collège / université (pas de diplôme)
+    some_post_grad: certains post-gradués
+    student: Étudiant
+    supervisor: Superviseur
+    technician: Technicien
+    telecommunications: Les télécommunications
+    transportation:
+    transportation_shipping: Transport / expédition
+    travel:
+    travel_services_tourism: Services de voyage / tourisme
+    under_15_000_eur:
+    under_16_000: moins de 16 000
+    under_25_000: Moins de 25 000
+    under_25k: Moins de 25 000
+    unemployed: Sans emploi
+    unemployed_not_currently_working_outside_the_home: Sans emploi / ne travaille pas actuellement à l'extérieur de la maison
+    unemployed_temporarily_out_of_work: Sans emploi / Temporairement au chômage
+    unmarried_partner: Partenaire non-marié
+    utilities: Utilitaires
+    very_conservative: Très conservateur
+    very_liberal: Très libéral
+    veterinarian: Vétérinaire
+    vice_president_other: Vice-président (autre)
+    vietnamese: vietnamien
+    white_caucasian: Blanc / Caucasien
+    wholesale_business: Commerce de gros
+    widowed: Veuf
+    work_from_home_full_time: Travailler à domicile à temps plein
+    work_from_office_full_time: Travailler de bureau à temps plein
+    work_part_time_home_or_office: Travailler à temps partiel / à domicile ou au bureau
+    writer_journalist: Écrivain / journaliste
+    !!str yes: oui
+    yes_another_hispanic_latino_or_spanish_origin: Oui, autre origine hispanique, latino ou espagnole
+    yes_cuban: Oui, cubain
+    yes_in_the_next_1_6_months: Oui, dans les 1-6 prochains mois
+    yes_in_the_next_6_12_months: Oui, dans les 6-12 prochains mois
+    yes_mexican_mexican_american_chicano: Oui, mexicaine, mexicaine américaine, chicano
+    yes_puerto_rican: Oui, portoricaine
+  demo_questions:
+    marital: Quel est votre statut matrimonial actuel?
+    origin: Êtes-vous d'origine hispanique, latino-américaine ou espagnole?
+    race: Quelle race vous considérez-vous?
+    orientation: Quelle est votre orientation sexuelle?
+    worth: Valeur nette individuelle hors maison et automobiles
+    license:  Avez-vous un permis de conduire actif?
+    car: Possédez-vous ou louez-vous un véhicule?
+    share: Utilisez-vous un service de covoiturage?
+    education: Quel est le niveau de scolarité le plus élevé que vous avez atteint?
+    enrolled: Êtes-vous actuellement inscrit en tant qu'étudiant dans un établissement d'enseignement?
+    self_employed: Recevez-vous au moins une partie de votre revenu personnel par le biais du travail indépendant?
+    employment: Quelle est votre situation d'emploi actuelle?
+    industry: Qu'est-ce qui décrit le mieux l'organisation ou le secteur dans lequel vous travaillez?
+    title: Lequel décrit le mieux le titre de votre travail?
+    occupation: Lequel décrit le mieux votre profession?
+    workplace: Où travaillez-vous principalement?
+    computers: Nombre d'ordinateurs sur tous les sites de l'entreprise dans le monde
+    employees: Taille de l'entreprise en nombre total d'employés sur tous les sites
+    revenue: Taille de l'entreprise en dollars de revenus
+    children: Combien d'enfants avez-vous moins de 18 ans?
+    under_6: Combien de personnes dans votre ménage ont moins de 6 ans?
+    6_to_11: De 6 à 11 ans
+    12_to_17: De 12 à 17 ans
+    18_to_24: De 18 à 24 ans
+    25_and_up: 25 ans et plus
+    residence: Êtes-vous propriétaire ou locataire de votre résidence actuelle?
+    income: Quel est le revenu annuel total de votre ménage avant impôts?
+    day_to_day_purchases: Dans votre ménage, qui est responsable de la majorité des décisions concernant les achats quotidiens?
+    large_purchases: Dans votre ménage, qui est responsable de la majorité des décisions concernant les gros achats?
+    vehicle: Possédez-vous ou louez-vous un véhicule?
+    gender: Quel est ton sexe?
+    new_vehicle: Prévoyez-vous acheter ou louer un véhicule NEUF?
+    used_vehicle: Prévoyez-vous acheter ou louer un véhicule d'occasion?
+    mobile_phone: Téléphone mobile de base
+    smart_phone: Téléphone intelligent (iPhone, Blackberry, etc.)
+    portable_gaming: Appareil de jeu portable (PSP, etc.)
+    laptop: Ordinateur portable ou ordinateur portable
+    netbook: Ordinateur Netbook (ordinateur portable plus petit et plus léger)
+    tablet: Tablette (iPad, etc.)
+    computer: Ordinateur de bureau ou portable
+    gaming_computer: Ordinateur de jeu
+    tablet_computer: Tablette
+    cell_phone: Téléphone portable
+    iphone_or_ipod_touch: iPhone ou iPod Touch
+    twitter: Publier sur un compte Twitter
+    facebook: Publiez, partagez ou surfez sur Facebook
+    linkedin: Publiez, lisez ou connectez-vous sur LinkedIn
+    wine: Du vin
+    champagne: Champagne ou vin mousseux
+    beer: Bière
+    liquor: Alcool fort
+    brandy_or_cognac: Brandy ou cognac
+    brandy: Brandy
+    liqueur: Liqueur
+    pets: As-tu des animaux?
+    dogs: Un ou plusieurs chiens?
+    cats: Un ou plusieurs chats?
+    other_pet: Un animal de compagnie qui n'est ni un chat ni un chien?
+    respiratory: Allergies, asthme ou troubles respiratoires
+    kidney: Maladie du rein ou de la vessie
+    blood: Maladie du sang
+    mens: Problèmes de santé des hommes
+    bone: État des os ou des articulations
+    neuro: État de santé neurologique ou mentale
+    cancer: Cancer ou affection liée au cancer
+    skin: Maladies de la peau
+    pain: Douleur chronique
+    sleep: Un trouble du sommeil
+    diabetes: Diabète ou maladie de la thyroïde
+    stomach: Maux d'estomac, d'intestin ou de digestion
+    eye_or_ear: Problème oculaire, visuel ou auditif
+    womens: Problème de santé des femmes
+    heart: Affection cardiaque ou cardio-vasculaire
+    infection: Maladies infectieuses
+    auto_loan: Prêt automatique
+    cert_of_deposit: Certificat de dépôt
+    checking: Compte courant
+    credit_card: Carte de crédit bancaire ou magasin
+    debit_card: Carte de débit
+    home_equity: Prêt sur valeur nette ou marge de crédit
+    stock_account: Compte d'actions ou d'obligations individuel
+    life_insurance: Police d'assurance vie
+    money_market: Compte du marché monétaire
+    mutual_fund: Compte de fonds commun
+    personal_loan: Prêt personnel ou marge de crédit
+    rv_loan: Prêt de véhicule récréatif
+    savings_account: Compte épargne
+    political_party: Avec quel parti politique êtes-vous inscrit?
+    political_views: Compte tenu de vos opinions politiques, comment vous décririez-vous?
+    teenager: Avez-vous un adolescent qui serait prêt à répondre à des sondages?
+    :25: Dans votre ménage, combien de personnes ont 25 ans et plus?
+    :18_24: Combien de personnes dans votre ménage ont entre 18 et 24 ans?
+    :12_17: Combien de personnes dans votre ménage ont entre 12 et 17 ans?
+    :6_11: Combien de personnes dans votre ménage ont entre 6 et 11 ans?
+    marital_status: Quel est votre état civil?
+    employee_count: Environ combien d'employés travaillent pour votre organisation?
+    employment_status: Quel est votre statut professionnel?
+    in_home_product_tester: "Seriez-vous intéressé à rejoindre des communautés thématiques ou à participer à des tests de produits à domicile?"
+    purchaser: "Dans votre ménage, êtes-vous la personne qui prend la plupart des décisions d'achat au quotidien?"
+    highest_level_of_education: "Quel est le niveau de scolarité le plus élevé que vous avez atteint?"
+    household_income: "Quel est votre revenu annuel du ménage?"
+    ethnicity: "Quelle est votre origine ethnique?"
+    state: "Dans quel état résidez-vous actuellement?"
+
+  activerecord:
+    errors:
+      models:
+        panelist:
+          attributes:
+            email:
+              taken: "(#NeedsTranslation)"

@@ -1,0 +1,11 @@
+standard:
+  panel: standard
+  country: standard
+  survey: standard
+simple:
+  panel: standard
+  country: standard
+  survey: standard
+feasibility_query:
+  panel: standard
+  country: standard

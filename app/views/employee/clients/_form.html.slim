@@ -1,0 +1,12 @@
+= form_for client do |f|
+  = render 'employee/form_errors', resource: client
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: 'form-control'
+  / .form-group
+  /   = f.label :custom_uid_parameter, 'Custom UID parameter (optional)'
+  /   = f.text_field :custom_uid_parameter, class: 'form-control'
+  / .form-group
+  /   = f.label :custom_key_parameter, 'Custom key parameter (optional)'
+  /   = f.text_field :custom_key_parameter, class: 'form-control'
+  = render 'employee/form_buttons'

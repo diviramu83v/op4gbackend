@@ -1,0 +1,37 @@
+standard:
+  onramp: testing
+  uid: 123
+  token: xyz
+  initial_survey_status: live
+  ip_address: standard
+  recaptcha_token: <%= SecureRandom.hex %>
+  gate_survey_token: <%= SecureRandom.hex %>
+  response_token: <%= SecureRandom.hex %>
+  error_token: <%= SecureRandom.hex %>
+  onboarding_token: <%= SecureRandom.hex %>
+second:
+  onramp: testing
+  uid: 456
+  token: abc
+  initial_survey_status: live
+  ip_address: fourth
+  recaptcha_token: <%= SecureRandom.hex %>
+  gate_survey_token: <%= SecureRandom.hex %>
+  response_token: <%= SecureRandom.hex %>
+  error_token: <%= SecureRandom.hex %>
+  onboarding_token: <%= SecureRandom.hex %>
+complete:
+  status: survey_finished
+  onramp: testing
+  survey_response_pattern: complete
+  survey_response_url: complete
+  panelist: standard
+  uid: 124
+  token: abcd
+  initial_survey_status: live
+  ip_address: fifth
+  recaptcha_token: <%= SecureRandom.hex %>
+  gate_survey_token: <%= SecureRandom.hex %>
+  response_token: <%= SecureRandom.hex %>
+  error_token: <%= SecureRandom.hex %>
+  onboarding_token: <%= SecureRandom.hex %>

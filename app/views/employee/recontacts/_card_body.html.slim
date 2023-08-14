@@ -1,0 +1,6 @@
+.card-body
+  .row
+    .col-2 = render 'employee/cards/text_element', label: 'LOI', value: format_loi_as_whole_minutes(recontact.try(:loi))
+    .col-2 = render 'employee/cards/text_element', label: 'CPI', value: format_currency(recontact.try(:cpi))
+    .col-2 = render 'employee/cards/text_element', label: 'Invitations', value: recontact.recontact_invitations.count
+    .col-2 = render 'employee/surveys/complete_count', survey: recontact, return_url: project_url(recontact.project, anchor: "recontact-#{recontact.id}")    

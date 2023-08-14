@@ -1,0 +1,467 @@
+// Admin area overrides.
+body.admin {
+  .dashhead-subtitle {
+    color: #a2a9b1;
+  }
+}
+
+// Landing page styles
+@font-face {
+  font-family: 'Lato';
+  src: url('Lato-Regular.ttf');
+}
+
+.landing-page-intro-logo {
+  width: 250px;
+}
+
+.square {
+  background-color: #D6EEEC;
+  font-family: 'Lato', sans-serif;
+  color: #0D3451;
+  opacity: 0.8;
+}
+
+// Employee area overrides.
+body.employee {
+  padding-bottom: 1.5rem !important;
+}
+
+.sticky-bottom {
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 0px;
+}
+
+// Standard bootstrap code not targeting these correctly.
+.breadcrumb-item {
+  display: inline-block;
+}
+
+.clickable-row {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+// Tweak position of close button on alert popups.
+button.close > span {
+  position: relative;
+  top: -3px;
+}
+
+.page-header-link {
+  font-size: 1.25rem;
+}
+
+h2 .alert {
+  font-size: 1rem;
+}
+
+// Tweak header button positions.
+h3 > .btn {
+  position: relative;
+  top: -2px;
+}
+// h4 > .btn {
+//   position: relative;
+//   top: -2px;
+// }
+h5 .btn,
+h6 .btn {
+  position: relative;
+  top: 4px;
+}
+
+.tiny-button-header .btn-xs {
+  margin-top: -9px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+
+.btn-minimal-padding {
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+
+.card-header .badge {
+  position: relative;
+  top: -2px;
+}
+
+.card-header .card-header-link {
+  font-size: 1rem;
+}
+
+h4 .card-header-link {
+  position: relative;
+  top: -3px;
+}
+
+.scroll-overflow-content {
+  max-height: 600px;
+  overflow: scroll;
+}
+
+// Tweak position of close button on regular flash alerts.
+[data-alert="alert"] > a.close {
+  position: relative;
+  top: -3px;
+}
+
+// Make step menu align top.
+ul.step-menu > li:first-child > a {
+  padding-top: 0px;
+}
+
+ul.step-menu > li {
+  font-size: 1rem;
+}
+
+// Make active step stand out.
+ul.step-menu > li > a.active {
+  font-weight: bold;
+}
+
+// On button navs, don't offset the first element if it's not a button.
+// ul.nav.nav-left-aligned > li:first-child > a:not(.active) {
+//   padding-left: 0px;
+// }
+
+// Remove extra margin when using simple_format() or <p> tags inside table cell.
+td > p:last-child {
+  margin-bottom: 0px;
+}
+
+// Make inline form elements shorter on tables.
+td .form-control-sm {
+  line-height: 1;
+}
+
+// Make table buttons smaller.
+td .btn-xs {
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+
+td .btn-xs {
+  position: relative;
+  top: -2px;
+}
+
+// Tighten up spacing of some card elements.
+.card {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-bottom: 0px;
+  }
+  // .table-sm th {
+  //   padding-left: 0px;
+  //   padding-right: 0px;
+  // }
+  // .table-sm td {
+  //   padding-left: 0px;
+  //   padding-right: 0px;
+  // }
+  .table-sm .btn-xs {
+    padding-top: 1px;
+    padding-bottom: 1px;
+  }
+}
+
+// make divider button smaller
+.hr-divider .btn-xs {
+  position: relative;
+  top: 3px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+
+// Center a spinner both horizontally and vertically.
+.spinner-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: -1;
+}
+
+td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  // white-space: nowrap;
+}
+
+// Remove extra thick border on table headers.
+.table thead th {
+  border-bottom: 1px;
+}
+
+.table-no-header-border {
+  thead tr:first-child th {
+    border-top: none;
+    padding-top: 0px;
+  }
+}
+
+.table-wrapped-no-header {
+  tbody tr:first-child td {
+    border-top: none;
+    padding-top: 0px;
+  }
+
+  tbody tr:last-child td {
+    padding-bottom: 0px;
+  }
+}
+
+.table-wrapped-with-header {
+  thead tr:first-child th {
+    border-top: none;
+    padding-top: 0px;
+  }
+}
+
+.wider-redirect-label {
+  width: 150px;
+}
+
+.redirect-label {
+  width: 110px;
+}
+
+.redirect-buttons {
+  width: 210px;
+}
+
+td.dashhead-subtitle {
+  line-height: 1.75;
+}
+
+td .btn-xs {
+  margin-top: 1px;
+}
+
+// Adjust this check box to line up with text fields.
+.form-check-matches-text-field {
+  padding-top: 12px;
+  padding-bottom: 10px;
+}
+
+// Remove default list spacing from pagination.
+ul.pagination {
+  margin-bottom: 0px;
+}
+
+.pagination-xs .page-link {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+// Make all form labels look like the theme headers
+form label {
+  margin-top: 0;
+  margin-bottom: 5px;
+  font-weight: 400;
+  font-size: 85%;
+  color: #a2a9b1;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.form-table-search {
+  display: inline-block;
+}
+
+// Fix weird color on pagination with lots of options.
+.page-item.disabled .page-link {
+  border: 1px solid #dee2e6;
+}
+
+// Set some column widths.
+td.period-column {
+  min-width: 90px;
+}
+td span.traffic-source {
+  display: inline-block;
+  min-width: 100px;
+}
+
+.min-width-55 {
+  min-width: 55px;
+}
+
+.untransformed {
+  text-transform: none;
+}
+
+.card-body p:last-child {
+  margin-bottom: 0;
+}
+
+.hide-overflow {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wrap {
+  white-space: normal;
+}
+
+.survey-menu .card-header-link {
+  position: relative;
+  top: 2px;
+}
+
+.text-label {
+  color: black;
+  text-transform: capitalize;
+  font-weight: 300;
+}
+
+.survey-warning-card {
+  .date {
+    min-width: 130px;
+  }
+}
+
+.sortable {
+  cursor: move;
+  cursor: grab;
+}
+
+.sortable:active {
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
+}
+
+.content-wrapper {
+  display: flex;
+}
+
+#sidebar-filler {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: steelblue;
+  width: 250px;
+  height: 10000px;
+  z-index: -1;
+}
+
+#sidebar {
+  min-width: 250px;
+  width: 250px;
+  min-height: 80vh;
+  background-color: steelblue;
+  padding-left: 2rem;
+  h5 > a {
+    color: white;
+    padding-left: 0;
+  }
+}
+
+#security-dashboard {
+  .card {
+    min-height: 140px;
+  }
+}
+
+.dashboard-card {
+  min-width: 310px;
+}
+
+.project-card-column {
+  min-width: 225px;
+}
+
+.bg-light {
+  background-color: #eeeeee !important;
+}
+
+// bootstrap's large screen breakpoint and larger
+@media (min-width: 992px) {
+  #header-top {
+    margin-left: 20rem;
+    margin-right: 5rem;
+    max-width: none;
+  }
+
+  #header-nav,
+  #secondary-nav {
+    margin-left: 20rem;
+  }
+
+  #sidebar {
+    + .container {
+      margin-left: 5.4rem;
+      margin-right: 5rem;
+      max-width: 100%;
+    }
+  }
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 25px;
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    &:checked {
+      + .slider {
+        // background-color: #2196f3;
+        background-color: #ccc;
+        &::before {
+          -webkit-transform: translateX(15px);
+          -ms-transform: translateX(15px);
+          transform: translateX(15px);
+        }
+      }
+    }
+    &:focus {
+      + .slider {
+        box-shadow: 0 0 1px #2196f3;
+      }
+    }
+  }
+  .slider {
+    border-radius: 34px;
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    // background-color: #ccc;
+    background-color: #2196f3;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    &:before {
+      border-radius: 50%;
+      position: absolute;
+      content: "";
+      height: 17px;
+      width: 17px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      -webkit-transition: 0.4s;
+      transition: 0.4s;
+    }
+  }
+}

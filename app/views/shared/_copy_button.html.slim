@@ -1,0 +1,10 @@
+= link_to '',
+          class: 'btn btn-outline-primary btn-xs',
+          data: { 'clipboard-copyable': 'true',
+                  'clipboard-text': text,
+                  'original-label': label }
+  - if label == ''
+    i.fa.fa-clipboard
+  - else
+    i.fa.fa-clipboard.mr-1
+    span.label = label

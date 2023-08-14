@@ -1,0 +1,87 @@
+= form_for vendor do |f|
+  = render 'employee/form_errors', resource: vendor
+  .row.mb-3
+    .col-md-6
+      .row.mb-4
+        .col-8
+          = render 'forms/text_field', form: f, field: :name
+        .col-4
+          = render 'forms/text_field', form: f, field: :abbreviation
+      .mb-5
+        = render 'forms/text_field', form: f, field: :complete_url, label: 'Complete URL'
+        = render 'forms/text_field', form: f, field: :terminate_url, label: 'Terminate URL'
+        = render 'forms/text_field', form: f, field: :overquota_url, label: 'Overquota URL'
+        = render 'forms/text_field', form: f, field: :security_url, label: 'Security URL'
+        = render 'forms/text_area', form: f, field: :contact_info, label: 'Contact info'
+        .mt-4.mb-2
+          h6 Response settings
+        .mb-2
+          .form-check
+            = f.check_box :collect_followup_data, class: 'form-check-input'
+            = f.label :collect_followup_data, 'Collect follow-up emails', class: 'form-check-label'
+        .mb-2
+          .form-group
+            = f.label :follow_up_wording, 'Follow-up wording'
+            = f.text_area :follow_up_wording, class: 'form-control', rows: 5
+    .col-md-6
+      - if current_employee.admin_or_ops_manager?(session[:effective_role])
+        .card
+          .card-header
+            h4 Advanced options
+          .card-body
+            .mb-4
+              .mb-2
+                h6 Onramp settings
+              .mb-2
+                = render 'forms/text_field', form: f, field: :uid_parameter, label: 'UID Parameter'
+              .mb-2
+                .form-check
+                  = f.check_box :security_disabled_by_default, class: 'form-check-input'
+                  = f.label :security_disabled_by_default, 'Security checks disabled by default', class: 'form-check-label'
+              .mb-0
+                .form-check
+                  = f.check_box :gate_survey_on_by_default, class: 'form-check-input'
+                  = f.label :gate_survey_on_by_default, 'Gate survey active by default', class: 'form-check-label'
+            .mb-4
+              .mb-2
+                h6 Redirects
+              .mb-2
+                .form-check
+                  = f.check_box :disable_redirects, class: 'form-check-input'
+                  = f.label :disable_redirects, 'Disabled', class: 'form-check-label'
+            .mb-4
+              .mb-2
+                h6 Hashing
+              .mb-2
+                = render 'forms/text_field', form: f, field: :hash_key, label: 'Hash key'
+                = render 'forms/text_field', form: f, field: :hashing_param, label: 'Hashing param'
+              .form-check
+                = f.check_box :include_hashing_param_in_hash_data, class: 'form-check-input'
+                = f.label :include_hashing_param_in_hash_data, 'Include Hashing Param In Hash Data', class: 'form-check-label'
+            .mb-0
+              .mb-2
+                h6 Webhooks
+              .mb-2
+                .form-check
+                  = f.check_box :send_complete_webhook, class: 'form-check-input'
+                  = f.label :send_complete_webhook, 'Send webhook on complete', class: 'form-check-label'
+              .mb-2
+                .form-group
+                  = f.label :complete_webhook_url, 'Complete webhook URL', class: 'dashhead-subtitle'
+                  = f.text_field :complete_webhook_url, class: 'form-control'
+              .mb-2
+                .form-check
+                  = f.check_box :send_secondary_webhook, class: 'form-check-input'
+                  = f.label :send_secondary_webhook, 'Send webhook on term/quotafull', class: 'form-check-label'
+              .mb-0
+                .form-group.mb-2
+                  = f.label :secondary_webhook_url, 'Secondary webhook URL', class: 'dashhead-subtitle'
+                  = f.text_field :secondary_webhook_url, class: 'form-control'
+
+              .mb-2
+                .form-group.mb-2
+                  = f.label :webhook_method, 'HTTP Method', class: 'dashhead-subtitle'
+                  .br
+                  = f.select :webhook_method, options_for_select(Vendor::WEBHOOK_METHODS.map{ |m| [m.upcase, m] }), {selected: (@vendor.webhook_method || "post")}, class: 'form-control'
+
+  = render 'employee/form_buttons'

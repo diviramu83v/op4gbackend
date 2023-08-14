@@ -1,0 +1,8 @@
+expert_recruit_batch_email_body:
+  record: standard (ExpertRecruitBatch)
+  name: email_body
+  body: <p>This is the email body.</p>
+expert_recruit_batch_email_signature:
+  record: send_on_behalf_of_client (ExpertRecruitBatch)
+  name: email_signature
+  body: <p>Sincerely,<br>Joe Smith</p>

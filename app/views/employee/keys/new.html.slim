@@ -1,0 +1,16 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Projects', projects_url
+  li.breadcrumb-item = link_to @survey.project.extended_name, @survey.project
+  li.breadcrumb-item = link_to @survey.name, survey_url(@survey)
+  li.breadcrumb-item = link_to 'Keys', survey_keys_url(@survey)
+  li.breadcrumb-item.active New
+.mb-5
+  h2 New survey keys
+.mb-5
+  .row
+    .col-6
+      = form_for :keys, url: survey_keys_url(@survey) do |f|
+        .form-group
+          = f.label :upload, 'Key upload (CSV file with one column, no headers, links not yet supported)'
+          = f.file_field :upload, class: 'form-control-file'
+        = render 'employee/form_buttons'

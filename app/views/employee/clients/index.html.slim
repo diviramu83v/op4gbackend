@@ -1,0 +1,26 @@
+.mb-5
+  h2
+    span.mr-3 Clients
+    span.mr-0
+      - if can?(:view_and_modify, Client)
+        = link_to new_client_url, class: 'page-header-link' do
+          i.fa.fa-plus-circle.mr-1
+          | Add
+.mb-5
+  table.table.mb-3 data-sort='table'
+    thead
+      tr
+        th Name
+        th Projects
+        th
+    tbody
+      - @clients.each do |client|
+        tr
+          td = link_to client.name, client
+          td = client.project_count
+          - if can?(:view_and_modify, Client) && can?(:view_and_modify, Project)
+            td = link_to new_client_project_url(client), class: 'btn btn-link btn-xs' do
+              i.fa.fa-plus-circle.mr-1
+              | New project
+          - else
+            td =

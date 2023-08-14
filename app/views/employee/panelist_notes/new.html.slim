@@ -1,0 +1,15 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Panelists', panelists_url
+  li.breadcrumb-item.active = @panelist.name
+  li.breadcrumb-item.active Notes
+.mb-5
+  h2 Panelist
+.mb-5 = render 'employee/panelists/mini_nav', panelist: @panelist
+.mb-3
+  h4 Create a new note
+.row
+  .col-md-6
+    = form_for @note do |f|
+      = render 'employee/form_errors', resource: @note
+      = render 'forms/text_area', form: f, field: :body
+      = render 'employee/form_buttons'

@@ -1,0 +1,36 @@
+.mb-5
+  nav.navbar.bg-light.header-nav
+    .container.justify-content-between
+      span
+        = link_to panelist_dashboard_url, class: 'navbar-brand pt-4 pb-4' do
+          = image_tag('op4g-logo.png', height: '30px')
+      .navbar-nav.flex-row
+        - if panelist_signed_in?
+          - if current_panelist.eligible_for_surveys?
+            = link_to panelist_dashboard_url, class: 'nav-link font-weight-bold ml-5 d-none d-md-block' do
+              i.fa.fa-square.mr-1
+              i.fa.fa-square.mr-1
+              i.fa.fa-check-square.mr-2
+              = t('panelist.header.surveys_link', default: 'Surveys')
+            = link_to account_url, class: 'nav-link font-weight-bold ml-5 d-none d-md-block' do
+              i.fa.fa-user.mr-2
+              = t('panelist.header.account_link', default: 'Account')
+          = link_to support_url, class: 'nav-link font-weight-bold ml-5 d-none d-md-block' do
+            i.far.fa-question-circle.mr-2
+            = t('panelist.header.support_link', default: 'Support')
+          = link_to destroy_panelist_session_url, class: 'nav-link font-weight-bold ml-5 d-none d-md-block', method: :delete do
+            i.fa.fa-sign-out-alt.mr-2
+            = t('panelist.header.sign_out_link', default: 'Sign out')
+
+      / mobile optimizatiion
+      .navbar-nav.flex-row.d-md-none
+        - if panelist_signed_in?
+          - if current_panelist.eligible_for_surveys?
+            = link_to panelist_dashboard_url, class: 'nav-link font-weight-bold', style: 'font-size: .85rem' do
+              = t('panelist.header.surveys_link', default: 'Surveys')
+            = link_to account_url, class: 'nav-link font-weight-bold ml-3', style: 'font-size: .85rem' do
+              = t('panelist.header.account_link', default: 'Account')
+          = link_to support_url, class: 'nav-link font-weight-bold ml-3', style: 'font-size: .85rem' do
+            = t('panelist.header.support_link', default: 'Support')
+          = link_to destroy_panelist_session_url, class: 'nav-link font-weight-bold ml-3', style: 'font-size: .85rem', method: :delete do
+            = t('panelist.header.sign_out_link', default: 'Sign out')

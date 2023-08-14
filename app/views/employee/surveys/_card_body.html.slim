@@ -1,0 +1,76 @@
+.card-body
+  - if survey.project.bad_redirect_last_twenty_four_hours?
+    = link_to project_redirect_issues_url(survey.project) do
+      .alert.alert-danger.mb-3
+        p.mb-0 Bad redirect traffic detected in the last 24 hours.
+  - if survey.onramps.any?(&:check_prescreener?)
+    .alert.alert-warning.mb-3
+      p.mb-0 A prescreener is active for this survey.
+  - if survey.return_keys.present?
+    .alert.alert-info.mb-3
+      p.mb-0 Return keys are being used for this survey.
+  = render 'employee/form_errors', resource: survey
+  .row.mb-4
+    .col-2 = render 'employee/cards/text_element', label: 'LOI', value: format_loi_as_whole_minutes(survey.try(:loi))
+    .col-2 = render 'employee/cards/text_element', label: 'CPI', value: format_currency(survey.try(:cpi))
+    .col-2 = render 'employee/surveys/complete_count', survey: survey, return_url: project_url(survey.project, anchor: "survey-#{survey.id}")
+    - if can?(:view_and_modify, Project)
+      .col-2 = render 'employee/surveys/complete_milestone_form', survey: survey
+      / .col-2 = render 'employee/surveys/click_milestone_form', survey: survey
+  .row.mb-4
+    .col-12
+      table.table.table-sm.table-wrapped-no-header.mb-0
+        tbody
+          tr
+          tr
+            td.redirect-label.dashhead-subtitle Live link
+            td.redirect-value.overflow-hidden = survey.base_link
+            td.redirect-buttons.text-right
+              span = render 'shared/copy_button', label: 'Copy', text: survey.base_link
+          - if survey.client_test_link.present?
+            tr
+              td.wider-redirect-label.dashhead-subtitle Client Test link
+              td.redirect-value.overflow-hidden = survey.client_test_link
+              td.redirect-buttons.text-right
+                span = render 'shared/copy_button', label: 'Copy', text: survey.client_test_link
+          tr
+            td.redirect-label.dashhead-subtitle Test link
+            td.redirect-value.overflow-hidden = survey_onramp_url(survey.testing_onramp.token, bypass: survey.testing_onramp.bypass_token) + '&uid=' + survey.testing_onramp.uid_param.to_s
+            td.redirect-buttons.text-right
+              span.mr-1
+                = link_to survey_onramp_url(survey.testing_onramp.token, bypass: survey.testing_onramp.bypass_token, uid: 'test_link'), target: '_blank', class: 'btn btn-outline-primary btn-xs ml-1' do
+                  i.fa.fa-external-link-alt.mr-1
+                  | Test
+              span = render 'shared/copy_button', label: 'Copy', text: survey_onramp_url(survey.testing_onramp.token, bypass: survey.testing_onramp.bypass_token) + '&uid='
+  - if survey.editable? && survey.keys.empty?
+    - if can?(:view_and_modify, Key)
+      .mb-4
+        = link_to new_survey_key_url(survey), class: 'btn btn-link pl-0' do
+          i.fa.fa-plus-circle.mr-1
+          | Add keys
+  .mb-0
+    .card-deck
+      = render 'employee/surveys/keys_card', survey: survey if survey.keys.any?
+      = render 'employee/surveys/sample_card', survey: survey
+      = render 'employee/surveys/panel_card', survey: survey
+  - if survey.onboardings.any?
+    .mt-3
+      .card
+        .card-header
+          h4
+            span.mr-3 Traffic
+            - if can?(:view_and_modify, Project)
+              span.mr-3
+                = link_to survey_traffic_url(survey), class: 'card-header-link' do
+                  i.fa.fa-square.mr-1
+                  | Overview
+              span.mr-3
+                = link_to survey_traffic_by_source_url(survey), class: 'card-header-link' do
+                  i.fa.fa-th-large.mr-1
+                  | By source
+              span.mr-0
+                = link_to survey_traffic_details_url(survey), class: 'card-header-link' do
+                  i.fa.fa-list-ul.mr-1
+                  | Details
+        .card-body
+          = render 'employee/traffic/calculations_row', resource: survey

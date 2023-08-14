@@ -1,0 +1,10 @@
+.hr-divider
+  ul.nav.nav-pills.hr-divider-content.hr-divider-nav
+    li.nav-item
+      = link_to 'Demographics', query_url(@query), class: nav_link_class(query_url(@query), exact: true)
+    / li.nav-item
+    /   = link_to 'Age', query_ages_url(query), class: nav_link_class(query_ages_url(@query), true)
+    li.nav-item
+      = link_to 'ZIP data', query_zips_url(@query), class: nav_link_class(query_zips_url(@query), exact: true)
+    li.nav-item
+      = link_to 'Traffic', query_traffic_url(@query), class: nav_link_class(query_traffic_url(@query), exact: true)

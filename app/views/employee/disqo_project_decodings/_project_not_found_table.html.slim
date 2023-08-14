@@ -1,0 +1,13 @@
+.mt-5
+  h5
+    span.mr-3 No project found
+    span.badge.badge-secondary = @decoding.decoded_disqo_projects.without_survey.size
+.mb-4
+  table.table.table-sm.table-no-header-border data-sort='table'
+    thead
+      tr
+        th Disqo campaign id
+    tbody
+      - @decoding.decoded_disqo_projects.without_survey.ordered_by_id.each do |decoding|
+        tr
+          td = decoding.disqo_campaign_id

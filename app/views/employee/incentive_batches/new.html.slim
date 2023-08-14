@@ -1,0 +1,15 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Incentive Batches', incentive_batches_url
+  li.breadcrumb-item.active New
+
+.row
+  .col-10
+    .row
+      .col-12
+        .mb-5
+          h2
+            span.mr-3 New incentive batch
+        .mb-0
+          .mb-3
+            h3 Upload file
+          = render 'form', url: incentive_batches_url

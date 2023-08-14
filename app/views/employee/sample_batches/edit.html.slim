@@ -1,0 +1,53 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Projects', projects_url
+  li.breadcrumb-item = link_to @survey.project.extended_name, @survey.project
+  li.breadcrumb-item = link_to @survey.name, survey_url(@survey)
+  li.breadcrumb-item = link_to 'Sample', survey_queries_url(@survey)
+  li.breadcrumb-item.active Batch
+  li.breadcrumb-item.active Edit
+.mb-5
+  h2 Edit sample batch
+.mb-5
+  = form_for @batch, url: sample_batch_url(@batch) do |f|
+    = render 'employee/form_errors', resource: @batch
+    .row.mb-3
+      .col-4
+        .form-group
+          = f.label :count, 'Invitation count'
+          p You can't update the number of invitations after creating a batch. If you need to, delete this batch and recreate it.
+      .col-4
+        .form-group
+          = f.label :incentive
+          = f.text_field :incentive, class: 'form-control'
+      .col-4
+        .form-group
+          = f.label :label, 'Batch label'
+          = f.text_field :label, class: 'form-control'
+          = render 'forms/comment', text: 'Optional. Not visible to panelists.'
+    .row
+      .col-4
+        .form-group
+          = f.label :email_subject, 'Survey name'
+          = f.text_field :email_subject, class: 'form-control'
+        .form-group
+          = f.label :description, 'Additional email description'
+          = f.text_area :description, rows: 12, class: 'form-control'
+          = render 'forms/comment', text: 'Optional.'
+      .col-8
+        = render 'employee/cards/text_header', label: 'Example email'
+        .mb-2 = render 'forms/comment', text: 'Survey name is used twice per email, once in the subject and once in the body.'
+        .card.mb-3
+          .card-header
+            p.mb-0 = 'New survey available: [survey name] (#[project ID])'
+          .card-body
+            p = '...'
+            p = 'You have been selected to participate in the market research survey below.'
+            p = 'Name: [survey name]'
+            ul
+              li = 'Estimated time to complete: [loi]'
+              li = 'Payment for completing: [incentive]'
+            p = 'Additional info: [additional email description]'
+            p = '[standard description]'
+            p.mb-0
+              = '...'
+    = render 'employee/form_buttons'

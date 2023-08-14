@@ -1,0 +1,9 @@
+one:
+  token: 'asdf'
+  survey: standard
+two:
+  token: 'zxcv'
+  survey: standard
+three:
+  token: 'wxyz'
+  survey: second

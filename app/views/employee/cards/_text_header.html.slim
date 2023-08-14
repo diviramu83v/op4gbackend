@@ -1,0 +1,13 @@
+h5.mb-2.dashhead-subtitle.text-header.tiny-button-header
+  - if local_assigns[:clipboard] && clipboard.is_a?(Hash)
+    span.mr-2 = label
+    = render 'shared/copy_button',
+      label: clipboard[:label],
+      text: clipboard[:text]
+  - elsif local_assigns[:clipboard]
+    span.mr-2 = label
+    = render 'shared/copy_button',
+      label: 'Copy',
+      text: clipboard
+  - else
+    = label

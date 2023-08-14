@@ -1,0 +1,3 @@
+standard:
+  url: <%= Faker::Internet.url %>
+  category: <%= TrackingPixel::CATEGORY_SLUGS.sample %>

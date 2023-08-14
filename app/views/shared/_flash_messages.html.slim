@@ -1,0 +1,7 @@
+- if flash.any?
+  .mb-5
+    .container
+      .row
+        div class="#{content_for(:flash_width) || 'col-12'}"
+          - flash.each do |type, message|
+            = render 'shared/dismissable_flash_message', type: type, message: message

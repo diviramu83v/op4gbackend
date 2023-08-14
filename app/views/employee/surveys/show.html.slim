@@ -1,0 +1,31 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Projects', projects_url
+  li.breadcrumb-item = link_to @survey.project.extended_name, @survey.project
+  li.breadcrumb-item.active = @survey.name
+.mb-5
+  = render 'employee/surveys/header', survey: @survey
+- if @survey.onramps.any?(&:check_prescreener?)
+    .alert.alert-warning.mb-5
+      p.mb-0 A prescreener is active for this survey.
+.mb-5
+  .row
+    .col-12
+      = render 'employee/surveys/details', survey: @survey
+    .col-2
+      = render 'employee/surveys/menu'
+    .col-10#traffic-data
+      .d-flex.flex-column.align-items-center
+        .spinner.mt-3
+          i.fa.fa-spinner.fa-pulse.fa-3x.fa-fw
+          span.sr-only Loading...
+
+javascript:
+  var surveyId = "#{@survey.id}"
+  var url = "#{request.host_with_port}"
+
+coffee:
+  App.cable.subscriptions.create { channel: "TrafficDataChannel", survey_id: surveyId },
+    received: (data) ->
+      $('#traffic-data').html(data.replace /admin.example.org/g, url)
+
+

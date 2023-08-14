@@ -1,0 +1,26 @@
+- if @query.panel.slug == 'op4g-us'
+  .mb-3
+    h5 State
+    - @query.possible_state_codes.each do |state|
+      = link_to state, query_state_codes_url(@query, code: state), method: :post, remote: true, 'data-demo-filter': 'button', class: 'btn btn-outline-primary btn-xs mr-1 mb-1'
+.mb-3
+  h5 Age
+  - @query.possible_ages.each do |age|
+    = link_to age.value, query_ages_url(@query, age_id: age.id), method: :post, remote: true, 'data-demo-filter': 'button', class: 'btn btn-outline-primary btn-xs mr-1 mb-1'
+.mb-3
+  h5 Age range
+  = form_tag(query_age_ranges_url(@query), method: :post, remote: true, 'data-demo-filter': 'form', class: 'form-inline form-table-search mr-3') do
+    = text_field_tag :from, nil, placeholder: 'from', class: 'form-control mr-1'
+    = text_field_tag :to, nil, placeholder: 'to', class: 'form-control mr-1'
+    = submit_tag 'Add', 'data-demo-filter': 'button', class: 'btn btn-outline-primary btn-sm', name: nil
+- @query.questions.each do |question|
+  - if question.demo_options.any?
+    h5
+      = question.label.humanize
+      small.ml-2.text-muted #{demo_question_panelist_percentage(question, @question_panelist_count, @query)} panelist coverage
+      - if question.label_different_than_body?
+        br
+        small.text-muted = question.body
+    .mb-3
+      - question.possible_answers(@query.options).each do |option|
+        = link_to option.label, query_options_url(query_id: @query.id, option_id: option.id), method: :post, remote: true, 'data-demo-filter': 'button', class: 'btn btn-outline-primary btn-xs mr-1 mb-1'

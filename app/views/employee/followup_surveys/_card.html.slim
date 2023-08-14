@@ -1,0 +1,29 @@
+.card
+  .card-header
+    .d-flex.justify-content-between
+      h4
+        span.mr-2 Follow-up emails
+        span.mr-2
+          .badge.badge-secondary = format_number(@followups.total_count)
+      span
+        = link_to survey_followup_surveys_url(@survey, format: :csv), class: 'btn btn-outline-primary' do
+          i.fas.fa-cloud-download-alt.mr-1
+          | Download
+  .card-body
+    - if @followups.any?
+      .d-flex.justify-content-end
+        .pagination-xs = paginate @followups
+      table.table.table-sm.table-wrapped-with-header.mb-3
+        thead
+          tr
+            th Encoded UID
+            th Email
+        tbody
+          - @followups.each do |followup|
+            tr
+              td = followup.token
+              td = followup.email
+      .d-flex.justify-content-end
+        .pagination-xs.mb-0 = paginate @followups
+    - else
+      p.mb-0 No follow-up emails have been added yet.

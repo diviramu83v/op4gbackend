@@ -1,0 +1,42 @@
+- affiliates.each do |affiliate|
+  tr
+    td = 'Affiliate'
+    td = affiliate.code
+    td = affiliate.name
+    td = format_currency_with_zeroes(affiliate.roi_dollars)
+    td = affiliate.completes
+    td = affiliate.completers
+    td = affiliate.accepted_completes
+    td = affiliate.total_panelists(starting_at: starting_at, ending_at: ending_at)
+    td = affiliate.total_signup(starting_at: starting_at, ending_at: ending_at)
+    td = affiliate.total_active(starting_at: starting_at, ending_at: ending_at)
+    td = affiliate.total_deactivated(starting_at: starting_at, ending_at: ending_at)
+    td n/a
+- nonprofits.each do |nonprofit|
+  tr
+    td = 'Nonprofit'
+    td = nonprofit.id
+    td = nonprofit.name
+    td = format_currency_with_zeroes(nonprofit.roi_dollars)
+    td = nonprofit.completes
+    td = nonprofit.completers
+    td = nonprofit.accepted_completes
+    td = nonprofit.total_panelists(starting_at: starting_at, ending_at: ending_at)
+    td = nonprofit.total_signup(starting_at: starting_at, ending_at: ending_at)
+    td = nonprofit.total_active(starting_at: starting_at, ending_at: ending_at)
+    td = nonprofit.total_deactivated(starting_at: starting_at, ending_at: ending_at)
+    td = format_currency_with_zeroes(nonprofit.total_donations(starting_at: starting_at, ending_at: ending_at))
+- others.each do |other|
+  tr
+    td = 'None'
+    td = other.id
+    td = other.code
+    td = format_currency_with_zeroes(other.roi_dollars)
+    td = other.completes
+    td = other.completers
+    td = other.accepted_completes
+    td = other.total_panelists(starting_at: starting_at, ending_at: ending_at)
+    td = other.total_signup(starting_at: starting_at, ending_at: ending_at)
+    td = other.total_active(starting_at: starting_at, ending_at: ending_at)
+    td = other.total_deactivated(starting_at: starting_at, ending_at: ending_at)
+    td n/a

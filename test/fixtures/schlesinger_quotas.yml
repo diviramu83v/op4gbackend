@@ -1,0 +1,18 @@
+standard:
+  name: Test
+  schlesinger_project_id: 1
+  schlesinger_survey_id: 1
+  schlesinger_quota_id: 1
+  industry_id: 1
+  cpi: 1.0
+  loi: 10
+  conversion_rate: 30
+  soft_launch_completes_wanted: 10
+  completes_wanted: 200
+  survey: standard
+  status: awarded
+  qualifications: { age: ["21", "25"], gender: ["58"] }
+  start_date_time: <%= 1.day.ago.to_s(:db) %>
+  end_date_time: <%= 5.days.from_now.to_s(:db) %>
+  study_type_id: 1
+  sample_type_id: 1

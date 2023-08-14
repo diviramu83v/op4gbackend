@@ -1,0 +1,6 @@
+- if @client_sent_survey_invitation.blank?
+  = render 'survey/client_sent_unsubscriptions/not_found'
+- elsif @unsubscription.blank?
+  = render 'survey/client_sent_unsubscriptions/unsubscribe'
+- else
+  = render 'survey/client_sent_unsubscriptions/already_unsubscribed'

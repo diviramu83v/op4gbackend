@@ -1,0 +1,15 @@
+.mb-5
+  h2 System jobs
+.mb-5
+  h3 = link_to 'Sidekiq', sidekiq_web_url
+  p Sidekiq dashboard.
+/ .mb-5
+/   h3
+/     span Run a test job
+/   .row
+/     .col-3
+/       = form_for :job do |f|
+/         .form-group
+/           = f.label :event_name, 'Event name (optional)'
+/           = f.text_field :event_name, class: 'form-control'
+/         button.btn.btn-primary type="submit" = 'Send'

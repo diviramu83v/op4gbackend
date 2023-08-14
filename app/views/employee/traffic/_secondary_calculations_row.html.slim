@@ -1,0 +1,32 @@
+- if resource.prescreener_check_failures?
+  .row.mt-4
+    .col-6
+      .mb-2
+        h5 Calculations with screened records
+      .mb-0
+        .row
+          .col-4
+            = render 'employee/cards/text_element_with_tooltip',
+                     label: 'Incidence',
+                     value: format_percentage(resource.incidence_rate_with_screened),
+                     tooltip: 'Incidence rate with screener: complete / screened + complete + terminate'
+          .col-4
+            = render 'employee/cards/text_element_with_tooltip',
+                     label: 'I + QF',
+                     value: format_percentage(resource.incidence_plus_quotafull_rate_with_screened),
+                     tooltip: 'Incidence rate with quotafull: complete / screened + finished'
+          .col-4
+            = render 'employee/cards/text_element_with_tooltip',
+                     label: 'Completion',
+                     value: format_percentage(resource.completion_rate_with_screened),
+                     tooltip: 'Completion rate: finished / screened + abandoned + finished'
+    - if resource.prescreener_check_failure_summary.any?
+      .col-6
+        .mb-2
+          h5 Term report
+        table.table.table-sm.table-wrapped-no-header.mb-0 data-sort='table'
+          tbody
+            - resource.prescreener_check_failure_summary.each do |key, value|
+              tr
+                td = key
+                td = value

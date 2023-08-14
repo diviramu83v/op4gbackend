@@ -1,0 +1,30 @@
+.mb-5
+  h2
+    span.mr-3 Projects that have been closed out
+.mb-5
+  .d-flex.justify-content-end.mb-3
+    .pagination-xs.mb-0 = paginate @projects
+  table.table.mb-3 data-sort='table'
+    thead
+      tr
+        th Project ID
+        th Project name
+        th Manager name
+        th Fraudulent count
+        th Completes count
+        th Rejected count
+        th Earnings count
+        / th
+    tbody
+      - @projects.each do |project|
+        tr
+          td = project.id
+          td = link_to project.name, project
+          td = project.manager.name
+          td = format_number(project.onboardings.fraudulent.count)
+          td = format_number(project.onboardings.accepted.count)
+          td = format_number(project.onboardings.rejected.count)
+          td = format_number(project.earnings.count)
+          / td = link_to 'Begin', new_project_fraudulent_url(project)
+  .d-flex.justify-content-end.mb-3
+    .pagination-xs.mb-0 = paginate @projects

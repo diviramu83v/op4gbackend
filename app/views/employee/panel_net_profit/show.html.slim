@@ -1,0 +1,17 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Panels', panels_url
+  li.breadcrumb-item = link_to @panel.name, panel_url(@panel)
+  li.breadcrumb-item.active = 'Panel panelist net incentive margin'
+.mb-5
+  .d-flex.justify-content-between
+    h2
+      span.mr-2 Panelist net incentive margin
+.row.mb-5
+  .col-lg-5 = render 'employee/cards/text_element', label: 'Name', value: @panel.name
+.row
+  .col-lg-8
+    h3.mb-4 Net incentive margin
+    .row.mb-5
+      .col-4 = render 'employee/cards/text_element', label: 'Accepted Completes x CPI', value: format_currency(@panel.calculate_total_cpi)
+      .col-4 = render 'employee/cards/text_element', label: 'Panelist earnings', value: format_currency(@panel.calculate_total_earnings)
+      .col-4 = render 'employee/cards/text_element', label: 'ROI', value: format_currency(@panel.calculate_net_profit)

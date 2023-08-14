@@ -1,0 +1,15 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Projects', projects_url
+  li.breadcrumb-item = link_to @prescreener_question.survey.project.extended_name, @prescreener_question.survey.project
+  li.breadcrumb-item = @prescreener_question.survey.name
+  li.breadcrumb-item.active = link_to 'Prescreener', survey_prescreener_questions_url(@prescreener_question.survey)
+  li.breadcrumb-item.active Edit
+.mb-5
+  h2 Edit screener question
+.mb-5
+  .row
+    .col-8
+      = form_for :prescreener_question, url: prescreener_question_url(@prescreener_question), method: :patch do |f|
+        = render 'employee/form_errors', resource: @prescreener_question
+        = render 'form', f: f
+        = render 'employee/form_buttons'

@@ -1,0 +1,30 @@
+- if query.filtered?
+  = render 'employee/cards/text_header', label: 'Filters'
+  - if query.country.present?
+    span.badge.wrap.badge-dark.mr-1 = query.country.button_label
+  - query.demo_query_state_codes.each do |obj|
+    span.badge.wrap.badge-dark.mr-1 = "State : #{obj.code}"
+  - query.ages.order_by_value.each do |age|
+    span.badge.wrap.badge-dark.mr-1 = age.button_label
+  - query.options.each do |option|
+    span.badge.wrap.badge-dark.mr-1 = option.button_label
+  - query.regions.each do |region|
+    span.badge.wrap.badge-dark.mr-1 = region.button_label
+  - query.divisions.each do |division|
+    span.badge.wrap.badge-dark.mr-1 = division.button_label
+  - query.states.each do |state|
+    span.badge.wrap.badge-dark.mr-1 = state.button_label
+  - query.dmas.each do |dma|
+    span.badge.wrap.badge-dark.mr-1 = dma.button_label
+  - query.msas.each do |msa|
+    span.badge.wrap.badge-dark.mr-1 = msa.button_label
+  - query.pmsas.each do |pmsa|
+    span.badge.wrap.badge-dark.mr-1 = pmsa.button_label
+  - query.counties.each do |county|
+    span.badge.wrap.badge-dark.mr-1 = county.button_label
+  - query.zip_codes.each do |zip|
+    span.badge.wrap.badge-dark.mr-1 = zip.button_label
+  - query.project_inclusions.each do |project|
+    span.badge.wrap.badge-dark.mr-1 = project.button_label
+  - if query.encoded_uid_onboardings.any?
+    span.badge.wrap.badge-dark.mr-1 = "Encoded UIDs : #{query.encoded_uid_onboardings.count}"

@@ -1,0 +1,22 @@
+.card
+  .card-header
+    h4 Screener questions
+  .card-body
+    .mb-3 Please complete the following question to enter the survey:
+    .row
+      .col-lg-6
+        = form_for :answer, url: survey_screener_step_question_url(@prescreener_question.token) do |f|
+          label.mb-3 = @prescreener_question.body
+          .mb-3
+            - if @prescreener_question.question_type == 'single_answer'
+              = f.select :selected_answer, options_for_select(@prescreener_question.answer_options), { prompt: 'Please select...' }, { class: 'form-control', required: true }
+            - if @prescreener_question.question_type == 'multi_answer'
+              .mb-2 Check all that apply
+              - @prescreener_question.answer_options.each do |answer|
+                .form-check.mb-2
+                  = f.check_box :checked_answers, { multiple: true, class: 'form-check-input', checked: false }, answer, false
+                  = f.label answer, class: 'form-check-label'
+
+            - if @prescreener_question.question_type == 'open_end'
+              = f.text_field :typed_answer, class: 'form-control'
+          = render 'forms/submit_button', form: f

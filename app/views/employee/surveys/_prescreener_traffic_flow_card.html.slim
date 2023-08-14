@@ -1,0 +1,18 @@
+.card#prescreener-traffic-flow
+  .card-header
+    .d-flex.justify-content-between
+      h4
+        span Traffic flow
+      - if can?(:view_and_modify, Survey)
+        span = render 'employee/surveys/prescreener_buttons', survey: @survey
+  .card-body
+    #prescreener-settings-errors
+    table.table.table-hover.table-sm.table-wrapped-with-header.mb-0
+      thead
+        tr
+          th Source
+          th
+      tbody
+        = render partial: 'employee/onramps/prescreener_settings_row',
+                collection: @survey.onramps.order_by_category,
+                as: :onramp

@@ -1,0 +1,24 @@
+nav.navbar.navbar-dark.bg-dark.fixed-bottom
+  .container
+    .navbar-nav.nav-left
+      .nav-item
+        - if current_employee.survey_test_mode&.easy_mode?
+          = link_to survey_test_modes_url, method: :patch, class: 'btn btn-warning btn-sm' do
+            i.fa.fa-toggle-on.mr-1
+            | Test mode
+        - else
+          = link_to survey_test_modes_url, method: :patch, class: 'btn btn-outline-primary btn-sm' do
+            i.fa.fa-toggle-off.mr-1
+            | Test mode
+    .navbar-nav.nav-left
+      .nav-item
+        - if current_employee&.admin?
+          = form_with url: effective_roles_url, local: false do |f|
+            .mb-1 style=("display: inline-flex")
+              = f.select :role, options_for_select(Role.all.to_a.map { |a| [a.name.humanize] }, selected: session[:effective_role].present? ? session[:effective_role] : 'Admin'), {}, { class: 'form-control form-control-sm mr-1' }
+              = f.hidden_field :redirect_url, value: request.original_url
+            = f.submit "Change Role", class: "btn btn-outline-primary btn-sm"
+    ul.navbar-nav.flex-row
+      li.nav-item.ml-3 = link_to 'System', admin_dashboard_url, class: 'nav-link'
+      li.nav-item.ml-3 = link_to 'Employee', employee_dashboard_url, class: 'nav-link'
+      li.nav-item.ml-3 = link_to 'Panelist', panelist_dashboard_url, class: 'nav-link'

@@ -1,0 +1,46 @@
+{
+  "name": "Op4G Platform",
+  "description": "The new hotness.",
+  "stack": "heroku-20",
+  "addons": [
+    "heroku-postgresql:in-dyno",
+    "heroku-redis:in-dyno"
+  ],
+  "scripts": {
+    "postdeploy": "bundle exec rake db:seed db:seed:dummy_data deploy:set_up_domains"
+  },
+  "env": {
+    "SECRET_TOKEN": {
+      "description": "A secret key for verifying the integrity of signed cookies.",
+      "generator": "secret"
+    },
+    "WEB_CONCURRENCY": {
+      "description": "The number of processes to run.",
+      "value": "5"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "standard-1x"
+    }
+  },
+  "image": "heroku/ruby",
+  "buildpacks": [
+    {
+      "url": "heroku/ruby"
+    }
+  ],
+  "environments": {
+    "test": {
+      "addons": [
+        "heroku-postgresql:in-dyno",
+        "heroku-redis:in-dyno"
+      ],
+      "scripts": {
+        "test-setup": "bundle exec rake assets:precompile",
+        "test": "bundle exec rails test"
+      }
+    }
+  }
+}

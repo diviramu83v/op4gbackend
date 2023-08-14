@@ -1,0 +1,35 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Projects', projects_url
+  li.breadcrumb-item = link_to @onboarding.project.extended_name, project_url(@onboarding.project)
+  - if @onboarding.survey
+    li.breadcrumb-item = link_to @onboarding.survey.name, survey_url(@onboarding.survey)
+  li.breadcrumb-item = link_to 'Traffic Details', @traffic_details_url
+  li.breadcrumb-item Traffic events
+.card
+  .card-header
+    .d-flex.justify-content-between
+      h3 Traffic events
+  .card-body
+    - if @onboarding.events.blank?
+      .row
+        .col.mt-2 There are no traffic events for this onboarding record
+    - else
+      .row
+        .col-3
+          h5.mb-2.dashhead-title.mb-1 Pre/Post
+        .col-3
+          h5.mb-2.dashhead-title.mb-1 Category
+        .col-3
+          h5.mb-2.dashhead-title.mb-1 Message
+        .col-3
+          h5.mb-2.dashhead-title.mb-1 Time
+      - @onboarding.events.by_id.each do |event|
+        .row
+          .col-3 = format_pre_or_post(event.traffic_check.traffic_step.when) if event.traffic_check
+          .col-3 = event.category.humanize
+          .col-3
+            = format_message(event.message)
+            - if event.url.present?
+              br
+              = event.url
+          .col-3 = format_date(event.created_at)

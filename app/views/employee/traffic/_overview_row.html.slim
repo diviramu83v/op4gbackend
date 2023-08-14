@@ -1,0 +1,40 @@
+.mb-2
+  h5
+    b = resource.started_count
+    = " traffic record".pluralize(resource.started_count)
+.mb-0
+  .row
+    .col-2
+      = render 'employee/cards/text_element_with_tooltip',
+               label: 'Onboarding',
+               value: resource.onboarding_count,
+               tooltip: 'In the security or screener process. Possibly abandoned at this point.'
+    .col-2
+      = render 'employee/cards/text_element_with_tooltip',
+               label: 'Blocked',
+               value: resource.blocked_count,
+               tooltip: 'Failed the security process.'
+    .col-2
+      = render 'employee/cards/text_element_with_tooltip',
+                label: 'Screened',
+                value: resource.screened_count,
+                tooltip: 'Gave a screener answer that did not match the desired target.'
+    .col-2
+      = render 'employee/cards/text_element_with_tooltip',
+               label: 'In survey',
+               value: resource.in_survey_count(resource.loi),
+               tooltip: "Sent to the client survey within the last #{resource.loi || 10} minutes."
+    .col-2
+      = render 'employee/cards/text_element_with_tooltip',
+               label: 'Abandoned',
+               value: resource.abandoned_count(resource.loi),
+               tooltip: "Sent to the client survey over #{resource.loi || 10} minutes ago. Could still be taking it."
+    .col-2
+      = render 'employee/cards/text_element_with_tooltip',
+               label: 'Finished',
+               value: resource.finished_count,
+               tooltip: 'Returned to one of our redirects for this study.'
+      - if resource.blocked_post_survey_count.positive?
+        .text-danger = "#{resource.blocked_post_survey_count} flagged"
+      - if resource.failed_post_survey_count.positive?
+        .text-danger = "#{resource.failed_post_survey_count} failed"

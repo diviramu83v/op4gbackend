@@ -1,0 +1,58 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Vendors', api_vendors_url
+  li.breadcrumb-item = @vendor.name
+.mb-5
+  .d-flex.justify-content-between.align-items-center
+    h2
+      span.mr-3 API data
+    div
+      div.mb-1
+        = link_to api_fraud_reject_url(@vendor, date: 3.months.ago, format: :csv), class: 'btn btn-outline-primary mr-2' do
+          i.fas.fa-cloud-download-alt.mr-2
+          | Download fraud/rejected #{3.months.ago.strftime('%B')}
+      div.mb-1
+        = link_to api_fraud_reject_url(@vendor, date: 2.months.ago, format: :csv), class: 'btn btn-outline-primary mr-2' do
+          i.fas.fa-cloud-download-alt.mr-2
+          | Download fraud/rejected #{2.months.ago.strftime('%B')}
+      div.mb-1
+        = link_to api_fraud_reject_url(@vendor, date: 1.months.ago, format: :csv), class: 'btn btn-outline-primary mr-2' do
+          i.fas.fa-cloud-download-alt.mr-2
+          | Download fraud/rejected #{1.months.ago.strftime('%B')}
+      div.mb-1
+        = link_to api_complete_url(@vendor, format: :csv), class: 'btn btn-outline-primary mr-2' do
+          i.fas.fa-cloud-download-alt.mr-2
+          | Download completes
+.mb-5
+  .d-flex.justify-content-between
+    h2
+      span.mr-3 Projects
+  .mb-0
+    = link_to 'all', request.query_parameters.merge(status: 'all'), class: "btn btn-outline-secondary btn-xs mr-1 #{active_class?('vendor_status', 'all')}"
+    - %w[live hold finished].each do |status|
+      = render 'filter_button', button_status: status
+- if @vendor.api_surveys.present?
+  table.table.table-sm.mb-0 data-sort='table'
+    thead
+      tr
+        th Name
+        th Survey
+        th Payout
+        th Op4G project ID
+        th WO number
+        th PM
+        th Received traffic
+    tbody
+      - @surveys.each do |survey|
+        tr
+          td = survey.project.name
+          td
+            span
+              = link_to "#{survey.name}:", survey_traffic_by_source_url(survey, anchor: "vendor-#{@vendor.id}")
+            span
+              .badge.ml-1 class="badge-#{survey_status_class(survey.status)}"
+                = survey.status
+          td $#{survey.survey_api_target.payout_cents / 100}
+          td = survey.project.id
+          td = survey.project.work_order
+          td = survey.project.manager.name
+          td = survey.onboardings.for_api_vendor(@vendor).count

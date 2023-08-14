@@ -1,0 +1,28 @@
+.card
+  .card-header
+    h4
+      span.mr-3 Panel
+      - if can?(:view_and_modify, Project)
+        span.mr-3
+          = link_to survey_vendors_url(survey), class: 'card-header-link' do
+            i.fa.fa-list-ul.mr-1
+            | Vendors
+        span
+          = link_to new_survey_vendor_url(survey), class: 'card-header-link' do
+            i.fa.fa-plus-circle.mr-1
+            | Add
+
+  .card-body
+    - if survey.vendors.any?
+      = render 'employee/cards/text_header', label: 'Vendors'
+      table.table.table-sm.mb-0
+        tbody
+          - survey.vendor_batches.each do |batch|
+            tr
+              - if can?(:view_and_modify, Project)
+                td = link_to batch.vendor.abbreviation, survey_vendors_url(survey, anchor: "vendor-#{batch.vendor.id}")
+              - else
+                td = batch.vendor.abbreviation
+              td.text-right = format_currency_with_zeroes(batch.incentive)
+    - else
+      p.mb-0 No vendors added yet.

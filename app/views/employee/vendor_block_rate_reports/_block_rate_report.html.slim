@@ -1,0 +1,14 @@
+.row.mb-5
+  .col-3 = render 'employee/cards/text_element', label: 'Block rate % (past 12 months)', value: vendor.total_onboardings_past_year.zero? ? 'No traffic in the past 12 months' : format_percentage(vendor.block_rate_percentage_past_year)
+- unless vendor.total_onboardings_past_year.zero?
+  .mb-5
+    table.table.mb-3 data-sort='table'
+      thead
+        tr
+          th Week of:
+          th Block rate %
+      tbody
+        - weeks.each do |week|
+          tr
+            td = week['beginning_of_week'].to_date
+            td = format_percentage_from_two_values(numerator: week['blocked_onboarding_count'], denominator: week['onboarding_count'])

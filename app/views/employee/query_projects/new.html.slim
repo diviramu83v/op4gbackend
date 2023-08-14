@@ -1,0 +1,11 @@
+.mb-5
+  h1 New project
+.mb-5
+  .row
+    .col-6
+      = form_for @project, url: query_projects_url(@query) do |f|
+        = render 'employee/form_errors', resource: @project
+        .form-group
+          = f.label :name
+          = f.text_field :name, class: 'form-control'
+        = render 'employee/form_buttons'

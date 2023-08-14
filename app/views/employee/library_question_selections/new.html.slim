@@ -1,0 +1,26 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Projects', projects_url
+  li.breadcrumb-item = link_to @survey.project.extended_name, @survey.project
+  li.breadcrumb-item = @survey.name
+  li.breadcrumb-item = link_to 'Prescreener', survey_prescreener_questions_url(@survey)
+  li.breadcrumb-item = link_to 'Prescreener Questions Library', survey_library_question_selections_url(@survey)
+  li.breadcrumb-item.active Add library question to survey
+.mb-5
+  h2 Add library question to #{@survey.name}
+.mb-5
+  .row
+    .col-10
+      = form_for @prescreener_question, url: survey_library_question_selections_url(@survey) do |f|
+        = render 'employee/form_errors', resource: @prescreener_question
+        .mb-3
+          = f.label :body
+          = f.text_field :body, value: @prescreener_question.body, class: 'form-control mb-2'
+          = f.label :question_type
+          = f.select :question_type, options_for_select(PrescreenerQuestionTemplate.question_types.to_a.map{|a| [a.first.humanize, a.last]}),
+                                                       { include_blank: 'Please select' }, { class: 'form-control mr-3 mb-2' }
+          = f.label :passing_criteria
+          = f.select :passing_criteria, options_for_select(PrescreenerQuestionTemplate.passing_criteria.to_a.map{|a| [a.first.humanize, a.last]}),
+                                                          { include_blank: 'Please select' }, { class: 'form-control mr-3 mb-2' }
+          = f.label :answers
+          = f.text_area :answers, rows: '10', value: convert_array_to_text_area(@prescreener_question.answers), class: 'form-control mb-2'
+        = render 'employee/form_buttons'

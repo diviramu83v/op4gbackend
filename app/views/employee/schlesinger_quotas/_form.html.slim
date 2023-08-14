@@ -1,0 +1,59 @@
+= form_for @schlesinger_quota, url: url do |f|
+  = render 'employee/form_errors', resource: @schlesinger_quota
+  .row.mb-3
+    .col-lg-3
+      .form-group
+        .mb-3 = f.label 'Payout'
+        span
+          = f.number_field :cpi, step: :any, class: 'form-control'
+    .col-lg-3
+      .form-group
+        .mb-3 = f.label 'LOI'
+        span
+          = f.number_field :loi, class: 'form-control'
+  .row.mb-3
+    .col-lg-3
+      .form-group
+        .mb-3 = f.label :industry_id, 'Industry'
+        span
+          = f.select :industry_id, options_for_select(@industries.map(&:values).map(&:reverse), selected: @schlesinger_quota.industry_id), { prompt: 'Please select...' }, { class: 'form-control' }
+    .col-lg-3
+      .form-group
+        .mb-3 = f.label :study_type_id, 'Study Type'
+        span
+          = f.select :study_type_id, options_for_select(@study_types.map(&:values).map(&:reverse), selected: @schlesinger_quota.study_type_id), { prompt: 'Please select...' }, { class: 'form-control' }
+    .col-lg-3
+      .form-group
+        .mb-3 = f.label :sample_type_id, 'Sample Type'
+        span
+          = f.select :sample_type_id, options_for_select(@sample_types.map(&:values).map(&:reverse), selected: @schlesinger_quota.sample_type_id), { prompt: 'Please select...' }, { class: 'form-control' }
+  .row.mb-3
+    .col-lg-3
+      .form-group
+        .mb-3 = render 'employee/cards/text_header_with_tooltip', label: 'Soft Launch Completes Wanted', tooltip: 'quota will pause once this number is reached'
+        span
+          = f.number_field :soft_launch_completes_wanted, class: 'form-control'
+    .col-lg-3
+      .form-group
+        .mb-3 = f.label 'Total Completes Wanted'
+        span
+          = f.number_field :completes_wanted, class: 'form-control'
+    .col-lg-3
+      .form-group
+        .mb-3 = f.label 'Conversion Rate'
+        span
+          = f.number_field :conversion_rate, class: 'form-control'
+  .row.mb-3
+    .col-lg-3
+      .form-group
+        .mb-3 = f.label 'Start Date'
+        span
+          = f.date_field :start_date_time, class: 'form-control'
+    .col-lg-3
+      .form-group
+        .mb-3 = f.label 'End Date'
+        span
+          = f.date_field :end_date_time, class: 'form-control'
+  = render 'qualifications_form', f: f
+
+  = render 'employee/form_buttons'

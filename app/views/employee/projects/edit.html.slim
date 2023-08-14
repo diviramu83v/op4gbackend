@@ -1,0 +1,90 @@
+.mb-5
+  h1 Edit project
+.mb-5
+  = form_for @project do |f|
+    = render 'employee/form_errors', resource: @project
+    .row
+      .col-md-8
+        .form-group.mb-4
+          = f.label :name
+          = f.text_field :name, class: 'form-control'
+        .row
+          .col-md-4
+            .form-group.mb-4
+              = f.label :manager
+              = f.collection_select(:manager_id, Employee.with_role('Operations').by_name, :id, :name,
+                { prompt: '...' }, class: 'form-control')
+        .row
+          .col-md-4
+            .form-group.mb-4
+              = f.label :work_order
+              = f.text_field :work_order, class: 'form-control'
+          .col-md-4
+            .form-group.mb-4
+              = f.label :salesperson
+              = f.collection_select(:salesperson_id, Employee.with_role('Sales').by_name, :id, :name,
+                { prompt: '...' }, class: 'form-control')
+          .col-md-4
+            .form-group.mb-4
+              = f.label :client
+              = f.collection_select(:client_id, Client.by_name, :id, :name,
+                { prompt: '...' }, class: 'form-control')
+        .row
+          .col-md-4
+            .form-group.mb-4
+              = f.label :product_name
+              = f.collection_select(:product_name, Project.product_names.map { |n| [n.first, n.first.humanize] }, :first, :last,
+                { prompt: '...' }, class: 'form-control')
+
+          .col-md-4
+            .form-group.mb-4
+              = f.label :estimated_start_date, 'Est. Start date'
+              = f.text_field :estimated_start_date, class: 'form-control', data: { type: 'date' }, autocomplete: "off"
+
+          .col-md-4
+            .form-group.mb-4
+              = f.label :start_date, 'Actual Start date'
+              = f.text_field :start_date, class: 'form-control', data: { type: 'date' }, autocomplete: "off"
+
+        .row
+          .col-md-4
+            .form-check.mb-4
+              = f.check_box :unbranded, class: 'form-check-input'
+              = f.label :unbranded_redirects, class: 'form-check-label'
+
+          .col-md-4
+            .form-group.mb-4
+              = f.label :estimated_complete_date, 'Est. Complete date'
+              = f.text_field :estimated_complete_date, class: 'form-control', data: { type: 'date' }, autocomplete: "off"
+
+          .col-md-4
+            .form-group.mb-4
+              = f.label :complete_date, 'Actual Complete date'
+              = f.text_field :complete_date, class: 'form-control', data: { type: 'date' }, autocomplete: "off"
+
+        .form-group.mb-4
+          = f.label :notes
+          - if @project.notes.present?
+            = f.text_area :notes, rows: 12, class: 'form-control'
+          - else
+            = f.rich_text_area :rtf_notes, class: 'form-control rich-text-area'
+      .col-md-4
+        .card.mt-4
+          .card-header
+            h4 Advanced options
+          .card-body
+            .mb-2
+              h6 RelevantID security level
+            .mb-3
+              = f.radio_button :relevant_id_level, 'project', checked: @project.relevant_id_level == 'project', class: 'mr-2'
+              = f.label 'Project (more secure)', class: 'mb-0'
+              small.form-text.text-muted Duplicates checked across the entire project.
+            .mb-3
+              = f.radio_button :relevant_id_level, 'survey', checked: @project.relevant_id_level == 'survey', class: 'mr-2'
+              = f.label 'Survey (standard)', class: 'mb-0'
+              small.form-text.text-muted Duplicates checked for each study.
+            .mb-0
+              = f.radio_button :relevant_id_level, 'vendor', checked: @project.relevant_id_level == 'vendor', class: 'mr-2'
+              = f.label 'Vendor (less secure)', class: 'mb-0'
+              small.form-text.text-muted Duplicates checked for each vendor/source/onramp.
+    = render 'employee/form_buttons'

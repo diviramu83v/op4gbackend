@@ -1,0 +1,6 @@
+.form-group
+  - if local_assigns[:label]
+    = form.label field, label
+  - else
+    = form.label field
+  = form.text_area field, class: 'form-control', rows: 5

@@ -1,0 +1,18 @@
+.mb-5
+  h2
+    .d-flex.justify-content-between
+      span
+        span.mr-2 = recontact.name
+        - if can?(:view_and_modify, Survey)
+          = link_to edit_recontact_url(recontact), class: 'page-header-link' do
+            i.fa.fa-edit.mr-1
+            | Edit
+.row.mb-5
+  .col-2
+    h5.mb-2.dashhead-subtitle.text-header.tiny-button-header
+      span = 'LOI'
+      = render 'employee/cards/text_value', value: recontact.loi
+  .col-2
+    h5.mb-2.dashhead-subtitle.text-header.tiny-button-header
+      span = 'CPI'
+      = render 'employee/cards/text_value', value: format_currency(recontact&.cpi)

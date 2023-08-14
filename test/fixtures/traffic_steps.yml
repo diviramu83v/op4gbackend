@@ -1,0 +1,26 @@
+pre_clean_id:
+  onboarding: standard
+  sort_order: 1
+  when: 'pre'
+  category: 'clean_id'
+  token: <%= SecureRandom.hex %>
+  status: 'complete'
+pre_analyze:
+  onboarding: standard
+  sort_order: 2
+  when: 'pre'
+  category: 'pre_analyze'
+  token: <%= SecureRandom.hex %>
+  status: 'incomplete'
+post_return_key:
+  onboarding: standard
+  when: 'post'
+  category: 'return_key'
+  token: <%= SecureRandom.hex %>
+  status: 'incomplete'
+post_return_key_second:
+  onboarding: second
+  when: 'post'
+  category: 'return_key'
+  token: <%= SecureRandom.hex %>
+  status: 'incomplete'

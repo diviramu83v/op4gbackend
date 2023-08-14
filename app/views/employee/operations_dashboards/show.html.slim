@@ -1,0 +1,51 @@
+.row
+  .col-4.dashboard-card
+    .mb-5
+      .mb-3
+        .card
+          .card-header
+            h4 = link_to 'Projects', projects_url
+          .card-body
+            .row
+              .col-2.mw-100
+                .mb-3
+                  = render 'employee/cards/text_element', label: 'Draft', value: format_number(Project.draft.count)
+              .col-2.mw-100
+                .mb-3
+                  = render 'employee/cards/text_element', label: 'Live', value: format_number(Project.live.count)
+              .col-2.mw-100
+                .mb-3
+                  = render 'employee/cards/text_element', label: 'Hold', value: format_number(Project.hold.count)
+              .col-2.mw-100
+                .mb-3
+                  = render 'employee/cards/text_element', label: 'Finished', value: format_number(Project.finished.count)
+
+  .col-4.dashboard-card
+    .mb-5
+      .mb-3
+        .card
+          .card-header
+            h4 = link_to 'Clients', clients_url
+          .card-body
+            .row
+              .col-2.mw-100
+                .mb-3
+                  = render 'employee/cards/text_element', label: 'Active', value: format_number(Client.active.count)
+              .col-2.mw-100
+                .mb-3
+                  = render 'employee/cards/text_element', label: 'Inactive', value: format_number(Client.inactive.count)
+
+  .col-4.dashboard-card
+    .mb-5
+      .mb-3
+        .card
+          .card-header
+            h4 = link_to 'Vendors', vendors_url
+          .card-body
+            .row
+              .col-2.mw-100
+                .mb-3
+                  = render 'employee/cards/text_element', label: 'Active', value: format_number(Vendor.with_active_projects.count)
+              .col-2.mw-100
+                .mb-3
+                  = render 'employee/cards/text_element', label: 'Inactive', value: format_number(Vendor.inactive.count)

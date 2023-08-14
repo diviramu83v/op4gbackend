@@ -1,0 +1,6 @@
+standard:
+  survey: standard
+  employee: locked_panel
+  description: test description
+  incentive_cents: 2000
+  email_subject: test email subject

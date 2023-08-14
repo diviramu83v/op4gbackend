@@ -1,0 +1,22 @@
+.mb-5
+  .d-flex.justify-content-between
+    h2
+      span.mr-3 Query feasibility
+      span.mr-0
+        - if can?(:view_and_modify, Panel)
+          = link_to new_feasibility_url, class: 'page-header-link' do
+            i.fa.fa-plus-circle.mr-1
+            | Add
+
+.d-flex.justify-content-end
+  .pagination-xs.mb-0 = paginate @feasibility_queries
+table
+  tbody
+    .mb-5
+      = render 'employee_buttons'
+    .mb-4
+      - @feasibility_queries.each do |demo_query|
+        tr
+          td = render 'employee/feasibilities/card', query: demo_query
+.d-flex.justify-content-end.mt-4
+  .pagination-xs.mb-0 = paginate @feasibility_queries

@@ -1,0 +1,60 @@
+.card-body
+  - if onboardings.empty?
+    p.mb-0 No traffic detected.
+  - else
+    .d-flex.justify-content-end.mb-3
+      .pagination-xs = paginate onboardings_for_page
+    table.table.table-sm.table-wrapped-with-header.mb-0 data-sort='table'
+      thead
+        tr
+          th
+          th UID > Encoded UID
+          th Response
+          th Timestamps
+          - if @survey.present?
+            - if current_user.effective_role_admin?(session[:effective_role])
+              th
+            - if current_user.admin_or_ops_manager?(session[:effective_role])
+              th
+      tbody
+        - onboardings_for_page.each do |onboarding|
+          tr
+            td
+              .row
+                .col-12 = onramp_source_badge(onboarding.onramp)
+              .row
+                .col-12 = format_onboarding_security(onboarding)
+              .row
+                .col-12 = survey_status_badge(onboarding.initial_survey_status)
+            td
+              .row
+                .col-12
+                  span.mr-1
+                    = onboarding.uid
+                  = render 'shared/copy_button', label: '', text: "#{onboarding.uid}"
+                  br
+                  span.mr-1
+                    = "> #{onboarding.token}"
+                  = render 'shared/copy_button', label: '', text: "#{onboarding.token}"
+            td
+              = format_onboarding_response(onboarding)
+              br
+              = format_loi_seconds(onboarding.length_of_interview)
+            td
+              - if onboarding.survey_started_at.present?
+                .row
+                  .col-12
+                    = format_date(onboarding.survey_started_at)
+                    = ": start"
+              - if onboarding.survey_finished_at.present?
+                .row
+                  .col-12
+                    = format_date(onboarding.survey_finished_at)
+                    = ": finish"
+
+            - if current_user.effective_role_admin?(session[:effective_role])
+              td = link_to 'Steps', onboarding_traffic_steps_url(onboarding)
+            - if current_user.admin_or_ops_manager?(session[:effective_role])
+              td = link_to 'Traffic events', onboarding_traffic_events_url(onboarding)
+    .d-flex.justify-content-end.mt-3
+      .pagination-xs.mb-0 = paginate onboardings_for_page

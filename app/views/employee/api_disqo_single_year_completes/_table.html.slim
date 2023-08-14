@@ -1,0 +1,16 @@
+table.table.table-sm.mb-0 data-sort='table'
+  thead
+      th Month
+      th Completes
+      th Revenue
+      th Payout
+      th Profit
+  tbody
+    - completes_by_month.each do |completes_row|
+      - date = Date.parse("#{completes_row.first.first}-#{completes_row.first.second}-01")
+      tr
+        td = link_to format_month_year_date(date), api_disqo_single_month_completes_url(date: date)
+        td = format_number(completes_row.second)
+        td = number_to_currency(completes_row.third)
+        td = number_to_currency(completes_row.fourth)
+        td = number_to_currency(completes_row.last)

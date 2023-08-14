@@ -1,0 +1,8 @@
+one:
+  survey: standard
+  report_type: completes
+  report_file_name: completes.csv
+two:
+  survey: standard
+  report_type: all-traffic
+  report_file_name: all.csv

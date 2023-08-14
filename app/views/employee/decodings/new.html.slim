@@ -1,0 +1,13 @@
+.mb-5
+  h2
+    span.mr-3 UID decoder
+.mb-0
+  .mb-3
+    h3 Paste encoded UIDs
+  = form_for @decoding , remote:true do |f|
+    = render 'employee/form_errors', resource: @decoding
+    .form-group
+      = f.text_area :encoded_uids, rows: '20', class: 'form-control'
+    button.btn.btn-primary type="submit" data-disable="button"
+      i.fas.fa-cloud-upload-alt.mr-2
+      = 'Save'

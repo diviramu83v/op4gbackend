@@ -1,0 +1,6 @@
+- if resource.errors.any?
+  .alert.alert-danger role="alert"
+    = "#{pluralize(resource.errors.count, "error")} kept this record from being saved:"
+    ul.mb-0
+      - resource.errors.full_messages.each do |msg|
+        li= msg

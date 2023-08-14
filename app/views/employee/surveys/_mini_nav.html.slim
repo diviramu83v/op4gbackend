@@ -1,0 +1,9 @@
+span.mr-1 = link_to 'Overview',
+  survey_traffic_url(survey),
+  class: activate_class(survey_traffic_url(survey), 'btn btn-xs btn-outline-primary')
+span.mr-1 = link_to 'By source',
+  survey_traffic_by_source_url(survey),
+  class: activate_class(survey_traffic_by_source_url(survey), 'btn btn-xs btn-outline-primary')
+span.mr-0 = link_to 'Details',
+  survey_traffic_details_url(survey),
+  class: activate_class(survey_traffic_details_url(survey), 'btn btn-xs btn-outline-primary')

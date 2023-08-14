@@ -1,0 +1,11 @@
+- content_for :flash_width
+  = 'col-lg-8'
+
+.row
+  .col-lg-8
+    .card
+      .card-header
+        h4 = @panel.try(:landing_page_title) || 'Op4G registration'
+      .card-body
+        .mb-3
+          = simple_format(@panel.try(:landing_page_content))

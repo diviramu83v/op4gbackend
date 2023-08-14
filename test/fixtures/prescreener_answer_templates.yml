@@ -1,0 +1,10 @@
+yes_answer:
+  body: yes
+  target: true
+  prescreener_question_template: standard
+  sort_order: 1
+no_answer:
+  body: no
+  target: false
+  prescreener_question_template: standard
+  sort_order: 2

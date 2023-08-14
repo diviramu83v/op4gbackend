@@ -1,0 +1,8 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Vendors', vendors_url
+  li.breadcrumb-item.active = @vendor.name
+  li.breadcrumb-item.active Edit
+.mb-5
+  h2 Edit vendor
+.mb-5
+  = render 'employee/vendors/form', vendor: @vendor

@@ -1,0 +1,56 @@
+.mb-5
+  h2
+    .d-flex.justify-content-between
+      span
+        span.mr-2 Project
+        div
+          h5.mt-2
+            span.mr-2 Surveys:
+            - @project.surveys.map(&:status).uniq.each do |status|
+              span.badge.mr-2 class="badge-#{survey_status_class(status)}"
+                | #{waiting_for_ids_label(status)}: #{@project.surveys.try(status).count}
+        - if @project.editable? && can?(:view_and_modify, Project)
+          span.mr-0
+            = link_to edit_project_url(@project), class: 'btn btn-link page-header-link pl-0' do
+              i.fa.fa-edit.mr-1
+              | Edit
+      = render 'relevant_id_level_warning', project: @project
+      - if can?(:view_and_modify, Project)
+        span
+          = render 'employee/project_statuses/buttons', project: @project
+.mb-0
+  .row
+    .col-md-12.mb-3
+      = render 'employee/cards/text_header', label: 'Name', clipboard: { label: 'Copy with IDs', text: @project.extended_name }
+      = render 'employee/cards/text_value', value: project.name
+    .col-md-9
+      .row
+        .col-md-4.mb-3 = render 'employee/cards/text_element', label: 'ID', value: @project.id
+        .col-md-4.mb-3 = render 'employee/cards/text_element', label: 'Manager', value: employee_link(@project.manager)
+      .row
+        .col-md-4.mb-3 = render 'employee/cards/text_element', label: 'Work order', value: @project.work_order || '?'
+        .col-md-4.mb-3 = render 'employee/cards/text_element', label: 'Salesperson', value: employee_link(@project.salesperson)
+        - if can?(:view_and_modify, Project)
+          .col-md-4.mb-3 = render 'employee/cards/text_element', label: 'Client', value: client_link(@project.client)
+        - else
+          .col-md-4.mb-3 = render 'employee/cards/text_element', label: 'Client', value: @project.client&.name
+      .row
+        .col-md-4.mb-3 = render 'employee/cards/text_element', label: 'Product name', value: @project.product_name&.humanize || '?'
+        .col-md-4.mb-3 = render 'employee/cards/text_element', label: 'Est. Start Date', value: @project.estimated_start_date || '?'
+        .col-md-4.mb-3 = render 'employee/cards/text_element', label: 'Start Date', value: @project.start_date || '?'
+      .row
+        .col-md-4.mb-3 = render 'employee/cards/text_element', label: 'Unbranded redirects', value: @project.unbranded || '?'
+        .col-md-4.mb-3 = render 'employee/cards/text_element', label: 'Est. Complete Date', value: @project.estimated_complete_date || '?'
+        .col-md-4.mb-3 = render 'employee/cards/text_element', label: 'Complete Date', value: @project.complete_date || '?'
+    .col-md-3
+      - if @project.started_at.present?
+        .mb-3 = render 'employee/cards/text_element', label: 'Started', value: format_long_date(@project.started_at)
+      - if @project.finished_at.present?
+        .mb-3 = render 'employee/cards/text_element', label: 'Finished', value: format_long_date(@project.finished_at)
+    - if @project.notes.present? || @project.rtf_notes.present?
+      .col-md-9
+        = render 'employee/cards/text_header', label: 'Notes'
+        - if @project.notes.present?
+          = render 'employee/cards/text_value', value: simple_format(@project.notes, {}, sanitize: false)
+        - if @project.rtf_notes.present?
+          == @project.rtf_notes

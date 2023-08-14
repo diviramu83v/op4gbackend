@@ -1,0 +1,43 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Panelists', panelists_url
+  li.breadcrumb-item = link_to @panelist.name, @panelist
+  li.breadcrumb-item.active Edit
+h2.mb-5 Edit panelist
+.mb-5
+  .row
+    .col-6
+      = form_for @panelist do |f|
+        = render 'employee/form_errors', resource: @panelist
+        .row
+          .col-4 = render 'forms/text_field', form: f, field: :first_name
+          .col-4 = render 'forms/text_field', form: f, field: :last_name
+          .col-4 = render 'forms/text_field', form: f, field: :email
+        .row
+          .col-12 = render 'forms/text_field', form: f, field: :address
+        .row
+          .col-6 = render 'forms/text_field', form: f, field: :city
+          .col-2.form-group
+            = f.label :state
+            /= f.select :state, options_from_collection_for_select(State::PANELIST[@panelist.country_sym], :to_s, :to_s, @panelist.state.code), { include_blank: 'Please select...' }, { class: 'form-control' }
+            = f.select :state, options_from_collection_for_select(State::PANELIST[@panelist.country_sym], :to_s, :to_s, @panelist.state), { include_blank: 'Please select...' }, { class: 'form-control' }
+          .col-4 = render 'forms/text_field', form: f, field: :postal_code
+        .row
+          .col-2
+            .mb-4.form-check
+              label.form-check-label
+                = f.check_box :verified_flag, class: 'form-check-input'
+                | Verified?
+        = render 'employee/form_buttons'
+.mb-5
+  h2.mb-5 Edit demographics
+  .row
+    - @panelist.answered_question_categories.each do |category|
+      - @panelist.answers_for_category(category).each do |answer|
+        .col-4.mb-5
+          h5.dashhead-title.mb-0 = answer.demo_question.label
+          - if answer.demo_question.label_different_than_body?
+            small.text-muted = answer.demo_question.body
+          - if can?(:view_and_modify, Panelist)
+            p.mb-0 = link_to answer.option.label, edit_demo_answer_url(answer)
+          - else
+            p.mb-0 = answer.option.label

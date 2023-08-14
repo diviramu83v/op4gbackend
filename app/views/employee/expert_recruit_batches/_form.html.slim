@@ -1,0 +1,95 @@
+= form_for @expert_recruit_batch, url: url do |f|
+  = render 'employee/form_errors', resource: @expert_recruit_batch
+  .row.mb-3
+    .col-12
+      .form-group
+        = render 'employee/cards/text_header_with_tooltip', label: 'Upload Email and First Name - CSV file', tooltip: "Only upload a properly formatted CSV file. <br> It must contain 'first_name' and 'email' columns. <br> The headers are case sensitive."
+        = f.file_field :emails_first_names, class: 'form-control-file', accept: 'text/csv'
+  .row.mb-3
+    .col-12
+      .form-group
+        = render 'employee/cards/text_header_with_tooltip', label: 'Email and First Name', tooltip: 'Include email and first name separated by a comma. e.g. john@testing.com, John <br> One expert per line.', class: 'data-html: true'
+        = f.text_area :pasted_first_names_emails, class: 'form-control', rows: '20', value: @expert_recruit_batch.view_friendly_csv_data
+  .row.mb-3
+    .col-6
+      .form-check.mb-3
+        = f.check_box :send_for_client, class: 'form-check-input'
+        = f.label :send_for_client, 'Send on behalf of client?', class: 'form-check-label'
+  .row.mb-3
+    .col-6
+      .form-group
+        = f.label :employee
+        = f.collection_select(:employee_id, Employee.locked_panel, :id, :name, { prompt: 'Please select...' }, class: 'form-control')
+    .col-6
+      .form-group
+        = f.label :description
+        = f.text_field :description, class: 'form-control', placeholder: 'eg. Plumbers'
+  .row.mb-3
+    .col-6
+      .form-group
+        = f.label :time
+        = f.text_field :time, class: 'form-control', placeholder: 'eg. 30'
+    .col-6
+      .form-group
+        = f.label :incentive
+        = f.text_field :incentive, class: 'form-control', placeholder: 'eg. 25.00'
+  .row.mb-3
+    .col-6
+      .form-group
+        = f.label :email_subject
+        = f.text_field :email_subject, class: 'form-control'
+  .row.mb-3#clients_name_and_email.d-none
+    .col-6
+      .form-group
+        = f.label :client_name, 'Client\'s name'
+        = f.text_field :client_name, class: 'form-control', placeholder: 'eg. Joe Smith'
+    .col-6
+      .form-group
+        = f.label :from_email, 'Client\'s email'
+        = f.text_field :from_email, class: 'form-control', placeholder: 'eg. client@business.com'
+  .row.mb-3#clients_phone_and_logo.d-none
+    .col-6
+      .form-group
+        = f.label :client_phone, 'Client\'s phone #'
+        = f.phone_field :client_phone, class: 'form-control', placeholder: 'eg. 555-555-5555'
+    .col-6
+      .form-group
+        = render 'employee/cards/text_header_with_tooltip', label: 'Upload client\'s logo - jpg or png', tooltip: 'Only upload a jpg or png file less than 2MB in size.'
+        = f.file_field :logo, class: 'form-control-file', accept: 'image/jpg, image/jpeg, image/png'
+  .row.mb-3#clients_color_scheme.d-none
+    .col-6
+      .form-group
+        = render 'employee/cards/text_header_with_tooltip', label: 'Pick the color scheme for the client\'s email', tooltip: 'This will determine the color for the horizontal bars and footer background in the email.'
+        = f.color_field :color, class: 'form-control-colorpicker d-block'
+  .row.mb-3
+    .col-12
+      .form-group
+        = f.label :email_body, 'Opening paragraph(s) of email - Do not include the greeting or signature.'
+        = f.rich_text_area :email_body, class: 'form-control rich-text-area', style: 'font-family:Helvetica Neue, Arial, Helvetica, sans-serif; font-weight:normal; color:#555555;', placeholder: 'eg. Currently, we are working with a client who is eager to learn more about Household Healthcare DMs, and based on your LinkedIn profile, it looks like you\'d be a great fit for this short survey.'
+  .row.mb-3#clients_signature.d-none
+    .col-6
+      .form-group
+        = f.label :email_signature, 'Client\'s signature'
+        = f.rich_text_area :email_signature, class: 'form-control rich-text-area', style: 'font-family:Helvetica Neue, Arial, Helvetica, sans-serif; font-weight:normal; color:#555555;'
+  = render 'employee/form_buttons'
+
+javascript:
+  function add_or_remove_class() {
+    if ($('#expert_recruit_batch_send_for_client').is(":checked")) {
+      $('#clients_name_and_email').removeClass('d-none');
+      $('#clients_phone_and_logo').removeClass('d-none');
+      $('#clients_color_scheme').removeClass('d-none');
+      $('#clients_signature').removeClass('d-none');
+    }
+    else {
+      $('#clients_name_and_email').addClass('d-none');
+      $('#clients_phone_and_logo').addClass('d-none');
+      $('#clients_color_scheme').addClass('d-none');
+      $('#clients_signature').addClass('d-none');
+    }
+  }
+
+  add_or_remove_class()
+  $('#expert_recruit_batch_send_for_client').click(function() {
+    add_or_remove_class()
+  })

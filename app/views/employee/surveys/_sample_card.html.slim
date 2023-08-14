@@ -1,0 +1,22 @@
+.card
+  .card-header
+    h4
+      span.mr-3 Sample
+      - if can?(:view_and_modify, Project)
+        span.mr-3
+          = link_to survey_queries_url(survey), class: 'card-header-link' do
+            i.fa.fa-list-ul.mr-1
+            | Queries
+        span
+          = link_to new_query_url(survey_id: survey.id), class: 'card-header-link' do
+            i.fa.fa-plus-circle.mr-1
+            | Add
+  .card-body
+    - if survey.queries.any?
+      .row
+        .col-6
+          = render 'employee/cards/text_element', label: 'Batches', value: survey.sample_batches.count
+        .col-6
+          = render 'employee/cards/text_element', label: 'Invitations', value: survey.invitations.count
+    - else
+      p.mb-0 No queries added yet.

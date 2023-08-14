@@ -1,0 +1,11 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Projects', projects_url
+  li.breadcrumb-item = link_to @survey.project.extended_name, @survey.project
+  li.breadcrumb-item = link_to @survey.name, @survey
+  li.breadcrumb-item.active Expert Recruit Completes List
+.mb-5
+  h1 Completes list
+.row
+  .col-2 = render 'employee/surveys/menu'
+  .col-10 = render 'employee/expert_recruit_completes/completes_list'
+

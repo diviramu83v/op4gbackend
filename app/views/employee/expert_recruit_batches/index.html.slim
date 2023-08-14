@@ -1,0 +1,104 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Projects', projects_url
+  li.breadcrumb-item = link_to @survey.project.extended_name, @survey.project
+  li.breadcrumb-item = link_to @survey.name, @survey
+  li.breadcrumb-item.active Expert Recruits
+.mb-5
+  = render 'employee/surveys/header', survey: @survey
+.row
+  .col-12 = render 'employee/surveys/details', survey: @survey
+  .col-2 = render 'employee/surveys/menu'
+  .col-10
+    span.mr-2.pb-5
+      = link_to new_survey_expert_recruit_batch_url(@survey), class: 'btn btn-link pl-0 mr-3' do
+        i.fa.fa-plus-circle.mr-1
+        | Add batch
+    span.mr-2.pb-5
+      = link_to survey_expert_recruit_unsubscriptions_url(@survey), class: 'btn btn-link pl-0 mr-3' do
+        i.fa.fa-clipboard-list.mr-1
+        | View unsubscribed list
+    span.mr-2.pb-5
+      = link_to survey_expert_recruit_completes_url(@survey), class: 'btn btn-link pl-0 mr-3' do
+        i.fa.fa-clipboard-check.mr-1
+        | View completes list
+    - if @survey.expert_recruit_batches.blank?
+      p.mb-0 No expert batches have been uploaded.
+    - else
+      - @survey.expert_recruit_batches.order(created_at: :desc).each do |batch|
+        .card.mb-3
+          .card-header
+            .d-flex.justify-content-between
+              span
+                h4
+                  span.mr-2 Expert Recruit Batch
+                  span.badge.mr-2 class="badge-#{expert_recruit_batch_status_class(batch.status)}"
+                    = batch.status
+                  span.mr-2
+                    = link_to edit_expert_recruit_batch_url(batch), class: "btn btn-outline-primary btn-xs #{batch.sent? ? 'disabled' : ''}" do
+                      i.fa.fa-edit.mr-1
+                      | Edit
+                  span.mr-2
+                    = link_to expert_recruit_batch_sends_url(batch), method: :post, class: "btn btn-outline-primary btn-xs #{batch.sent? ? 'disabled' : ''}", data: { disable_with: "<i class='far fa-envelope mr-1'></i>Sending..." } do
+                      i.far.fa-envelope.mr-1
+                      | Send
+                  span.mr-2
+                    = link_to expert_recruit_batch_reminders_url(batch), method: :post, class: "btn btn-outline-primary btn-xs #{'disabled' unless batch.remindable?}", data: { disable_with: "<i class='fa fa-bell mr-1'></i>Sending..." }
+                      i.fa.fa-bell.mr-1
+                      | Remind
+              span
+                = link_to expert_recruit_batch_url(batch), method: :delete, data: { confirm: 'Are you sure you want to delete this batch?' }, class:  "btn btn-outline-danger btn-xs ml-2 #{batch.sent? ? 'disabled' : ''}" do
+                  i.far.fa-trash-alt.mr-1
+                  | Delete
+          .card-body
+            .row.mb-4
+              .col-3
+                h5.mb-2.dashhead-subtitle.text-header.tiny-button-header Employee
+                span.mr-2 = batch.employee.name
+              .col-3
+                h5.mb-2.dashhead-subtitle.text-header.tiny-button-header Email subject
+                span.mr-2 = batch.email_subject
+              .col-3
+                h5.mb-2.dashhead-subtitle.text-header.tiny-button-header Description
+                span.mr-2 = batch.description.presence || '?'
+              .col-3
+                h5.mb-2.dashhead-subtitle.text-header.tiny-button-header Email sent from
+                span.mr-2 = batch.from_email.presence || batch.employee.email
+            .row.mb-4
+              .col-3
+                h5.mb-2.dashhead-subtitle.text-header.tiny-button-header Send on behalf of client?
+                span.mr-2 = format_bool_as_yes_no(batch.send_for_client?)
+              .col-3
+                h5.mb-2.dashhead-subtitle.text-header.tiny-button-header Time
+                span.mr-2 = batch.time
+              .col-3
+                h5.mb-2.dashhead-subtitle.text-header.tiny-button-header Incentive
+                span.mr-2 = format_currency_with_zeroes(batch.incentive.presence) || '?'
+              .col-3
+                h5.mb-2.dashhead-subtitle.text-header.tiny-button-header Sender's phone #
+                span.mr-2 = batch.client_phone.presence || batch.employee.phone
+            .row.mb-4
+              .col-3
+                h5.mb-2.dashhead-subtitle.text-header.tiny-button-header Client's name
+                span.mr-2 = batch.client_name.presence || '?'
+              .col-3
+                h5.mb-2.dashhead-subtitle.text-header.tiny-button-header Email addresses
+                span.mr-2 = format_number(batch.eligible_email_list.count)
+              .col-3
+                h5.mb-2.dashhead-subtitle.text-header.tiny-button-header Unsubscribed Email addresses
+                span.mr-2 = format_number(batch.unsubscribed_email_list.count)
+            .row.mb-4
+              .col-3
+                h5.mb-2.dashhead-subtitle.text-header.tiny-button-header Client's logo
+                - if batch.send_for_client? && batch.logo.attached?
+                  span.mr-2 = image_tag batch.logo.variant(resize: '300x300')
+                - elsif batch.send_for_client? && !batch.logo.attached?
+                  span.mr-2 = 'No logo uploaded'
+                - else
+                  span.mr-2 = '?'
+              .col-3
+                h5.mb-2.dashhead-subtitle.text-header.tiny-button-header Client's color scheme
+                - if batch.send_for_client?
+                  span.btn.mr-2 style="background-color: #{batch.color}; color: #FFFFFF"
+                    = batch.color
+                - else
+                  span.mr-2 = '?'

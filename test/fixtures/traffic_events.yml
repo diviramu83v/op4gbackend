@@ -1,0 +1,4 @@
+standard:
+  onboarding: standard
+  category: TrafficEvent::CATEGORIES.sample
+  message: 'the best traffic message'

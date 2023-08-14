@@ -1,0 +1,12 @@
+complete:
+  slug: complete
+  name: Complete
+  sort: 1
+term:
+  slug: terminate
+  name: Terminate
+  sort: 2
+quotafull:
+  slug: quotafull
+  name: Quotafull
+  sort: 3

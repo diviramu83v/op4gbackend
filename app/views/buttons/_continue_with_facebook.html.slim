@@ -1,0 +1,4 @@
+- if FeatureManager.panelist_facebook_auth?
+  = button_to panelist_facebook_omniauth_authorize_path, class: 'btn btn-primary btn-facebook'
+    i.fa.fa-facebook-square.mr-2
+    = t('panelist.registrations.new.continue_with_facebook', default: 'Continue with Facebook')

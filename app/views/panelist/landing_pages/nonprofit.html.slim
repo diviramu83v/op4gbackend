@@ -1,0 +1,19 @@
+- content_for :flash_width
+  = 'col-md-8'
+
+.row
+  .col-lg-8
+    .card
+      .card-header
+        h4 Welcome to Opinions4Good
+      .card-body
+        .mb-3
+          h5 You were invited by:
+        .mb-3
+          h5
+            - if @nonprofit.logo?
+              = image_tag(@nonprofit.logo.url, class: 'mr-3')
+            = @nonprofit.name
+        .mb-3
+          = simple_format(@panel.try(:landing_page_content))
+

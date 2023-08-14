@@ -1,0 +1,32 @@
+.card
+  .card-header
+    .d-flex.justify-content-between
+      h4
+        span.mr-2 Earnings
+        span.mr-2
+          .badge.badge-secondary = @earnings.count
+        span.mr-0
+          - if can?(:view_and_modify, Earning)
+            = link_to new_survey_earning_url(@survey), class: 'card-header-link' do
+              i.fa.fa-edit.mr-1
+              | Add
+      span.actions
+        - if can?(:destroy, Earning)
+          = link_to survey_earnings_url(@survey), method: :delete, class: 'btn btn-sm btn-outline-danger' do
+            i.far.fa-trash-alt.mr-2
+            | Delete all
+
+  .card-body
+    - if @earnings.any?
+      table.table.table-sm.table-wrapped-with-header.mb-0
+        thead
+          tr
+            th Original UID
+            th Amount
+        tbody
+          - @earnings.each do |earning|
+            tr
+              td = earning.original_uid
+              td = format_currency(earning.total_amount)
+    - else
+      p.mb-0 No earnings have been added yet.

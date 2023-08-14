@@ -1,0 +1,10 @@
+standard:
+  address: 0.0.0.0
+second:
+  address: 192.168.0.1
+third:
+  address: 192.168.0.2
+fourth:
+  address: 192.168.0.3
+fifth:
+  address: 192.168.0.4

@@ -1,0 +1,11 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Panelists', panelists_url
+  li.breadcrumb-item.active = @panelist.name
+  li.breadcrumb-item.active Nonpayments
+.mb-5
+  h2 Panelist
+.mb-5 = render 'employee/panelists/mini_nav', panelist: @panelist
+.mb-5
+  .mb-3
+    h3 Nonpayments
+.mb-5 = render 'employee/panelist_nonpayments/card', rejected_completions: @rejected_completions

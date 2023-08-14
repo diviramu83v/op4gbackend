@@ -1,0 +1,27 @@
+.mb-5
+  h2
+    span.mr-3 Campaigns
+    span.mr-0
+      - if can?(:view_and_modify, RecruitingCampaign)
+        = link_to new_recruiting_campaign_url, class: 'page-header-link' do
+          i.fa.fa-plus-circle.mr-1
+          | Add
+- if @campaigns.empty?
+  p.mb-0 No campaigns found.
+- else
+  .d-flex.justify-content-end.mb-1
+    span.mr-2
+      .pagination-xs = paginate @campaigns
+  .mb-3
+    table.table.table-sm.mb-0
+      thead
+        tr
+          th Invite code
+          th Landing page
+          th.text-right Signed up
+      tbody
+        - @campaigns.most_recent_first.each do |campaign|
+          tr
+            td = link_to campaign.code, campaign
+            td = link_to landing_page_url(code: campaign.code), landing_page_url(code: campaign.code)
+            td.text-right = format_number(campaign.signup_completed_count)

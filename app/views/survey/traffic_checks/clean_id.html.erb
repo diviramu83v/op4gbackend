@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="spinner-wrapper">
+    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
+<script type="text/javascript" data-nc id="cleanid_script_id" src="https://idsuite.navigatorsurveys.com/cleanid-v3.current.min.js" data-key="55CA5FF5523CFCED1274BABF57EA6E42-8002-1"></script>
+<script type="text/javascript">
+  // This function is called if the API processes successfully
+  function successCallback(jsonData) {
+    // Creates an object with the results of the API call which is in JSON format
+    var data = JSON.stringify(jsonData);
+    console.log(data);
+    var completion_url = '<%= survey_step_check_url(traffic_step.token) %>' + '?data=' + data;
+    window.location.replace(completion_url);
+  }
+
+  function errorCallback(jsonData) {
+    var data = JSON.stringify(jsonData);
+    console.log(data);
+    var completion_url = '<%= survey_step_check_url(traffic_step.token) %>' + '?data=' + data;
+    window.location.replace(completion_url);
+  }
+
+  IDSuite.cleanid( {
+    RequestId: "<%= onboarding.onboarding_token %>",       // required
+    EventId: "<%= onboarding.survey.token %>",             // required
+    ChannelId: "<%= onboarding.onramp.token %>",           // required
+    PanelistId: "<%= onboarding.panelist&.token %>",
+    Event: "<%= onboarding.survey&.name %>",
+    Channel: "<%= onboarding.onramp&.source_model_name %>",
+    Status: 'Start',
+
+    onSuccess: successCallback,
+    onError: errorCallback,
+    FullDataSet: false
+  })
+</script>

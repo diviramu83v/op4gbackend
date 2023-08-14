@@ -1,0 +1,119 @@
+= form_for @feasibility, url: url do |f|
+  = render 'employee/form_errors', resource: @feasibility
+
+  .row.mb-3
+    .col-lg-6
+      .form-group
+        .mb-3 = f.label 'LOI'
+        span
+          = f.number_field :loi, class: 'form-control', required: true
+    .col-lg-6
+      .form-group
+        .mb-3 = f.label 'Incidence Rate'
+        span
+          = f.number_field :incidence_rate, class: 'form-control', required: true
+
+  .row.mb-3
+    .col-lg-6
+      .form-group
+        .mb-3 = f.label 'Completes Wanted'
+        span
+          = f.number_field :completes_wanted, class: 'form-control', required: true
+    .col-lg-6
+      .form-group
+        .mb-3 = f.label 'Days in Field'
+        span
+          = f.select :days_in_field, options_for_select(1..7, selected: @feasibility.find_in_qualifications('days_in_field')), { include_blank: true }, { class: 'form-control' }
+
+  = f.fields_for :qualifications do |qual_form|
+    .row.mb-3
+      .col-lg-6
+        .form-group
+          .mb-3 = f.label 'Country'
+          span
+            = qual_form.radio_button :geocountry, 'US', class: 'mr-2', checked: true, required: true
+            = qual_form.label 'US', class: 'mb-0 mr-4'
+            = qual_form.radio_button :geocountry, 'CA', class: 'mr-2', required: true
+            = qual_form.label 'CA', class: 'mb-0 mr-4'
+            = qual_form.radio_button :geocountry, 'AU', class: 'mr-2', required: true
+            = qual_form.label 'AU', class: 'mb-0'
+
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoFeasibility::LABEL_OPTIONS[:georegion]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+          = qual_form.collection_check_boxes :georegion, DisqoQuotaSelections.find_in_hash('georegion'), :first, :last, { checked: @feasibility.find_in_qualifications('georegion') } do |b|
+            .form-check.form-check-inline
+              = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+              = b.label(class: 'pt-2 text-label')
+
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3 = qual_form.label DisqoFeasibility::LABEL_OPTIONS[:geopostalcode]
+          = qual_form.text_area :geopostalcode, value: @feasibility.find_in_qualifications('geopostalcode')&.join("\n"), rows: '6', class: 'form-control'
+
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3 = qual_form.label DisqoFeasibility::LABEL_OPTIONS[:geodmaregioncode]
+          = qual_form.text_area :geodmaregioncode, value: @feasibility.find_in_qualifications('geodmaregioncode')&.join("\n"), rows: '5', class: 'form-control'
+
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3 = qual_form.label DisqoFeasibility::LABEL_OPTIONS[:gender]
+          span
+          = qual_form.collection_check_boxes :gender, DisqoQuotaSelections.find_in_hash('gender'), :first, :last, { checked: @feasibility.find_in_qualifications('gender') } do |b|
+            .form-check.form-check-inline
+              = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+              = b.label(class: 'pt-2 text-label')
+
+    label Panelist age range
+    = qual_form.fields_for :age do |age_form|
+      .row.mb-3
+        .col-lg-4
+          .form-group
+            = age_form.label 'Minimum Age'
+            = age_form.select :min_age, options_for_select(DisqoFeasibility::MIN_AGE..DisqoFeasibility::MAX_AGE, selected: @feasibility.find_in_qualifications('age')&.min), { include_blank: true }, { class: 'form-control' }
+        .col-lg-4
+          .form-group
+            = age_form.label "Maximum Age"
+            = age_form.select :max_age, options_for_select(DisqoFeasibility::MIN_AGE..DisqoFeasibility::MAX_AGE, selected: @feasibility.find_in_qualifications('age')&.max), { include_blank: true }, { class: 'form-control' }
+
+    label Panelist with children age range
+    = qual_form.fields_for :anychildage do |age_form|
+      .row.mb-3
+        .col-lg-4
+          .form-group
+            = age_form.label 'Minimum Age'
+            = age_form.select :min_age, options_for_select(DisqoFeasibility::MIN_CHILD_AGE..DisqoFeasibility::MAX_AGE, selected: @feasibility.find_in_qualifications('anychildage')&.min), { include_blank: true }, { class: 'form-control' }
+        .col-lg-4
+          .form-group
+            = age_form.label "Maximum Age"
+            = age_form.select :max_age, options_for_select(DisqoFeasibility::MIN_CHILD_AGE..DisqoFeasibility::MAX_AGE, selected: @feasibility.find_in_qualifications('anychildage')&.max), { include_blank: true }, { class: 'form-control' }
+
+    .row.mb-3
+      - DisqoFeasibility::FORM_FIELDS.each do |field|
+        = render 'form_row', { feasibility: @feasibility, field: field, qual_form: qual_form }
+
+  = render 'employee/form_buttons'
+
+javascript:
+  $('.select-all').click(function() {
+    if ($(this).text() == 'Select all') {
+      $(this).text('Unselect all')
+      $(this).siblings('div')
+           .find("input[type='checkbox']")
+           .prop('checked', true);
+    } else {
+      $(this).text('Select all')
+      $(this).siblings('div')
+           .find("input[type='checkbox']")
+           .prop('checked', false);
+    }
+  })

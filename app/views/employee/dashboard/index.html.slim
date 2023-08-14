@@ -1,0 +1,33 @@
+.mb-5
+  h2 Dashboard
+.row
+  .col-4
+    .mb-5
+      .mb-3
+        h3
+          = link_to 'Projects', projects_url
+      .row
+        .col-2
+          .mb-3
+            = render 'employee/cards/text_element', label: 'Live', value: format_number(Project.live.count)
+        .col-2
+          .mb-3
+            = render 'employee/cards/text_element', label: 'Hold', value: format_number(Project.hold.count)
+        .col-2
+          .mb-3
+            = render 'employee/cards/text_element', label: 'Finished', value: format_number(Project.finished.count)
+  .col-4
+    .mb-5
+      .mb-3
+        h3 = link_to 'Recruitment', recruitment_dashboard_url
+      .mb-3.row
+        .col-4 = render 'employee/cards/text_element', label: 'Nonprofits', value: format_number(Nonprofit.count)
+  .col-4
+    .mb-5
+      .mb-3
+        h3 Panelists
+      .row
+        - @panels.find_each do |panel|
+          .col-4
+            .mb-3
+              = render 'employee/cards/text_element', label: "#{panel.name}", value: format_number(@panelist_counts[panel.id])

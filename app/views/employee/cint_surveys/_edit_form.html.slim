@@ -1,0 +1,16 @@
+= form_for @cint_survey, url: url do |f|
+  = render 'employee/form_errors', resource: @cint_survey
+  .row.mb-3
+    .col-lg-6
+      .form-group
+        .mb-3 = f.label 'Payout'
+        span
+          = f.number_field :cpi, class: 'form-control', step: 'any'
+  .row.mb-3
+    .col-lg-6
+      .form-group
+        .mb-3 = f.label 'Limit'
+        span
+          = f.number_field :limit, class: 'form-control'
+  = render 'employee/form_buttons'
+

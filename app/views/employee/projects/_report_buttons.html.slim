@@ -1,0 +1,10 @@
+.btn-group
+  = link_to project_report_path, method: :get, class: 'btn btn-outline-primary' do
+    i.fas.fa-cloud-download-alt.mr-2
+    | Download report
+  = link_to project_report_path, method: :post, class: 'btn btn-outline-primary', data: { disable_with: "<i class='fa fa-spinner fa-pulse mr-2'></i>Regenerating report..." } do
+    i.fa.fa-sync.mr-2
+    | Refresh data
+- if report.present?
+  .justify-content-end.text-right.mt-1
+    p = "Updated #{time_ago_in_words(report.report_updated_at)} ago"

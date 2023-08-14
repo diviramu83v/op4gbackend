@@ -1,0 +1,12 @@
+complete:
+  project: standard
+  token: <%= SecureRandom.hex %>
+  slug: complete
+terminate:
+  project: standard
+  token: <%= SecureRandom.hex %>
+  slug: terminate
+quotafull:
+  project: standard
+  token: <%= SecureRandom.hex %>
+  slug: quotafull

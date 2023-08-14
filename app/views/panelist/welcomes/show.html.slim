@@ -1,0 +1,15 @@
+- content_for :flash_width
+  = 'col-lg-8'
+
+.row
+  .col-lg-8
+    .card
+      .card-body
+        .mb-3
+          h4 = t('panelist.welcomes.show.welcome', default: 'Welcome to Op4G!')
+        .mb-3 = t('panelist.welcomes.show.note', default: 'Please take a moment to get familiar with your dashboard and account settings.')
+        .mb-0
+          = button_to t('panelist.welcomes.show.view_dashboard', default: 'View your dashboard'), panelist_dashboard_path, method: 'get', class: 'btn btn-primary'
+
+- @pixels.each do |pixel|
+  iframe frameborder="0" height="1" scrolling="no" src=pixel.url width="1"

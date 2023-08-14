@@ -1,0 +1,161 @@
+= form_for survey_api_target, url: url do |f|
+  = render 'employee/form_errors', resource: survey_api_target
+  .row.mb-3
+    .col-lg-4
+      .form-group
+        .mb-3
+          = f.label :payout, "Payout"
+          = f.text_field :payout, class: 'form-control'
+  .row.mb-3
+    .col-lg-12
+      .form-group
+        .mb-3.d-inline = f.label :countries, "Countries"
+        .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+          i.fa.mr-1
+          | Select all
+        div
+          = f.collection_check_boxes :countries, SurveyApiTarget::COUNTRIES_ARRAY, :first, :last do |b|
+            .form-check.form-check-inline
+              = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+              = b.label(class: 'pt-2 text-label')
+  .row.mb-3
+    .col-lg-12
+      .form-group
+        .mb-3.d-inline = f.label :states, "States"
+        .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+          i.fa.mr-1
+          | Select all
+        div
+          = f.collection_check_boxes :states, State::QUERY[:us], :to_s, :to_s do |b|
+            .form-check.form-check-inline
+              = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+              = b.label(class: 'pt-2 text-label')
+  .row.mb-3
+    .col-lg-4
+      .form-group
+        .mb-3 = f.label :genders, "Gender"
+        = f.collection_check_boxes :genders, SurveyApiTarget::GENDERS, :to_s, :to_s do |b|
+          .form-check.form-check-inline
+            = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+            = b.label(class: 'pt-2 text-label')
+  .row.mb-3
+    .col-lg-4
+      .form-group
+        = f.label :min_age, "Minimum age"
+        = f.select :min_age, (SurveyApiTarget::MIN_AGE..SurveyApiTarget::MAX_AGE), { include_blank: true }, { class: 'form-control' }
+    .col-lg-4
+      .form-group
+        = f.label :max_age, "Maximum age"
+        = f.select :max_age, (SurveyApiTarget::MIN_AGE..SurveyApiTarget::MAX_AGE), { include_blank: true }, { class: 'form-control' }
+  .row.mb-3
+    .col-lg-12
+      .form-group
+        .mb-3.d-inline = f.label :education, "Education"
+        .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+          i.fa.mr-1
+          | Select all
+        div
+          = f.collection_check_boxes :education, SurveyApiTarget::EDUCATION_OPTIONS, :first, :last, { checked: @target.education&.map(&:to_param) } do |b|
+            .form-check.form-check-inline
+              = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+              = b.label(class: 'pt-2 text-label')
+  .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = f.label :employment, "Employment"
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = f.collection_check_boxes :employment, SurveyApiTarget::EMPLOYMENT_OPTIONS, :first, :last, { checked: @target.employment&.map(&:to_param) } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+  .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = f.label :income, "Income"
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = f.collection_check_boxes :income, SurveyApiTarget::INCOME_OPTIONS, :first, :last, { checked: @target.income&.map(&:to_param) } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+  .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = f.label :race, "Race"
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = f.collection_check_boxes :race, SurveyApiTarget::RACE_OPTIONS, :first, :last, { checked: @target.race&.map(&:to_param) } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+  .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = f.label :number_of_employees, "Number of employees"
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = f.collection_check_boxes :number_of_employees, SurveyApiTarget::NUMBER_OF_EMPLOYEE_OPTIONS, :first, :last, { checked: @target.number_of_employees&.map(&:to_param) } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+  .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = f.label :job_title, "Job title"
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = f.collection_check_boxes :job_title, SurveyApiTarget::JOB_TITLE_OPTIONS, :first, :last, { checked: @target.job_title&.map(&:to_param) } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+  .row.mb-3
+      .col-lg-12
+        .form-group
+
+          .mb-3.d-inline = f.label :decision_maker, "Decision Maker"
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = f.collection_check_boxes :decision_maker, SurveyApiTarget::DECISION_MAKER_OPTIONS, :first, :last, { checked: @target.decision_maker&.map(&:to_param) } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+  .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3
+            = f.label :payout, "Additional Information for Vendors"
+            = f.text_field :custom_option, class: 'form-control'
+  - if current_user.effective_role_admin?(session[:effective_role])
+    .row.mb-3
+      .col-lg-4
+        = f.label :status
+        = f.collection_select(:status, SurveyApiTarget.statuses, :first, :first, { prompt: 'Please select...' }, class: 'form-control')
+  = render 'employee/form_buttons'
+
+javascript:
+  $('.select-all').click(function() {
+    if ($(this).text() == 'Select all') {
+      $(this).text('Unselect all')
+      $(this).siblings('div')
+           .find("input[type='checkbox']")
+           .prop('checked', true);
+    } else {
+      $(this).text('Select all')
+      $(this).siblings('div')
+           .find("input[type='checkbox']")
+           .prop('checked', false);
+    }
+  })

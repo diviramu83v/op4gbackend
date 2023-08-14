@@ -1,0 +1,40 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Panels', panels_url
+  li.breadcrumb-item = link_to @panel.name, panel_url(@panel)
+  li.breadcrumb-item.active = 'Panel utilization'
+.mb-5
+  .d-flex.justify-content-between
+    h2
+      span.mr-2 Panel utilization
+.row.mb-5
+  .col-lg-3
+    = render 'employee/cards/text_element', label: 'Panel Name', value: @panel.name
+  .col-lg-3
+    = render 'employee/cards/text_element', label: "Surveys with invitations to #{@panel.name} panel", value: @panel_survey_ids.count
+.mb-5
+  .d-flex.justify-content-end.mb-4
+    .pagination-xs.mb-0 = paginate @surveys
+  table.table.mb-4 data-sort='table'
+    thead
+      tr
+        th Project
+        th Survey
+        th Started at
+        th Sent invitations
+        th Unsent invitations
+        th Completes
+    tbody
+      - @surveys.each do |survey|
+        tr
+          td = link_to survey.project.name, survey.project
+          td
+            span = link_to survey.name, survey
+            span
+              .badge.ml-1 class="badge-#{survey_status_class(survey.status)}"
+                = survey.status
+          td = survey.started_at.present? ? format_long_date(survey.started_at) : 'Not started'
+          td = link_to format_number(survey.invitations_for_panel(panel: @panel).has_been_sent.count), survey_queries_url(survey)
+          td = link_to format_number(survey.invitations_for_panel(panel: @panel).unsent.count), survey_queries_url(survey)
+          td = survey.panel_onramps.find_by(panel: @panel).try(:complete_count)
+  .d-flex.justify-content-end.mb-4
+    .pagination-xs.mb-0 = paginate @surveys

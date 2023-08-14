@@ -1,0 +1,26 @@
+.card
+  .card-body
+    h1.mb-3 We're sorry.
+
+    p
+      | You've encountered an error while attempting to access this survey. It is likely due to the fact that our system has flagged your survey attempt as fraudulent or suspicious. Here are some typical reasons why this can occur:
+    ul
+      li You did not successfully complete the ReCaptcha form.
+      li You have a virtual private network software installed. Our Terms and Conditions forbid VPNs.
+      li You used scripted actions, spiders, robots or other automation technologies while accessing the survey.
+      li You have been flagged as high-risk by one of our technology security partners.
+      li You have attempted the survey more than once. We allow only one account per person.
+    p
+      | We carry out various types of automated checks on accounts to improve data quality. These include assessing responses to surveys, reports from research clients, information you have provided us with, as well as other factors. As a result of these automated checks, we reserve the right to suspend accounts due to infractions. By violating our Terms and Conditions, you render your account ineligible for rewards. We are often unable to disclose further information about what these checks are, as they are critical in ensuring high data quality. We apologize for the inconvenience.
+    - if @onboarding.project.branded?
+      p
+        | Please only start a survey when you have the time to complete it. Do not speed through surveys or navigate away from the survey page. Be honest! Our clients only accept quality responses. Also, please review our
+        span<> = link_to 'Terms and Conditions', 'https://opinions4good.com/terms-and-conditions'
+        | before attempting another survey. If you've been denylisted from another survey website, there is a chance that that fraud designation will carry over to our platform.
+      p
+        | If you believe this message was delivered to you in error, please contact us at
+        span< = mail_to 'support@op4g.com'
+        | .
+    - else
+      p
+        | Please only start a survey when you have the time to complete it. Do not speed through surveys or navigate away from the survey page. Be honest! Our clients only accept quality responses. If you've been denylisted from another survey website, there is a chance that that fraud designation will carry over to our platform.

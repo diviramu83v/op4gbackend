@@ -1,0 +1,4 @@
+span.mr-1
+  = link_to project_statuses_url(@project, id: 'draft'), method: :post, data: { confirm: confirm_message }, class: "btn btn-outline-dark" do
+    i.fa.fa-undo class="#{'mr-2'}"
+    = 'Draft'

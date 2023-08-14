@@ -1,0 +1,28 @@
+= f.fields_for :qualifications do |qual_form|
+  - @qualification_questions.each do |question|
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label question.text
+          - unless question.qualification_type_id == 6
+            .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+              i.fa.mr-1
+              | Select all
+          div
+          = form_type_for_question(qual_form, question)
+
+
+javascript:
+  $('.select-all').click(function() {
+    if ($(this).text() == 'Select all') {
+      $(this).text('Unselect all')
+      $(this).siblings('div')
+           .find("input[type='checkbox']")
+           .prop('checked', true);
+    } else {
+      $(this).text('Select all')
+      $(this).siblings('div')
+           .find("input[type='checkbox']")
+           .prop('checked', false);
+    }
+  })

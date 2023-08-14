@@ -1,0 +1,31 @@
+.card
+  .card-header
+    h4 Follow up
+  .card-body
+    - if @onboarding.use_override_email?
+      = simple_format(@onboarding.follow_up_wording)
+    - else
+      .row.col-6
+        p.text-danger.font-weight-bold.mb-3 You must finish this step to be counted as complete.
+        p If you choose not to enter an email address, please select the "Skip" button to submit.
+        p Sometimes we ask follow up questions to our surveys.
+        p Please enter your email address here if you'd like to be contacted, should the need arise.
+        p.mb-3 An additional incentive will be provided. We will not use your email for any other purpose.
+    .row
+      .col-6
+        = form_for :step, url: survey_step_check_url, html: { class: 'followup', id: 'followup' } do |f|
+          = f.hidden_field :token, value: @traffic_step.token
+          .form-group
+            = render 'forms/text_field', form: f, field: :email
+            button.btn.btn-primary type="submit" data-disable-with="Submit"
+              = 'Submit'
+            button.btn.btn-secondary.ml-2#skip style="border: none;" type="button" data-disable-with="Skip"
+              = 'Skip'
+
+
+javascript:
+
+  $('#skip').click(function() {
+    $('input[name="step[email]"]').val('');
+    $('#followup').submit();
+  });

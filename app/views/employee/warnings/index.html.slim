@@ -1,0 +1,10 @@
+- if @selected_project_manager.present?
+  - content_for :breadcrumbs
+    li.breadcrumb-item = link_to 'Warnings', warnings_url
+    li.breadcrumb-item.active = @selected_project_manager.name
+.mb-5
+  h2 Project Warnings
+.mb-5
+  = render 'project_manager_buttons'
+.mb-5
+  = render 'card_list'

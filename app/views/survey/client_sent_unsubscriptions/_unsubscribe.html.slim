@@ -1,0 +1,9 @@
+.card
+  .card-header
+    h4 Unsubscribe - #{@client_sent_survey_invitation.email}
+  .card-body
+    h5 If you no longer wish to receive e-mail from Op4G, please click below to unsubscribe.
+  .row
+    .col.ml-3.mb-4
+      = link_to survey_client_sent_unsubscriptions_url(email: @client_sent_survey_invitation.email, unsubscribe_token: @client_sent_survey_invitation.unsubscribe_token), method: :post, class: 'btn btn-primary' do
+        | Unsubscribe

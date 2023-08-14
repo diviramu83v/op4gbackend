@@ -1,0 +1,6 @@
+span.mr-1 = link_to 'Overview',
+        recontact_traffic_url(@recontact),
+        class: activate_class(recontact_traffic_url(@recontact), 'btn btn-xs btn-outline-primary')
+span.mr-0 = link_to 'Details',
+        recontact_traffic_details_url(@recontact),
+        class: activate_class(recontact_traffic_details_url(@recontact), 'btn btn-xs btn-outline-primary')

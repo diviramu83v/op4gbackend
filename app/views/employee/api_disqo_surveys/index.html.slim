@@ -1,0 +1,41 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Disqo', api_disqo_index_url
+  li.breadcrumb-item Disqo surveys
+.mb-4
+  .d-flex.justify-content-between.align-items-center
+    h2
+      span.mr-3 Disqo API surveys
+  .mb-0
+    = link_to 'all', request.query_parameters.merge(status: 'all'), class: "btn btn-outline-secondary btn-xs mr-1 #{active_class?('disqo_status', 'all')}"
+    = link_to 'live', request.query_parameters.merge(status: 'live'), class: "btn btn-outline-primary btn-xs mr-1 #{active_class?('disqo_status', 'live')}"
+.d-flex.justify-content-end.mb-4
+  .pagination-xs.mb-0 = paginate @disqo_quotas
+table.table.table-sm.mb-0 data-sort='table'
+  thead
+    tr
+      th Project
+      th Survey
+      th Disqo ID
+      th CPI
+      th Op4G project ID
+      th WO number
+      th PM
+      th Received traffic
+      th Disqo status
+      th Incidence Rate
+  tbody
+    - @disqo_quotas.uniq.each do |disqo_quota|
+      tr
+        td = disqo_quota.survey.project.name
+        td = link_to disqo_quota.survey.name, survey_traffic_by_source_url(disqo_quota.survey)
+        td = link_to disqo_quota.quota_id, survey_disqo_quotas_url(disqo_quota.survey)
+        td = number_to_currency(disqo_quota.cpi || 0)
+        td = disqo_quota.survey.project.id
+        td = disqo_quota.survey.project.work_order
+        td = disqo_quota.survey.project.manager.name
+        td = format_number(disqo_quota.onboardings.count)
+        td = disqo_quota.status
+        td = disqo_quota.incidence_rate
+
+.d-flex.justify-content-end.mt-4
+  .pagination-xs.mb-0 = paginate @disqo_quotas

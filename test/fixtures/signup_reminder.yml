@@ -1,0 +1,4 @@
+standard:
+  panelist: standard
+  send_at: <%= Time.now.utc + 1.day %>
+  status: <%= SignupReminder.statuses[:waiting] %>

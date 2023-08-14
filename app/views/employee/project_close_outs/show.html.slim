@@ -1,0 +1,114 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Project close-outs', project_close_outs_url
+  li.breadcrumb-item = link_to @project.name, project_url(@project)
+  li.breadcrumb-item.active = 'Project close-out'
+.mb-5
+  h2
+    .d-flex.justify-content-between
+      span
+        span.mr-2 Project close-out
+.mb-3
+  .row
+    .col-md-2
+      .mb-4 = render 'employee/cards/text_element', label: 'Project ID', value: @project.id
+    .col-md-6
+      .mb-4 = render 'employee/cards/text_element', label: 'Project name', value: @project.extended_name
+    - if can?(:view_and_modify, Project)
+      .col-md-2
+        .mb-4
+          span
+            span#download-button.btn.btn-primary.btn-block.mb-2 style='white-space:normal !important; word-wrap: break-word'
+              i.fas.fa-cloud-download-alt.mr-2
+              | Master file
+      .col-md-2
+        .mb-4 = link_to project_vendor_close_out_reports_url(@project), class: 'btn btn-secondary btn-block', style: 'white-space:normal !important; word-wrap: break-word' do
+          i.fas.fa-cloud-download-alt.mr-2
+          | Vendor reports
+  .row
+    .col-md-2
+      .mb-4 = render 'employee/cards/text_element', label: 'Project manager', value: employee_link(@project.manager)
+    .col-md-2
+      .mb-4 = render 'employee/cards/text_element', label: 'Close out status', value: project_close_out_label(@project.close_out_status)
+.mb-3
+  .row
+    .col-2
+      .mb-4 = render 'employee/cards/text_element', label: 'Accepted ID count', value: @project.onboardings.complete.accepted.count
+    .col-2
+      .mb-4 = render 'employee/cards/text_element', label: 'Earnings count', value: @project.earnings.count
+    .col-2
+      .mb-4 = render 'employee/cards/text_element', label: 'Fraudulent ID count', value: @project.onboardings.complete.fraudulent.count
+    .col-2
+      .mb-4 = render 'employee/cards/text_element', label: 'Rejected ID count', value: @project.onboardings.complete.rejected.count
+    .col-2
+      .mb-4 = render 'employee/cards/text_element', label: 'Unaccepted count', value: @project.unaccepted_count
+    .col-2
+      .mb-4 = render 'employee/cards/text_element', label: 'Remaining ID count', value: @project.remaining_id_count
+  - if can?(:view_and_modify, Onboarding)
+    .row
+      .col-3
+        .mb-5 = link_to new_project_accepted_complete_url(@project), class: 'btn btn-outline-primary btn-block', style: 'white-space:normal !important; word-wrap: break-word' do
+          i.fas.fa-cloud-upload-alt.mr-2
+          | Upload accepted IDs
+      .col-3
+        .mb-5 = link_to project_panelist_earnings_url(@project), class: 'btn btn-outline-success btn-block', style: 'white-space:normal !important; word-wrap: break-word' do
+          i.fas.fa-calculator.mr-2
+          | Generate earnings
+      .col-3
+        .mb-5 = link_to new_project_fraudulent_url(@project), class: 'btn btn-outline-warning btn-block', style: 'white-space:normal !important; word-wrap: break-word'do
+          i.fas.fa-cloud-upload-alt.mr-2
+          | Upload fraudulent IDs
+      .col-3
+        .mb-5 = link_to new_project_rejected_complete_url(@project), class: 'btn btn-outline-danger btn-block', style: 'white-space:normal !important; word-wrap: break-word' do
+          i.fas.fa-cloud-upload-alt.mr-2
+          | Upload rejected IDs
+  - if can?(:view_and_modify, Onboarding)
+    .mb-2
+      .row
+        .col
+          h4 Have you received all IDs expected for this project?
+    .mb-5
+      .row
+        .col-4
+          = link_to project_finalize_project_statuses_url(@project, finished: true), method: :post, class: "btn btn-success btn-block #{'disabled' unless @project.finishable?}", style: 'white-space:normal !important; word-wrap: break-word' do
+            i.fa.fa-check-square.mr-2
+            | Yes, change the project status to finished
+          p.text-muted.mt-2 This will change the status of all surveys in this project to finished and it will be removed from the close-out list.
+        .col-4
+          = link_to project_finalize_project_statuses_url(@project), method: :post, class: 'btn btn-secondary btn-block', style: 'white-space:normal !important; word-wrap: break-word' do
+            i.fa.fa-times-circle.mr-2.ml-2
+            | No, but hide project
+          p.text-muted.mt-2 The project status will not be changed, but it will be removed from the close-out list.
+        .col-4
+          = link_to project_close_outs_url, method: :get, class: 'btn btn-primary btn-block', style: 'white-space:normal !important; word-wrap: break-word' do
+            i.fa.fa-times-circle.mr-2.ml-2
+            | No, keep project
+          p.text-muted.mt-2 The project status will not be changed and it will stay on the close-out list so you can review it again later.
+.mb-2
+  - @project.surveys.standard.order(:created_at).each do |survey|
+    = render 'employee/project_close_outs/survey_stats', survey: survey
+
+javascript:
+  var project_id = "#{@project.id}"
+
+coffee:
+  $('#download-button').click ->
+    $(this).html("<i class='fa fa-spinner fa-pulse mr-2'></i>Generating")
+    $('#download-button').addClass('disabled');
+    $('#download-button').css('pointer-events', 'none');
+    App.project_completes_report_download = App.cable.subscriptions.create { channel: "ProjectCompletesReportDownloadChannel", project_id: project_id },
+      received: (data) ->
+        $('#download-button').html("<i class='fas fa-cloud-download-alt mr-2'></i>Master file")
+        $('#download-button').removeClass('disabled');
+        $('#download-button').css('pointer-events', 'auto');
+        blob = new Blob([data['csv_file']['content']]);
+
+        # Create a link with the data and trigger click event to download the file
+        csv_download_link = document.createElement('a');
+        csv_download_link.href = window.URL.createObjectURL(blob);
+        csv_download_link.download = data['csv_file']['file_name'];
+        csv_download_link.click();
+
+        App.project_completes_report_download.unsubscribe()
+        App.cable.disconnect()
+        delete App.project_completes_report_download
+        return

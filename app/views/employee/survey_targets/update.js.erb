@@ -1,0 +1,2 @@
+$("#survey-<%= @survey.id %>-target").html("<p class='mb-1'><%= @survey.target %></p>");
+$("#project-<%= @survey.project.id %>-value").html("<%= format_currency(@survey.project.value) %>");

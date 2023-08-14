@@ -1,0 +1,8 @@
+.mb-2.dashhead-subtitle.text-header Past studies with query
+- if query.recent_studies_with_matching_query.blank?
+  .row
+    .col-12 There are no matching queries
+- else
+  - query.recent_studies_with_matching_query.each do |survey|
+    .row
+      .col-12 = link_to("#{survey.project.id} / #{survey.name}: #{survey.onboardings.complete.secured.count} completes", project_url(survey.project))

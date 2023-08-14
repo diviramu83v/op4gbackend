@@ -1,0 +1,24 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Panelists', panelists_url
+  li.breadcrumb-item = link_to @demo_answer.panelist.name, panelist_url(@demo_answer.panelist)
+  li.breadcrumb-item = link_to "Edit #{@demo_answer.panelist.name}", edit_panelist_url(@demo_answer.panelist)
+  li.breadcrumb-item Demo answer
+  li.breadcrumb-item.active Edit
+.mb-5
+  .row
+    .col-12
+      h2.mb-5 Edit demo answer
+  .row
+    .col-12
+      h5.dashhead-subtitle.mb-2 Demo question
+  .row.mb-3
+    .col-12
+      h5.dashead-title = @demo_answer.demo_question.body
+  .row
+    .col-4
+      = form_for @demo_answer, url: demo_answer_url(@demo_answer) do |f|
+        = render 'employee/form_errors', resource: @demo_answer
+        .mb-2 = f.label :demo_option
+        .mb-3 = f.select :demo_option, options_for_select(@demo_answer.demo_question.demo_options.pluck(:label, :id), selected: @demo_answer.demo_option.id), { }, { class: 'form-control ml-1' }
+        = render 'forms/submit_button', form: f, label: t('panelist.passwords.edit.update', default: 'Update'), icon: 'fa-cloud-upload-alt'
+

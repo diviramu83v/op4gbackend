@@ -1,0 +1,63 @@
+- content_for :breadcrumbs
+  - if can?(:view_and_modify, Onboarding)
+    li.breadcrumb-item = link_to 'UID decoder', new_decoding_url
+  - else
+    li.breadcrumb-item = 'UID decoder'
+  li.breadcrumb-item.active Results
+.mb-5
+  h2
+    span.mr-3 Decoded UIDs
+    span.badge.badge-secondary = @decoding.decoded_uids.size
+
+  - if @decoding.multiple_projects?
+    .mt-4
+      .alert.alert-warning
+        p.mb-0 Multiple projects detected in this batch of UIDs. Not necessarily a problem, just want to make sure you're aware.
+.mb-4
+  ul.nav.nav-tabs
+    - if @decoding.unmatched_uids.any?
+      li.nav-item
+        = link_to decoding_errors_url(@decoding), class: activate_class(decoding_errors_url(@decoding), 'nav-link') do
+          span.text-danger Errors
+          span.badge.badge-secondary.ml-2 = @decoding.unmatched_uids.size
+    - if @decoding.testing_traffic?
+      li.nav-item
+        = link_to decoding_testings_url(@decoding), class: activate_class(decoding_testings_url(@decoding), 'nav-link') do
+          span Testing
+          span.badge.badge-secondary.ml-2 = @decoding.testing_traffic_uids.size
+    - if @decoding.panel_traffic?
+      - Panel.all.each do |panel|
+        - if @decoding.decoded_uids_for_panel(panel).any?
+          li.nav-item
+            = link_to decoding_panel_url(@decoding, panel), class: activate_class(decoding_panel_url(@decoding, panel), 'nav-link') do
+              span = panel.name
+              span.badge.badge-secondary.ml-2 = @decoding.decoded_uids_for_panel(panel).size
+      - if @decoding.multiple_panels?
+        li.nav-item
+          = link_to decoding_combined_url(@decoding), class: activate_class(decoding_combined_url(@decoding), 'nav-link') do
+              span = 'Combined panels'
+              span.badge.badge-secondary.ml-2 = @decoding.combined_panel_decodings.size
+    - @decoding.unique_vendors.each do |vendor|
+      li.nav-item
+        = link_to decoding_vendor_url(@decoding, vendor), class: activate_class(decoding_vendor_url(@decoding, vendor), 'nav-link') do
+          span = vendor.name
+          span.badge.badge-secondary.ml-2 = @decoding.vendor_counts[vendor.id]
+    - @decoding.unique_api_vendors.each do |vendor|
+      li.nav-item
+        = link_to decoding_api_vendor_url(@decoding, vendor), class: activate_class(decoding_api_vendor_url(@decoding, vendor), 'nav-link') do
+          span = vendor.name
+          span.badge.badge-secondary.ml-2 = @decoding.api_vendor_counts[vendor.id]
+    - if @decoding.disqo_uid?
+      li.nav-item
+        = link_to decoding_disqo_url(@decoding), class: activate_class(decoding_disqo_url(@decoding), 'nav-link') do
+          span = 'DISQO'
+          span.badge.badge-secondary.ml-2 = @decoding.matched_uids_for_disqo.size
+    - if @decoding.cint_uid?
+      li.nav-item
+        = link_to decoding_cint_url(@decoding), class: activate_class(decoding_cint_url(@decoding), 'nav-link') do
+          span = 'Cint'
+          span.badge.badge-secondary.ml-2 = @decoding.matched_uids_for_cint.size
+    li.nav-item
+      = link_to decoding_matches_url(@decoding), class: activate_class(decoding_matches_url(@decoding), 'nav-link') do
+        span All decoded UIDs
+        span.badge.badge-secondary.ml-2 = @decoding.matched_uids.size

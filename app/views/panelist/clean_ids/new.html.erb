@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="spinner-wrapper">
+    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
+<script type="text/javascript" data-nc id="cleanid_script_id" src="https://idsuite.navigatorsurveys.com/cleanid-v3.current.min.js" data-key="55CA5FF5523CFCED1274BABF57EA6E42-8002-1"></script>
+<script type="text/javascript">
+  // This function is called if the API processes successfully
+  function successCallback(jsonData) {
+    // Creates an object with the results of the API call which is in JSON format
+    var data = JSON.stringify(jsonData);
+    var completion_url = '<%= clean_id_url %>' + '?data=' + data;
+    // If score == 0, we are adding a 5 sec delay before we redirect
+    if(jsonData['Score'] == 0){
+      setTimeout(function(){window.location.replace(completion_url)}, 5000);
+    } else {
+      window.location.replace(completion_url);
+    }
+  }
+
+  function errorCallback(jsonData) {
+    var data = JSON.stringify(jsonData);
+    var completion_url = '<%= clean_id_url %>' + '?data=' + data;
+    window.location.replace(completion_url);
+  }
+
+  function validateCleanId(){
+    IDSuite.cleanid( {
+      RequestId: "<%= current_panelist.token %>",       // required
+      EventId: "Panelist login",                        // required
+      ChannelId: "Panelist login",                      // required
+      PanelistId: "<%= current_panelist.token %>",
+      Channel: "Panelist login",
+
+      onSuccess: successCallback,
+      onError: errorCallback,
+      FullDataSet: false
+    })
+  }
+
+  validateCleanId()
+</script>

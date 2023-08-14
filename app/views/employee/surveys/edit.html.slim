@@ -1,0 +1,51 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Projects', projects_url
+  li.breadcrumb-item = link_to @survey.project.extended_name, @survey.project
+  li.breadcrumb-item = link_to @survey.name, survey_url(@survey)
+  li.breadcrumb-item.active Edit
+.mb-5
+  h2 Edit client survey
+.mb-5
+  .row
+    .col-md-6
+      = form_for @survey, url: survey_url(@survey) do |f|
+        = render 'employee/form_errors', resource: @survey
+        .form-group
+          = f.label :name
+          = f.text_field :name, class: 'form-control'
+        .form-group
+          = f.label :base_link, 'Base link'
+          = f.text_field :base_link, class: 'form-control'
+          small class='form-text text-muted'
+            | Must start with "http://" or "https://" and contain "{{uid}}". The "{{key}}" variable is also supported.
+        .form-group
+          = f.label :client_test_link, 'Client test link'
+          = f.text_field :client_test_link, class: 'form-control'
+        .form-group
+          = f.label :loi, 'Expected length of interview (in minutes)'
+          = f.text_field :loi, class: 'form-control'
+        .form-group
+          = f.label :cpi, 'CPI'
+          = f.text_field :cpi, class: 'form-control'
+        .form-group
+          = f.label :target, 'Target # of completes'
+          = f.text_field :target, class: 'form-control'
+          = render 'forms/comment', text: 'This is for reporting. It does not affect the flow of traffic into the survey.'
+        .form-group
+          = f.label :audience
+          = f.select :audience, options_for_select(SurveySelectionsHashes::AUDIENCE_OPTIONS, :selected => f.object.audience), { prompt: 'Please select...' }, { class: 'form-control ml-1 mr-3' }
+        .form-group
+          - countries = Country.all.to_a
+          - countries.delete(Country.find_by(slug: 'multi'))
+          - @sorted_countries = countries.unshift(Country.find_by(slug: 'multi'))
+          = f.label :country
+          = f.select :country_id, options_for_select(@sorted_countries.map {|c| [c.name, c.id]}, :selected => @survey.country_id), { include_blank: 'Please select...' }, { class: 'form-control ml-1 mr-3' }
+        .form-group
+          = f.label :language
+          = f.select :language, options_for_select(['English', 'French (Canadian)', 'Chinese'], :selected => f.object.language), { prompt: 'Please select...' }, { class: 'form-control ml-1 mr-3' }
+        .form-check.mb-3
+          label.form-check-label
+            = f.check_box :prevent_overlapping_invitations, class: 'form-check-input'
+            | Prevent new invitations for panelists invited to this project
+          = render 'forms/comment', text: "By default, panelists can be invited to multiple surveys in the same project. Use this option to keep from creating invitations for panelists if they've already been invited to another survey in this project. This will not affect invitations that have already been created. This is similar to the old de-dupe option."
+        = render 'employee/form_buttons'

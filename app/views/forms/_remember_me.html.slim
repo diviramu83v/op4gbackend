@@ -1,0 +1,7 @@
+.form-check.mb-3
+  = form.check_box :remember_me, class: 'form-check-input'
+
+  - if local_assigns[:label]
+    = form.label label, class: 'form-check-label'
+  - else
+    = form.label :remember_me, class: 'form-check-label'

@@ -1,0 +1,8 @@
+div
+  .mb-3#screener-form
+    = f.label :question_type
+    = f.select :question_type, options_for_select(PrescreenerQuestionTemplate.question_types.to_a.map{|a| [a.first.humanize, a.last]}, selected: @prescreener_question.question_type), { }, { class: 'form-control ml-1 mr-3 mb-2' }
+    = f.label :passing_criteria
+    = f.select :passing_criteria, options_for_select(PrescreenerQuestionTemplate.passing_criteria.to_a.map{|a| [a.first.humanize, a.last]}, selected: @prescreener_question.passing_criteria), { }, { class: 'form-control ml-1 mr-3 mb-2' }
+    = f.label :body
+    = f.text_field :body, class: 'form-control mb-2'

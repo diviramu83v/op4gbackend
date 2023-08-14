@@ -1,0 +1,58 @@
+.card.mb-3
+  .card-header
+    .d-flex.justify-content-between
+      h4
+        span.mr-2 = quota.name_with_safeguard
+        span.mr-2.badge class="badge-#{cint_survey_status_class(quota.status)}"
+          = quota&.status
+        span.mr-2
+          - if can?(:view_and_modify, Survey)
+            - if quota.editable?
+              = link_to edit_cint_survey_url(quota), class: 'card-header-link' do
+                i.fa.fa-edit.mr-1
+                | Edit
+      span
+        - if can?(:view_and_modify, Survey)
+          - if quota.present? && quota.completable?
+            = link_to cint_survey_cint_survey_completions_url(quota), method: :post, class: 'btn btn-xs btn-success mr-2' do
+              | Complete
+          - if quota.present? && quota.draft?
+            - if survey.live?
+              = link_to cint_survey_cint_survey_activations_url(quota), method: :post, class: 'btn btn-xs btn-outline-primary' do
+                i.fa.fa-toggle-on.mr-1
+                | Activate
+          - if quota.present? && quota.paused?
+            - if survey.live?
+              = link_to cint_survey_cint_survey_activations_url(quota), method: :post, class: 'btn btn-xs btn-outline-primary' do
+                i.fa.fa-toggle-on.mr-1
+                | Resume
+          - elsif quota.present? && quota.live?
+            = link_to cint_survey_activation_url(quota), method: :delete, class: 'btn btn-xs btn-outline-secondary' do
+              i.fa.fa-toggle-off.mr-1
+              | Pause
+  .card-body
+    .row.mb-3
+      .col-lg-2
+        = render 'employee/cards/text_element', label: 'ID', value: quota.cint_id
+      .col-lg-2
+        = render 'employee/cards/text_element', label: 'LOI', value: quota.loi
+      .col-lg-3
+        = render 'employee/cards/text_element', label: 'Incidence Rate', value: format_number(quota.expected_incidence_rate)
+      .col-lg-2
+        = render 'employee/cards/text_element', label: 'Payout', value: format_currency_with_zeroes(quota.cpi)
+      .col-lg-3
+        = render 'employee/cards/text_element', label: 'Completes Wanted', value: format_number(quota.limit)
+    hr
+    .row.scroll-overflow-content
+      - if quota.age_present?
+        .col-lg-4.mb-3
+          = render 'employee/cards/text_header', label: 'Age'
+          div #{quota.min_age} - #{quota.max_age}
+      - if quota.state_names.present?
+        = render 'employee/cint_surveys/region_row', { type: 'States', regions: quota.state_names }
+      - if quota.city_names.present?
+        = render 'employee/cint_surveys/region_row', { type: 'Cities', regions: quota.city_names }
+      - if quota.postal_codes.present?
+        = render 'employee/cint_surveys/postal_code_row', { postal_codes: quota.formatted_postal_codes }
+      - quota.option_variables_hash.each do |option, variables|
+        = render 'card_row', { quota: quota, option: option, variables: variables }

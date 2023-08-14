@@ -1,0 +1,44 @@
+.row
+  .col-6
+    .mb-2
+      h5 Results
+    .mb-0
+      .row
+        .col-4
+          = render 'employee/cards/text_element_with_tooltip',
+                   label: 'Complete',
+                   value: resource.class == Onramp ? resource.adjusted_complete_count : resource.complete_count,
+                   tooltip: resource.class == Onramp ? 'Finished client survey with a complete response. Excludes any completes rejected or deemed fraudulent by the client.' : 'Finished client survey with a complete response.'
+          - if resource.flagged_post_survey_complete_count.positive?
+            .text-danger = "#{resource.flagged_post_survey_complete_count} flagged"
+        .col-4
+          = render 'employee/cards/text_element_with_tooltip',
+            label: 'Terminate',
+            value: resource.terminate_count,
+            tooltip: 'Finished client survey with a term response.'
+          - if resource.blocked_post_survey_term_count.positive?
+            .text-danger = "#{resource.blocked_post_survey_term_count} flagged"
+        .col-4
+          = render 'employee/cards/text_element_with_tooltip',
+            label: 'Quotafull',
+            value: resource.quotafull_count,
+            tooltip: 'Finished client survey with a quotafull response.'
+          - if resource.blocked_post_survey_quotafull_count.positive?
+            .text-danger = "#{resource.blocked_post_survey_quotafull_count} flagged"
+  .col-6
+    .mb-2
+      h5 Results (last 24 hours)
+    .mb-0
+      .row
+        .col-4 = render 'employee/cards/text_element_with_tooltip',
+                        label: 'Complete',
+                        value: resource.completed_recent_count,
+                        tooltip: 'Finished client survey with a complete response within the last 24 hours.'
+        .col-4 = render 'employee/cards/text_element_with_tooltip',
+                        label: 'Terminate',
+                        value: resource.terminate_recent_count,
+                        tooltip: 'Finished client survey with a term response within the last 24 hours.'
+        .col-4 = render 'employee/cards/text_element_with_tooltip',
+                        label: 'Quotafull',
+                        value: resource.quotafull_recent_count,
+                        tooltip: 'Finished client survey with a quotafull response within the last 24 hours.'

@@ -1,0 +1,10 @@
+one:
+  employee: operations
+  paid_at: <%= Time.now.utc %>
+  period: '2020-01'
+  payment_data: "panelist@op4g.com\t$55.39\r\npanelist2@op4g.com\t$20.91"
+error:
+  employee: operations
+  paid_at: <%= Time.now.utc %>
+  period: '2020-01'
+  payment_data: "panelist@op4g.com\t$55.39\r\npanelist2@op4g.com\t$20.91\r\nnobodysemail@notanemail.com\t$17.23"

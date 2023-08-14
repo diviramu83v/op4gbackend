@@ -1,0 +1,38 @@
+= render 'report_form'
+
+.mb-0
+  = render 'table'
+
+javascript:
+  var startPeriod = "#{@period&.dig(:start_period)}"
+  var endPeriod = "#{@period&.dig(:end_period)}"
+coffee:
+  document.getElementById('download-button').style['pointer-events'] = 'none'
+  window.onload = ->
+    App.cable.subscriptions.create { channel: "RecruitmentSourceReportChannel", start_period: startPeriod, end_period: endPeriod },
+      received: (data) ->
+        $('#download-button').css('pointer-events', 'auto');
+        $('#download-button').removeClass('disabled');
+        $('#table-data').html(data)
+
+    $('#download-button').click ->
+      $(this).html("<i class='fa fa-spinner fa-pulse mr-2'></i>Downloading")
+      $('#download-button').addClass('disabled');
+      $('#download-button').css('pointer-events', 'none');
+      App.recruitment_source_report_download = App.cable.subscriptions.create { channel: "RecruitmentSourceReportDownloadChannel", start_period: startPeriod, end_period: endPeriod },
+        received: (data) ->
+          $('#download-button').html("<i class='fas fa-cloud-download-alt mr-1'></i>Download")
+          $('#download-button').removeClass('disabled');
+          $('#download-button').css('pointer-events', 'auto');
+          blob = new Blob([data['csv_file']['content']]);
+
+          # Create a link with the data and trigger click event to download the file
+          csv_download_link = document.createElement('a');
+          csv_download_link.href = window.URL.createObjectURL(blob);
+          csv_download_link.download = data['csv_file']['file_name'];
+          csv_download_link.click();
+
+          App.recruitment_source_report_download.unsubscribe()
+          App.cable.disconnect()
+          delete App.recruitment_source_report_download
+          return

@@ -1,0 +1,10 @@
+tr id="onramp-#{onramp.id}" class=onramp_prescreener_row_status(onramp)
+  td
+    = format_bool_as_colored_on_off(onramp.check_prescreener?, 'mr-1')
+    = onramp_source_badge(onramp)
+  td.text-right
+    - if can?(:view_and_modify, Survey)
+      = render 'employee/onramps/prescreener_button', onramp: onramp
+    = link_to survey_onramp_url(onramp.token, bypass: onramp.bypass_token, uid: 'test_link'), target: '_blank', class: 'btn btn-outline-primary btn-xs ml-1' do
+      i.fa.fa-external-link-alt.mr-1
+      | Test

@@ -1,0 +1,6 @@
+standard:
+  survey: standard
+  status: 'initialized'
+  subject: 'subject'
+  email_body: 'email body'
+  incentive_cents: 200

@@ -1,0 +1,20 @@
+.mb-5
+  .row
+    .col
+      h2 Have you received all IDs expected for this project?
+.row
+  .col
+    = link_to project_finalize_project_statuses_url(finished: true), method: :post, class: "btn btn-success btn-block #{'disabled' unless @project.finishable?}" do
+      i.fa.fa-check-square.mr-2
+      | Yes, change the project status to finished
+    p.text-muted.mt-2 This will change the status of all surveys in this project to finished and it will be removed from the close-out list.
+  .col
+    = link_to project_finalize_project_statuses_url, method: :post, class: 'btn btn-secondary btn-block' do
+      i.fa.fa-arrow-right.mr-2
+      | No, but hide project
+    p.text-muted.mt-2 The project status will not be changed, but it will be removed from the close-out list.
+  .col
+    = link_to project_close_outs_url, method: :get, class: 'btn btn-primary btn-block' do
+      i.fa.fa-arrow-right.mr-2.ml-2
+      | No, keep project
+    p.text-muted.mt-2 The project status will not be changed and it will stay on the close-out list so you can review it again later.

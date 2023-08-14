@@ -1,0 +1,53 @@
+= render 'employee/cards/text_header_with_tooltip', label: 'Complete milestone', tooltip: 'Enter the number of completes that will trigger an email alert to the project manager.'
+= form_for :complete_milestone, url: survey_complete_milestones_url(survey), remote: true, html: { class: "forms form-inline #{'d-none' if survey.complete_milestones.active.any?}", id: "milestone-form-#{survey.id}" }  do |f|
+  = f.number_field :target_completes, required: true, class: 'number-field form-control-sm form-control mr-1', id: "field-#{survey.id}"
+  button.btn.btn-primary.btn-sm.milestone-button type="submit" data-disable="true"
+    i.fas.fa-cloud-upload-alt.mr-2
+    | Add
+
+h5.dashhead-title.mb-1.displays id="milestone-display-#{survey.id}" class="#{'d-none' if survey.complete_milestones.active.blank?}"
+  = link_to('javascript:;', class: 'form-link') do
+    span> id="milestone-target-number-#{survey.id}" = survey.complete_milestones.active.last&.target_completes
+    | completes
+
+
+javascript:
+  // Hide form
+  $(document).click(function(event) {
+    if (somethingWasClickedOtherThanTheFormOrSubmitButton(event)) {
+      hideForms();
+    }
+  });
+
+  // Show form.
+  $('.displays').click(function() {
+    survey_id = $(this).attr('id').split('-')[2]
+    showForm(survey_id);
+  });
+
+  $(document).click(function() {
+    $('.forms').each(function() {
+      value = $(this).next('.displays').children('.form-link').children(":first").text();
+      if (value == '') {
+        $(this).removeClass('d-none');
+        $('#error-message').remove();
+        $(this).next('.displays').addClass('d-none');
+      }
+    })
+  })
+
+  function somethingWasClickedOtherThanTheFormOrSubmitButton(event) {
+    return !$(event.target).hasClass('milestone-button') && !$(event.target).hasClass('number-field') && !$(event.target).hasClass('form-link');
+  }
+
+  function hideForms() {
+    $('.forms').addClass('d-none');
+    $('#error-message').remove();
+    $('.displays').removeClass('d-none');
+  }
+
+  function showForm(survey_id) {
+    $('#milestone-display-' + survey_id).addClass('d-none');
+    $('#milestone-form-' + survey_id).removeClass('d-none');
+    $('#field-' + survey_id).val('').focus();
+  }

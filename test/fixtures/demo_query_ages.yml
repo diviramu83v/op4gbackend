@@ -1,0 +1,4 @@
+standard:
+  demo_query: standard
+  age: standard
+  created_at: <%= 5.day.ago.to_s(:db) %>

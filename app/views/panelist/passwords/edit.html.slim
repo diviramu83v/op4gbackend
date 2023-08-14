@@ -1,0 +1,16 @@
+- content_for :flash_width
+  | col-lg-6
+
+.row
+  .col-lg-6
+    .card
+      .card-header
+        h4 = t('panelist.passwords.edit.change_password', default: 'Change your password')
+      .card-body
+        = devise_error_messages!
+        = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
+          = f.hidden_field :reset_password_token
+          .mb-3 = render 'forms/password_field', form: f, field: :password
+          .mb-3 = render 'forms/password_field', form: f, field: :confirm_password
+          = render 'forms/submit_button', form: f, label: t('panelist.passwords.edit.update', default: 'Update'), icon: 'fa-cloud-upload-alt'
+        = render "devise/shared/links"

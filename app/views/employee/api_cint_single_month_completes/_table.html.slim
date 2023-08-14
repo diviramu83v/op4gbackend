@@ -1,0 +1,37 @@
+table.table.table-sm.mb-0 data-sort='table'
+  thead
+      th Project ID
+      th Cint project ID
+      th Number of completes
+      th CPI
+      th Revenue
+      th Payout(s)
+      th Total payout (payouts x completes)
+      th Profit
+      th Traffic page
+  tbody
+    - @cint_completes_grouped.each do |onramp_id, count|
+      - onramp = Onramp.find(onramp_id)
+      - cpi = onramp.survey.cpi
+      - cint_surveys = onramp.survey.cint_surveys
+      - payouts = cint_surveys.map(&:cpi)
+      - payouts = payouts.map { |payout| payout.to_f }
+      - onboardings = onramp.onboardings.complete.for_cint.for_month(@date)
+      - revenue = onboardings.sum { |onboarding| onboarding.survey.cpi.to_f || 0 }
+      - total_payout = onboardings.sum do |onboarding|
+        - if onboarding.cint_survey.present?
+          - onboarding.cint_survey&.cpi.to_f || 0
+        - else
+          - onboarding.survey.cint_surveys.first&.cpi.to_f || 0
+
+      - profit = revenue - total_payout
+      tr
+        td = link_to onramp.project.id, project_url(onramp.project.id)
+        td = onramp_id
+        td.text-right.pr-3 = format_number(count)
+        td.text-right.pr-3 = number_to_currency(cpi)
+        td.text-right.pr-3 = number_to_currency(revenue)
+        td.text-right.pr-3 = payouts.uniq.map { |payout| number_to_currency(payout) }.join(', ')
+        td.text-right.pr-3 = number_to_currency(total_payout)
+        td.text-right.pr-3 = number_to_currency(profit)
+        td = link_to "https://admin.op4g.com/surveys/#{onramp.survey.id}/traffic_by_source", survey_traffic_by_source_url(onramp.survey.id)

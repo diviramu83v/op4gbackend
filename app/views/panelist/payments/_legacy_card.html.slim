@@ -1,0 +1,21 @@
+.card
+  .card-header
+    h4 = t('panelist.payments.show.legacy_header', default: 'Legacy')
+  .card-body
+    table.table.table-sm.table-wrapped-with-header.mb-0
+      thead
+        tr
+          th = t('panelist.payments.show.period_header', default: 'Period')
+          th = t('panelist.payments.show.description_header', default: 'Description')
+          - if panelist.supporting_nonprofit?
+            th.text-right = t('panelist.payments.show.personal_header', default: 'Personal')
+            th.text-right = t('panelist.payments.show.nonprofit_header', default: 'Nonprofit')
+          - else
+            th.text-right = t('panelist.payments.show.amount_header', default: 'Amount')
+      tbody
+        tr
+          td = '2018-05'
+          td = 'Imported from legacy OPlus system'
+          td.text-right = number_to_currency(panelist.legacy_earnings)
+          - if panelist.supporting_nonprofit?
+            td.text-right N/A

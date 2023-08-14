@@ -1,0 +1,18 @@
+.mb-5
+  h2
+    span.mr-3 Nonprofits
+    span.mr-0
+      - if can?(:view_and_modify, Nonprofit)
+        = link_to new_nonprofit_url, class: 'page-header-link' do
+          i.fa.fa-plus-circle.mr-1
+          | Add
+.mb-0
+  table.table.table-sm.mb-3
+    thead
+      tr
+        th
+        th Name
+        th.text-right Active panelists
+        th.text-right Earnings
+    tbody
+      = render partial: 'employee/nonprofits/table_row', collection: @nonprofits, as: :nonprofit

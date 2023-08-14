@@ -1,0 +1,116 @@
+.mb-0
+  .row.mb-4
+    .col-12
+      = render 'employee/cards/text_element_with_tooltip',
+               label: 'Recruitment source',
+               value: resource.recruiting_source_name.present? ? resource.recruiting_source_name : 'N/A',
+               tooltip: "Name of the panelist's recruitment source"
+  .row.mb-4
+    .col-3
+      = render 'employee/cards/text_element_with_tooltip',
+               label: 'Status',
+               value: resource.status,
+               tooltip: "Panelist's current status"
+    - if resource.suspended?
+      .col-3
+        = render 'employee/cards/text_element_with_tooltip',
+                 label: 'Suspended at',
+                 value: format_long_date(resource.suspended_at),
+                 tooltip: "Date and time the panelist was suspended"
+    - if resource.deactivated?
+      .col-3
+        = render 'employee/cards/text_element_with_tooltip',
+                 label: 'Deactivated at',
+                 value: format_long_date(resource.deactivated_at),
+                 tooltip: "Date and time the panelist was deactivated"
+    .col-3
+      = render 'employee/cards/text_element_with_tooltip',
+               label: 'Panelist since',
+               value:  format_long_date(resource.created_at),
+               tooltip: "Date and time the panelist's account was created"
+    .col-3
+      = render 'employee/cards/text_element_with_tooltip',
+               label: 'Length of tenure',
+               value: distance_of_time_in_words_to_now(resource.created_at),
+               tooltip: "How long the panelist has been a member of the panel"
+  .row.mb-4
+    .col-3
+      = render 'employee/cards/text_element_with_tooltip',
+               label: 'Recent payouts',
+               value: format_number(resource.payments.where('paid_at >= ?', 18.months.ago).count),
+               tooltip: 'The number of payouts the panelist has received in the past 18 months'
+    .col-3
+      = render 'employee/cards/text_element_with_tooltip',
+               label: 'Recent net incentive margin',
+               value: format_currency(resource.recent_net_profit),
+               tooltip: "The difference between the total CPI of the panelist's accepted completes from the past 18 months and the total dollar amount of the payouts received by the panelist in the past 18 months"
+    .col-3
+      = render 'employee/cards/text_element_with_tooltip',
+               label: 'Lifetime payouts',
+               value: format_number(resource.payments.count),
+               tooltip: 'The number of payouts the panelist has ever received'
+    .col-3
+      = render 'employee/cards/text_element_with_tooltip',
+               label: 'Lifetime net incentive margin',
+               value: format_currency(resource.net_profit),
+               tooltip: "The difference between the total CPI of all the panelist's accepted completes and the total dollar amount of all the payouts ever received by the panelist"
+  .row.mb-4
+    .col-3
+      = render 'employee/cards/text_element_with_tooltip',
+               label: 'Invitations received',
+               value: format_number(resource.recent_invitations.count),
+               tooltip: 'Number of invitations the panelist received in the past 18 months'
+    .col-3
+      = render 'employee/cards/text_element_with_tooltip',
+               label: 'Invitations clicked',
+               value: "#{format_number(resource.recent_invitations_clicked)} | #{format_percentage(resource.percentage_of_recent_invitations_clicked)}",
+               tooltip: 'Number and percentage of invitations the panelist clicked in the past 18 months'
+    .col-3
+      = render 'employee/cards/text_element_with_tooltip',
+               label: 'Avg. reaction time',
+               value: resource.average_reaction_time == 'N/A' ? 'N/A' : "#{pluralize(format_number(resource.average_reaction_time), 'minute')}",
+               tooltip: 'The average amount of time that passes from when the panelist receives and clicks an invitation'
+  .row.mb-4
+    .col-3
+      = render 'employee/cards/text_element_with_tooltip',
+               label: 'Accepted completes',
+               value: format_number(resource.recent_accepted_count),
+               tooltip: "Number of the panelist's accepted completes for the past 18 months"
+    .col-3
+      = render 'employee/cards/text_element_with_tooltip',
+               label: 'Rejected completes',
+               value: format_number(resource.recent_rejected_count),
+               tooltip: "Number of the panelist's rejected completes for the past 18 months"
+    .col-3
+      = render 'employee/cards/text_element_with_tooltip',
+               label: 'Fraudulent completes',
+               value: format_number(resource.recent_fraudulent_count),
+               tooltip: "Number of the panelist's fraudulent completes for the past 18 months"
+  .row.mb-4
+    .col-3
+      = render 'employee/cards/text_element_with_tooltip',
+               label: 'Score',
+               value: format_number(resource.score),
+               tooltip: "Panelist's score, the higher the score the better"
+    .col-3
+      = render 'employee/cards/text_element_with_tooltip',
+               label: 'Score percentile',
+               value: format_percentage_with_no_zeroes(resource.score_percentile),
+               tooltip: "The percentile where the panelist's score ranks"
+  .row.mb-2
+    .col-3
+      = render 'employee/cards/text_element_with_tooltip',
+               label: 'Signup CleanID score',
+               value: resource.signup_clean_id_score,
+               tooltip: "The Panelist's CleanID score at the time of first signing-up, the lower the score the better"
+    .col-6
+      - if resource.recent_clean_id_scores.present?
+        = render 'employee/cards/text_element_with_tooltip',
+                 label: 'Recent CleanID scores',
+                 value: resource.recent_clean_id_scores.count > 1 ? resource.recent_clean_id_scores.join(',') : resource.recent_clean_id_scores.join,
+                 tooltip: "The Panelist's CleanID scores from their 10 most recent onboardings"
+      - else
+        = render 'employee/cards/text_element_with_tooltip',
+                 label: 'Recent CleanID scores',
+                 value: 'N/A',
+                 tooltip: "The Panelist's CleanID scores from their 10 most recent onboardings"

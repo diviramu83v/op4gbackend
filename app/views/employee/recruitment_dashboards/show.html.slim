@@ -1,0 +1,76 @@
+#recruitment-dashboard
+  .row
+    - if can?(:read, Panel)
+      .col-4.dashboard-card
+        .mb-5
+          .mb-3
+            .card
+              .card-header
+                h4 = link_to_if can?(:read, Panel), 'Panels', panels_path
+              .card-body
+                p View all Panels
+
+    - if can?(:read, Nonprofit)
+      .col-4.dashboard-card
+        .mb-5
+          .mb-3
+            .card
+              .card-header
+                h4 = link_to_if can?(:read, Nonprofit), 'Nonprofits', nonprofits_path
+              .card-body
+                p View all Nonprofits
+
+    - if can?(:read, RecruitingCampaign)
+      .col-4.dashboard-card
+        .mb-5
+          .mb-3
+            .card
+              .card-header
+                h4 = link_to_if can?(:read, RecruitingCampaign), 'Campaigns', recruiting_campaigns_path
+              .card-body
+                p View all Recruiting Campaigns
+
+    - if can?(:read, Panel)
+      .col-4.dashboard-card
+        .mb-5
+          .mb-3
+            .card
+              .card-header
+                h4 = link_to_if can?(:read, Panel), 'Affiliates', affiliates_path
+              .card-body
+                p View all Affiliates
+      .col-4.dashboard-card
+        .mb-5
+          .mb-3
+            .card
+              .card-header
+                h4 = link_to_if can?(:read, Panel), 'Affiliate report', new_affiliate_report_path
+              .card-body
+                p View and download the affiliate report
+      .col-4.dashboard-card
+        .mb-5
+          .mb-3
+            .card
+              .card-header
+                h4 = link_to_if can?(:read, Panel), 'Recruitment source report', new_recruitment_source_report_path
+              .card-body
+                p View and download the recruitment source report
+
+    - if can?(:read, TrackingPixel)
+      .col-4.dashboard-card
+        .mb-5
+          .mb-3
+            .card
+              .card-header
+                h4 = link_to_if can?(:read, TrackingPixel), 'Tracking pixels', pixels_path
+              .card-body
+                p View all tracking pixels
+    - if current_employee.effective_role_admin?(session[:effective_role])
+      .col-4.dashboard-card
+        .mb-5
+          .mb-3
+            .card
+              .card-header
+                h4 = link_to_if can?(:read, Panel), 'Incentive batches', incentive_batches_url
+              .card-body
+                p View and create Incentive Batches

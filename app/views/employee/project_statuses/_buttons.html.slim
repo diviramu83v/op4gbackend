@@ -1,0 +1,13 @@
+- confirm_message = 'This will change the status of all surveys in this project. Proceed anyway?'
+- if current_employee.effective_role_admin?(session[:effective_role]) && @project.surveys_that_can_be_changed_to_status(status: 'draft').exists?
+  = render 'employee/project_statuses/draft_button', confirm_message: confirm_message
+- if @project.surveys_that_can_be_changed_to_status(status: 'live').exists?
+  = render 'employee/project_statuses/launch_button', confirm_message: confirm_message
+- if @project.surveys_that_can_be_changed_to_status(status: 'hold').exists?
+  = render 'employee/project_statuses/hold_button', confirm_message: confirm_message
+- if @project.surveys_that_can_be_changed_to_status(status: 'waiting').exists?
+  = render 'employee/project_statuses/wait_button', confirm_message: confirm_message
+- if @project.surveys_that_can_be_changed_to_status(status: 'finished').exists?
+  = render 'employee/project_statuses/finish_button', confirm_message: confirm_message
+- if current_employee.effective_role_admin?(session[:effective_role])
+  = render 'employee/project_statuses/archive_button', confirm_message: confirm_message

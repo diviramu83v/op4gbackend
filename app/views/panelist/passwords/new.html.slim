@@ -1,0 +1,16 @@
+- content_for :flash_width
+  | col-lg-6
+
+.row
+  .col-lg-6
+    .card
+      .card-header
+        h4 = t('panelist.passwords.new.forgot_password', default: 'Forgot your password?')
+      .card-body
+        = devise_error_messages!
+        = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+          = render 'forms/email_field', form: f, field: :email
+          = render 'forms/submit_button', form: f, label: t('panelist.passwords.new.send_reset_instructions', default: 'Send reset instructions'), icon: 'far fa-envelope'
+      .card-footer
+        .d-flex.flex-column
+          = render "panelist/devise/links"

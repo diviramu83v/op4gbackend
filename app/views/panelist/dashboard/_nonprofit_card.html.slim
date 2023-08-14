@@ -1,0 +1,20 @@
+.card
+  .card-header
+    h4 = t('panelist.dashboard.show.donations_snapshot', default: 'Donations snapshot')
+  .card-body
+    - if @nonprofit&.logo?
+      .row
+        .col-4 = image_tag(@nonprofit.logo.url, class: 'w-100 mb-3')
+        .col-8
+          p = @nonprofit&.name
+    - else
+      p = @nonprofit.name
+    table.table.table-sm.table-wrapped-no-header.mb-0
+      tr
+        - if panelist.unlocked?
+          td = t('panelist.dashboard.show.contribution_percentage', default: 'Your contribution percentage')
+          td.text-right = format_percentage_with_no_zeroes(panelist.donation_percentage)
+      tr
+        td = t('panelist.dashboard.show.quarterly_contribution', default: 'Your contribution this quarter')
+        td.text-right = format_currency_with_zeroes(panelist.donation_total_this_quarter)
+    p.mb-0.mt-3 = link_to t('panelist.dashboard.show.adjust_contribution', default: 'Adjust your contribution'), url

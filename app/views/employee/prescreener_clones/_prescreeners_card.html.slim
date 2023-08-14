@@ -1,0 +1,40 @@
+- if @surveys_with_prescreener_questions.present?
+  .mb-5
+    .d-flex.justify-content-end
+      - unless @search_terms.present?
+        .pagination-xs.mb-0 = paginate @surveys_with_prescreener_questions
+  - @surveys_with_prescreener_questions.uniq.each do |survey|
+    .mb-5
+      .card
+        .card-header
+          .d-flex.justify-content-between
+            h4
+              span.mr-2
+                = "#{survey.project.id} / #{survey.project.name} / #{survey.name}"
+            span.mr-2
+              = link_to survey_prescreener_clones_url(@survey, survey_to_clone: survey.id), method: :post, remote: true, class: 'btn btn-outline-primary btn-xs ml-1' do
+                | Clone
+                i.fa.fa-plus.ml-1
+        .card-body
+          table.table.table-sm.table-wrapped-with-header.mb-0
+            thead
+              tr
+                th style=("width: 40%") Question
+                th Question type
+                th Passing criteria
+                th Answer options
+            tbody
+              - survey.prescreener_question_templates.active.order(:id).each do |question|
+                tr
+                  td.p-3 = question.body.humanize
+                  td.p-3 = question.question_type.humanize
+                  td.p-3 = question.passing_criteria.humanize
+                  td.p-3 = question.prescreener_answer_templates.count
+  .mb-3
+    .d-flex.justify-content-end
+      - unless @search_terms.present?
+        .pagination-xs.mb-0 = paginate @surveys_with_prescreener_questions
+- elsif @search_terms.present?
+  p.mb-0 No matching prescreeners found for #{@keywords}
+- else
+  p.mb-0 No prescreener questions have been added yet.

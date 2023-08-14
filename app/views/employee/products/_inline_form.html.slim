@@ -1,0 +1,3 @@
+= form_for project, url: project_product_url(project) do |f|
+  = f.collection_select(:product_name, Project.product_names.map{ |n| [n.first, n.first.humanize]}, :first, :last,
+    { prompt: '...' }, class: 'form-control form-control-sm', onchange: 'this.form.submit()')

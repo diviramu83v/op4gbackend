@@ -1,0 +1,29 @@
+# 1. Find/replace op4g-staging with op4g-production if necessary.
+# 2. After creating new follower, replace HEROKU_POSTGRESQL_XXX_URL with appropriate database URL.
+
+# create new follower database
+heroku addons:create heroku-postgresql:standard-2 --follow DATABASE_URL --app op4g-staging
+heroku pg:wait --app op4g-staging
+heroku pg:info --app op4g-staging
+
+# take platform down
+heroku ps:scale worker=0 --app op4g-staging
+heroku ps:scale clock=0 --app op4g-staging
+heroku maintenance:on --app op4g-staging
+
+# wait until follower catches up
+heroku pg:info --app op4g-staging
+
+# promote follower
+heroku pg:unfollow HEROKU_POSTGRESQL_XXX_URL --app op4g-staging
+heroku pg:promote HEROKU_POSTGRESQL_XXX_URL --app op4g-staging
+
+# bring platform back up
+heroku maintenance:off --app op4g-staging
+heroku ps:scale worker=1 --app op4g-staging
+heroku ps:scale clock=1 --app op4g-staging
+
+# add new follower, if necessary
+heroku addons:create heroku-postgresql:standard-0 --follow DATABASE_URL --app op4g-staging
+
+# remove old followers through UI

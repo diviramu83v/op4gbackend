@@ -1,0 +1,26 @@
+.row
+  .col-4.dashboard-card
+    .mb-5
+      .mb-3
+        .card
+          .card-header
+            h4 = link_to 'Panelists', panelists_path
+          .card-body
+            p View all Panelists
+  .col-4.dashboard-card
+    .mb-5
+      .mb-3
+        .card
+          .card-header
+            h4 = link_to 'Projects', projects_path
+          .card-body
+            p View all Projects
+.row
+  .col-4.dashboard-card
+    .mb-5
+      .mb-3
+        .card
+          .card-header
+            h4 Panelists Report
+          .card-body
+            = render 'employee/panelists/global_report'

@@ -1,0 +1,35 @@
+.card.mb-3
+  .card-header
+    .d-flex.justify-content-between
+      h4
+        span.mr-3 Query
+        span.mr-3
+          - if query.editable?
+            = link_to feasibility_url(query), class: 'card-header-link' do
+              i.fa.fa-edit.mr-1
+              | Edit
+  .card-body
+    .row
+      .col-1
+        .mb-3
+          = render 'employee/cards/text_element', label: 'Panel', value: query.panel.name
+      .col-2
+        .mb-3
+          = render 'employee/cards/text_element', label: 'Client', value: query.client&.name || '?'
+      .col-2
+        .mb-3
+          = render 'employee/demo_queries/card_filters', query: query
+      .col-2
+        .mb-3
+          = render 'employee/cards/text_element', label: 'Targeted panelists', value: format_number(query.feasibility_total)
+      .col-3
+        .mb-3
+          = render 'recent_results', label: 'Recent query results', query: query
+      .col-2
+        .mb-3
+          = render 'employee/cards/text_element', label: 'Created on', value: format_date(query.created_at)
+    - if query.employee.present?
+      .row
+        .col-3
+          .mb-3
+            = render 'employee/cards/text_element', label: 'Employee', value: query.employee.name

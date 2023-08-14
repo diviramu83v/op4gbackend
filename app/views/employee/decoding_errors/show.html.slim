@@ -1,0 +1,20 @@
+= render 'employee/decodings/results_header'
+- if @failed_decodings.any?
+  .mb-4
+    .d-flex.justify-content-between
+      h4
+        span.mr-2 Errors
+      = link_to decoding_errors_url(@decoding, format: :csv), class: 'btn btn-outline-primary' do
+        i.fas.fa-cloud-download-alt.mr-1
+        | Download
+  .mb-3
+    table.table.table-sm.table-no-header-border data-sort='table'
+      thead
+        tr
+          th Encoded UID
+      tbody
+        - @failed_decodings.each do |decoding|
+          tr
+            td = decoding.uid
+- else
+  p No errors with this batch of UIDs.

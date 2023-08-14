@@ -1,0 +1,25 @@
+.mb-3
+  .row
+    .col
+      h2.mb-3 Panelist IDs awaiting payment
+      - if @onboardings.without_earnings.empty?
+        p = 'No panelist completes detected.'
+      - else
+        - @onboardings.without_earnings.each do |onboarding|
+          - if onboarding.earning.nil?
+            div = onboarding.token
+    .col
+      h2.mb-3 Panelist IDs that have been paid
+      - if @onboardings.with_earnings.empty?
+        p = 'No panelists IDs have been paid yet.'
+      - else
+        - @onboardings.with_earnings.each do |onboarding|
+          - if onboarding.earning
+            div = onboarding.token
+- if @onboardings.without_earnings.count.positive?
+  = link_to project_panelist_earnings_url, method: :post, class: 'btn btn-primary mr-1' do
+    i.fas.fa-dollar-sign.mr-2
+    | Create earnings
+= link_to project_close_out_url(@project), class: 'btn btn-primary' do
+      i.fa.fa-arrow-circle-left.mr-1
+      | Return

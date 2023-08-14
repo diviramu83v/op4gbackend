@@ -1,0 +1,42 @@
+.card.mb-3
+  .card-header
+    .d-flex.justify-content-between
+      h4
+        span.mr-2 Disqo Quota
+        span.mr-2.badge class="badge-#{disqo_quota.status == 'live' ? 'primary' : 'secondary'}"
+          = disqo_quota&.status
+        span.mr-2
+          - if can?(:view_and_modify, Survey)
+            = link_to edit_disqo_quota_url(disqo_quota), class: 'card-header-link' do
+              i.fa.fa-edit.mr-1
+              | Edit
+      span
+        - if can?(:view_and_modify, Survey)
+          - disqo_system_status = disqo_quota.disqo_project_system_status
+          - if disqo_quota.present? && disqo_quota.eligible_to_activate?
+            = link_to disqo_quota_activations_url(disqo_quota), method: :post, class: 'btn btn-xs btn-outline-primary' do
+              i.fa.fa-toggle-on.mr-1
+              | Activate
+          - elsif disqo_quota.present? && disqo_quota.status == 'live'
+            = link_to activation_url(disqo_quota), method: :delete, class: 'btn btn-xs btn-outline-secondary' do
+              i.fa.fa-toggle-off.mr-1
+              | Pause
+  .card-body
+    - if disqo_system_status == 'CLOSED'
+      .alert.alert-danger.mb-3
+        p.mb-0 This quota is closed and can't be reopened
+    .row.mb-3
+      .col-lg-2
+        = render 'employee/cards/text_element', label: 'Quota ID', value: disqo_quota.quota_id
+      .col-lg-2
+        = render 'employee/cards/text_element', label: 'Project ID', value: disqo_quota.survey.project.id
+      .col-lg-2
+        = render 'employee/cards/text_element', label: 'Payout', value: format_currency_with_zeroes(disqo_quota.cpi)
+      .col-lg-2
+        = render 'employee/cards/text_element', label: 'Soft Launch Completes Wanted', value: format_number(disqo_quota.soft_launch_completes_wanted)
+      .col-lg-2
+        = render 'employee/cards/text_element', label: 'Completes Wanted', value: format_number(disqo_quota.completes_wanted)
+    hr
+    .row.scroll-overflow-content
+      - disqo_quota.all_present_qualifications.each_key do |filter|
+        = render 'card_row', { disqo_quota: disqo_quota, filter: filter }

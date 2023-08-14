@@ -1,0 +1,15 @@
+.mb-5
+  .d-flex.justify-content-end.mb-3
+    .pagination-xs.mb-0 = paginate @ip_addresses
+  table.table.table-sm.mb-3 data-sort='table'
+    thead
+      tr
+        th Address
+        th.text-right Count
+    tbody
+      - @ip_addresses.each do |ip|
+        tr
+          td = link_to ip.address, ip_address_path(ip)
+          td.text-right = format_number(ip.cnt)
+  .d-flex.justify-content-end
+    .pagination-xs.mb-0 = paginate @ip_addresses

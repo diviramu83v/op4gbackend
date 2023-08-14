@@ -1,0 +1,5 @@
+tr
+  td = panelist_status(panelist)
+  td = link_to panelist.name, panelist_url(panelist)
+  td = panelist.email
+  td = format_long_date(panelist.created_at)

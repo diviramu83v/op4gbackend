@@ -1,0 +1,29 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Traffic step lookup', new_traffic_step_lookup_url
+  li.breadcrumb-item.active Results
+.mb-5
+  h2 Traffic step lookup
+.mb-4
+  table.table.table-sm.table-no-header-border data-sort='table'
+    thead
+      tr
+        th UID
+        th Onboarding id
+        th Traffic steps link
+    tbody
+      - @traffic_step_lookup.uid_onboardings.each do |uid, onboarding|
+        tr
+          td = uid
+          td = onboarding.id
+          td = link_to onboarding_traffic_steps_url(onboarding), onboarding_traffic_steps_url(onboarding)
+- if @traffic_step_lookup.uids_not_found.present?
+  .row.mt-5
+    .col-4
+      table.table.table-sm.table-no-header-border data-sort='table'
+        thead
+          tr
+            th UIDs not found
+        tbody
+          - @traffic_step_lookup.uids_not_found.each do |uid|
+            tr
+              td = uid

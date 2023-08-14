@@ -1,0 +1,66 @@
+{
+  "status": 200,
+  "offers": [
+    {
+      "id": "iCX8YkancqT3zzx8GweRFU72",
+      "url": "http://survey.op4g.com/onramps/SqddjUbmQGEJdT8ez9YEEjfd?uid={{uid}}",
+      "target": {
+        "country": [
+          "US"
+        ],
+        "state": [
+          "TX",
+          "FL",
+          "CO"
+        ],
+        "gender": [
+          "male"
+        ],
+        "income": [
+          "35000-44999",
+          "45000-54999"
+        ],
+        "age": [
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35
+        ]
+      },
+      "payout_dollars": 17.00,
+      "loi_minutes": 15
+    },
+    {
+      "id": "kwgpnDGRynUQJPxBbZ8p51MV",
+      "url": "http://survey.op4g.com/onramps/ejsh3jUmQGEJdT8ez9ejejsh?uid={{uid}}",
+      "target": {
+        "country": [
+          "DE",
+          "ES"
+        ],
+        "gender": [
+          "female"
+        ],
+        "age": [
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25
+        ]
+      },
+      "payout_dollars": 32.00,
+      "loi_minutes": 20
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Campaigns', recruiting_campaigns_url
+  li.breadcrumb-item = link_to @campaign.name, recruiting_campaign_url(@campaign)
+  li.breadcrumb-item.active = 'Campaign panelist lifecycle stats'
+.mb-5
+  .d-flex.justify-content-between
+    h2
+      span.mr-2 Panelist lifecycle stats
+.row.mb-5
+  .col-lg-5 = render 'employee/cards/text_element', label: 'Name', value: @campaign.name
+.row
+  .col-lg-8
+    h3.mb-4 Panelists
+    .row.mb-5
+      .col-3 = render 'employee/cards/text_element', label: 'Active', value: format_number(@campaign.active_panelists_count)
+      .col-3 = render 'employee/cards/text_element', label: 'Suspended due to fraud or manually by support team', value: format_number(@campaign.suspended_panelists_count)
+      .col-3 = render 'employee/cards/text_element', label: 'Deactivated due to inactivity', value: format_number(@campaign.deactivated_panelists_count)
+      .col-3 = render 'employee/cards/text_element', label: 'Deleted themself', value: format_number(@campaign.deleted_panelists_count)

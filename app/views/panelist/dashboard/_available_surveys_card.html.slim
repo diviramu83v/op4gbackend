@@ -1,0 +1,27 @@
+.card
+  .card-header
+    h4 = t('panelist.dashboard.show.available_surveys', default: "Available surveys")
+  .card-body
+    - if @open_invitations.empty?
+      p.mb-0 = t('panelist.dashboard.show.no_surveys_open', default: "No open surveys at the moment. Check back soon.")
+    - else
+      table.table.table-sm.table-wrapped-with-header.mb-0
+        thead
+          tr
+            th = t('panelist.dashboard.show.title_column_header', default: 'Title')
+            th = t('panelist.dashboard.show.payout_column_header', default: 'Payout')
+            th
+        tbody
+          - @open_invitations.each do |invitation|
+            tr
+              td = invitation.batch.email_subject
+              td = format_currency_with_zeroes(invitation.batch.incentive)
+              td.text-right
+                = link_to invitation_url(invitation.token), class: 'btn btn-success btn-xs', data: { turbolinks: false } do
+                  i.fa.fa-play.mr-1
+                  = t('panelist.dashboard.show.take_survey_button_label', default: 'Take')
+              td.text-right
+                = link_to invitation_path(invitation), method: :delete, class: 'btn btn-outline-danger btn-xs' do
+                  i.fa.fa-stop.mr-1
+                  = t('panelist.dashboard.show.dismiss_survey_button_label', default: 'Dismiss')
+                / = link_to 'DISMISS', panelist_dashboard_url, class: 'btn btn-primary'

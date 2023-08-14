@@ -1,0 +1,22 @@
+.card
+  .card-header
+    .d-flex.justify-content-between
+      h4 Project close-out
+      - if can?(:view_and_modify, Project)
+        = link_to project_close_out_url(@project), class: 'btn btn-outline-primary' do
+          i.fas.fa-cloud-upload-alt.mr-2
+          | Upload IDs
+  .card-body
+    .row
+      .col-2
+        .mb-4 = render 'employee/cards/text_element', label: 'Accepted ID count', value: project.onboardings.complete.accepted.count
+      .col-2
+        .mb-4 = render 'employee/cards/text_element', label: 'Earnings count', value: project.earnings.count
+      .col-2
+        .mb-4 = render 'employee/cards/text_element', label: 'Fraudulent ID count', value: project.onboardings.complete.fraudulent.count
+      .col-2
+        .mb-4 = render 'employee/cards/text_element', label: 'Rejected ID count', value: project.onboardings.complete.rejected.count
+      .col-2
+        .mb-4 = render 'employee/cards/text_element', label: 'Unaccepted count', value: project.unaccepted_count
+      .col-2
+        .mb-4 = render 'employee/cards/text_element', label: 'Remaining ID count', value: project.remaining_id_count

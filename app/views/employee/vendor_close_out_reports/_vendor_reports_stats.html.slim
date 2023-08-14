@@ -1,0 +1,36 @@
+- @vendor_batches.group_by { |vb| vb.vendor_name }.each do |vendor_name, vendor_batches|
+  .card.mb-3
+    .card-header
+      .d-flex.justify-content-between
+        .mb-2
+          h4 = vendor_name
+        span
+          - if current_user.effective_role_admin?(session[:effective_role])
+            = link_to project_vendor_close_out_report_downloads_url(project, vendor_name: vendor_name), class: 'btn btn-primary btn-block' do
+              i.fas.fa-cloud-download-alt.mr-2
+              | Download
+    .card-body
+      - accepted_totals = []
+      - rejected_totals = []
+      - fraudulent_totals = []
+      - unaccepted_totals = []
+      - remaining_totals = []
+      - vendor_batches.each do |vendor_batch|
+        - next if vendor_batch.onramp.blank?
+
+        - accepted_totals << vendor_batch.onramp.complete_accepted_onboardings.size
+        - fraudulent_totals << vendor_batch.onramp.complete_fraudulent_onboardings.size
+        - rejected_totals << vendor_batch.onramp.complete_rejected_onboardings.size
+        - unaccepted_totals << vendor_batch.onramp.unaccepted_count
+        - remaining_totals << vendor_batch.onramp.remaining_id_count
+      .row
+        .col-2
+          .mb-4 = render 'employee/cards/text_element', label: 'Accepted ID count', value: format_number(accepted_totals.compact&.sum) || 0
+        .col-2
+          .mb-4 = render 'employee/cards/text_element', label: 'Fraudulent ID count', value: format_number(fraudulent_totals.compact&.sum) || 0
+        .col-2
+          .mb-4 = render 'employee/cards/text_element', label: 'Rejected ID count', value: format_number(rejected_totals.compact&.sum) || 0
+        .col-2
+          .mb-4 = render 'employee/cards/text_element', label: 'Unaccepted count', value: format_number(unaccepted_totals.compact&.sum) || 0
+        .col-2
+          .mb-4 = render 'employee/cards/text_element', label: 'Remaining ID count', value: format_number(remaining_totals.compact&.sum) || 0

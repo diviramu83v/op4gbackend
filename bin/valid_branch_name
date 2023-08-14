@@ -1,0 +1,8 @@
+# frozen_string_literal: true
+
+branch = `(git rev-parse --abbrev-ref HEAD)`.chomp
+REGEX = %r[([a-zA-Z]{2})-([0-9a-zA-Z]*)/([0-9a-z-]*)]
+
+exit if REGEX.match?(branch)
+
+abort 'Please correct your branch name to the format <ClickUp-ID>/<description-with-dashes> eg CU-3uctvi8/user-bug'

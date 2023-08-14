@@ -1,0 +1,15 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Projects', projects_url
+  li.breadcrumb-item = link_to @survey.project.extended_name, @survey.project
+  li.breadcrumb-item.active = @survey.name
+  li.breadcrumb-item.active = link_to 'Clone Prescreener', survey_prescreener_clones_url
+.mb-5
+  .d-flex.justify-content-between
+    h2 = 'Clone Prescreener'
+    = form_for(:prescreener_clone_search, url: survey_prescreener_clones_url(@survey), method: :get, html: { class: 'form-inline' }) do |f|
+      .mr-1
+        = f.text_field :id_or_keyword, placeholder: 'Search prescreeners by project id or keyword(s)', required: true, minlength: 3 , maxlength: 75, class: 'form-control'
+      = f.submit 'Go', class: 'btn btn-outline-primary btn-sm'
+.row
+  .col-2 = render 'employee/surveys/menu'
+  .col-10 = render 'employee/prescreener_clones/prescreeners_card'

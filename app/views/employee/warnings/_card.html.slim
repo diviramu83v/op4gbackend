@@ -1,0 +1,6 @@
+.card.survey-warning-card.mb-1 id="#{warning.id}"
+  .padding.p-2
+    .d-flex.justify-content-between
+      span.mr-2 = render 'card_content', warning: warning
+      - if current_employee.admin_or_ops_manager?(session[:effective_role])
+        span.mr-0 = render 'card_button', warning: warning

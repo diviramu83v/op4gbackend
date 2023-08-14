@@ -1,0 +1,11 @@
+- DemoQuery.feasibility_employees.each do |employee|
+  - if employee == @selected_employee
+    span.mr-1.mb-1.d-inline-block
+      = link_to feasibilities_url, class: 'btn btn-primary btn-xs' do
+        span.mr-1.badge.badge-secondary id="#{employee.id}" = employee.feasibility_count
+        span.mr-0 = employee.name
+  - else
+    span.mr-1.mb-1.d-inline-block
+      = link_to employee_feasibilities_url(employee), class: 'btn btn-outline-primary btn-xs' do
+        span.mr-1.badge.badge-secondary id="#{employee.id}" = employee.feasibility_count
+        span.mr-0 = employee.name

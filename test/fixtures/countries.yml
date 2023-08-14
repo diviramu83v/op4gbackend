@@ -1,0 +1,6 @@
+standard:
+  name: United States
+  slug: us
+multi:
+  name: Multi-country
+  slug: multi

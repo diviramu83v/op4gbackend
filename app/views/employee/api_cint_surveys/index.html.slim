@@ -1,0 +1,41 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Cint', api_cint_index_url
+  li.breadcrumb-item Cint surveys
+.mb-4
+  .d-flex.justify-content-between.align-items-center
+    h2
+      span.mr-3 Cint API surveys
+  .mb-0
+    = link_to 'all', request.query_parameters.merge(status: 'all'), class: "btn btn-outline-secondary btn-xs mr-1 #{active_class?('cint_survey_status', 'all')}"
+    - %w[draft live paused halted complete closed activation_failed].each do |status|
+      = link_to status, request.query_parameters.merge(status: status), class: "btn btn-outline-#{cint_survey_status_class(status)} btn-xs mr-1 #{active_class?('cint_survey_status', status)}"
+.d-flex.justify-content-end.mb-4
+  .pagination-xs.mb-0 = paginate @cint_surveys
+table.table.table-sm.mb-0 data-sort='table'
+  thead
+    tr
+      th Project
+      th Survey
+      th Cint ID
+      th CPI
+      th Op4G project ID
+      th WO number
+      th PM
+      th Received traffic
+      th Incidence rate
+      th Cint status
+  tbody
+    - @cint_surveys.uniq.each do |cint_survey|
+      tr
+        td = cint_survey.survey.project.name
+        td = link_to cint_survey.survey.name, survey_traffic_by_source_url(cint_survey.survey)
+        td = link_to cint_survey.display_cint_id, survey_cint_surveys_url(cint_survey.survey)
+        td = number_to_currency(cint_survey.cpi || 0)
+        td = cint_survey.survey.project.id
+        td = cint_survey.survey.project.work_order
+        td = cint_survey.survey.project.manager.name
+        td = format_number(cint_survey.onboardings.count)
+        td = cint_survey.incidence_rate
+        td = cint_survey.status
+.d-flex.justify-content-end.mt-4
+  .pagination-xs.mb-0 = paginate @cint_surveys

@@ -1,0 +1,11 @@
+.col-lg-4 = render 'panelist/accounts/navigation_card', panelist: current_panelist, payments_url: account_payments_url, account_url: account_contribution_url, demographics_url: account_demographics_url, password_url: edit_account_private_url
+
+.mb-0
+  h2 Notification Preferences and Settings
+  = form_for(:panelist) do |f|
+    .field
+      p
+        = f.label :language
+        = f.select :language, options_for_select(Locale::ACCOUNT_OPTIONS, selected: current_panelist.locale)
+    .actions
+      = f.submit "SAVE"

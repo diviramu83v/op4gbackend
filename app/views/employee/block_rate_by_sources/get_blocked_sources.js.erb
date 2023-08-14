@@ -1,0 +1,5 @@
+$(".source-dropdown").html("<%= j render partial: 'employee/block_rate_by_sources/source_field', locals: {onboardings: @onboardings}  %>");
+$(".source-dropdown").trigger('change')
+$('#download-button').removeClass('disabled')
+$('.spinner').hide();
+$('.select-source-row').show();

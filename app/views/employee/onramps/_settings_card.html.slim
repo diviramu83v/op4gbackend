@@ -1,0 +1,79 @@
+.card
+  .card-header
+    .d-flex.justify-content-between
+      h4
+        span.mr-2 Onramp
+        span.mr-2 = onramp_source_badge(onramp) if local_assigns[:add_context?] == true
+        - if onramp.disabled?
+          span.badge.badge-warning.mr-2 = 'disabled'
+        - if onramp.editable?
+          - if can?(:view_and_modify, Onramp)
+            = link_to edit_onramp_url(onramp), class: 'card-header-link' do
+              i.fa.fa-edit.mr-1
+              | Edit
+      span
+        - if can?(:view_and_modify, Onramp)
+          - if onramp.enableable?
+            = link_to onramp_disabling_url(onramp), method: :delete, class: 'btn btn-outline-success btn-xs' do
+              i.fa.fa-redo.mr-1
+              | Enable
+          - else
+            = link_to onramp_disabling_url(onramp), method: :post, data: { confirm: 'Are you sure you want to disable this traffic?' }, class: "btn btn-outline-danger btn-xs #{'disabled' unless onramp.disableable?}" do
+              i.fa.fa-ban.mr-1
+              | Disable
+  .card-body
+    .row
+      .col-2
+        .mb-4
+          = render 'employee/cards/text_element',
+                   label: 'Recaptcha',
+                   value: format_bool_as_on_off(onramp.check_recaptcha?)
+      .col-2
+        .mb-4
+          = render 'employee/cards/text_element',
+                   label: 'Clean ID',
+                   value: format_bool_as_on_off(onramp.check_clean_id?)
+      .col-2
+        .mb-4
+          = render 'employee/cards/text_element',
+                   label: 'Ignore security flags',
+                   value: format_bool_as_on_off(onramp.ignore_security_flags?)
+      .col-2
+        .mb-4
+          = render 'employee/cards/text_element',
+                  label: 'Prescreener',
+                  value: format_bool_as_on_off(onramp.check_prescreener?)
+      .col-2
+        .mb-4
+          = render 'employee/cards/text_element',
+                   label: 'Gate Survey',
+                   value: format_bool_as_on_off(onramp.check_gate_survey?)
+      .col-12
+        .mb-0
+          table.table.table-sm.table-wrapped-no-header.mb-0
+            tbody
+              - if onramp.vendor? || onramp.api? || onramp.router? || onramp.disqo? || onramp.cint? || onramp.schlesinger?
+                tr
+                tr
+                  td.redirect-label.dashhead-subtitle Live link
+                  td.redirect-value.overflow-hidden = survey_onramp_url(onramp.token) + "?#{uid_tid_pid_param(onramp)}=" + onramp.uid_param.to_s
+                  td.redirect-buttons.text-right
+                    span = render 'shared/copy_button', label: 'Copy', text: survey_onramp_url(onramp.token) + "?#{uid_tid_pid_param(onramp)}=" + onramp.uid_param.to_s
+              - if onramp.requires_security_checks?
+                - if onramp.vendor&.name == 'Lucid'|| current_employee.effective_role_admin?(session[:effective_role])
+                  tr
+                  tr
+                    td.redirect-label.dashhead-subtitle Test link
+                    td.redirect-value.overflow-hidden = survey_onramp_url(onramp.token, bypass: onramp.bypass_token) + "&#{uid_tid_pid_param(onramp)}=" + onramp.uid_param.to_s
+                    td.redirect-buttons.text-right
+                      span.mr-1
+                        = link_to survey_onramp_url(onramp.token, bypass: onramp.bypass_token, uid_tid_pid_param(onramp) => 'test_link'), target: '_blank', class: 'btn btn-outline-primary btn-xs ml-1' do
+                          i.fa.fa-external-link-alt.mr-1
+                          | Test
+                      span = render 'shared/copy_button', label: 'Copy', text: survey_onramp_url(onramp.token, bypass: onramp.bypass_token) + "&#{uid_tid_pid_param(onramp)}="
+              - if onramp.vendor?
+                tr
+                  td.redirect-label.dashhead-subtitle Vendor link
+                  td.redirect-value.overflow-hidden = survey_onramp_url(onramp.token, bypass_all: onramp.bypass_token) + "&#{uid_tid_pid_param(onramp)}=" + onramp.uid_param.to_s
+                  td.redirect-buttons.text-right
+                    span = render 'shared/copy_button', label: 'Copy', text: survey_onramp_url(onramp.token, bypass_all: onramp.bypass_token) + "&#{uid_tid_pid_param(onramp)}="

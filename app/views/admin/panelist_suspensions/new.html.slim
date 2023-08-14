@@ -1,0 +1,13 @@
+.mb-5
+  h2
+    span.mr-3 Panelist suspender
+.mb-0
+  .mb-3
+    h3 Paste panelist emails or onboarding tokens
+  = form_for :panelist_emails_or_tokens, url: panelist_suspensions_url do |f|
+    .form-group
+      = f.text_area :emails_or_tokens, rows: '20', class: 'form-control'
+    .form-group
+      = f.label :name, 'Comment'
+      = f.text_field :comment, class: 'form-control', value: 'Suspended due to suspicious activity.'
+    = render 'employee/form_buttons'

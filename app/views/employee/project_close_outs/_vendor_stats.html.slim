@@ -1,0 +1,25 @@
+.card-header
+  .d-flex.justify-content-between
+    h4
+      span
+        span.mr-2 = onramp.vendor_name
+        - if can?(:view_and_modify, Project)
+          span.mr-3
+            = link_to project_close_out_details_link(onramp), class: 'card-header-link' do
+              i.fa.fa-list-ul.mr-3
+              | Details
+.card-body
+  .row
+    .col-2
+      .mb-4 = render 'employee/cards/text_element', label: 'Accepted ID count', value: onramp.onboardings.complete.accepted.count
+    .col-2
+      .mb-4 = render 'employee/cards/text_element', label: 'Fraudulent ID count', value: onramp.onboardings.complete.fraudulent.count
+    .col-2
+      .mb-4 = render 'employee/cards/text_element', label: 'Rejected ID count', value: onramp.onboardings.complete.rejected.count
+    .col-2
+      .mb-4 = render 'employee/cards/text_element', label: 'Unaccepted count', value: onramp.unaccepted_count
+    .col-2
+      .mb-4 = render 'employee/cards/text_element', label: 'Remaining ID count', value: onramp.remaining_id_count
+    .col-2
+      .mb-5 = link_to onramp_vendor_stats_url(onramp, format: :csv), class: 'btn btn-primary' do
+        | Download

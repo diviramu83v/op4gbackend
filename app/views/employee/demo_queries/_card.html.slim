@@ -1,0 +1,33 @@
+.card id="query-#{query.id}"
+  .card-header
+    .d-flex.justify-content-between
+      h4
+        span.mr-3 Query
+        span.mr-3
+          - if can?(:view_and_modify, DemoQuery)
+            - if query.editable?
+              = link_to query_url(query), class: 'card-header-link' do
+                i.fa.fa-edit.mr-1
+                | Edit
+      span
+        - if query.removable?
+          - if can?(:destroy, DemoQuery)
+            = link_to query_url(query), method: :delete, class: 'btn btn-outline-danger btn-xs' do
+              i.far.fa-trash-alt.mr-1
+              | Remove
+        - if query.closable_batches?
+          - if can?(:view_and_modify, SampleBatch)
+            = link_to query_close_url(query), method: :post, data: { confirm: "Are you sure you want to cancel all invitations sent with this query?\n\nThis will block all panelists invited from this query who haven't already started the survey." }, class: 'btn btn-outline-danger btn-xs' do
+              i.fa.fa-ban.mr-1
+              | Close open batches
+  .card-body
+    .row
+      .col-4
+        .mb-3
+          = render 'employee/cards/text_element', label: 'Panel', value: query.panel.name
+        .mb-3
+          = render 'employee/demo_queries/card_filters', query: query
+        .mb-3
+          = render 'employee/cards/text_element', label: 'Targeted panelists', value: format_number(query.panelist_count(cache: true))
+      .col-8
+        = render 'employee/demo_queries/sample_batches', query: query

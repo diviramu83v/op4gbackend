@@ -1,0 +1,10 @@
+.card id="vendor-#{onramp.api_vendor.id}"
+  .card-header
+    h4
+      span.mr-1 = onramp_source_badge(onramp)
+      = format_currency(onramp.survey&.survey_api_target&.payout)
+  .card-body
+    - if onramp.onboardings.any?
+      = render 'employee/traffic/overview_card_body', resource: onramp
+    - else
+      p.mb-0 No traffic detected.

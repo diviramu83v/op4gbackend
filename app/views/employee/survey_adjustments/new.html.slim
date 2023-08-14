@@ -1,0 +1,19 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Projects', projects_url
+  li.breadcrumb-item = link_to @survey.project.extended_name, @survey.project
+  li.breadcrumb-item = link_to @survey.name, survey_url(@survey)
+  li.breadcrumb-item.active Adjust counts
+.mb-5
+  h2 Adjust complete count
+.mb-5
+  .row
+    .col-md-6
+      = form_for @adjustment, url: survey_adjustments_url(@survey) do |f|
+        = render 'employee/form_errors', resource: @adjustment
+        .mb-3 = render 'employee/cards/text_element', label: 'Our count', value: @adjustment.survey.adjusted_complete_count
+        .form-group
+          = f.label :client_count
+          = f.text_field :client_count, class: 'form-control'
+          small class='form-text text-muted'
+            | Enter the complete count reported by the client.
+        = render 'employee/form_buttons'

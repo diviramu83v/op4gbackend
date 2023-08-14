@@ -1,0 +1,7 @@
+= render 'shared/campaign_panelists',
+  panelists: @panelists,
+  download_link: recruiting_campaign_panelists_url(format: :csv, method: :index),
+  resource_url: recruiting_campaign_url(@campaign),
+  model_name: 'Campaigns',
+  name: @campaign.name,
+  hide_donation: true

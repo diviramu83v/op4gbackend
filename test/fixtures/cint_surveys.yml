@@ -1,0 +1,10 @@
+standard:
+  cint_id: 227
+  name: Test
+  loi: 10
+  limit: 2
+  expected_incidence_rate: 30
+  survey: standard
+  cint_country_id: 22
+  variable_ids: ["2", "3"]
+  cpi_cents: 100

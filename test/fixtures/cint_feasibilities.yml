@@ -1,0 +1,7 @@
+standard:
+  days_in_field: 3
+  loi: 10
+  limit: 2
+  incidence_rate: 30
+  country_id: 22
+  variable_ids: ['2', '3']

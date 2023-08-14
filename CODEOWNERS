@@ -1,0 +1,4 @@
+# This file automatically requests PR reviews for new code.
+# Format: file pattern, followed by a Github user name or email address.
+
+db/*  @ryanstrickler @stingey @JarodWeldin

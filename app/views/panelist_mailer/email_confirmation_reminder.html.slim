@@ -1,0 +1,20 @@
+p Dear #{@panelist.first_name},
+p
+  |
+    Thank you for your interest in becoming a valued member of the growing Opinions 4 Good panel community.
+    We noticed you didn’t finish signing up. To complete registration follow the link below.
+p = link_to t('.confirm_account_link', default: 'Confirm your account'), confirmation_url(@panelist, confirmation_token: @panelist.confirmation_token, locale: @panelist.locale)
+p We noticed that you never finished signing up.
+ul
+  li In order to begin taking surveys, your e-mail address needs to be confirmed.
+  li Upon signing up with your e-mail and creating a password, a link to confirm your email address is sent to your inbox.
+  li After confirming your account's email address, you'll start receiving paid survey invitations shortly after answering our brief demographic questionnaire.
+
+p Why should I finish signing up for Opinions4Good?
+p
+  |
+    Our panelists have the opportunity to engage with interesting market research surveys--and they get paid monthly for earnings over $10 via Paypal!
+    Opinions4Good also allows you to digitally volunteer to support your favorite cause--without opening your wallet. Choose to donate 25 to 100% of your
+    earnings to one of our 300 nonprofit partners! For more information on Opinions4Good, please visit our FAQ: Op4G Frequently Asked Questions.
+p Still having problems? Feel free to get in touch with us directly at support@op4g.com.
+p We need your insights to keep our panel awesome!

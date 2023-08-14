@@ -1,0 +1,82 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Nonprofits', nonprofits_url
+  li.breadcrumb-item.active = @nonprofit.name
+.mb-5
+  .d-flex.justify-content-between
+    h2
+      span.mr-2 Nonprofit
+      span.mr-0
+        - if can?(:view_and_modify, Nonprofit)
+          = link_to edit_nonprofit_url(@nonprofit), class: 'btn btn-link page-header-link pl-0' do
+            i.fa.fa-edit.mr-1
+            | Edit
+.row.mb-5
+  .col-lg-5 = render 'employee/cards/text_element', label: 'Name', value: @nonprofit.name
+  .col-lg-2 = render 'employee/cards/text_element', label: 'Earnings', value: format_currency_with_zeroes(@nonprofit.donation_total_with_adjustment)
+  .col-lg-4.offset-lg-1
+    - if @nonprofit.logo.present?
+      = render 'employee/cards/text_header', label: 'Logo'
+      = image_tag @nonprofit.logo.url, class: 'img-fluid img-thumbnail'
+.row
+  .col-lg-7
+    h3.mb-4 Panelists
+    .row.mb-5
+      .col-3 = render 'employee/cards/text_element', label: 'Started signup', value: format_number(@nonprofit.original_panelists.count)
+      .col-3 = render 'employee/cards/text_element', label: 'Completed signup', value: format_number(@nonprofit.signed_up_panelists_count)
+      .col-3
+        = link_to nonprofit_panelists_url(@nonprofit)
+          = render 'employee/cards/text_element', label: 'Active panelists', value: format_number(@nonprofit.active_current_panelists.count)
+      .col-3
+        = link_to nonprofit_panelists_url(@nonprofit, incomplete_demos: true)
+          = render 'employee/cards/text_element', label: 'Panelists with incomplete demos', value: format_number(@nonprofit.panelists.signing_up.where.not(confirmed_at: nil).count)
+    .mb-5 = render 'employee/recruiting_campaigns/list', resource: @nonprofit
+    .mb-5 = render 'signups_by_month'
+    .mb-2
+      .col-3
+        = link_to nonprofit_earnings_url(@nonprofit), class: 'btn btn-link pl-0' do
+          i.fa.fa-credit-card.mr-1
+          | View Earnings Data
+    .mb-2
+      .col-3
+        = link_to nonprofit_profit_url(@nonprofit), class: 'btn btn-link pl-0' do
+          i.fas.fa-dollar-sign.mr-1
+          | View Panelist Net Incentive Margin
+    .mb-2
+      .col-3
+        = link_to nonprofit_stats_url(@nonprofit), class: 'btn btn-link pl-0' do
+          i.fa.fa-filter.mr-1
+          | View Signup Stats
+    .mb-2
+      .col-3
+        = link_to nonprofit_completes_url(@nonprofit), class: 'btn btn-link pl-0' do
+          i.fa.fa-check.mr-1
+          | View Completes Funnel
+    .mb-5
+      .col-3
+        = link_to nonprofit_lifecycle_url(@nonprofit), class: 'btn btn-link pl-0' do
+          i.fa.fa-chart-bar.mr-1
+          | View Panelist Lifecycle Stats
+  .col-lg-4.offset-lg-1
+    .mb-4
+      h3 Organization
+    .mb-5
+      .mb-4 = render 'employee/cards/text_element', label: 'Address', value: format_nonprofit_address(@nonprofit)
+      - if @nonprofit.phone.present?
+        .mb-4 = render 'employee/cards/text_element', label: 'Phone', value: @nonprofit.phone
+      - if @nonprofit.url.present?
+        .mb-4 = render 'employee/cards/text_element', label: 'Website', value: link_to(@nonprofit.url, @nonprofit.url)
+      - if @nonprofit.ein.present?
+        .mb-4 = render 'employee/cards/text_element', label: 'Federal EIN', value: @nonprofit.ein
+      - if @nonprofit.mission.present?
+        .mb-0 = render 'employee/cards/text_element', label: 'Mission statement', value: simple_format(@nonprofit.mission)
+    .mb-5
+      h3.mb-3 Primary contact
+      .mb-0
+        - if @nonprofit.any_contact_info?
+          = format_nonprofit_contact(@nonprofit)
+        - else
+          p.mb-0 No contact info.
+    - if @nonprofit.any_manager_info?
+      .mb-5
+        h3.mb-3 Manager
+        .mb-0 = format_nonprofit_manager(@nonprofit)

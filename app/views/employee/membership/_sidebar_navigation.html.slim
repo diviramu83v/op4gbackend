@@ -1,0 +1,5 @@
+nav#sidebar.navbar.navbar-dark.justify-content-start.flex-column.align-items-start.d-none.d-lg-flex
+  h5 = link_to 'Membership', membership_dashboard_url, class: nav_link_class(membership_dashboard_url)
+  ul.navbar-nav
+    li.nav-item.mr-3 = link_to 'Panelists', panelists_url, class: nav_link_class(panelists_url)
+    li.nav-item.mr-3 = link_to 'Projects', projects_url, class: nav_link_class(projects_url)

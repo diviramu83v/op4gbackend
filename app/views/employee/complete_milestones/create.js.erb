@@ -1,0 +1,4 @@
+$('#milestone-form-' + <%= survey_id %>).addClass('d-none');
+$('#milestone-display-' + <%= survey_id %>).removeClass('d-none');
+$('#milestone-target-number-' + <%= survey_id %>).text(<%= milestone_target %>);
+$('#error-message').remove();

@@ -1,0 +1,32 @@
+= render 'employee/decodings/results_header'
+- if @decodings.any?
+  .mb-4
+    .d-flex.justify-content-between
+      h4
+        span.mr-2 All sources
+      = link_to decoding_matches_url(@decoding, format: :csv), class: 'btn btn-outline-primary' do
+        i.fas.fa-cloud-download-alt.mr-1
+        | Download
+  .mb-3
+    table.table.table-sm.table-no-header-border data-sort='table'
+      thead
+        tr
+          th Source
+          th Surveys
+          th Decoded UID
+          th CPI
+
+      tbody
+        - @decodings.each do |decoding|
+          - if decoding.project
+            - surveys = decoding.project.surveys.map { |survey| survey.name }.join(', ')
+            tr
+              td = decoding.source_name
+              td = surveys.to_s
+              td = decoding.onboarding.uid
+              td = decoding.onramp.survey.cpi
+          - else
+            tr
+              td ID not found
+- else
+  p No UIDs were successfully decoded.

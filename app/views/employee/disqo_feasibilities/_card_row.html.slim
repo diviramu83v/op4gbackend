@@ -1,0 +1,9 @@
+.col-lg-4.mb-3
+  = render 'employee/cards/text_header', label: DisqoQuotaSelections::LABEL_OPTIONS[filter.to_sym]
+  - if filter.include?('age')
+    div = feasibility.all_present_qualifications[filter].values.join(' - ')
+  - elsif %w[geodmaregioncode geopostalcode].include?(filter)
+    div = feasibility.all_present_qualifications[filter].join(' ')
+  - else
+    - feasibility.all_present_qualifications[filter].each do |value|
+      div = DisqoQuotaSelections.find_in_hash(filter)[value.to_sym]

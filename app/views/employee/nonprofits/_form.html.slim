@@ -1,0 +1,74 @@
+= form_for nonprofit do |f|
+  = render 'employee/form_errors', resource: nonprofit
+  .row
+    .col-lg-8.mb-5 = render 'forms/text_field', form: f, field: :name
+    .col-lg-4.mb-5
+      = f.label :status, class: 'mb-0'
+      .form-check
+        label.form-check-label
+          = f.check_box :fully_qualified, class: 'form-check-input'
+          | Fully qualified?
+      .form-check
+        label.form-check-label
+          = f.check_box :front_page, class: 'form-check-input'
+          | Front page?
+    .col-lg-6
+      .mb-3
+        h3 Organization
+      .form-group
+        = f.label :country
+        = f.select :country_id, options_from_collection_for_select(Country.nonprofit_options, :id, :name), { prompt: 'Please select...' }, id: 'country-selection', class: 'form-control'
+      = render 'forms/text_field', form: f, field: :address_line_1, label: 'Address Line 1'
+      = render 'forms/text_field', form: f, field: :address_line_2, label: 'Address Line 2'
+      .row
+        .col-5 = render 'forms/text_field', form: f, field: :city
+        .col-3
+          .form-group
+            = f.label :state
+            input type="hidden" name="state_options" id="state-options" value=@all_state_options.to_json
+            = f.select :state, options_from_collection_for_select(@selected_state_options, :to_s, :to_s, @nonprofit.state), { prompt: 'Select...' }, id: 'state-selection', class: 'form-control'
+        .col-4 = render 'forms/text_field', form: f, field: :zip_code
+      .form-group
+        = f.label :phone
+        = f.phone_field :phone, class: 'form-control'
+      .form-group
+        = f.label :url, 'Website URL'
+        = f.url_field :url, class: 'form-control'
+      = render 'forms/text_field', form: f, field: :ein, label: 'Federal EIN'
+      .form-group
+        = f.label :logo
+        = f.file_field :logo, class: 'form-control'
+      .form-group
+        = f.label :mission
+        = f.text_area :mission, rows: 10, class: 'form-control'
+    .col-lg-6
+      .mb-3
+        h3 Primary Contact
+      = render 'forms/text_field', form: f, field: :contact_name, label: 'Name'
+      = render 'forms/text_field', form: f, field: :contact_title, label: 'Title'
+      = render 'forms/text_field', form: f, field: :contact_phone, label: 'Phone'
+      = render 'forms/text_field', form: f, field: :contact_email, label: 'Email'
+      .mb-3.mt-5
+        h3 Manager
+      = render 'forms/text_field', form: f, field: :manager_name, label: 'Name'
+      = render 'forms/text_field', form: f, field: :manager_email, label: 'Email'
+  .row
+    .col-lg-6
+      = render 'employee/form_buttons'
+
+javascript:
+  $('#country-selection').change(function(event) {
+    var countryName = $('#country-selection option:selected').text();
+    var allStateOptions = JSON.parse($('#state-options').val());
+    var selectedStateOptions = allStateOptions[countryName];
+    var states = $("#state-selection");
+
+    states.empty(); // remove old options
+
+    states.append($("<option></option>").attr("value", '').text('Select...'));
+    $.each(selectedStateOptions, function(index, value) {
+      states.append($("<option></option>").attr("value", value).text(value));
+    });
+
+    console.log(selectedStateOptions);
+  })

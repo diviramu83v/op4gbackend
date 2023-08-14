@@ -1,0 +1,12 @@
+pre_new:
+  traffic_step: pre_clean_id
+  controller_action: 'show'
+  ip_address: second
+  data_collected: {}
+  status: 'N/A'
+pre_show:
+  traffic_step: pre_clean_id
+  controller_action: 'show'
+  ip_address: second
+  data_collected: {'TransactionId': 'eb815afc-c4eb-47e9-89a8-8981b32f7ca4', 'Score': 0, 'ORScore': 0.45, 'Duplicate': false, 'IsMobile': false }
+  status: 'N/A'

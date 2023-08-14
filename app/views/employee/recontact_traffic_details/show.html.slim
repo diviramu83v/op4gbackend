@@ -1,0 +1,52 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Projects', projects_url
+  li.breadcrumb-item = link_to @recontact.project.extended_name, @recontact.project
+  li.breadcrumb-item.active = @recontact.name
+  li.breadcrumb-item.active = @step.to_s.titlecase
+.mb-5
+  = render 'employee/recontacts/header', recontact: @recontact
+.mb-5
+  .row
+    .col-12
+      = render 'employee/surveys/details', survey: @recontact
+    .col-2
+      = render 'employee/recontacts/menu'
+    .col-10
+      .mb-3 = render 'employee/recontact_traffic/mini_nav'
+      .card
+        .card-header
+          .d-flex.justify-content-between
+            h3 Traffic details
+            span
+              - if @recontact.onboardings.most_recent_first.live.complete.any?
+                = link_to '#', id: 'completes-button', class: 'btn btn-outline-primary btn-xs mr-1' do
+                  i.fas.fa-cloud-download-alt.mr-1
+                  | Completes (live only)
+              - if @recontact.onboardings.most_recent_first.any?
+                = link_to '#', id: 'traffic-button', class: 'btn btn-outline-primary btn-xs' do
+                  i.fas.fa-cloud-download-alt.mr-1
+                  | Everything
+        = render 'shared/traffic_details_card_body', survey: @recontact
+      javascript:
+          var completesDownload = "#{survey_completions_url(@recontact, format: :csv)}"
+          var trafficDownload = "#{survey_traffic_details_url(@recontact, format: :csv)}"
+          var survey_id = "#{@recontact.id}"
+      coffee:
+        window.createChannel = (report_type, campaign) ->
+          App.traffic_subscription = App.cable.subscriptions.create { channel: "TrafficReportsChannel", report_type: report_type, survey_id: survey_id },
+            received: (data) ->
+              App.cable.subscriptions.remove(App.traffic_subscription)
+              if data == 'completes'
+                window.location = completesDownload
+                $('#completes-button').html("<i class='fas fa-cloud-download-alt mr-1'></i>Completes (live only)")
+              if data == 'all-traffic'
+                window.location = trafficDownload
+                $('#traffic-button').html("<i class='fas fa-cloud-download-alt mr-1'></i>Everything")
+        $("#completes-button").click (event) ->
+          event.preventDefault()
+          $(this).html("<i class='fa fa-spinner fa-pulse mr-2'></i>Building")
+          window.createChannel("all-traffic", survey_id)
+        $("#traffic-button").click (event) ->
+          event.preventDefault()
+          $(this).html("<i class='fa fa-spinner fa-pulse mr-2'></i>Building")
+          window.createChannel('completes', survey_id)

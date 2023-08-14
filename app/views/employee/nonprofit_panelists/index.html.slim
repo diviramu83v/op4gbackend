@@ -1,0 +1,6 @@
+= render 'shared/campaign_panelists',
+  panelists: @panelists,
+  download_link: nonprofit_panelists_url(format: :csv, method: :index, incomplete_demos: params[:incomplete_demos]),
+  resource_url: nonprofit_url(@nonprofit),
+  model_name: 'Nonprofits',
+  name: @nonprofit.name

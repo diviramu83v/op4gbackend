@@ -1,0 +1,21 @@
+.card-header id="survey-#{survey.id}"
+  .d-flex.justify-content-between
+    h4
+      span
+        span.mr-2 = survey.name
+        span.badge.mr-2 class="badge-#{survey_status_class(survey.status)}"
+          = survey.status
+        span.mr-3
+          = link_to survey_url(survey), class: 'card-header-link' do
+            i.fa.fa-list-ul.mr-3
+            | Details
+        - if can?(:view_and_modify, Project) && survey.present?
+          span.mr-3
+            = link_to edit_survey_url(survey), class: 'card-header-link' do
+              i.fa.fa-edit.mr-3
+              | Edit
+    span.ml-3
+      = render 'employee/survey_statuses/buttons', survey: survey
+      = link_to survey_clone_url(survey), method: :post, class: 'btn btn-outline-success' do
+        i.fa.fa-clone.mr-1
+        | Clone

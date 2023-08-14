@@ -1,0 +1,20 @@
+.square.p-5
+  .row.justify-content-center
+    .col-xs-12.col-lg-6.text-center
+      = image_tag 'op4g-signature-logo.png', class: 'landing-page-intro-logo'
+      p.h5.font-weight-light.pb-2 If you are interested in participating in this survey, please enter the email address where you’d like to receive the survey invitation in the box below.
+      p.h5.font-weight-light.pb-2 This should be the same email address your organization has on file for you – so we can verify your identity prior to payment.
+      p.h5.font-weight-light.pb-2 Thank you for your consideration in taking this survey, your participation is appreciated!
+      .div
+        = form_for :survey_client_sent_survey_invitation, url: survey_client_sent_survey_invitations_url do |f|
+          .form-group
+            .d-flex.flex-row.justify-content-center
+              = f.hidden_field :onramp_id, value: @onramp.id
+              = f.text_field :email, class: 'form-control w-50 mr-2'
+              = f.submit 'Submit', class: 'btn btn-primary'
+            .d-flex.flex-row.justify-content-center
+              .form-check.mt-3
+                = f.check_box :opt_in, class: 'form-check-input'
+                = f.label :opt_in, 'Check the box to be contacted about future surveys', class: 'font-weight-bold', style: 'color: #0d3451;'
+    .d-none.d-lg-block.pl-3
+      = image_tag 'landing_page_people.png'

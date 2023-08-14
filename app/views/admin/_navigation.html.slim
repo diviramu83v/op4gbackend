@@ -1,0 +1,13 @@
+nav.navbar.navbar-inverse.navbar-dark.bg-dark
+  .container.justify-content-between
+    = link_to admin_dashboard_url, class: 'navbar-brand' do
+      i.fa.fa-chart-bar.mr-2
+      = 'System'
+    ul.navbar-nav.flex-row
+      / li.nav-item.ml-3 = link_to 'Sign in ', '', class: 'nav-link' unless employee_signed_in?
+      / li.nav-item.ml-3 = link_to 'Account', '', class: 'nav-link' if employee_signed_in?
+      / li.nav-item.ml-3 = link_to 'Sign out', destroy_employee_session_url, method: :delete, class: 'nav-link' if employee_signed_in?
+nav.navbar.navbar-inverse.navbar-dark.bg-dark.pt-0
+  .container
+    ul.navbar-nav.d-flex.flex-row
+      = render 'admin/nav_links'

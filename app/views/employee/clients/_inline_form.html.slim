@@ -1,0 +1,3 @@
+= form_for project, url: project_client_url(project) do |f|
+  = f.collection_select(:client_id, Client.all, :id, :name,
+    { prompt: '...' }, class: 'form-control form-control-sm', onchange: 'this.form.submit()')

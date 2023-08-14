@@ -1,0 +1,10 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Projects', projects_url
+  li.breadcrumb-item = link_to @survey.project.extended_name, @survey.project
+  li.breadcrumb-item = link_to @survey.name, survey_url(@survey)
+  li.breadcrumb-item = link_to 'Cint quotas', survey_cint_surveys_url(@survey)
+  li.breadcrumb-item.active Edit Cint quota
+.mb-5
+  h2 Edit Cint quota
+.mb-5
+  = render 'edit_form', url: cint_survey_url(@cint_survey)

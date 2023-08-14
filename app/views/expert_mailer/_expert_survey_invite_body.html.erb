@@ -1,0 +1,39 @@
+<p class='expert-mailer-greeting'> Hello, <%= "#{@expert_recruit.first_name}!" %></p>
+<p>My name is <%= "#{@employee.name}" %>, I am an executive recruiter at Op4G, a leading Market Research company.</p>
+<div class='trix-content', style='font-family:Helvetica Neue, Arial, Helvetica, sans-serif; font-weight:normal; color:#555555;'>
+  <%= @batch.email_body %>
+</div>
+<% if @batch.incentive.present? %>
+  <p>In appreciation for your time, we are offering an incentive of <%= "#{@incentive}" %>.</p>
+<% end %>
+<p>The survey can be completed on your phone, tablet, or computer, and should take no more than <%= "#{@batch.time}" %> minutes.</p>
+<p>Participation is completely anonymous, and you will not be asked to discuss any non-public information about yourself or your company.</p>
+<p>
+  If you would like to participate, please click here to begin: <%= link_to 'Start survey', survey_onramp_url(@onramp.token) + '?uid=' + @expert_recruit.token, class: 'expert-mailer-link' %>
+</p>
+<p>
+  We appreciate your consideration! If at any time, you have questions or concerns, you can contact us at <%= "#{@employee.phone}" %>, or via e-mail at <%= mail_to "#{@employee.email}", "#{@employee.email}", class: 'expert-mailer-link' %>
+</p>
+<p>
+  This e-mail was sent to <%= "#{@expert_recruit.email}" %>. If you no longer wish to receive e-mail from Op4G, please click <%= link_to 'here', expert_unsubscribe_url(email: @expert_recruit.email, unsubscribe_token: @expert_recruit.unsubscribe_token), class: 'expert-mailer-link' %> to unsubscribe.
+</p>
+<br>
+<div class="row">
+  <div class="col-3 border-right">
+    <%= image_tag('op4g-signature-logo.png', width: '100%') %>
+  </div>
+  <div class="col expert-mailer-signature-text">
+    <p><%= @employee.name %></p>
+    <p>Executive Recruiter | Op4G</p>
+    <p>
+      <b>
+        P:
+      </b> <%= @employee.phone %>
+    </p>
+    <p>
+      <b>
+        E:
+      </b> <%= @employee.email %>
+    </p>
+  </div>
+</div>

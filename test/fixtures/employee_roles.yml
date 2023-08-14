@@ -1,0 +1,33 @@
+operations:
+  employee: operations
+  role: operations
+admin:
+  employee: admin
+  role: admin
+nonprofits:
+  employee: nonprofits
+  role: nonprofits
+recruitment:
+  employee: recruitment
+  role: recruitment
+sales:
+  employee: sales
+  role: sales
+operations_manager:
+  employee: operations_manager
+  role: operations_manager
+payment:
+  employee: payment
+  role: payment
+reporting:
+  employee: reporting
+  role: reporting
+security:
+  employee: security
+  role: security
+supply:
+  employee: supply
+  role: supply
+panelist_editor:
+  employee: panelist_editor
+  role: panelist_editor

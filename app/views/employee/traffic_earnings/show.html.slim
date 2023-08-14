@@ -1,0 +1,17 @@
+h3.mb-4
+  = @report_name
+- @report_data.sort.each do |survey_year, recruit_years|
+  .card.mb-3
+    .card-header
+      h5 = "Survey Year: #{survey_year}"
+    .card-body
+      table.table.table-sm.mb-0 data-sort='table'
+        thead
+          tr
+            th Recruitment Year
+            th Earnings
+        tbody
+          - recruit_years.sort.each do |year, value|
+            tr
+              td = year
+              td = number_to_currency(value.to_f / 100)

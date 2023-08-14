@@ -1,0 +1,25 @@
+standard:
+  project: standard
+  token: <%= SecureRandom.hex %>
+  target: 300
+  loi: 15
+  cpi_cents: 200
+  base_link: https://test.com?pid={{uid}}
+  name: Survey 123
+  category: standard
+  status: live
+  audience: audience
+  country_id: 284678023
+  language: English
+second:
+  project: standard
+  token: <%= SecureRandom.hex %>
+  target: 300
+  loi: 15
+  cpi_cents: 200
+  base_link: https://testing.com?pid={{uid}}
+  name: Survey 234
+  category: standard
+  status: live
+  audience: audience
+  country_id: 284678023

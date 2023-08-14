@@ -1,0 +1,53 @@
+.row
+  .col-lg-4.mb-3 = render 'panelist/accounts/navigation_card', panelist: current_panelist, payments_url: account_payments_url, account_url: account_contribution_url, demographics_url: account_demographics_url, password_url: edit_account_private_url
+  .col-lg-8
+    - if @nonprofit
+      .card.mb-3
+        .card-header
+          h4 = t('panelist.contributions.show.your_nonprofit_contribution', default: 'Your nonprofit')
+        .card-body
+          .row
+            .col-2
+              = image_tag(@nonprofit.logo.url, class: 'img-fluid w-100')
+            .col-10
+              .mb-3 = @nonprofit&.name
+              - if current_panelist.unlocked?
+                = t('panelist.contributions.show.current_contribution', default: 'Current contribution') + ": #{current_panelist.donation_percentage}%"
+    - if @nonprofit && current_panelist.unlocked?
+      .card.mb-3
+        .card-header
+          h4 = t('panelist.contributions.show.change_your_contribution', default: 'Change your contribution')
+        .card-body
+          = form_for(:contribution_percent, html: { method: :put } ) do |f|
+            .mb-3
+              .mb-0
+                = f.radio_button :contribution, 100, checked: current_panelist.donation_percentage == 100, class: 'mr-2'
+                = f.label '100%'
+              .mb-0
+                = f.radio_button :contribution, 75, checked: current_panelist.donation_percentage == 75, class: 'mr-2'
+                = f.label '75%'
+              .mb-0
+                = f.radio_button :contribution, 50, checked: current_panelist.donation_percentage == 50, class: 'mr-2'
+                = f.label '50%'
+              .mb-0
+                = f.radio_button :contribution, 25, checked: current_panelist.donation_percentage == 25, class: 'mr-2'
+                = f.label '25%'
+            span.mr-1 = f.submit 'Update', class: 'btn btn-primary'
+            = link_to 'Stop contributing', account_nonprofit_url, { method: :delete, class: 'btn btn-primary' }
+
+    .card
+      .card-header
+        - if @nonprofit
+          h4 = t('panelist.contributions.show.change_your_nonprofit', default: 'Change your nonprofit')
+        - else
+          h4 = t('panelist.contributions.show.select_a_nonprofit', default: 'Select a nonprofit')
+      .card-body
+        .row
+          - @nonprofits.active.sort_by(&:name).each do |nonprofit|
+            .col-lg-6.col-md-6.col-sm-12.mb-5
+              .row
+                .col-3
+                  = image_tag(nonprofit.logo.url, class: 'img-fluid')
+                .col-9
+                  .mb-2 = nonprofit.name
+                  .mb-0 = button_to 'Select', account_nonprofit_url, method: :put, params: { nonprofit_id: nonprofit.id }, class: 'btn btn-primary'

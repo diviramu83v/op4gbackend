@@ -1,0 +1,5 @@
+one:
+  category: query_has_no_filters
+  survey: standard
+  sample_batch: standard
+  status: active

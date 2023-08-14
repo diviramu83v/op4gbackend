@@ -1,0 +1,7 @@
+- if @survey.present?
+  - content_for :breadcrumbs
+    li.breadcrumb-item = link_to 'Projects', projects_url
+    li.breadcrumb-item = link_to @survey.project.extended_name, @survey.project
+    li.breadcrumb-item = link_to @survey.name, survey_url(@survey)
+    li.breadcrumb-item = link_to 'Queries/batches', survey_queries_url(@survey)
+    li.breadcrumb-item.active Query

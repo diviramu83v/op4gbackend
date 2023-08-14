@@ -1,0 +1,6 @@
+standard:
+  demo_option: standard
+  panelist: standard
+active:
+  demo_option: standard
+  panelist: active

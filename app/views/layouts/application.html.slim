@@ -1,0 +1,60 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+    meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    - if Rails.env.production?
+      meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"
+
+    title Op4G
+    = favicon_link_tag asset_path('th-logo.png'), :rel => 'icon', :type =>  'image/png'
+    = csrf_meta_tags
+    - if content_for? :theme
+      = yield :theme
+    - else
+      = stylesheet_link_tag 'bootstrap/toolkit-light.min', media: 'all', 'data-turbolinks-track': 'reload', defer: true
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload', defer: true
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload', defer: false
+  body class=(yield :body_class)
+    - if content_for? :breadcrumbs
+      = render 'shared/popup_messages'
+      - if content_for? :primary_navigation
+        = yield :primary_navigation
+      - if content_for? :secondary_navigation
+        = yield :secondary_navigation
+      .mb-5
+        nav
+          ol.breadcrumb.rounded-0
+            .container
+              = yield :breadcrumbs
+    - else
+      .mb-5
+        = render 'shared/popup_messages'
+        - if content_for? :primary_navigation
+          = yield :primary_navigation
+        - if content_for? :secondary_navigation
+          = yield :secondary_navigation
+
+    = render 'shared/flash_messages'
+
+    .content-wrapper
+      - if content_for? :sidebar_navigation
+        #sidebar-filler.d-lg-flex
+        = yield :sidebar_navigation
+
+      .container.mb-5#main
+        = yield
+      - if content_for? :fluid_container
+        .pl-3.pr-3
+          = yield :fluid_container
+
+    - if content_for? :footer_navigation
+      = yield :footer_navigation
+    - elsif current_employee&.admin?
+      = render 'shared/navigation'
+
+    - if ENV['TRACKING_ON'].present?
+      - if content_for? :tracking_code
+        = yield :tracking_code
+      - else
+        = render 'tracking/google', property_code: ENV['ANALYTICS_PROPERTY_CODE_FOR_ADMIN_AREA'].presence

@@ -1,0 +1,666 @@
+= form_for @disqo_quota, url: url do |f|
+  = render 'employee/form_errors', resource: @disqo_quota
+  .row.mb-3
+    .col-lg-4
+      .form-group
+        .mb-3 = f.label 'Payout'
+        span
+          = f.number_field :cpi, step: :any, class: 'form-control'
+    .col-lg-4
+      .form-group
+        .mb-3 = f.label 'LOI'
+        span
+          = f.number_field :loi, class: 'form-control'
+  .row.mb-3
+    .col-lg-4
+      .form-group
+        .mb-3 = render 'employee/cards/text_header_with_tooltip', label: 'Soft Launch Completes Wanted', tooltip: 'quota will pause once this number is reached'
+        span
+          = f.number_field :soft_launch_completes_wanted, class: 'form-control'
+    .col-lg-4
+      .form-group
+        .mb-3 = f.label 'Total Completes Wanted'
+        span
+          = f.number_field :completes_wanted, class: 'form-control'
+  .row.mb-3
+    .col-lg-4
+      .form-group
+        .mb-3 = f.label 'Conversion Rate'
+        span
+          = f.number_field :conversion_rate, class: 'form-control'
+  = f.fields_for :qualifications do |qual_form|
+    = render partial: 'regions', locals: { qual_form: qual_form }
+
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3 = qual_form.label DisqoQuota::LABEL_OPTIONS[:geopostalcode]
+          = qual_form.text_area :geopostalcode, value: @disqo_quota.find_in_qualifications('geopostalcode')&.join("\n"), rows: '6', class: 'form-control'
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3 = qual_form.label DisqoQuota::LABEL_OPTIONS[:geodmaregioncode]
+          = qual_form.text_area :geodmaregioncode, value: @disqo_quota.find_in_qualifications('geodmaregioncode')&.join("\n"), rows: '5', class: 'form-control'
+    .row.mb-3
+      .col-lg-4
+        .form-group
+          .mb-3 = qual_form.label DisqoQuota::LABEL_OPTIONS[:gender]
+          = qual_form.collection_check_boxes :gender, DisqoQuota::GENDER_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('gender') } do |b|
+            .form-check.form-check-inline
+              = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+              = b.label(class: 'pt-2 text-label')
+    label Panelist age range
+    = qual_form.fields_for :age do |age_form|
+      .row.mb-3
+        .col-lg-4
+          .form-group
+            = age_form.label 'Minimum Age'
+            = age_form.select :min_age, options_for_select(DisqoQuota::MIN_AGE..DisqoQuota::MAX_AGE, selected: @disqo_quota.find_in_qualifications('age')&.min), { include_blank: true }, { class: 'form-control' }
+        .col-lg-4
+          .form-group
+            = age_form.label "Maximum Age"
+            = age_form.select :max_age, options_for_select(DisqoQuota::MIN_AGE..DisqoQuota::MAX_AGE, selected: @disqo_quota.find_in_qualifications('age')&.max), { include_blank: true }, { class: 'form-control' }
+    label Panelist with children age range
+    = qual_form.fields_for :anychildage do |age_form|
+      .row.mb-3
+        .col-lg-4
+          .form-group
+            = age_form.label 'Minimum Age'
+            = age_form.select :min_age, options_for_select(DisqoQuota::MIN_CHILD_AGE..DisqoQuota::MAX_AGE, selected: @disqo_quota.find_in_qualifications('anychildage')&.min), { include_blank: true }, { class: 'form-control' }
+        .col-lg-4
+          .form-group
+            = age_form.label "Maximum Age"
+            = age_form.select :max_age, options_for_select(DisqoQuota::MIN_CHILD_AGE..DisqoQuota::MAX_AGE, selected: @disqo_quota.find_in_qualifications('anychildage')&.max), { include_blank: true }, { class: 'form-control' }
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:householdincome]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :householdincome, DisqoQuota::HOUSEHOLD_INCOME_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('householdincome') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:ethnicity]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :ethnicity, DisqoQuota::ETHNICITY_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('ethnicity') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:employmentstatus]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :employmentstatus, DisqoQuota::EMPLOYEMENT_STATUS_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('employmentstatus') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:jobposition]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :jobposition, DisqoQuota::JOB_POSITION_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('jobposition') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+    .row.mb-3
+        .col-lg-12
+          .form-group
+            .mb-3 = qual_form.label DisqoQuota::LABEL_OPTIONS[:financialdecisionmaker]
+            span
+              = qual_form.collection_check_boxes :financialdecisionmaker, DisqoQuota::FINANCIAL_DECISION_MAKER_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('financialdecisionmaker') } do |b|
+                .form-check.form-check-inline
+                  = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                  = b.label(class: 'pt-2 text-label')
+
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:employeecount]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :employeecount, DisqoQuota::EMPLOYEE_COUNT_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('employeecount') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:industry]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :industry, DisqoQuota::INDUSTRY_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('industry') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:yearsinindustry]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :yearsinindustry	, DisqoQuota::YEARS_IN_INDUSTRY_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('yearsinindustry') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:educationlevel]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :educationlevel, DisqoQuota::EDUCATION_LEVEL_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('educationlevel') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:rentorown]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :rentorown, DisqoQuota::RENT_OR_OWN_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('rentorown') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:onlinepaymentmethod]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :onlinepaymentmethod	, DisqoQuota::ONLINE_PAYMENT_METHOD_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('onlinepaymentmethod') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:ownlease]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :ownlease	, DisqoQuota::OWN_LEASE_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('ownlease') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:newoldvehicle]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :newoldvehicle	, DisqoQuota::NEW_OLD_VEHICLE_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('newoldvehicle') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3 = qual_form.label DisqoQuota::LABEL_OPTIONS[:autopurchaseprospect]
+          span
+            = qual_form.collection_check_boxes :autopurchaseprospect	, DisqoQuota::AUTO_PURCHASE_PROSPECT_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('autopurchaseprospect') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:hightechdevices]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :hightechdevices	, DisqoQuota::HIGH_TECH_DEVICES_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('hightechdevices') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:employertype]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :employertype	, DisqoQuota::EMPLOYER_TYPE_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('employertype') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:employmentdepartment]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :employmentdepartment	, DisqoQuota::EMPLOYMENT_DEPARTMENT_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('employmentdepartment') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:smartphoneuse]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :smartphoneuse	, DisqoQuota::SMARTPHONE_USE_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('smartphoneuse') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:internetpersonaluse]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :internetpersonaluse	, DisqoQuota::INTERNET_PERSONAL_USE_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('internetpersonaluse') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:groceryshoppingduty]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :groceryshoppingduty, DisqoQuota::GROCERY_SHOPPING_DUTY_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('groceryshoppingduty') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:children]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :children, DisqoQuota::CHILDREN_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('children') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:purchaseauth]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :purchaseauth, DisqoQuota::PURCHASE_AUTH_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('purchaseauth') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:investableassets]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :investableassets, DisqoQuota::INVESTABLE_ASSETS_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('investableassets') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:insurancetype]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :insurancetype, DisqoQuota::INSURANCE_TYPE_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('insurancetype') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:loantype]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :loantype, DisqoQuota::LOAN_TYPE_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('loantype') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:financialproduct]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :financialproduct, DisqoQuota::FINANCIAL_PRODUCT_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('financialproduct') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:internetbusinessuse]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :internetbusinessuse, DisqoQuota::INTERNET_BUSINESS_USE_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('internetbusinessuse') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:onlineshopping]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :onlineshopping, DisqoQuota::ONLINE_SHOPPING_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('onlineshopping') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:onlinepurchase]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :onlinepurchase, DisqoQuota::ONLINE_PURCHASE_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('onlinepurchase') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:socialnetworks]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :socialnetworks, DisqoQuota::SOCIAL_NETWORKS_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('socialnetworks') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:socialnetworkuse]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :socialnetworkuse, DisqoQuota::SOCIAL_NETWORK_USE_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('socialnetworkuse') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:favoritepublications]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :favoritepublications, DisqoQuota::FAVORITE_PUBLICATIONS_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('favoritepublications') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:storetype]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :storetype, DisqoQuota::STORE_TYPE_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('storetype') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:purchaseditems]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :purchaseditems, DisqoQuota::PURCHASED_ITEMS_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('purchaseditems') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:grocerypurchases]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :grocerypurchases, DisqoQuota::GROCERY_PURCHASES_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('grocerypurchases') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:purchasetype]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :purchasetype, DisqoQuota::PURCHASE_TYPE_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('purchasetype') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:restaurantvisits]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :restaurantvisits, DisqoQuota::RESTAURANT_VISITS_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('restaurantvisits') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:fastfoodvisits]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :fastfoodvisits, DisqoQuota::COOKING_FREQUENCY_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('fastfoodvisits') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:cookingfrequency]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :cookingfrequency, DisqoQuota::COOKING_FREQUENCY_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('cookingfrequency') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3 = qual_form.label DisqoQuota::LABEL_OPTIONS[:alcoholconsumption]
+          span
+            = qual_form.collection_check_boxes :alcoholconsumption, DisqoQuota::ALCOHOL_CONSUMPTION_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('alcoholconsumption') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:alcoholconsumptiontypes]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :alcoholconsumptiontypes, DisqoQuota::ALCOHOL_CONSUMPTION_TYPES_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('alcoholconsumptiontypes') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:weeklyalcoholconsumption]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :weeklyalcoholconsumption, DisqoQuota::WEEKLY_ALCOHOL_CONSUMPTION_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('weeklyalcoholconsumption') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:health]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :health, DisqoQuota::HEALTH_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('health') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:personalhealth]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :personalhealth, DisqoQuota::PERSONAL_HEALTH_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('personalhealth') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:yearlytravelfrequency]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :yearlytravelfrequency, DisqoQuota::YEARLY_TRAVEL_FREQUENCY_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('yearlytravelfrequency') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:travelsites]
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = qual_form.collection_check_boxes :travelsites, DisqoQuota::TRAVEL_SITE_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('travelsites') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+
+
+    .row.mb-3
+      .col-lg-12
+        .form-group
+          .mb-3 = qual_form.label DisqoQuota::LABEL_OPTIONS[:vehicleownorlease]
+          span
+            = qual_form.collection_check_boxes :vehicleownorlease, DisqoQuota::VEHICLE_OWN_OR_LEASE_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('vehicleownorlease') } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+
+  = render 'employee/form_buttons'
+
+javascript:
+  $('.select-all').click(function() {
+    if ($(this).text() == 'Select all') {
+      $(this).text('Unselect all')
+      $(this).siblings('div')
+           .find("input[type='checkbox']")
+           .prop('checked', true);
+    } else {
+      $(this).text('Select all')
+      $(this).siblings('div')
+           .find("input[type='checkbox']")
+           .prop('checked', false);
+    }
+  })

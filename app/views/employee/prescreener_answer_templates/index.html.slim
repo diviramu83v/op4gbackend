@@ -1,0 +1,106 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Projects', projects_url
+  li.breadcrumb-item = link_to @prescreener_question.survey.project.extended_name, @prescreener_question.survey.project
+  li.breadcrumb-item.active = @prescreener_question.survey.name
+  li.breadcrumb-item.active = link_to 'Prescreener', survey_prescreener_questions_url(@prescreener_question.survey)
+  li.breadcrumb-item.active Answers
+.mb-4
+  h3
+    span.mr-3 Prescreener answers
+.row
+  .col-2
+    .mb-2.dashhead-subtitle Question
+.row
+  .col-10
+    h5.mb-4.dashhead-title = @prescreener_question.body
+/ .spinner-wrapper.d-nones
+/   i.fa.fa-spinner.fa-pulse.fa-3x.fa-fw
+/     span.sr-only Loading...
+.row
+  .col-10
+    .mb-2
+      - if can?(:view_and_modify, PrescreenerAnswerTemplate)
+        span.mr-3.dashhead-subtitle Upload Answers File
+        = link_to new_prescreener_question_prescreener_upload_answer_url(@prescreener_question), class: 'mr-3' do
+          i.fa.fa-plus-circle.mr-1
+          | Upload
+.row
+  .col-10
+    .mb-2
+      - if can?(:view_and_modify, PrescreenerAnswerTemplate)
+        span.mr-3.dashhead-subtitle Add Answers Manually
+        = link_to new_prescreener_question_answer_url(@prescreener_question), class: 'mr-3' do
+          i.fa.fa-plus-circle.mr-1
+          | Add
+.spinner-wrapper.d-none style='z-index: 1'
+  i.fa.fa-spinner.fa-pulse.fa-3x.fa-fw
+    span.sr-only Loading...
+
+- if @prescreener_answers.present?
+  .d-flex.justify-content-end.mb-3
+    .pagination-xs.mb-0 = paginate @prescreener_answers
+  table.table.table-hover.table-sm.table-wrapped-with-header.mb-3
+    thead
+      tr
+        th Order
+        th Body
+        th Target
+        th
+        th
+          - if can?(:destroy, PrescreenerAnswerTemplate)
+            = link_to prescreener_question_all_answers_url(@prescreener_question, delete_all: true), method: :delete, id: 'delete-all', class: 'btn-xs btn-link pl-2 float-right' do
+              i.far.fa-trash-alt.mr-1
+              | Delete all
+    tbody class="sortable"
+      - @prescreener_answers.each_with_sortable_id do |prescreener_answer, sortable_id|
+        tr.answer-row class="#{'table-primary' if prescreener_answer.target}" id="#{sortable_id}"
+          td.sort-order = prescreener_answer.sort_order + 1
+          td = prescreener_answer.body&.humanize
+          td.text-center style="width: 5%"
+            - if prescreener_answer.target
+              | true
+            -else
+              | false
+          td style="width: 10%"
+            - if can?(:view_and_modify, PrescreenerAnswerTemplate)
+              - if prescreener_answer.target
+                = link_to answer_url(prescreener_answer, prescreener_answer_template: {target: false}), method: :patch, remote: true, class: 'btn btn-outline-primary btn-xs ml-1 float-right' do
+                  i.fa.fa-minus.mr-1
+                  | Remove Target
+              - else
+                = link_to answer_url(prescreener_answer, prescreener_answer_template: {target: true}), method: :patch, remote: true, class: 'btn btn-outline-primary btn-xs ml-1 float-right' do
+                  i.fa.fa-plus.mr-1
+                  | Set Target
+          td style="width: 13%"
+            - if can?(:destroy, PrescreenerAnswerTemplate)
+              = link_to answer_url(prescreener_answer), method: :delete, class: 'btn-xs btn-link pl-2 float-right' do
+                i.far.fa-trash-alt.mr-1
+                | Delete
+            - if can?(:view_and_modify, PrescreenerAnswerTemplate)
+              = link_to edit_answer_url(prescreener_answer), class: 'btn-xs btn-link pl-2 float-right' do
+                i.fa.fa-edit.mr-1
+                | Edit
+- else
+  .row.no-answers
+    .col-12 There are no answers for this question.
+
+.d-flex.justify-content-end.mb-3
+  .pagination-xs.mb-0 = paginate @prescreener_answers
+javascript:
+  $(function() {
+    $('.sortable').railsSortable({
+      update: function() {
+        $('table').find('tr.answer-row').each(function (i) {
+          $(this).children('td.sort-order').html(i + 1);
+        });
+      }
+    });
+  });
+
+  var question_id = "#{@prescreener_question.id}"
+coffee:
+  App.cable.subscriptions.create { channel: 'PrescreenerAnswerUploadChannel', prescreener_question: question_id },
+    received: (data) ->
+      window.location.reload()
+    $('#delete-all').click ->
+      $('.spinner-wrapper').removeClass('d-none');

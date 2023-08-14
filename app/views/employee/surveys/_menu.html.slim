@@ -1,0 +1,51 @@
+.mb-5
+  ul.nav.flex-column.step-menu
+    li.nav-item
+      = campaign_menu_link(survey_traffic_url(@survey), 'Traffic')
+    li.nav-item
+      = campaign_menu_link(survey_onramps_url(@survey), 'Onramps')
+    li.nav-item
+      = campaign_menu_link(survey_prescreener_questions_url(@survey), 'Prescreener')
+    li.nav-item
+      - if @survey.queries.any?
+        = campaign_menu_link(survey_queries_url(@survey), 'Queries')
+      - else
+        = campaign_add_link(new_query_url(survey_id: @survey.id), 'Add query')
+    li.nav-item
+      - if @survey.vendor_batches.any?
+        = campaign_menu_link(survey_vendors_url(@survey), 'Vendors')
+      - else
+        = campaign_add_link(new_survey_vendor_url(@survey), 'Add vendor')
+    li.nav-item
+      = campaign_menu_link(survey_disqo_quotas_url(@survey), 'Disqo quotas')
+    li.nav-item
+      = campaign_menu_link(survey_cint_surveys_url(@survey), 'Cint quotas')
+    - if current_employee.admin_or_ops_manager?(session[:effective_role])
+      li.nav-item
+        = campaign_menu_link(survey_schlesinger_quotas_url(@survey), 'Schlesinger quotas')
+    li.nav-item
+      = campaign_menu_link(survey_api_target_url(@survey), 'API')
+    li.nav-item
+      = campaign_menu_link(survey_block_reasons_url(@survey), 'Block reasons')
+    li.nav-item
+      - if @survey.keys.any?
+        = campaign_menu_link(survey_keys_url(@survey), 'Keys')
+      - else
+        = campaign_add_link(new_survey_key_url(@survey), 'Keys')
+    li.nav-item
+      = campaign_add_link(survey_return_keys_url(@survey), 'Return keys')
+    li.nav-item
+      = campaign_menu_link(survey_gate_surveys_url(@survey), 'Gate data')
+    li.nav-item
+      = campaign_menu_link(survey_followup_surveys_url(@survey), 'Followup data')
+    li.nav-item
+      = campaign_menu_link(survey_earnings_url(@survey), 'Earnings')
+    - if current_employee.admin_or_ops_manager?(session[:effective_role])
+      li.nav-item
+        = campaign_menu_link(survey_complete_milestones_url(@survey), 'Complete milestones')
+    - if current_employee.admin_or_ops_manager?(session[:effective_role]) || current_employee.locked_panel?(session[:effective_role])
+      li.nav-item
+        = campaign_menu_link(survey_expert_recruit_batches_url(@survey), 'Invite experts')
+    - if current_employee.admin_or_ops_manager?(session[:effective_role])
+      li.nav-item
+        = campaign_menu_link(survey_client_sent_surveys_url(@survey), 'Client sent survey')

@@ -1,0 +1,35 @@
+.mb-5
+  .d-flex.justify-content-between
+    .header
+      h1 Nonprofit earnings
+    .actions
+      .mt-2
+        = form_tag nonprofit_earnings_report_url
+          .d-flex.justify-content-end
+            span.mt-1.mr-3
+              span.mr-1 = label :start_period, 'Starting'
+              span = select_tag 'start_month', options_for_select(Date::MONTHNAMES.compact, @start_month_name)
+              span = collection_select(:start_year, :start_year, Earning.select(:period_year).distinct.sort_by(&:period_year).reverse!, :period_year, :period_year, { selected: @start_year })
+            span.mt-1.mr-3
+              span.mr-1 = label :end_period, 'Ending'
+              span = select_tag 'end_month', options_for_select(Date::MONTHNAMES.compact, @end_month_name)
+              span = collection_select(:end_year, :end_year, Earning.select(:period_year).distinct.sort_by(&:period_year).reverse!, :period_year, :period_year, { selected: @end_year })
+            span.mr-1
+              = submit_tag 'Generate', class: 'btn btn-sm btn-primary'
+            span.mr-0
+              = submit_tag 'Download', class: 'btn btn-sm btn-primary', name: 'generate_csv'
+
+- if @results
+  table.table
+    thead
+      - @results.columns.each do |header|
+        th
+          = header.capitalize
+    tbody
+      - @results.rows.sort_by(&:first).reverse.each do |row|
+        tr
+          - row.each do |cell|
+            - if cell.to_s.include? '.'
+              td = number_to_currency(cell)
+            - else
+              td = cell

@@ -1,0 +1,17 @@
+.mb-5
+  - if survey.one_of_many?
+    .mb-4 = render 'employee/cards/text_element', label: 'Name', value: survey.name
+  .row.mb-3
+    .col-2 = render 'employee/cards/text_element', label: 'LOI', value: format_loi_as_whole_minutes(survey.try(:loi))
+    .col-2 = render 'employee/cards/text_element', label: 'CPI', value: format_currency(survey&.cpi)
+    - if !@recontact
+      .col-2 = render 'employee/surveys/complete_count', survey: survey
+    .col-4 = render 'employee/surveys/complete_milestone_form', survey: survey
+  .row
+    - if !@recontact
+      .col-12 = render 'employee/surveys/link_field', survey: survey
+.mb-5
+  - if survey.project.bad_redirect_last_twenty_four_hours?
+    = link_to project_redirect_issues_url(survey.project) do
+      .alert.alert-danger.mb-3
+        p.mb-0 Bad redirect traffic detected in the last 24 hours.

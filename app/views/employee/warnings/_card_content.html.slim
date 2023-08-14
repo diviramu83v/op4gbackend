@@ -1,0 +1,7 @@
+.d-flex.justify-content-start
+  span.mr-2
+    .badge.badge-secondary
+      = warning.project.manager.initials.upcase
+  span.date.mr-2
+    = format_date(warning.created_at)
+  span.mr-0 = survey_warning_message(warning)

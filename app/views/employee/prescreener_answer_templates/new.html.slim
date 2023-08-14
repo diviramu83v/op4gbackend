@@ -1,0 +1,28 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Projects', projects_url
+  li.breadcrumb-item = link_to @prescreener_question.survey.project.extended_name, @prescreener_question.survey.project
+  li.breadcrumb-item = @prescreener_question.survey.name
+  li.breadcrumb-item.active = link_to 'Prescreener', survey_prescreener_questions_url(@prescreener_question.survey)
+  li.breadcrumb-item.active Answers
+  li.breadcrumb-item.active New
+.mb-5
+  h2 New prescreener answer
+.mb-5
+  .row
+    .col-8
+      = form_for @prescreener_answer, url: prescreener_question_answers_url(@prescreener_question) do |f|
+        .mb-3
+          label Question
+          h5.mb-2.dashhead-title = @prescreener_question.body
+          = render 'employee/form_errors', resource: @prescreener_answer
+          = f.label :answer
+          = f.text_field :body, { autofocus: true, class: 'form-control ml-1 mr-3' }
+        .mb-3.form-check
+          = f.check_box :target, class: 'form-check-input'
+          = f.label :target
+        = render 'employee/form_buttons'
+        button.btn.btn-primary.ml-2 type='submit' name='add_another' value='true'
+          i.fas.fa-cloud-upload-alt.mr-2
+          = 'Save and add another'
+
+.mb-5 = render 'employee/prescreener_answer_templates/prescreener_answers_list', prescreener_answers: @prescreener_answers

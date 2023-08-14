@@ -1,0 +1,8 @@
+h5.dashhead-title.hide-overflow
+  - if local_assigns[:link] && value.present?
+    = link_to value, link
+  - elsif local_assigns[:clipboard] && value.present?
+    span.mr-2 = value
+    = render 'shared/copy_button', label: 'Copy', text: value
+  - else
+    = value || '?'

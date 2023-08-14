@@ -1,0 +1,5 @@
+standard:
+  name: category name
+  slug: category slug
+  sort_order: 1
+  panel: standard

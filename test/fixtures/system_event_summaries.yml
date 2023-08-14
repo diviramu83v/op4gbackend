@@ -1,0 +1,4 @@
+standard:
+  day_happened_at: <%= Time.now.utc.beginning_of_day - 200.days %>
+  action: some_controller_action
+  count: 5

@@ -1,0 +1,26 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Incentive Batches', incentive_batches_url
+  li.breadcrumb-item.active Edit
+
+.row
+  .col-10
+    .row
+      .col-12
+        .mb-5
+          h2
+            span.mr-3 Edit incentive batch
+        .mb-0
+          .mb-3
+          = form_for @incentive_batch, url: incentive_batch_url(@incentive_batch), method: :patch do |f|
+            .row.mb-3
+              .col-6
+                .form-group
+                  = f.label :reward
+                  = f.text_field :reward, class: 'form-control', placeholder: 'eg. 100.00'
+            .row.mb-3
+              .col-6
+                .form-group
+                  = render 'employee/cards/text_header_with_tooltip', label: 'Survey name', tooltip: 'Do not include the word "survey".'
+                  = f.text_field :survey_name, class: 'form-control'
+            = render 'employee/form_buttons'
+

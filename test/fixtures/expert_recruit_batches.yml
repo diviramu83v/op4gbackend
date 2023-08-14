@@ -1,0 +1,21 @@
+standard:
+  survey: standard
+  description: plumber
+  incentive_cents: 200
+  status: waiting
+  email_subject: hello
+  employee: locked_panel
+  time: 30
+  csv_data: "{\"test@test.com\":\"test\"}"
+send_on_behalf_of_client:
+  survey: standard
+  incentive_cents: 200
+  status: waiting
+  email_subject: hello
+  employee: locked_panel
+  time: 30
+  csv_data: "{\"test@test.com\":\"test\"}"
+  send_for_client: true
+  from_email: client@business.com
+  client_name: Joe Smith
+  client_phone: 555-555-5555

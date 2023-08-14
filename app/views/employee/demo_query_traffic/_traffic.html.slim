@@ -1,0 +1,18 @@
+.mb-4
+  h5 Include panelists based on project ID & response status
+  = form_for :demo_query_project_inclusion, url: query_project_inclusions_url(@query), remote: true, data: { 'demo-filter': 'form' }, html: { class: 'form-inline' } do |f|
+    = f.text_field :project_id, class: 'form-control mr-2', placeholder: 'project ID'
+    = f.collection_select(:slug, @query.project.responses, :slug, :slug,
+      { prompt: 'All' }, class: 'form-control mr-2')
+    button.btn.btn-primary type="submit" data-demo-filter="button"
+      i.fas.fa-cloud-upload-alt.mr-2
+      | Include
+/ .mb-4
+/   h5 Exclude panelists based on project ID & response status
+.mb-4
+  h5 Include panelists based on encoded UIDs (allows comma-separated list)
+  = form_for :demo_query_onboardings, url: query_onboardings_url(@query), remote: true, data: { 'demo-filter': 'form' }, html: { class: 'form-inline' } do |f|
+    = f.text_field :encoded_uids, class: 'form-control w-50 mr-2'
+    button.btn.btn-primary type="submit" data-demo-filter="button"
+      i.fas.fa-cloud-upload-alt.mr-2
+      | Add

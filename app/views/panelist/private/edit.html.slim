@@ -1,0 +1,12 @@
+.row
+  .col-lg-4.mb-3 = render 'panelist/accounts/navigation_card', panelist: current_panelist, payments_url: account_payments_url, account_url: account_contribution_url, demographics_url: account_demographics_url, password_url: edit_account_private_url
+  .col-lg-8
+    .card
+      .card-header
+        h4 = t('panelist.private.show.change_password', default: 'Change your password')
+      .card-body
+        = form_for(current_panelist, url: account_private_path, method: :post) do |f|
+          .mb-5 = render 'forms/password_field', form: f, field: :current_password, label: t('panelist.private.show.current_password_label', default: 'Current password')
+          .mb-3 = render 'forms/password_field', form: f, field: :new_password, label: t('panelist.private.show.new_password_label', default: 'New password')
+          .mb-3 = render 'forms/password_field', form: f, field: :password_confirmation, label: t('panelist.private.show.confirm_password_label', default: 'Password confirmation')
+          = render 'forms/submit_button', label: t('panelist.private.show.submit_button', default: 'Save')

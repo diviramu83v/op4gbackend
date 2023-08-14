@@ -1,0 +1,13 @@
+.form-group
+  - if local_assigns[:label]
+    = form.label field, label
+  - else
+    = form.label field
+
+  - if local_assigns[:value]
+    = form.text_field field, value: value.utc.strftime('%Y-%m-%d'), class: 'form-control', data: { type: 'date' }
+  - else
+    = form.text_field field, class: 'form-control', data: { type: 'date' }
+
+  - if local_assigns[:comment]
+    = render 'forms/comment', text: comment

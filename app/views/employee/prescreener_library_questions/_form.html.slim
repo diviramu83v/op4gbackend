@@ -1,0 +1,6 @@
+.
+  .mb-3
+    = f.label :question
+    = f.text_field :question, class: 'form-control mb-2'
+    = f.label :answers
+    = f.text_area :answers, rows: '10', value: convert_array_to_text_area(@prescreener_library_question.answers), class: 'form-control mb-2'

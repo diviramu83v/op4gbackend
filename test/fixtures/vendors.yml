@@ -1,0 +1,12 @@
+batch:
+  name: Test vendor for vendor batch traffic
+  complete_url: https://batch.vendor.com/complete?uid=
+  terminate_url: https://batch.vendor.com/term?uid=
+  overquota_url: https://batch.vendor.com/full?uid=
+  security_url: https://batch.vendor.com/security?uid=
+api:
+  name: Test vendor for API traffic
+  complete_url: https://api.vendor.com/complete?uid=
+  terminate_url: https://api.vendor.com/term?uid=
+  overquota_url: https://api.vendor.com/full?uid=
+  security_url: https://api.vendor.com/security?uid=

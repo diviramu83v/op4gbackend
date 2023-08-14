@@ -1,0 +1,12 @@
+.row
+  .col-md-6
+    .card
+      .card-header
+        h4 Sign in
+      .card-body
+        = devise_error_messages!
+        = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+          = render 'forms/email_field', form: f, field: :email
+          = render 'forms/password_field', form: f, field: :password
+          = render 'forms/remember_me', form: f
+          = render 'forms/submit_button', form: f, label: 'Sign in', icon: 'fa-sign-in-alt'

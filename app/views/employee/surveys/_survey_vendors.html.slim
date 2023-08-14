@@ -1,0 +1,14 @@
+- if survey.vendor_batches.any?
+  - if can?(:view_and_modify, Vendor)
+    .mb-3 = link_to new_survey_vendor_url(survey),
+      class: 'btn btn-link pl-0' do
+      i.fa.fa-plus-circle.mr-1
+      | Add another vendor
+  - @survey.vendor_batches.by_first_created.each do |batch|
+    .mb-3 = render 'employee/vendor_batches/setup_card', batch: batch
+- else
+  - if can?(:view_and_modify, Vendor)
+    = link_to new_survey_vendor_url(survey),
+      class: 'btn btn-link pl-0' do
+      i.fa.fa-plus-circle.mr-1
+      | Add vendor

@@ -1,0 +1,9 @@
+.card
+  .card-header
+    h4
+      span.mr-1 = onramp_source_badge(onramp)
+  .card-body
+    - if onramp.onboardings.any?
+      = render 'employee/traffic/overview_card_body', resource: onramp
+    - else
+      p.mb-0 No traffic detected.

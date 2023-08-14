@@ -1,0 +1,22 @@
+.mb-5
+  h1 System events
+
+.mb-5
+  table.table
+    thead
+      th Description
+      th Employee
+      th Timestamp
+    tbody
+      - @events.each do |event|
+        = render 'row', event: event
+
+coffee:
+  App.cable.subscriptions.create { channel: 'EventsChannel' },
+    received: (data) ->
+      # console.log(data)
+      $('table tbody').prepend(data.table_row)
+      console.log 'Event row added.'
+      App.convertUtcDates()
+
+  console.log 'Subscribed to events channel.'

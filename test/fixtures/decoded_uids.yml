@@ -1,0 +1,20 @@
+standard:
+  decodable: standard
+  decodable_type: 'Decoding'
+  uid: xyz
+  onboarding: standard
+second:
+  decodable: standard
+  decodable_type: 'Decoding'
+  uid: abc
+  onboarding: second
+completes_decoder:
+  decodable: standard
+  decodable_type: 'CompletesDecoder'
+  uid: uvw
+  onboarding: standard
+third:
+  decodable: standard
+  decodable_type: 'CompletesDecoder'
+  uid: def
+  onboarding: second

@@ -1,0 +1,18 @@
+.mb-5
+  .d-flex.justify-content-between
+    h2 Recruitment source report
+.mb-0
+  .d-flex.justify-content-between.mb-3
+    span
+      = form_for :period_selector, url: recruitment_source_report_url, method: :get, html: { class: 'form-inline form-table-search' } do |f|
+        span.dashhead-subtitle start
+        = f.select :start_period, options_for_select(PeriodCalculator.monthly_periods, selected:  @period&.dig(:start_period)), { }, { class: 'form-control ml-1 mr-3' }
+        span.dashhead-subtitle end
+        = f.select :end_period, options_for_select(PeriodCalculator.monthly_periods, selected:  @period&.dig(:end_period)), { }, { class: 'form-control ml-1' }
+        button.btn.btn-primary.ml-2 type="submit"
+          i.fas.fa-cloud-upload-alt.mr-2
+          = 'Update'
+    span
+      span#download-button.btn.btn-outline-primary.disabled
+        i.fas.fa-cloud-download-alt.mr-1
+        | Download

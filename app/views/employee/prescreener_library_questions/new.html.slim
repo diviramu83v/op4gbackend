@@ -1,0 +1,12 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Prescreener Questions Library',  prescreener_library_questions_url
+  li.breadcrumb-item.active New prescreener library question
+.mb-5
+  h2 New prescreener library question
+.mb-5
+  .row
+    .col-8
+      = form_for :prescreener_library_question, url: prescreener_library_questions_url do |f|
+        = render 'employee/form_errors', resource: @prescreener_library_question
+        = render 'form', f: f
+        = render 'employee/form_buttons'

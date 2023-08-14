@@ -1,0 +1,62 @@
+.row
+  .col-2
+    .mb-4
+      h5 Regions
+      - @query.possible_regions.each do |region|
+        = link_to region.name, query_regions_url(@query, region_id: region.id), method: :post, remote: true, 'data-demo-filter': 'button', class: 'btn btn-outline-primary btn-xs mr-1 mb-1'
+  .col-2
+    .mb-4
+      h5 Divisions
+      - @query.possible_divisions.each do |division|
+        = link_to division.name, query_divisions_url(@query, division_id: division.id), method: :post, remote: true, 'data-demo-filter': 'button', class: 'btn btn-outline-primary btn-xs mr-1 mb-1'
+  .col-8
+    .mb-4
+      h5 States
+      - @query.possible_states.each do |state|
+        = link_to state.name, query_states_url(@query, state_id: state.id), method: :post, remote: true, 'data-demo-filter': 'button', class: 'btn btn-outline-primary btn-xs mr-1 mb-1'
+.row
+  .col-3
+    .mb-4
+      h5 DMAs
+      = form_for :demo_query_dma, url: query_dmas_url(@query), remote: true, data: { 'demo-filter': 'form' }, html: { class: 'form-inline' } do |f|
+        = f.collection_select(:dma_id, @query.possible_dmas, :id, :name,
+          { prompt: '...' }, { required: true, class: 'form-control w-50 mr-2' } )
+        button.btn.btn-primary type="submit" data-demo-filter="button" data-disable="true"
+          i.fas.fa-cloud-upload-alt.mr-2
+          | Add
+  .col-3
+    .mb-4
+      h5 MSAs
+      = form_for :demo_query_msa, url: query_msas_url(@query), remote: true, data: { 'demo-filter': 'form' }, html: { class: 'form-inline' } do |f|
+        = f.collection_select(:msa_id, @query.possible_msas, :id, :name,
+          { prompt: '...' }, { required: true, class: 'form-control w-50 mr-2' })
+        button.btn.btn-primary type="submit" data-demo-filter="button" data-disable="true"
+          i.fas.fa-cloud-upload-alt.mr-2
+          | Add
+  .col-3
+    .mb-4
+      h5 PMSAs
+      = form_for :demo_query_pmsa, url: query_pmsas_url(@query), remote: true, data: { 'demo-filter': 'form' }, html: { class: 'form-inline' } do |f|
+        = f.collection_select(:pmsa_id, @query.possible_pmsas, :id, :name,
+          { prompt: '...' }, { required: true, class: 'form-control w-50 mr-2' })
+        button.btn.btn-primary type="submit" data-demo-filter="button" data-disable="true"
+          i.fas.fa-cloud-upload-alt.mr-2
+          | Add
+  .col-3
+    .mb-4
+      h5 Counties
+      = form_for :demo_query_county, url: query_counties_url(@query), remote: true, data: { 'demo-filter': 'form' }, html: { class: 'form-inline' } do |f|
+        = f.collection_select(:county_id, @query.possible_counties, :id, :name,
+          { prompt: '...' }, { required: true, class: 'form-control w-50 mr-2' })
+        button.btn.btn-primary type="submit" data-demo-filter="button" data-disable="true"
+          i.fas.fa-cloud-upload-alt.mr-2
+          | Add
+.row
+  .col-12
+    .mb-4
+      h5 ZIPs (one per line)
+      = form_for :demo_query_zip, url: query_zips_url(@query), method: :post, remote: true, data: { 'demo-filter': 'form' }, html: { class: 'form-inline' } do |f|
+        = f.text_area :zips, rows: 10, class: 'form-control w-50 mr-2'
+        button.btn.btn-primary type="submit" data-demo-filter="button"
+          i.fas.fa-cloud-upload-alt.mr-2
+          | Add

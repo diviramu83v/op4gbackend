@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+      /* Email styles need to be inline */
+      .container {
+          width: 560px;
+          margin: auto;
+      }
+
+      .img-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+      }
+
+      .footer-container {
+          height: 65px;
+          width: 100%;
+          background-color: #163755;
+          display: table;
+      }
+
+      .footer {
+          display: table-cell;
+          text-align:center;
+          vertical-align:middle;
+          font-weight: bold;
+          color:#ffffff;
+          font-size:13px;
+      }
+
+      .footer-link {
+          color: #1997c6;
+          text-decoration: none;
+      }
+
+      p {
+          font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+          font-weight: normal;
+          color: #555555;
+      }
+
+      hr {
+          height: 5px;
+          width: 100%;
+          border-width: 0;
+          background: <%= @batch.color %>;
+          color: <%= @batch.color %>;
+      }
+
+      .unsubscribe-text {
+          font-size: 10px;
+      }
+
+      .expert-mailer-survey-link a, .expert-mailer-support a {
+          color: #103550;
+      }
+
+      /* Styles used in email_survey_invite.html.slim */
+      .expert-mailer-greeting {
+          font-weight: bold;
+          color: #555555;
+      }
+
+      .expert-mailer-link {
+          font-weight: bold;
+          color: #103550;
+      }
+
+      .expert-mailer-link:hover {
+          color: #103550;
+      }
+
+      .expert-mailer-signature-text {
+          font-size: 12px;
+          line-height: 7px;
+          margin-left: 10px;
+      }
+
+      .border-right {
+          border-right: 1px solid #dee2e6!important;
+      }
+
+      .row {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+          margin-right: -10px;
+          margin-left: -10px;
+      }
+
+      .col {
+          flex-basis: 0;
+          -webkit-box-flex: 1;
+          flex-grow: 1;
+          max-width: 100%;
+      }
+
+      .col-3 {
+          -webkit-box-flex: 0;
+          -ms-flex: 0 0 25%;
+          flex: 0 0 25%;
+          max-width: 25%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class='container'>
+      <% if @batch.send_for_client? && @batch.logo.attached? %>
+        <div class='img-container'>
+          <%= image_tag @batch.logo.variant(resize: '300x300') %>
+          <br>
+          <br>
+        </div>
+      <% elsif !@batch.send_for_client? %>
+        <%= image_tag('mail_header.png', width: '100%') %>
+        <br>
+        <br>
+      <% end %>
+      <%= yield %>
+      <br>
+      <div class='footer-container', style='background-color: <%= "#{@batch.color}" %>'>
+        <p class='footer'> © 2022 Op4G | <a class='footer-link' href='https://www.op4g.com'>www.op4g.com</a> | 93 Middle Street, Portsmouth, NH 03801 </p>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,6 @@
+standard:
+  label: test-label
+  input_type: single
+  sort_order: 1
+  body: question body
+  demo_questions_category: standard

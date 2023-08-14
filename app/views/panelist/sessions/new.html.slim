@@ -1,0 +1,26 @@
+- content_for :flash_width
+  | col-lg-6
+
+.row
+  .col-lg-6
+    .card
+      .card-header
+        h4 = t('panelist.sessions.new.sign_in', default: 'Sign in')
+      .card-body
+        = devise_error_messages!
+        .mb-3 = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+          = render 'forms/email_field', form: f, field: :email, label: t('panelist.sessions.new.form.email_label', default: 'Email')
+          = render 'forms/password_field', form: f, field: :password, label: t('panelist.sessions.new.form.password_label', default: 'Password')
+          = render 'forms/remember_me', form: f, label: t('panelist.sessions.new.form.remember_me_label', default: 'Remember me')
+          = render 'forms/submit_button', form: f, label: t('panelist.sessions.new.form.sign_in_button', default: 'Sign in'), icon: 'fa-sign-in-alt'
+          - if params[:locale].present?
+            = hidden_field_tag :locale, params[:locale]
+        - if params[:locale].present?
+          = hidden_field_tag :locale, params[:locale]
+      .card-footer
+        .d-flex.flex-column
+          = render "panelist/devise/links"
+
+- if params[:emailed].present?
+  - @pixels.each do |pixel|
+    iframe frameborder="0" height="1" scrolling="no" src=pixel.url width="1"

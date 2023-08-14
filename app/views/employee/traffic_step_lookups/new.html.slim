@@ -1,0 +1,10 @@
+.mb-5
+  h2
+    span.mr-3 Traffic step lookup
+.mb-0
+  .mb-3
+    h3 Paste uids
+  = form_for :traffic_step_lookup, url: traffic_step_lookups_url do |f|
+    .form-group
+      = f.text_area :uids, rows: '20', class: 'form-control'
+    = render 'employee/form_buttons'

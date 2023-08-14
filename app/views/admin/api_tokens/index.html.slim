@@ -1,0 +1,30 @@
+.mb-5 = render 'page_headers/title_with_add_button',
+  title: 'API tokens',
+  url: new_api_token_url
+.mb-5
+  table.table
+    thead
+      th Description
+      th Token
+      th Vendor
+      th Status
+      th Created At
+      th
+      th
+    tbody
+      - @tokens.order(:description).each do |token|
+        tr
+          td = token.description
+          td = token.token
+          td = token.vendor.name
+          td = token.status&.humanize
+          td = token.created_at
+          td.text-right
+              = link_to edit_api_token_path(token.id), class: 'page-header-link'
+                i.fa.fa-edit.mr-1
+                | Edit
+          td.text-right
+            .d-flex.justify-content-around
+              = link_to api_token_path(token.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'page-header-link' do
+                i.fa.fa-times-circle.mr-1
+                | Delete

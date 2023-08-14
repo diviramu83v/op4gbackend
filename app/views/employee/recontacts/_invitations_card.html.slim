@@ -1,0 +1,44 @@
+- if @recontact.recontact_invitations.any?
+  - @recontact.invitation_batches.where.not(status: :initialized).order(id: :desc).each do |batch|
+    .mb-5
+      .card
+        .card-header
+          .d-flex.justify-content-between
+            h4
+              span.mr-2 Invitations
+              span.mr-2
+                .badge.badge-secondary = batch.recontact_invitations.count
+              span.mr-2
+                - if can?(:view_and_modify, RecontactInvitationBatch)
+                  = link_to edit_recontact_invitation_batch_url(batch), method: :get, class: "btn btn-outline-primary btn-xs" do
+                    i.fa.fa-edit.mr-1
+                    | Edit
+              span.mr-2
+                - if can?(:view_and_modify, RecontactInvitationBatch)
+                  = link_to recontact_invitation_batch_launch_url(batch), method: :post, name: 'recontact-batch-launch-btn', class: "btn btn-outline-primary btn-xs #{'disabled' unless batch.sendable?}", data: {disable_with: "<i class='far fa fa-envelope mr-1'></i>Sending..."} do
+                    i.far.fa-envelope.mr-1
+                    | Send
+        .card-body
+          p
+            span.font-weight-bold Incentive:&nbsp;
+            = format_currency_with_zeroes(batch.incentive)
+          p
+            span.font-weight-bold Subject:&nbsp;
+            = value_or_question_mark(batch.subject)
+          p
+            span.font-weight-bold Email Body:&nbsp;
+            = value_or_question_mark(batch.email_body)
+          table.table.table-sm.table-wrapped-with-header.mb-0
+            thead
+              tr
+                th style=("width: 40%") Email
+                th Url
+                th Source
+            tbody
+            - batch.recontact_invitations.each do |invitation|
+              tr
+                td = invitation.original_onboarding.find_email_address
+                td = invitation.url
+                td = invitation.original_onboarding.source_name
+- else
+  p.mb-0 No invitations have been added yet. Click Upload IDs to get started.

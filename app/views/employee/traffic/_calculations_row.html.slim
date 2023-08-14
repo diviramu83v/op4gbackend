@@ -1,0 +1,51 @@
+.row
+  .col-8
+    .mb-2
+      h5 Calculations
+    .mb-0
+      .row
+        .col-2
+          = render 'employee/cards/text_element_with_tooltip',
+                   label: 'Incidence',
+                   value: format_percentage(resource.incidence_rate),
+                   tooltip: 'Incidence rate: complete / complete + terminate'
+        .col-2
+          = render 'employee/cards/text_element_with_tooltip',
+                   label: 'I + QF',
+                   value: format_percentage(resource.incidence_plus_quotafull_rate),
+                   tooltip: 'Incidence rate with quotafull: complete / finished'
+        .col-2
+          = render 'employee/cards/text_element_with_tooltip',
+                   label: 'Blocked rate',
+                   value: format_percentage(resource.blocked_rate),
+                   tooltip: 'Blocked rate: total blocks / total starts'
+        .col-2
+          = render 'employee/cards/text_element_with_tooltip',
+                   label: 'Conversion rate',
+                   value: format_percentage(resource.conversion_rate_calculation),
+                   tooltip: 'Conversion rate: complete / abandoned + finished'
+        .col-2
+          = render 'employee/cards/text_element_with_tooltip',
+                   label: 'Completion',
+                   value: format_percentage(resource.completion_rate),
+                   tooltip: 'Completion rate: finished / abandoned + finished'
+        .col-2
+          = render 'employee/cards/text_element_with_tooltip',
+                   label: 'Pass/fail',
+                   value: format_percentage(resource.pass_fail_rate),
+                   tooltip: 'Pass/fail rate: complete / all records'
+  .col-4
+    .mb-2
+      h5 LOI
+    .mb-0
+      .row
+        .col-6
+          = render 'employee/cards/text_element_with_tooltip',
+                   label: 'Average',
+                   value: value_or_question_mark(format_loi_seconds(resource.average_loi)),
+                   tooltip: 'Average length of interview'
+        .col-6
+          = render 'employee/cards/text_element_with_tooltip',
+                   label: 'Median',
+                   value: value_or_question_mark(format_loi_seconds(resource.median_loi)),
+                   tooltip: 'Median length of interview'

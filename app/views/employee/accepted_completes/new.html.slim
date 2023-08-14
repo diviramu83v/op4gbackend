@@ -1,0 +1,25 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Project close-out', project_close_out_url(@project)
+  li.breadcrumb-item.active Accepted Completes IDs
+
+.mb-5
+  h2
+    span.mr-3 Add all accepted IDs for this project (not just the Op4G panel)
+.mb-5
+  .mb-3
+    h3 Paste encoded UIDs
+  = form_for :accepted_completes, url: project_accepted_completes_url(@project) do |f|
+    .form-group
+      = f.text_area :encoded_uids, rows: '20', class: 'form-control'
+    button.btn.btn-primary.mr-1 type="submit" data-disable="button"
+      i.fas.fa-cloud-upload-alt.mr-2
+      = 'Save'
+    = link_to project_close_out_url(@project), class: 'btn btn-primary' do
+      i.fa.fa-arrow-circle-left.mr-1
+      | Return
+
+- if @project.onboardings.accepted.exists?
+  h5.mb-3 Previously uploaded accepted UIDs
+  .mb-5
+    - @project.onboardings.accepted.each do |onboarding|
+      div = onboarding.token

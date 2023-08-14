@@ -1,0 +1,703 @@
+fr:
+  date:
+    month_names: [~, janvier, février, mars, avril, mai, juin, juillet, août, septembre, octobre, novembre, décembre]
+    abbr_month_names: [~, janv, févr, mars, avril, mai, juin, juil, août, sept, oct, nov, déc]
+    month: "Mois"
+    day: "Journée"
+    year: "Année"
+  panelist:
+    header:
+      surveys_link: "Sondages"
+      account_link: "Profil"
+      support_link: "Contactez nous"
+      sign_out_link: "Déconnexion"
+    footer:
+      terms_link: "Termes et conditions"
+      privacy_link: "Politique de confidentialité"
+    accept_terms_and_conditions:
+      show:
+        submit: "J'accepte"
+    birthdates:
+      edit:
+        change_birthdate: "Modifier la date de naissance"
+        birthdate: "Date de naissance"
+        save: "Réserver"
+      update:
+        success_flash: "Profil mis à jour."
+        alert_flash: "Mise à jour a échoué."
+    landing_pages:
+      default:
+        welcome: "Bienvenue sur Op4G"
+        have_an_opinion: "Soyez payé pour partager vos idées!"
+        explanation_one: "Merci de votre intérêt à rejoindre Opinions4Good. Gagnez de l'argent en fournissant des commentaires sur une variété de sujets de recherche différents. Une fois que vous atteignez 10 $ de revenus, vous serez automatiquement payé le mois suivant directement sur votre compte PayPal vérifié."
+        explanation_two: "Gagnez vos premiers 2 $ en remplissant votre profil de membre! Cela nous aide à vous envoyer des sondages qui correspondent le mieux à vos intérêts personnels."
+        join_button: "S'inscrire"
+    registrations:
+      new:
+        sign_up: "Inscrivez-vous à Op4G"
+        form:
+          first_name_label: "Prénom"
+          last_name_label: "Nom de famille"
+          email_label: "Email"
+          password_label: "Mot de Passe"
+    sessions:
+      new:
+        sign_in: "Connexion"
+        form:
+          email_label: "Email"
+          password_label: "Mot de Passe"
+          remember_me_label: "Souviens-toi de moi"
+          sign_in_button: "Connexion"
+    confirmations:
+      new:
+        resend_confirmation_instructions: "Veuillez saisir votre adresse électronique ci-dessous pour recevoir une nouvelle confirmation."
+        resend_confirmation: "Renvoyez-moi mon e-mail de confirmation"
+    passwords:
+      new:
+        forgot_password: "Réinitialisation du mot de passe"
+        send_reset_instructions: "Si vous avez oublié ou perdu votre mot de passe, saisissez l’adresse électronique que vous avez utilisée lors de votre inscription à Op4G dans le champ ci-dessous, et nous vous enverrons un e-mail de confirmation."
+      edit:
+        change_password: "Entrez un nouveau mot de passe"
+        update: "Mettre le mot de passe"
+    terms_and_conditions:
+      show:
+        terms_and_conditions: "Conditions d’utilisation"
+    base_demographics:
+      show:
+        basic_information: "Profit de membre"
+        address: "Rue et numéro"
+        address_line_two: "Addresse"
+        city: "Ville"
+        state: "Région"
+        postal_code: "code postal"
+        birthdate: "Date de naissance"
+        business_name: "Nom de l'entreprise"
+        prompt: "Sélectionner.."
+        save: "Enregistrer le profil"
+    demographics:
+      create:
+        flash:
+          no_answers: "Aucun changement détecté."
+          success_some: "Vos changements ont été enregistrés."
+          success_all: "Merci d'avoir complété votre profil."
+          answer: "Réponse"
+    demographic_categories:
+      show:
+        demographic_questionnaire: "Profit de membre"
+        instructions: "Merci de répondre aux questions suivantes. Vous pouvez enregistrer vos données à tout moment."
+        save: "Enregistrer le profil"
+        prompt: "Désélectionner"
+        gender: "Êtes-vous..."
+        state: "Dans quelle province résidez-vous actuellement?"
+        province: "Dans quelle province résidez-vous actuellement?"
+        region: "Dans quelle région habitez-vous actuellement ?"
+        employment_status: "Quelle est votre situation professionnelle ?"
+        professional_industries: "Travaillez-vous dans l'un des secteurs d'activité suivants ?"
+        employee_count: "Et environ combien de personnes travaillent au sein de votre organisation ?"
+        in_home_product_tester: "Souhaiteriez-vous faire partie de groupes créés autour d'un sujet précis ou participer à des tests de produits à domicile ?"
+        purchaser: "Êtes-vous la personne qui prend la plupart des décisions d'achat quotidiennes?"
+        ethnicity: "Quelle est votre origine ethnique?"
+        household_income: "Quels sont les revenus annuels de votre foyer ?"
+        highest_level_of_education: "Quel est votre niveau d'études ?"
+        marital_status: "Quelle est votre situation familiale ?"
+        children: "Combien d'enfants dans votre maison ont moins de 18 ans?"
+        :under_6: "Combien d'enfants dans votre ménage ont moins de 6 ans?"
+        :6_11: "Combien d'enfants dans votre ménage ont entre 6 et 11 ans?"
+        :12_17: "Combien d'enfants dans votre ménage ont entre 12 et 17 ans?"
+        :18_24: "Combien de personnes dans votre maison ont entre 18 et 24 ans?"
+        :25: "Combien de personnes dans votre ménage ont 25 ans et plus?"
+        teenager: "Votre enfant adolescent accepterait-il de répondre à des sondages ?"
+        interests: "Quels sont vos centres d'intérêts ou activités régulières ?"
+        personal: "Personnel"
+        work: "Travail"
+        family: "Famille"
+        about-me: "Au propos de vous"
+        education: "Éducation"
+        job: "Emploi"
+        household: "Ménage"
+        purchasing: "Achat"
+        electronics: "Électronique"
+        online: "En ligne"
+        food: "Aliments"
+        lifestyle: "Mode de vie"
+        medical: "Médical"
+        financial: "Financier"
+        politics: "Politique"
+    welcomes:
+      show:
+        welcome: "Bienvenue sur Op4G !"
+        note: "Vous pouvez modifier votre profil ci-dessous."
+        view_dashboard: "Voir le profil"
+    dashboard:
+      show:
+        last_month: "Le mois dernier"
+        this_month: "Ce mois-ci"
+        available_surveys: "Sondages disponibles"
+        no_surveys_open: "Aucun sondage disponible pour le moment."
+        no_surveys_in_review: "Aucun sondage en cours d'examen à afficher pour le moment."
+        no_surveys_paid: "Aucune enquête payante à afficher pour le moment."
+        no_surveys_rejected: "Aucune enquête n'a encore été rejetée."
+        completed_surveys: "Mon historique de sondages Op4G"
+        in_review_surveys: "Enquêtes en revue"
+        paid_surveys: "Sondages rémunérés"
+        rejected_surveys: "Sondages rejetés"
+        no_surveys_completed: "Vous n’avez répondu à aucun sondage. On s’y met ?"
+        earnings_snapshot: "Gains"
+        current_balance: "Solde du compte"
+        balance: "Solde du compte"
+        additional_funds_needed: "Nécessaire"
+        view_earnings_details: "Gains"
+        next_payout_date: "Date de récompense"
+        payout_date: "Date de récompense"
+        last_months_balance: "Solde du mois dernier"
+        current_months_balance: "Solde du mois en cours"
+        donations_snapshot: "Contribution caritative"
+        contribution_percentage: "Pourcentage de contribution"
+        quarterly_contribution: "Contribution trimestrielle"
+        total_op4g_contribution: "Contribution totale"
+        adjust_contribution: "Ajustez votre contribution"
+        title_column_header: "Lien du sondage"
+        payout_column_header: "Récompense"
+        completed_column_header: "Terminé"
+        take_survey_button_label: "commencer"
+        dismiss_survey_button_label: "Rejeter"
+    accounts:
+      show:
+        navigation_header: "Voir le profil"
+        view_earnings: "Journal des transactions de récompense"
+        change_email: "Changer votre email"
+        adjust_contribution: "Ajustez votre contribution"
+        donate: "Faire un don"
+        view_demographics: "Profil démographique"
+        change_password: "Changer le mot de passe"
+        change_birthdate: "Modifier la date de naissance"
+        delete_account: "Supprimer votre compte"
+    emails:
+      edit:
+        change_email: "Modifier mon adresse email"
+        email_label: "Email"
+    payments:
+      show:
+        summary_header: "Récompenses"
+        current_balance: "Solde du compte"
+        balance_required: "Nécessaire"
+        funds_needed: "Fonds supplémentaires nécessaires"
+        next_payout_date: "Prochaine date de récompense"
+        or_next_business_day: "ou le prochain jour ouvrable"
+        details_header: "Détails de la récompense"
+        legacy_header: "Gains à date"
+        period_header: "Gains ce trimestre"
+        description_header: "Types d’échanges"
+        amount_header: "Somme"
+        personal_header: "Personnel"
+        nonprofit_header: "Non lucratif"
+    account_demographics:
+      show:
+        demographic_header: "Profil démographique"
+    contributions:
+      show:
+        adjust_contribution: "Ajustez votre contribution"
+        change_your_contribution: "Changer votre contribution"
+        change_your_nonprofit: "Changer votre but non lucratif"
+        current_contribution: "Contribution actuelle"
+        select_a_nonprofit: "Sélectionnez une organisation à but non lucratif"
+        your_nonprofit_contribution: "Votre contribution à but non lucratif"
+    private:
+      show:
+        change_password: "Entrez un nouveau mot de passe"
+        password_label: "Mot de passe"
+        current_password_label: "Mot de passe actuel"
+        new_password_label: "Nouveau mot de passe"
+        confirm_password_label: "Confirmation mot de passe"
+        submit_button: "Enregistrer le profil"
+    support:
+      show:
+        header: "Support technique Op4G"
+        hours: "Heures d'ouverture"
+        mon_fri: "du lundi au vendredi"
+        nine_to_five_eastern: "9h00 à 17h00 EST"
+        contact: "Contactez nous"
+    give_up:
+      show:
+        confirm_delete: "Êtes-vous sûr de vouloir supprimer votre compte? il n'y a pas de retour en arrière."
+        delete_account: "Supprimer votre compte"
+        header: "Nous sommes désolés que vous nous quittiez."
+        reconsider: "Si vous revenez sur votre décision, vous pouvez vous inscrire comme nouveau membre à tout moment."
+        remove_info: "La fermeture de votre compte sera complète quand vous aurez cliqué sur le bouton ci-dessous. Nous supprimerons de notre système tous vos renseignements personnels et concernant votre compte, sous réserve des informations requises par la loi."
+        team: "L’équipe d’Op4G"
+        thanks: "Merci d’avoir fait partie d’Op4G."
+  forms:
+    disable_submit_with: "Enregistrement de sauvegarde"
+  devise:
+    links:
+      sign_in: "Connexion"
+      sign_up: "Inscrivez-vous à Op4G"
+      forgot_password: "Entrez un nouveau mot de passe"
+      missing_confirmation: "Renvoyer un courriel de confirmation"
+    mailer:
+      welcome: "Bienvenue"
+      hi: "Bonjour"
+      closing: "Meilleur,"
+      interest: "Merci de votre intérêt à devenir membre du panel Opinions4Good. Nos panélistes réalisent des études de marché intéressantes et sont payés en espèces, avec la possibilité de faire don d'une partie à l'un de nos plus de 300 partenaires caritatifs à but non lucratif. La participation est gratuite et votre vie privée est garantie. C'est une étude de marché pour une cause!"
+      confirm: "Avant de commencer à répondre à des enquêtes, nous avons besoin de vous pour confirmer votre compte. Cliquez simplement ci-dessous:"
+      mistake_text: "Si vous avez reçu cet e-mail par erreur, supprimez-le simplement. Vous ne serez pas abonné si vous ne cliquez pas sur le lien de confirmation ci-dessus."
+      support_text: "Contacter le service d’assistance d’Op4G"
+      signature_text: "Op4G"
+      confirmation_instructions:
+        confirm_account: "Confirmer votre adresse électronique » ci-dessous et nous nous chargeons du reste."
+        confirm_account_link: "Confirmer votre adresse électronique"
+      reset_password_instructions:
+        someone_has_requested: "Vous avez demandé à récupérer votre mot de passe Op4G Pour récupérer votre mot de passe, veuillez cliquer sur le bouton « Récupérer votre mot de passe » ci-dessous."
+        change_password: "Récupérer votre mot de passe"
+        ignore: "Si vous n’avez PAS demandé à récupérer votre mot de passe, vous pouvez ignorer cet e-mail ou vous connecter à Op4G our modifier votre mot de passe."
+  demo_options:
+    1_billion_to_1_4_billion: "1 milliard à 1,4 milliard"
+    1_million_to_4_9_million: "1 million à 4,9 millions"
+    1_to_24: "1 à 24"
+    1_to_4: "1 à 4"
+    1_000_to_1_499: "1000 à 1499"
+    1_500_to_4_999: "1500 à 4999"
+    1_5_billion_to_1_9_billion: "1,5 milliard à 1,9 milliard"
+    10_million_to_19_9_million: "10 million à 19,9 millions"
+    1_000_000_to_1_999_999: "1 000 000 à 1 999 999"
+    100_000_to_499_999: "100 000 à 499 999"
+    100_000_to_249_999: "100 000 à 124 999"
+    100_to_249: "100 à 249"
+    125_000_to_149_999: "125 000 à 149 999"
+    150_000_to_174_999: "150 000 à 174 999"
+    150_million_to_249_million: "150 million à 249 millions"
+    16_000_to_49_999: "16 000 à 49 999"
+    175_000_to_199_999: "175 000 à 199 999"
+    200_000_to_249_999: "200 000 à 249 999"
+    20_million_or_more: "20 millions ou plus"
+    2_000_000_to_2_999_999: "2 000 000 à 2 999 999"
+    2_billion_to_4_9_billion: "2 milliards à 4,9 milliards"
+    250_000_eur_or_more: "250000 eur ou plus"
+    250_000_to_299_999: "250 000 à 299 999"
+    25_million_to_74_million: "25 million à 74 millions"
+    25_to_49: "25 à 49"
+    25_000_or_more: "25000 ou plus"
+    25_000_to_49_999: "25000 à 49999"
+    250_million_to_499_million: "250 million à 499 millions"
+    250_to_499: "250 à 499"
+    3_000_000_to_3_999_999: "3 000 000 à 3 999 999"
+    300_000_to_399_999: "300 000 à 399 999"
+    400_000_to_499_999: "400 000 à 499 999"
+    4_000_000_or_more: "4 000 000 ou plus"
+    5_billion_to_9_9_billion: "5 milliards à 9,9 milliards"
+    5_million_to_9_9_million: "5 million à 9,9 millions"
+    5_million_to_24_million: "5 million à 24 millions"
+    5_to_24: "5 à 24"
+    5_000_to_24_999: "5000 à 24999"
+    50_to_99: "50 à 99"
+    500_million_to_749_million: "500 millions à 749 millions"
+    500_to_999: "500 à 999"
+    500_000_to_749_999: "500 000 à 749 999"
+    500_000_to_999_999: "500 000 à 999 999"
+    50_000_or_more: "50000 ou plus"
+    50_000_to_74_999: "50 000 à 74 999"
+    50_000_to_99_999: "50 000 à 99 999"
+    750_000_to_999_999: "750 000 à 999 999"
+    750_million_to_999_million: "750 millions à 999 millions"
+    75_000_to_99_999: "75 000 à 99 999"
+    75_million_to_149_million: "75 million à 149 millions"
+    accountant_cpa_auditor: "Comptable / CPA / Auditeur"
+    accounting: "comptabilité"
+    administrator: "administrateur"
+    advertising: "La publicité"
+    aerospace_defense: " Aérospatiale / défense"
+    agriculture_fishing: "pêche agricole"
+    agriculture_forestry_landscaping: "Agriculture / foresterie / aménagement paysager"
+    american_indian_alaska_native: "Indien d'Amérique / Native Alaska"
+    apprenticeship: "apprentissage"
+    architect: "Architecte"
+    architecture: "architecture"
+    artist_designer_actor_musician: "Artiste / designer / acteur / musicien"
+    arts_crafts: "Art et Bricolages"
+    arts_entertainment_recreation: "Arts / spectacles / loisirs"
+    automotive_transport: "Automobile / Transports"
+    asian_indian: "Indien asiatique"
+    associate_s_degree_earned: "Diplôme d'associé obtenu"
+    associate_s_degree_earned_vocational_program: "Diplôme d'associé obtenu - Programme professionnel"
+    associate_s_degree_earned_academic_program: "Diplôme de partenaire obtenu - programme académique"
+    automotive: "automobile"
+    aviation: "aviation"
+    bachelor_s_or_undergraduate_degree_earned: "Baccalauréat ou diplôme de premier cycle acquis"
+    banking: "Banque"
+    banking_financial: "bancaire financier"
+    baseball: "base-ball"
+    basketball: "basketball"
+    bio_tech: "biotechnologies"
+    british_national_party_uk: "British National Party (UK)"
+    bisexual: "bisexuel"
+    black_african_american: "Noir / Afro-américain"
+    boating_sailing: "navigation de plaisance"
+    bowling: "bowling"
+    broadcasting_tv_radio: "Radiodiffusion / TV / radio"
+    broker_dealer_trader: "Courtier / revendeur / commerçant"
+    brokerage: "courtage"
+    builder_building_contractor: "Constructeur / entrepreneur en bâtiment"
+    building_construction: "Bâtiment / construction"
+    business_services: "Services aux entreprises"
+    carpenting_electrical_installations_vvs: "menuiserie installations électriques vvs"
+    certified_finanical_planner: "Planificateur financier agréé (CFP)"
+    certified_public_account_cpa: "Compte public certifié (CPA)"
+    chemical: "Produits chimiques"
+    chemicals_plastics_rubber: "produits chimiques en plastique en caoutchouc"
+    chief_executive_officer_ceo: "Président Directeur-Général (PDG)"
+    chief_financial_officer_cfo: "Dirigeant principal des finances (CFO)"
+    chief_information_officer_cio: "Dirigeant principal de l'information (DPI)"
+    chief_marketing_officer_cmo: "Directeur Marketing (CMO)"
+    chief_operating_officer_coo: "Chef de l'exploitation (COO)"
+    chief_technology_officer_cto: "Directeur Technique (CTO)"
+    chinese: "chinois"
+    civil_union_domestic_partnership: "Union civile partenariat domestique"
+    clergy_other_person_at_religious_institution: "Clergé / autre personne dans une institution religieuse"
+    completed_vocational_training: "formation professionnelle complétée"
+    communications_information: "informations de communication"
+    company_offices_premises: "Bureaux / locaux de l'entreprise"
+    computer_hardware: "matériel informatique"
+    computer_network_services: "Services informatiques / réseaux"
+    computer_reseller_software_hardware: "logiciel informatique revendeur"
+    computer_software: "logiciel"
+    computers_it_electronics: "informatique informatique"
+    continuous_travel_on_the_road: "Voyage continu / sur la route"
+    conservative_ca: "Conservateur (CA)"
+    construction: "construction"
+    consultant: "Consultant"
+    consultant_analyst_specialist: "Consultant / analyste / spécialiste"
+    consulting: "consultant"
+    consumer_electronics: "électronique grand public"
+    consumer_packaged_goods: "biens de consommation emballés"
+    cooking: "cuisine"
+    cosmetologist_barber_other_personal_care: "Cosmétologue / coiffeur / autre soin personnel"
+    counselor_psychologist_therapist: "Conseiller / psychologue / thérapeute"
+    couponing: "couponing"
+    cricket: "criquet"
+    cycling: "cyclisme"
+    democratic: "Démocrate"
+    dentist: "Dentiste"
+    department_head: "chef de département"
+    designer: "Designer"
+    dining_out: "dîner à l'extérieur"
+    director: "Réalisateur"
+    divorced: "divorcé"
+    doctorate_earned_phd_edd_etc: "Doctorat obtenu (PhD, EdD, etc.)"
+    domestic_partnership: "partenariat domestique"
+    don_t_know_prefer_not_to_say: "ne sais pas préfère ne pas dire"
+    drama_arts: "arts dramatiques"
+    education: "éducation"
+    education_professional: "Professionnel de l'éducation"
+    education_teaching_coaching: "Education / enseignement / coaching"
+    educator_teacher_coach: "Educateur / enseignant / coach"
+    employed_full_time_35_hours_per_week: "Employé à temps plein (35 heures et plus par semaine)"
+    employed_part_time_under_35_hours_per_week: "Employé à temps partiel (moins de 35 heures par semaine)"
+    energy_utilities: "Energie / Services publics"
+    energy_utilities_oil_and_gas: "énergie services publics pétrole et gaz"
+    engineer: "Ingénieur"
+    engineering: "ingénierie"
+    engineering_scientific_professional: "Ingénieur / scientifique professionnel"
+    engineering_services: "Services d'ingénierie"
+    environmental_services: "services environnementaux"
+    executive_senior_vice_president: "Vice-président exécutif / senior"
+    farmer_rancher: "Fermier / éleveur"
+    fashion_apparel: "vêtements de mode"
+    female: "femelle"
+    filipino: "Philippin"
+    financial_securities_analyst: "Analyste financier / titres"
+    financial_services_investments: "Services financiers / Investissements"
+    financial_services_professional: "Professionnel des services financiers"
+    fishing: "pêche"
+    food_beverage: "nourriture et boissons"
+    football: "Football"
+    full: "plein"
+    full_time_disabled: "Invalides à temps plein"
+    gambling: "jeux d'argent"
+    gaming: "jeu"
+    gardening: "jardinage"
+    general_manager_director: "Directeur général / directeur"
+    golf: "le golf"
+    government_federal_state_local: "Gouvernement (Etat fédéral)"
+    government_public_sector: "secteur public gouvernemental"
+    guamanian_chamorro: "Guamanian / Chamorro"
+    habilitation: "habilitation"
+    health_medical_services: "Santé / médecine / services"
+    healthcare: "soins de santé"
+    heterosexual: "hétérosexuel"
+    high_school: "école secondaire"
+    high_school_secondary_school_graduate: "Diplôme d'études secondaires"
+    higher_education: "l'enseignement supérieur"
+    hiking: "randonnée"
+    hockey: "le hockey"
+    homemaker: "ménagère"
+    homosexual_lesbian_gay: "Homosexuel (lesbienne / gay)"
+    hospitality_tourism: "tourisme d'accueil"
+    human_resources: "ressources humaines"
+    hunting: "chasse"
+    i_am: "je suis"
+    i_don_t_know: "Je ne sais pas"
+    i_share_that_responsibility_with_someone_else_others: "Je partage cette responsabilité avec quelqu'un d'autre"
+    independent: "Indépendant"
+    information_technology_it: "Information Technologique (IT"
+    insurance: "Assurance"
+    intermediate_school: "école intermédiaire"
+    internet: "l'Internet"
+    internet_publishing_services: "Édition / services Internet"
+    investment_banker: "Banquier d'investissement"
+    it_professional: "professionel de l'informatique"
+    it_technology_software: "Informatique / technologie / logiciels"
+    japanese: "Japonais"
+    korean: "coréen"
+    lacrosse: "lacrosse"
+    law_enforcement: "Application de la loi"
+    law_enforcement_officer: "Agent d'application de la loi"
+    lawyer: "Avocat"
+    lawyer_judge: "Avocat / juge"
+    legal_law: "droit juridique"
+    legal_professional: "Juriste"
+    legal_services: "Services juridiques"
+    less_than_100_000: "moins de 100 000"
+    liberal_ca: "Libéral (CA)"
+    male: "mâle"
+    management_administration: "Administration de la gestion"
+    management_consulting_services: "Services de conseil en gestion"
+    manager: "Directeur"
+    manufacturing: "fabrication"
+    market_research: "étude de marché"
+    marketing: "commercialisation"
+    marketing_sales: "Ventes marketing"
+    married: "marié"
+    master_tradesman: "maître artisan"
+    master_s_degree_earned: "Master obtenu"
+    media_advertising_public_relations: "Publicité dans les médias / relations publiques"
+    media_entertainment: "divertissement multimédia"
+    medical_assistant: "Assistant médical"
+    medical_doctor_dentist: "Médecin / dentiste"
+    medical_doctor_md: "Docteur en médecine"
+    medical_practice: "Cabinet médical"
+    medical_professional_nurse_nurses_aid_etc: "Professionnel de la santé (infirmière, infirmière auxiliaire, etc.)"
+    medical_services: "Services médicaux"
+    middle_of_the_road: "Au milieu de la route"
+    military: "militaire"
+    mining_oil_gas: "Exploitation minière / extraction de pétrole / gaz"
+    motor_sports: "sports motorisés"
+    movies_entertainment_music: "films divertissement musique"
+    native_hawaiian: "Hawaïen indigène"
+    new_democratic_ca: "Nouveau Démocratique (CA)"
+    !!str no: "non"
+    no_diploma_yet: "pas encore de diplôme"
+    no_educational_qualifications: "pas de diplômes"
+    non_profit_religion: "Sans but lucratif / religion"
+    non_profit_social_services: "services sociaux à but non lucratif"
+    none: "aucun"
+    not_applicable: "n'est pas applicable"
+    not_currently_employed: "Pas actuellement employé"
+    not_currently_working_outside_the_home: "Ne travaille pas actuellement à l'extérieur de la maison"
+    nurse: "Infirmière"
+    occupy_w_no_rent_paid: "Occuper sans loyer payé"
+    office_administration: "Bureau de l'administration"
+    other: "autre"
+    other_asian: "Autre asiatique"
+    other_chief_officer: "Autre officier en chef"
+    other_company_officer_board_member: "Autre membre du conseil d'administration"
+    other_financial_planner_investment_advisor_asset_manager_cfa_chfc_estate_planning_professional_CLU_etc: "Autre planificateur financier / conseiller en placement / gestionnaire d'actifs (CFA, ChFC, professionnel de la planification successorale, CLU, etc.)"
+    other_health_care_technicians_etc: "Autres soins de santé (techniciens, etc.)"
+    other_legal_paralegals_arbitrators_etc: "Autres questions juridiques (parajuristes, arbitres, etc.)"
+    other_pacific_islander: "Autre insulaire du Pacifique"
+    outside_of_home_or_office: "En dehors de la maison ou du bureau"
+    over_10_billion: "Plus de 10 milliards"
+    own_no_loan_mortgage: "Propre, pas de prêt / hypothèque"
+    own_with_loan_mortgage: "Propre, avec prêt / hypothèque"
+    owner_partner: "Propriétaire / partenaire"
+    no_current_plan_to_purchase: "Pas de plan d'achat en cours"
+    paralegal: "Parajuriste"
+    part_time: "à temps partiel"
+    personal_services: "services personnels"
+    pharmaceutical: "Pharmaceutique"
+    pharmaceuticals: "médicaments"
+    pharmacist: "Pharmacien"
+    pilot: "Pilote"
+    postgraduate_study: "Études de troisième cycle"
+    prefer_not_to_say: "je préfère ne pas le dire"
+    president_chairman: "Président"
+    primary_school: "école primaire"
+    printing_publishing: "édition imprimée"
+    professional_degree_earned_md_dds_dvm_etc: "Diplôme professionnel obtenu (MD, DDS, DVM, etc.)"
+    public_administrator_government_worker: "Administrateur public / employé du gouvernement"
+    public_relations: "relations publiques"
+    publishing_print_media: "Édition / Presse écrite"
+    real_estate: "Immobilier"
+    real_estate_property: "biens immobiliers"
+    registered_investment_advisor_ria: "Conseiller en investissement inscrit (RIA)"
+    rent: "Loyer"
+    repair_maintenence: "Réparation / maintenance"
+    republican: "Républicain"
+    retail_business: "Commerce de détail"
+    retail_wholesale_trade: "commerce de gros"
+    restaurant_food_and_beverage_services: "Services de restauration / services de restauration"
+    retired: "retraité"
+    running_exercising_weightlifting: "course à pied haltérophilie"
+    sales_marketing_advertising: "Ventes / marketing / publicité"
+    salesperson: "Vendeur"
+    samoan: "Samoan"
+    scientist: "Scientifique"
+    security: "Sécurité"
+    separated: "Séparé"
+    shipping_distribution: "distribution d'expédition"
+    single: "unique"
+    skiing_snowboarding_winter_sports: "ski snowboard sports d'hiver"
+    small_business_owner: "Patron de PME"
+    social_services: "Services sociaux"
+    social_service_professional: "Professionnel des services sociaux"
+    social_worker: "Travailleur social"
+    software_developer_network_specialist: "Développeur logiciel / spécialiste réseau"
+    somewhat_conservative: "Un peu conservateur"
+    somewhat_liberal: "Un peu libéral"
+    some_college_university_no_degree: "Un collège / université (pas de diplôme)"
+    some_high_school_secondary_school_or_less: "Quelques années d'études secondaires ou moins"
+    someone_else: "Quelqu'un d'autre"
+    student: "étudiant"
+    supervisor: "Superviseur"
+    technician: "Technicien"
+    telecommunications: "télécommunications"
+    transportation: "transport"
+    transportation_shipping: "Transports / expédition"
+    travel: "Voyage"
+    travel_services_tourism: "Services de voyage / tourisme"
+    under_15_000_eur: "moins de 15000 euros"
+    under_16_000: "moins de 16 000"
+    under_25_000: "Moins de 25 000"
+    unemployed: "sans emploi"
+    unemployed_not_currently_working_outside_the_home: "Sans emploi / ne travaille pas actuellement à l'extérieur de la maison"
+    unemployed_temporarily_out_of_work: "Sans emploi / Temporairement au chômage"
+    unmarried_partner: "Partenaire non-marié"
+    utilities: "Services publics"
+    very_conservative: "Très conservateur"
+    very_liberal: "Très libéral"
+    veterinarian: "Vétérinaire"
+    vice_president_other: "Vice-président (autre)"
+    vietnamese: "vietnamien"
+    white_caucasian: "Blanc / Caucasien"
+    wholesale_business: "Commerce de gros"
+    widowed: "veuf"
+    work_from_home_full_time: "Travailler à domicile à temps plein"
+    work_from_office_full_time: "Travailler de bureau à temps plein"
+    work_part_time_home_or_office: "Travailler à temps partiel / à domicile ou au bureau"
+    writer_journalist: "Écrivain / journaliste"
+    !!str yes: "Oui"
+    yes_another_hispanic_latino_or_spanish_origin: "Oui, autre origine hispanique, latino ou espagnole"
+    yes_cuban: "Oui, cubain"
+    yes_in_the_next_1_6_months: "Oui, dans les 1-6 prochains mois"
+    yes_in_the_next_6_12_months: "Oui, dans les 6-12 prochains mois"
+    yes_mexican_mexican_american_chicano: "Oui, mexicaine, mexicaine américaine, chicano"
+    yes_puerto_rican: "Oui, portoricaine"
+  demo_questions:
+    :6_11: Combien de personnes dans votre ménage ont entre 6 et 11 ans?
+    :6_to_11: De 6 à 11 ans
+    :12_17: Combien de personnes dans votre ménage ont entre 12 et 17 ans?
+    :12_to_17: De 12 à 17 ans
+    :18_24: Combien de personnes dans votre ménage ont entre 18 et 24 ans?
+    :18_to_24: À partir de 18-24 ans
+    :25: Dans votre ménage, combien de personnes ont 25 ans ou plus?
+    :25_and_up: 25 ans et plus
+    auto_loan: Auto emprunt
+    beer: Bière
+    blood: Maladie du sang
+    bone: État des os ou des articulations
+    brandy: Brandy ou cognac
+    cancer: Cancer ou affection liée au cancer
+    car: Possédez-vous ou louez-vous un véhicule?
+    cats: Un ou plusieurs chats?
+    cell_phone: Téléphone portable
+    cert_of_deposit: Certificat de dépôt
+    champagne: Champagne ou vin mousseux
+    checking: Compte courant
+    children: Combien d'enfants avez-vous moins de 18 ans?
+    computer: Ordinateur de bureau ou portable
+    computers: Nombre d'ordinateurs sur tous les sites de l'entreprise dans le monde
+    credit_card: Bank ou carte de crédit en magasin
+    day_to_day_purchases: Dans votre ménage, qui est responsable de la majorité des décisions concernant les achats quotidiens?
+    debit_card: Carte de débit
+    diabetes: Diabète ou maladie de la thyroïde
+    dogs: Un ou plusieurs chiens?
+    education: Quel est le niveau de scolarité le plus élevé que vous avez atteint?
+    employment: Quelle est votre situation d'emploi actuelle?
+    employment_status: Quel est votre statut professionnel?
+    employee_count: Environ combien d'employés travaillent pour votre organisation?
+    employees: Taille de l'entreprise en nombre total d'employés sur tous les sites
+    enrolled: Êtes-vous actuellement inscrit en tant qu'étudiant dans un établissement d'enseignement?
+    eye_or_ear: Problème oculaire, visuel ou auditif
+    facebook: Publiez, partagez ou surfez sur Facebook
+    gaming_computer: Ordinateur de jeu
+    gender: Quel est ton sexe?
+    heart: Affection cardiaque ou cardio-vasculaire
+    highest_level_of_education: Quel est le niveau de scolarité le plus élevé que vous avez atteint?
+    home_equity: Prêt sur valeur nette ou marge de crédit
+    household_income: Quel est votre revenu annuel du ménage?
+    industry: Qu'est-ce qui décrit le mieux l'organisation ou le secteur dans lequel vous travaillez?
+    infection: Maladie infectieuse
+    in_home_product_tester: Seriez-vous intéressé à rejoindre des communautés thématiques ou à participer à des tests de produits à domicile?
+    income: Quel est le revenu annuel total de votre ménage avant impôts?
+    iphone_or_ipod_touch: iPhone ou iPod Touch
+    kidney: Maladie du rein ou de la vessie
+    laptop: Ordinateur portable
+    large_purchases: Dans votre ménage, qui est responsable de la majorité des décisions concernant les gros achats?
+    license: Avez-vous un permis de conduire actif?
+    life_insurance: Police d'assurance vie
+    linkedin: Publiez, lisez ou connectez-vous sur LinkedIn
+    liqueur: Liqueur
+    liquor: Alcool fort
+    marital: Quel est votre statut matrimonial actuel?
+    marital_status: Quel est votre état civil?
+    mens: Problèmes de santé des hommes
+    mobile_phone: Appareil mobile ou téléphone de base
+    money_market: Compte du marché monétaire
+    mutual_fund: Compte de fonds commun
+    occupation: Lequel décrit le mieux votre profession?
+    origin: Êtes-vous d'origine hispanique, latino-américaine ou espagnole?
+    other_pet: Un animal de compagnie qui n'est ni un chat ni un chien?
+    netbook: Ordinateur Netbook (ordinateur portable plus petit et plus léger)
+    neuro: État de santé neurologique ou mentale
+    new_vehicle: Vous envisagez d'acheter ou de louer un véhicule NEUF?
+    orientation: Quelle est votre orientation sexuelle?
+    pain: Douleur chronique
+    pets: As-tu des animaux?
+    personal_loan: Prêt personnel ou marge de crédit
+    political_party: Avec quel parti politique êtes-vous inscrit?
+    political_views: Compte tenu de vos opinions politiques, comment vous décririez-vous?
+    portable_gaming: Périphérique de jeu portable (PSP, etc.)
+    purchaser: Dans votre ménage, êtes-vous la personne qui prend la plupart des décisions d'achat au quotidien?
+    race: Quelle race vous considérez-vous?
+    region: Dans quelle région résidez-vous actuellement?
+    residence: Êtes-vous propriétaire ou locataire de votre résidence actuelle?
+    respiratory: Allergies, asthme ou troubles respiratoires
+    revenue: Taille de l'entreprise en dollars de revenus
+    rv_loan: Prêt de véhicule récréatif
+    savings_account: Compte épargne
+    self_employed: Recevez-vous au moins une partie de votre revenu personnel par le biais du travail indépendant?
+    share: Utilisez-vous un service de covoiturage?
+    skin: Maladies de la peau
+    sleep: Un trouble du sommeil
+    smart_phone: Téléphone intelligent (iPhone, Blackberry, etc.)
+    stock_account: Compte d'actions ou d'obligations individuel
+    stomach: Maux d'estomac, d'intestin ou de digestion
+    tablet: Tablette (iPad, etc.)
+    tablet_computer: Tablette
+    teenager: Avez-vous un adolescent qui serait prêt à répondre à des sondages?
+    title: Lequel décrit le mieux le titre de votre travail?
+    twitter: Publier sur un compte Twitter
+    under_6: Combien de personnes dans votre ménage ont moins de 6 ans?
+    used_vehicle: Prévoyez-vous acheter ou louer un véhicule d'occasion?
+    vehicle: Possédez-vous ou louez-vous un véhicule?
+    wine: Du vin
+    womens: Problème de santé des femmes
+    workplace: Où travaillez-vous principalement?
+    worth: Valeur nette individuelle hors maison et automobiles
+
+  activerecord:
+    errors:
+      models:
+        panelist:
+          attributes:
+            email:
+              taken: "(#NeedsTranslation)"

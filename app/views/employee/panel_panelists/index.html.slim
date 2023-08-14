@@ -1,0 +1,32 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Panels', panels_url
+  li.breadcrumb-item = link_to @panel.name, panel_url(@panel)
+  li.breadcrumb-item.active Panelists: #{@panelists_group&.humanize}
+
+.mb-5
+  .d-flex.justify-content-between
+    h2 Panelists: #{@panelists_group&.humanize}
+
+.mb-0
+  .d-flex.justify-content-between.mb-3
+    span
+      = link_to panel_panelists_url(@panel, format: :csv, panelists: @panelists_group), class: 'btn btn-outline-primary' do
+        i.fas.fa-cloud-download-alt.mr-1
+        | Download list
+.mb-0
+  .row
+    - if @panelists.empty?
+      p.mb-0 There are no panelists matching your selection.
+    - else
+      table.table.table-sm.mb-3 data-sort='table'
+        thead
+          tr
+            th Name
+            th Email
+            th Status
+        tbody
+          - @panelists.each do |panelist|
+            tr
+              td = panelist.name
+              td = panelist.email
+              td = panelist.status.humanize

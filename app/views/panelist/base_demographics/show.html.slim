@@ -1,0 +1,34 @@
+- content_for :flash_width
+  = 'col-lg-6'
+.row
+  .col-lg-6
+    .card.mb-3
+      .card-header
+        h4 = t('panelist.base_demographics.show.basic_information', default: 'Basic information')
+      .card-body
+        = form_for(:base_demographics) do |f|
+          = render 'employee/form_errors', resource: current_panelist
+          .field.mb-3
+            = f.label :address, t('panelist.base_demographics.show.address', default: 'Address')
+            = f.text_field :address, value: current_panelist.address, class: 'form-control'
+          .field.mb-3
+            = f.label :address_line_two, t('panelist.base_demographics.show.address_line_two', default: 'Address line two')
+            = f.text_field :address_line_two, value: current_panelist.address_line_two, class: 'form-control'
+          .field.mb-3
+            = f.label :city, t('panelist.base_demographics.show.city', default: 'City')
+            = f.text_field :city, value: current_panelist.city, class: 'form-control'
+          .field.mb-3
+            = f.label :state, t('panelist.base_demographics.show.state', default: 'State')
+            = f.select :state, options_for_select(State::PANELIST[current_panelist.country_sym], selected: current_panelist.state), { prompt: t('panelist.base_demographics.show.prompt', default: 'Please select...') }, { class: 'form-control' }
+          .field.mb-3
+            = f.label :postal_code, t('panelist.base_demographics.show.postal_code', default: 'ZIP code')
+            = f.text_field :postal_code, value: current_panelist.postal_code, class: 'form-control'
+          .field.mb-3
+            = f.label :birthdate, t('panelist.base_demographics.show.birthdate', default: 'Birthdate')
+            = render partial: '/forms/birthdate_form', locals: { f: f }
+          - if current_panelist.campaign&.business_name_flag?
+            .field.mb-3
+              = f.label :business_name, t('panelist.base_demographics.show.business_name', default: 'Business name')
+              = f.text_field :business_name, value: current_panelist.business_name, class: 'form-control'
+          .actions.mt-5
+            = f.submit t('panelist.base_demographics.show.save', default: 'Save'), class: 'btn btn-primary'

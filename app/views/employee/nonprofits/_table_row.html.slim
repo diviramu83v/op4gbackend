@@ -1,0 +1,5 @@
+tr
+  td = image_tag nonprofit.logo.url
+  td = link_to nonprofit.name, nonprofit_url(nonprofit)
+  td.text-right = format_number(nonprofit.active_current_panelists.count)
+  td.text-right = format_currency_with_zeroes(nonprofit.donation_total_with_adjustment)

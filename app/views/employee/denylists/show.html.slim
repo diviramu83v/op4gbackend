@@ -1,0 +1,10 @@
+.mb-5
+  h2
+    span.mr-3 IP Denylist
+    span.mr-0
+      - if can?(:view_and_modify, IpAddress)
+        = link_to new_denylist_url, class: 'page-header-link' do
+          i.fa.fa-plus-circle.mr-1
+          | Add
+.mb-0
+  = render 'table'

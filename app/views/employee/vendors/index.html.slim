@@ -1,0 +1,52 @@
+.mb-5
+  h2
+    span.mr-3 Vendors
+    span.mr-0
+      - if can?(:view_and_modify, Vendor)
+        = link_to new_vendor_url, class: 'page-header-link' do
+          i.fa.fa-plus-circle.mr-1
+          | Add
+.mb-5
+  table.table.mb-3 data-sort='table'
+    thead
+      tr
+        th Name
+        th Projects
+        th Disable security?
+        th Gate survey?
+        th Collect emails?
+        th Disable redirects?
+        th Block rate report
+        th Default redirects
+    tbody
+      - @vendors.each do |vendor|
+        tr
+          td = link_to_if can?(:view_and_modify, Vendor), vendor_name_with_abbreviation(vendor), edit_vendor_url(vendor)
+          td = vendor.project_count
+          td = format_bool_as_colored_on_off(vendor.security_disabled_by_default)
+          td = format_bool_as_colored_on_off(vendor.gate_survey_on_by_default)
+          td = format_bool_as_colored_on_off(vendor.collect_followup_data)
+          td = format_bool_as_colored_on_off(vendor.disable_redirects)
+          td style='min-width:175px' = link_to vendor_block_rate_report_url(vendor), class: 'card-header-link' do
+            i.fa.fa-list-ul.mr-3
+            | Block rate report
+          td
+            - if vendor.any_url_present?
+              table.table.table-sm.table-wrapped-no-header.mb-0
+                tbody
+                  - if vendor.complete_url.present?
+                    tr
+                      td.redirect-label Complete
+                      td.redirect-value = vendor.complete_url
+                  - if vendor.terminate_url.present?
+                    tr
+                      td.redirect-label Terminate
+                      td.redirect-value = vendor.terminate_url
+                  - if vendor.overquota_url.present?
+                    tr
+                      td.redirect-label Quotafull
+                      td.redirect-value = vendor.overquota_url
+                  - if vendor.security_url.present?
+                    tr
+                      td.redirect-label Security
+                      td.redirect-value = vendor.security_url

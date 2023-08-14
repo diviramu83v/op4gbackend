@@ -1,0 +1,10 @@
+#prescreener-buttons
+  | All sources:
+  - if survey.some_prescreeners_off?
+    = link_to survey_prescreener_url(survey), method: :post, remote: true, class: 'btn btn-outline-primary btn-xs ml-1' do
+      i.fa.fa-plus.mr-1
+      | Turn on
+  - if survey.some_prescreeners_on?
+    = link_to survey_prescreener_url(survey), method: :delete, remote: true, class: 'btn btn-outline-primary btn-xs ml-1' do
+      i.fa.fa-minus.mr-1
+      | Turn off

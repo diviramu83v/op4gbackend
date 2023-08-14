@@ -1,0 +1,253 @@
+en:
+  activerecord:
+    attributes:
+      survey_api_target:
+        api_filter_countries: "Country"
+        api_filter_payout: "Payout"
+    errors:
+      models:
+        survey_api_target:
+          attributes:
+            api_filter_countries:
+              blank: "is required"
+            api_filter_payout:
+              blank: "is required"
+
+  date:
+    month_names: [~, January, February, March, April, May, June, July, August, September, October, November, December]
+    abbr_month_names: [~, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sept, Oct, Nov, Dec]
+    month: "Month"
+    day: "Day"
+    year: "Year"
+  panelist:
+    header:
+      surveys_link: "Surveys"
+      account_link: "Account"
+      support_link: "Support"
+      sign_out_link: "Sign out"
+    footer:
+      terms_link: "Terms & Conditions"
+      privacy_link: "Privacy"
+    accept_terms_and_conditions:
+      show:
+        submit: "Accept terms"
+    birthdates:
+      edit:
+        change_birthdate: "Change your birthdate"
+        birthdate: "Birthdate"
+        save: "Save"
+      update:
+        success_flash: "Account successfully updated."
+        alert_flash: "Account could not be updated."
+    landing_pages:
+      default:
+        welcome: "Welcome to Opinions4Good"
+        have_an_opinion: "Get Paid To Share Your Insights!"
+        explanation_one: "Thanks for your interest in joining Opinions4Good. Earn cash by providing feedback on a variety of different research topics. Once you reach $10 in earnings, you’ll be automatically paid out the following month directly to your verified PayPal account."
+        join_button: "Join now!"
+    registrations:
+      new:
+        continue_with_facebook: 'Continue with Facebook'
+        sign_up: "Sign up"
+        form:
+          first_name_label: "First name"
+          last_name_label: "Last name"
+          email_label: "Email"
+          password_label: "Password"
+    sessions:
+      new:
+        sign_in: "Sign in"
+        form:
+          email_label: "Email"
+          password_label: "Password"
+          remember_me_label: "Remember me"
+          sign_in_button: "Sign in"
+    confirmations:
+      new:
+        resend_confirmation_instructions: "Resend confirmation instructions"
+        resend_confirmation: "Resend confirmation"
+    passwords:
+      new:
+        forgot_password: "Forgot your password?"
+        send_reset_instructions: "Send reset instructions"
+      edit:
+        change_password: "Change your password"
+        update: "Update"
+    terms_and_conditions:
+      show:
+        terms_and_conditions: "Terms and conditions"
+    base_demographics:
+      show:
+        basic_information: "Basic information"
+        address: "Address"
+        address_line_two: "Address line two"
+        city: "City"
+        state: "State"
+        postal_code: "ZIP code"
+        birthdate: "Birthdate"
+        business_name: "Business name"
+        prompt: "Please select..."
+        save: "Save"
+    demographics:
+      create:
+        flash:
+          no_answers: "No new answers detected."
+          success_some: "Thanks! Successfully saved %{count} %{subject}."
+          success_all: "All questions answered successfully. Thanks for completing your demographics."
+          answer: "answer"
+    demographic_categories:
+      show:
+        demographic_questionnaire: "Demographic questionnaire"
+        instructions: "Please answer the following questions."
+        save: "Save"
+        prompt: "Choose one..."
+        gender: "What is your gender?"
+        state: "In which state do you currently reside?"
+        province: "In which province do you currently reside?"
+        region: "In which region do you currently reside?"
+        employment_status: "What is your employment status?"
+        professional_industries: "What industries do you work in professionally?"
+        employee_count: "Approximately how many employees work for your organization?"
+        in_home_product_tester: "Would you be interested in joining topic-specific communities, or participating in in-home product tests?"
+        purchaser: "In your household, are you the person who makes most of the daily purchasing decisions?"
+        ethnicity: "What is your ethnicity?"
+        household_income: "What is your annual household income?"
+        highest_level_of_education: "What is the highest level of education you've completed?"
+        marital_status: "What is your marital status?"
+        children: "How many children do you have under the age of 18?"
+        :under_6: "How many people in your household are under 6 years old?"
+        :6_11: "How many people in your household are 6-11 years old?"
+        :12_17: "How many people in your household are 12-17 years old?"
+        :18_24: "How many people in your household are 18-24 years old?"
+        :25: "How many people in your household are 25 years and older?"
+        teenager: "Do you have a teenager who would be willing to take surveys?"
+        interests: "Which of the following do you participate/have interest or experience in?"
+    welcomes:
+      show:
+        welcome: "Welcome to Op4G!"
+        note: "Please take a moment to get familiar with your dashboard and account settings."
+        view_dashboard: "View your dashboard"
+    dashboard:
+      show:
+        last_month: "Last month"
+        this_month: "This month"
+        available_surveys: "Available surveys"
+        no_surveys_open: "No open surveys at the moment. Check back soon."
+        no_surveys_in_review: "No surveys in review to show yet."
+        no_surveys_paid: "No credited surveys to show yet."
+        no_surveys_rejected: "No surveys have been rejected yet."
+        completed_surveys: "Completed surveys"
+        in_review_surveys: "Surveys in review"
+        paid_surveys: "Credited surveys"
+        rejected_surveys: "Rejected surveys"
+        no_surveys_completed: "No completed surveys to show yet. You'll see more information here once you've taken one."
+        earnings_snapshot: "Earnings snapshot"
+        current_balance: "Current balance"
+        balance: "Balance"
+        additional_funds_needed: "Additional funds needed"
+        view_earnings_details: "View earnings details"
+        next_payout_date: "Next payout date"
+        payout_date: 'Payout date'
+        last_months_balance: "Last month's balance"
+        current_months_balance: "Current month's balance"
+        donations_snapshot: "Donations snapshot"
+        contribution_percentage: "Your contribution percentage"
+        quarterly_contribution: "Your contribution this quarter"
+        total_op4g_contribution: "Total Op4G contribution"
+        adjust_contribution: "Adjust your contribution"
+        title_column_header: "Title"
+        payout_column_header: "Payout"
+        completed_column_header: "Completed"
+        take_survey_button_label: "Take"
+        dismiss_survey_button_label: "Dismiss"
+        verify_paypal: 'Verify Paypal Account'
+    accounts:
+      show:
+        navigation_header: "Account"
+        view_earnings: "View your earnings"
+        change_email: "Change your email"
+        adjust_contribution: "Adjust your contribution"
+        donate: "Donate to a nonprofit"
+        view_demographics: "View your demographics"
+        change_password: "Change your password"
+        change_birthdate: "Change your birthdate"
+    emails:
+      edit:
+        change_email: "Change your email"
+        email_label: "Email"
+    payments:
+      show:
+        summary_header: "Earnings summary"
+        current_balance: "Current balance"
+        balance_required: "Balance required for payout"
+        funds_needed: "Additional funds needed for payout"
+        next_payout_date: "Next payout processing date"
+        or_next_business_day: "or next business day"
+        details_header: "Earnings details"
+        legacy_header: "Legacy"
+        period_header: "Period"
+        description_header: "Description"
+        amount_header: "Amount"
+        personal_header: "Personal"
+        nonprofit_header: "Nonprofit"
+    account_demographics:
+      show:
+        demographic_header: "Your demographic information"
+    contributions:
+      show:
+        adjust_contribution: "Adjust your contribution"
+        change_your_contribution: "Change your contribution"
+        change_your_nonprofit: "Change your nonprofit"
+        current_contribution: "Current contribution"
+        select_a_nonprofit: "Select a nonprofit"
+        your_nonprofit_contribution: "Your nonprofit contribution"
+    private:
+      show:
+        change_password: "Change your password"
+        password_label: "Password"
+        current_password_label: "Current password"
+        new_password_label: "New password"
+        confirm_password_label: "Password confirmation"
+        submit_button: "Save"
+    emails:
+      edit:
+        change_email: "Change your email"
+    support:
+      show:
+        header: "Op4G Support is here to help"
+        hours: "Hours of operation"
+        mon_fri: "Monday - Friday"
+        nine_to_five_eastern: "9am - 5pm US Eastern Time"
+        contact: "Email us"
+    give_up:
+      show:
+        delete_account: "Are you sure you want to delete your account? There is no going back."
+        header: "We're sorry to see you go"
+        reconsider: "If you ever reconsider your decision, you can sign up as a new member at any time."
+        remove_info: "The closing of your account will be complete when you click on the button below. We will remove all of your personal and account information from our system, except any information required by law."
+        team: "The Op4G team"
+        thanks: "Thanks for being part of Op4G."
+  forms:
+    disable_submit_with: "Saving..."
+  devise:
+    links:
+      sign_in: "Sign in"
+      sign_up: "Sign up"
+      forgot_password: "Forgot your password?"
+      missing_confirmation: "Missing email confirmation instructions?"
+    mailer:
+      welcome: "Welcome"
+      hi: "Hi"
+      closing: "Best,"
+      interest: "Thanks for your interest in becoming an Opinions4Good panel member. Our panelists take interesting market research surveys and get paid in cash—with the option of donating a portion to one of our 300+ charitable nonprofit partners. Participation is free and your privacy is guaranteed. It’s market research for a cause!"
+      confirm: "Before you start taking surveys, we need you to confirm your account. Just click below:"
+      mistake_text: "If you received this email by mistake, simply delete it. You won’t be subscribed if you don’t click the confirmation link above."
+      support_text: "If you have any questions, please do not hesitate to contact Op4G Support at"
+      signature_text: "The Op4G Team"
+      confirmation_instructions:
+        confirm_account: "You can confirm your account email through the link below:"
+        confirm_account_link: "Confirm your account"
+      reset_password_instructions:
+        someone_has_requested: "Someone has requested a link to change your password. You can do this through the link below:"
+        change_password: "Change your password"
+        ignore: "If you didn't request this, please ignore this email. Your password won't change until you access the link above and create a new one."

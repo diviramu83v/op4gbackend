@@ -1,0 +1,42 @@
+.card.mb-3
+  .card-header
+    .d-flex.justify-content-between
+      h4
+        span.mr-3 Feasibility
+
+  .card-body
+    .row
+      .col-3
+        .mb-3
+          = render 'employee/cards/text_element', label: 'Expected Number of Completes', value: format_number(feasibility.number_of_panelists)
+    .row
+      .col-3
+        .mb-3
+          = render 'employee/cards/text_element', label: 'Days in Field', value: feasibility.days_in_field
+      .col-3
+        .mb-3
+          = render 'employee/cards/text_element', label: 'Incidence Rate', value: "#{feasibility.incidence_rate}%"
+      .col-2
+        .mb-3
+          = render 'employee/cards/text_element', label: 'LOI', value: feasibility.loi
+      .col-2
+        .mb-3
+          = render 'employee/cards/text_element', label: 'Competes Wanted', value: format_number(feasibility.limit)
+    hr
+    .row.scroll-overflow-content
+      - if feasibility.age_present?
+        .col-lg-4.mb-3
+          = render 'employee/cards/text_header', label: 'Age'
+          div #{feasibility.min_age} - #{feasibility.max_age}
+      - if feasibility.gender.present?
+        .col-lg-4.mb-3
+          = render 'employee/cards/text_header', label: 'Gender'
+          div #{feasibility.gender.capitalize}
+      - if feasibility.state_names.present?
+        = render 'employee/cint_surveys/region_row', { type: 'States', regions: feasibility.state_names }
+      - if feasibility.city_names.present?
+        = render 'employee/cint_surveys/region_row', { type: 'Cities', regions: feasibility.city_names }
+      - if feasibility.postal_codes.present?
+        = render 'employee/cint_surveys/postal_code_row', { postal_codes: feasibility.formatted_postal_codes }
+      - feasibility.option_variables_hash.each do |option, variables|
+        = render 'employee/cint_surveys/card_row', { quota: feasibility, option: option, variables: variables }

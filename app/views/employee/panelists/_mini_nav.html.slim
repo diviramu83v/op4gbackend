@@ -1,0 +1,15 @@
+span.mr-1 = link_to 'Details',
+  panelist_url(panelist),
+  class: activate_class(panelist_url(panelist), 'btn btn-xs btn-outline-primary')
+span.mr-1 = link_to 'Dashboard',
+  panelist_invitations_url(panelist),
+  class: activate_class(panelist_invitations_url(panelist), 'btn btn-xs btn-outline-primary')
+span.mr-1 = link_to 'Payments',
+  panelist_payments_url(panelist),
+  class: activate_class(panelist_payments_url(panelist), 'btn btn-xs btn-outline-primary')
+span.mr-1 = link_to 'Demographic Information',
+  panelist_demographics_url(panelist),
+  class: activate_class(panelist_demographics_url(panelist), 'btn btn-xs btn-outline-primary')
+span.mr-1 = link_to 'Nonpayments',
+  panelist_nonpayments_url(panelist),
+  class: activate_class(panelist_nonpayments_url(panelist), 'btn btn-xs btn-outline-primary')

@@ -1,0 +1,19 @@
+<p><%= t('devise.mailer.welcome', default: 'Welcome') %>, <%= @resource.first_name %>!</p>
+
+<p><%= t('devise.mailer.interest', default: 'Thanks for your interest in becoming an Opinions4Good panel member. Our panelists take interesting market research surveys and get paid in cash—with the option of donating a portion to one of our 300+ charitable nonprofit partners. Participation is free and your privacy is guaranteed. It’s market research for a cause!') %></p>
+
+<p><%= t('.devise.mailer.confirm', default: 'Before you start taking surveys, we need you to confirm your account. Just click below:')%></p>
+
+<p>
+  <div class='mx-5 my-4'>
+    <%= link_to t('.confirm_account_link', default: 'Yes, confirm my account'), confirmation_url(@resource, confirmation_token: @token, locale: @resource.locale, country: @resource.country.try(:slug)), class: 'btn btn-success btn-lg btn-block' %>
+  </div>
+</p>
+
+<p><%= t('devise.mailer.mistake_text', default: 'If you received this email by mistake, simply delete it. You won’t be subscribed if you don’t click the confirmation link above.') %>
+
+<p><%= t('devise.mailer.support_text', default: 'If you have any questions, please do not hesitate to contact Op4G Support at') %> <%= mail_to 'support@op4g.com' %>.</p>
+
+<p><%= t('devise.mailer.closing', default: 'Best,')%></b></p>
+
+<p><b><%= t('devise.mailer.signature_text', default: 'The Op4G Team')%></b></p>

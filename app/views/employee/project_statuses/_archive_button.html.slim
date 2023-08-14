@@ -1,0 +1,4 @@
+span.mr-1
+  = link_to project_statuses_url(@project, id: 'archived'), method: :post, data: { confirm: confirm_message }, class: "btn btn-outline-info" do
+    i.fa.fa-archive.mr-2
+    | Archive

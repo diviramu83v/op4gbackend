@@ -1,0 +1,19 @@
+.mb-5
+  h2 Upload a payment batch
+.mb-5
+  .row
+    .col-6
+      = form_for @payment_upload_batch, url: payments_url do |f|
+        = render 'employee/form_errors', resource: @payment_upload_batch
+        .form-group
+          = f.label :period
+          = f.text_field :period, placeholder: 'YYYY-MM', class: 'form-control mb-1'
+          = render 'forms/comment', text: 'The accounting period these payments should be counted towards.'
+        = render 'forms/date_field', form: f, field: :paid_at, comment: 'The date these payments were made.'
+        .form-group
+          = f.label :payment_data
+          = f.text_area :payment_data, rows: '15', placeholder: "bob123@yahoo.com\t$11.50\r\njane789@yahoo.com\t$18.00", class: 'form-control'
+          = render 'forms/comment', text: 'Email address and dollar amount, tab-delimited. Intended to support copying from a spreadsheet.'
+        button.btn.btn-primary type="submit" data-disable-with="<i class='fa fa-spinner fa-pulse mr-2'></i>Uploading..."
+          i.fas.fa-cloud-upload-alt.mr-2
+          = 'Save'

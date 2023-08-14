@@ -1,0 +1,36 @@
+.card
+  .card-header
+    .d-flex.justify-content-between
+      h4
+        span.mr-2 Redirects
+
+        - if can?(:view_and_modify, VendorBatch)
+          - if batch.editable? && batch.using_redirects?
+            = link_to edit_vendor_batch_url(batch), class: 'card-header-link' do
+              i.fa.fa-edit.mr-1
+              | Edit
+      - if batch.using_redirects?
+        = render 'shared/copy_button', label: 'Copy all', text: "Complete: #{batch.complete_url.present? ? batch.complete_url : '?'}\nTerminate: #{batch.terminate_url.present? ? batch.terminate_url : '?'}\nQuotafull: #{batch.overquota_url.present? ? batch.overquota_url : '?'}"
+  .card-body
+    - if batch.using_redirects?
+      table.table.table-sm.table-wrapped-no-header.mb-0
+        tbody
+          tr
+            td.redirect-label.dashhead-subtitle Complete
+            td.redirect-value = batch.complete_url.present? ? batch.complete_url : '?'
+          tr
+            td.redirect-label.dashhead-subtitle Terminate
+            td.redirect-value = batch.terminate_url.present? ? batch.terminate_url : '?'
+          tr
+            td.redirect-label.dashhead-subtitle Quotafull
+            td.redirect-value = batch.overquota_url.present? ? batch.overquota_url : '?'
+          - if batch.security_url.present?
+            tr
+              td.redirect-label.dashhead-subtitle Security
+              td.redirect-value = batch.security_url.present? ? batch.security_url : '?'
+    - else
+      .alert.alert-warning.mb-0
+        p.mb-0 Redirects are disabled for this vendor. Traffic will land on our default completion pages.
+    - if batch.send_complete_webhook?
+      .alert.alert-warning.mb-0.mt-2
+        p.mb-0 = "Notifying vendor by webhook: #{batch.base_webhook_url}"

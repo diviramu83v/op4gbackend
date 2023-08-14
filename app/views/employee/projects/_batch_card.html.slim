@@ -1,0 +1,12 @@
+.card
+  .card-header = render 'employee/projects/card_header', project: project
+  .card-body
+    .row
+      .col-sm-3.col-md-2
+        .mb-3.mb-sm-0
+          h6.mb-2.dashhead-subtitle Panelists
+          h4 = project.panelist_count
+      .col-sm-9.col-md-10
+        .mb-0.mb-sm-0
+          h6.mb-2.dashhead-subtitle Name
+          h4 = project.name

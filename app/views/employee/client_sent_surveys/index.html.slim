@@ -1,0 +1,54 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Projects', projects_url
+  li.breadcrumb-item = link_to @survey.project.extended_name, @survey.project
+  li.breadcrumb-item = link_to @survey.name, @survey
+  li.breadcrumb-item.active Client sent survey
+.mb-5
+  = render 'employee/surveys/header', survey: @survey
+.row
+  .col-12 = render 'employee/surveys/details', survey: @survey
+  .col-2 = render 'employee/surveys/menu'
+  .col-10
+    - if @survey.client_sent_survey.blank?
+      span.mr-2.pb-5
+        = link_to new_survey_client_sent_survey_url(@survey), class: 'btn btn-link pl-0 mr-3' do
+          i.fa.fa-plus-circle.mr-1
+          | Add client sent survey
+    span.mr-2.pb-5
+      = link_to survey_client_sent_survey_unsubscriptions_url(@survey), class: 'btn btn-link pl-0 mr-3' do
+        i.fa.fa-clipboard-list.mr-1
+        | View unsubscribed list
+    - if @survey.client_sent_survey.blank?
+      p.mb-0 Client sent survey has not been uploaded.
+    - else
+      .card.mb-3
+        .card-header
+          .d-flex.justify-content-between
+            span
+              h4
+                span.mr-2 Client Sent Survey
+            span.mr-2
+              = link_to edit_client_sent_survey_url(@client_sent_survey), class: "btn btn-outline-primary btn-xs" do
+                i.fa.fa-edit.mr-1
+                | Edit
+        .card-body
+          .row.mb-4
+            .col-3
+              h5.mb-2.dashhead-subtitle.text-header.tiny-button-header Employee
+              span.mr-2 = @client_sent_survey.employee.name.presence || '?'
+            .col-3
+              h5.mb-2.dashhead-subtitle.text-header.tiny-button-header Email subject
+              span.mr-2 = @client_sent_survey.email_subject.presence || '?'
+            .col-3
+              h5.mb-2.dashhead-subtitle.text-header.tiny-button-header Description
+              span.mr-2 = @client_sent_survey.description.presence || '?'
+            .col-3
+              h5.mb-2.dashhead-subtitle.text-header.tiny-button-header Incentive
+              span.mr-2 = format_currency_with_zeroes(@client_sent_survey.incentive.presence) || '?'
+          .row.mb-4
+            .col-12
+              h6.mb-2.dashhead-subtitle.text-header.tiny-button-header
+                span = 'Link'
+                span.ml-2 = render 'shared/copy_button', label: 'Copy', text: survey_client_sent_survey_url(@client_sent_survey.onramp_token)
+              span = survey_client_sent_survey_url(@client_sent_survey.onramp_token)
+

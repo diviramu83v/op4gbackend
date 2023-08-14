@@ -1,0 +1,25 @@
+.mb-3
+  h3
+    span.mr-2 Campaigns
+    span.mr-0
+      - if can?(:view_and_modify, RecruitingCampaign)
+        = link_to new_nonprofit_recruiting_campaign_url(resource), class: 'page-header-link' do
+          i.fa.fa-plus-circle.mr-1
+          | Add
+- if resource.campaigns.empty?
+  p.mb-0 No campaigns found.
+- else
+  table.table.table-sm.mb-0
+    thead
+      tr
+        th Invite code
+        th Landing page
+        th.text-right Signed up
+    tbody
+      - resource.campaigns.most_recent_first.each do |campaign|
+        tr
+          td = link_to campaign.code, campaign
+          td = link_to landing_page_url(code: campaign.code), landing_page_url(code: campaign.code)
+          td.text-right = format_number(campaign.signup_completed_count)
+- if resource.panelists.completed_signup.deleted.where(campaign: nil).any?
+  p.mb-0.mt-1.text-right = "* #{pluralize(format_number(resource.panelists.completed_signup.deleted.where(campaign: nil).count), 'panelist record')} deleted & campaign removed"

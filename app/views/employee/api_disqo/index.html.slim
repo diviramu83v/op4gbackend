@@ -1,0 +1,25 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item Disqo API
+.mb-5
+  .mb-3
+    .d-flex
+      h3
+        span.mr-3 Disqo API
+  span#table-data
+    .d-flex.flex-column.align-items-center
+      .spinner.mt-3
+        i.fa.fa-spinner.fa-pulse.fa-3x.fa-fw
+        span.sr-only Loading...
+.row.mb-5
+  .col-3
+    h4
+      span.mr-1
+        = link_to 'Surveys list', api_disqo_surveys_url
+
+javascript:
+  var years = #{@years}
+  var url = "#{request.host_with_port}"
+coffee:
+  App.cable.subscriptions.create { channel: "ApiDisqoCompletesChannel", years: years },
+    received: (data) ->
+      $('#table-data').html(data.replace /admin.example.org/g, url)

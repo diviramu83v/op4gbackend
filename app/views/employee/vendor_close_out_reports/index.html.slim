@@ -1,0 +1,22 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Project close-outs', project_close_outs_url
+  li.breadcrumb-item = link_to @project.name, project_url(@project)
+  li.breadcrumb-item = link_to 'Project close-out', project_close_out_url(@project)
+  li.breadcrumb-item.active Vendor close-out reports
+
+.mb-4
+  h2
+    span.mr-3 Vendor close-out reports
+.card.mb-3
+  .card-header
+    .d-flex.justify-content-between
+      .mb-4
+        h4 = @project.name
+    - if @project.vendor_batches.present?
+      = render 'employee/vendor_close_out_reports/vendor_reports_stats', project: @project
+    - if @project.disqo_quotas.present?
+      = render 'employee/vendor_close_out_reports/disqo_reports_stats', project: @project
+    - if @project.cint_surveys.present?
+      = render 'employee/vendor_close_out_reports/cint_reports_stats', project: @project
+    - if @project.schlesinger_quotas.present?
+      = render 'employee/vendor_close_out_reports/schlesinger_reports_stats', project: @project

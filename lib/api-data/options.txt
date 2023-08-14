@@ -1,0 +1,108 @@
+id: string
+  "SqddjejshdiJdTdjeiskeEjfd"
+
+status: integer
+  200: ok
+  400: bad request
+  401: unauthorized
+  429: too many requests
+  500: server error
+
+country: array of strings
+  "CA": Canada
+  "DE": Germany
+  "ES": Spain
+  "FR": France
+  "GB": United Kingdom
+  "US": United States
+
+state: array of strings
+  "AL": Alabama
+  "AK": Alaska
+  "AZ": Arizona
+  "AR": Arkansas
+  "CA": California
+  "CO": Colorado
+  "CT": Connecticut
+  "DE": Delaware
+  "FL": Florida
+  "GA": Georgia
+  "HI": Hawaii
+  "ID": Idaho
+  "IL": Illinois
+  "IN": Indiana
+  "IA": Iowa
+  "KS": Kansas
+  "KY": Kentucky
+  "LA": Louisiana
+  "ME": Maine
+  "MD": Maryland
+  "MA": Massachusetts
+  "MI": Michigan
+  "MN": Minnesota
+  "MS": Mississippi
+  "MO": Missouri
+  "MT": Montana
+  "NE": Nebraska
+  "NV": Nevada
+  "NH": New Hampshire
+  "NJ": New Jersey
+  "NM": New Mexico
+  "NY": New York
+  "NC": North Carolina
+  "ND": North Dakota
+  "OH": Ohio
+  "OK": Oklahoma
+  "OR": Oregon
+  "PA": Pennsylvania
+  "RI": Rhode Island
+  "SC": South Carolina
+  "SD": South Dakota
+  "TN": Tennessee
+  "TX": Texas
+  "UT": Utah
+  "VT": Vermont
+  "VA": Virginia
+  "WA": Washington
+  "WV": West Virginia
+  "WI": Wisconsin
+  "WY": Wyoming
+
+gender: array of strings
+  "male"
+  "female"
+
+income: array of strings, representing ranges of currency
+  "0-14999": Less than 15,000
+  "15000-24999": 15,000 to 24,999
+  "25000-34999": 25,000 to 34,999
+  "35000-44999": 35,000 to 44,999
+  "45000-54999": 45,000 to 54,999
+  "55000-64999": 55,000 to 64,999
+  "65000-74999": 65,000 to 74,999
+  "75000-84999": 75,000 to 84,999
+  "85000-94999": 85,000 to 94,999
+  "95000-124999": 95,000 to 124,999
+  "125000-199999": 125,000 to 199,999
+  "200000-1000000": 200,000 or more
+
+age: array of integers
+  13
+  14
+  15
+  ...
+  103
+  104
+  105
+
+payout_dollars: float with two decimal places
+  15.50
+
+loi_minutes: integer
+  1
+  2
+  3
+  ...
+  118
+  119
+  120

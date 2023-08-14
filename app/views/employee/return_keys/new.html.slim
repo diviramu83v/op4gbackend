@@ -1,0 +1,22 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Projects', projects_url
+  li.breadcrumb-item = link_to @survey.project.extended_name, @survey.project
+  li.breadcrumb-item = link_to @survey.name, survey_url(@survey)
+  li.breadcrumb-item = link_to 'Return keys', survey_return_keys_url(@survey)
+  li.breadcrumb-item.active New
+.mb-5
+  h2 New survey return keys
+.mb-5
+  .row
+    .col-lg-4
+      = form_for :return_keys, url: survey_return_keys_url(@survey) do |f|
+        .form-group
+          .row
+            .col-12
+              = f.label :enter_number_of_keys_to_generate
+          .row
+            .col-6
+              = f.number_field :number, class: 'form-control'
+            .col-6
+              span#upload-button
+                = render 'employee/form_buttons'

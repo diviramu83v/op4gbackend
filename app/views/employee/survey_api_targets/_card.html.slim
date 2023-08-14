@@ -1,0 +1,108 @@
+.card
+  .card-header
+    .d-flex.justify-content-between
+      h4
+        span.mr-2 API Targeting
+        span.mr-2.badge class="badge-#{api_status_class(@target)}"
+          = @target&.status
+        - if survey.survey_api_target.present?
+          span.mr-2
+            = link_to edit_survey_api_target_url(survey), class: 'card-header-link' do
+              i.fa.fa-edit.mr-1
+              | Edit
+        - else
+          span.mr-2
+            = link_to new_survey_api_target_url(survey), class: 'card-header-link' do
+              i.fa.fa-plus-circle.mr-1
+              | Add
+      span
+        - if survey.survey_api_target.present? && survey.survey_api_target.not_active?
+          = link_to survey_api_target_activations_url(survey), method: :post, class: 'btn btn-xs btn-outline-primary' do
+            i.fa.fa-toggle-on.mr-1
+            | Activate
+        - elsif survey.survey_api_target.present?
+          = link_to survey_api_target_activations_url(survey), method: :delete, class: 'btn btn-xs btn-outline-secondary' do
+            i.fa.fa-toggle-off.mr-1
+            | Deactivate
+  .card-body
+    - if @target.present?
+      .row.mb-3
+        .col-lg-12
+          = render 'employee/cards/text_element', label: 'Payout', value: format_currency_with_zeroes(@target.payout)
+      - @countries = @target.countries
+      - if @countries.present?
+        .row.mb-3
+          .col-lg-12
+            = render 'employee/cards/text_element', label: 'Country', value: @countries.join(', ')
+      - @states = @target.states
+      - if @states.present?
+        .row.mb-3
+          .col-lg-12
+            = render 'employee/cards/text_element', label: 'State', value: @states.join(', ')
+      - @genders = @target.genders
+      - if @genders.present?
+        .row.mb-3
+          .col-lg-12
+            = render 'employee/cards/text_element', label: 'Gender', value: @genders.join(', ')
+      .row.mb-3
+        .col-lg-12
+          = render 'employee/cards/text_element', label: 'Age', value: formatted_age_range(@target)
+      .row.mb-3
+        .col-lg-12
+          = render 'employee/cards/text_element', label: 'Status', value: @target.status&.humanize
+      - @education = @target.education
+      - if @education.present?
+        .row.mb-3
+          .col-lg-12
+            = render 'employee/cards/text_header', label: 'Education'
+            - @education.map do |e|
+              div = "- #{SurveyApiTarget::EDUCATION_OPTIONS[e.to_sym]}"
+      - @employment = @target.employment
+      - if @employment.present?
+        .row.mb-3
+          .col-lg-12
+            = render 'employee/cards/text_header', label: 'Employment'
+            - @employment.map do |e|
+              div = "- #{SurveyApiTarget::EMPLOYMENT_OPTIONS[e.to_sym]}"
+      - @income = @target.income
+      - if @income.present?
+        .row.mb-3
+          .col-lg-12
+            = render 'employee/cards/text_header', label: 'Income'
+            - @income.map do |e|
+              div = "- #{SurveyApiTarget::INCOME_OPTIONS[e.to_sym]}"
+      - @race = @target.race
+      - if @race.present?
+        .row.mb-3
+          .col-lg-12
+            = render 'employee/cards/text_header', label: 'Race'
+            - @race.map do |e|
+              div = "- #{SurveyApiTarget::RACE_OPTIONS[e.to_sym]}"
+      - @number_of_employees = @target.number_of_employees
+      - if @number_of_employees.present?
+        .row.mb-3
+          .col-lg-12
+            = render 'employee/cards/text_header', label: 'Employees'
+            - @number_of_employees.map do |e|
+              div = "- #{SurveyApiTarget::NUMBER_OF_EMPLOYEE_OPTIONS[e.to_sym]}"
+      - @job_title = @target.job_title
+      - if @job_title.present?
+        .row.mb-3
+          .col-lg-12
+            = render 'employee/cards/text_header', label: 'Job'
+            - @job_title.map do |e|
+              div = "- #{SurveyApiTarget::JOB_TITLE_OPTIONS[e.to_sym]}"
+      - @decision_maker = @target.decision_maker
+      - if @decision_maker.present?
+        .row.mb-3
+          .col-lg-12
+            = render 'employee/cards/text_header', label: 'Decision Maker'
+            - @decision_maker.map do |e|
+              div = "- #{SurveyApiTarget::DECISION_MAKER_OPTIONS[e.to_sym]}"
+      - @custom_option = @target.custom_option
+      - if @custom_option.present?
+        .row.mb-3
+          .col-lg-12
+            = render 'employee/cards/text_element', label: 'Additional Information for Vendors', value: @custom_option
+    - else
+      p.mb-0 No API survey configured.

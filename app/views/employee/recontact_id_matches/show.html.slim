@@ -1,0 +1,14 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Projects', projects_url
+  li.breadcrumb-item = link_to @project.extended_name, @project
+  li.breadcrumb-item = link_to @recontact.name, recontact_url(@recontact)
+  li.breadcrumb-item.active = 'ID Matches'
+
+.mb-4
+  h2
+    span.mr-3 Total IDs matched
+    span.badge.badge-secondary = @recontact.recontacted_onboardings.complete.size
+  - if @recontact.recontacted_onboardings.complete.any?
+    = render 'employee/recontact_id_matches/id_matches_card'
+  - else
+    p.mb-0 No ID matches found.

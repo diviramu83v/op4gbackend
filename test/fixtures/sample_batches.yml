@@ -1,0 +1,5 @@
+standard:
+  query: standard
+  count: 1
+  incentive_cents: 500
+  email_subject: Test subject

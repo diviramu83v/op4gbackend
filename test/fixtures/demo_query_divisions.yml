@@ -1,0 +1,6 @@
+standard:
+  demo_query: standard
+  division: standard
+feasibility:
+  demo_query: feasibility_demo
+  division: standard

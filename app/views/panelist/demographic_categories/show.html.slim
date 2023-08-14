@@ -1,0 +1,37 @@
+.card.mb-3
+  / .card-header
+  /   h4 = t('panelist.demographic_categories.show.demographic_questionnaire', default: 'Demographic questionnaire')
+  .card-body.mt-0
+    p = t('panelist.demographic_categories.show.instructions', default: 'Please answer the following questions.')
+= form_for(:demographics, url: demographics_url) do |f|
+  .card.mb-3
+    .card-header
+      h4 = t(".#{@category.slug}", default: @category.name)
+    .card-body
+      .row
+        - @questions.each do |question|
+          - if question.input_type == 'radio'
+            .col-md-6
+              .form-group.mb-3
+                p.mb-2 = t("demo_questions.#{question.slug}", default: question.body)
+                - question.demo_options_for_panelist(current_panelist).each do |option|
+                  .form-check.form-check-inline
+                    = f.radio_button question.label, option.id, class: 'form-check mr-2'
+                    = f.label question.label, t("demo_options.#{option.label.downcase}", default: option.label), value: option.id, class: 'form-check-label'
+          - elsif question.input_type == 'multiple'
+            .col-md-12
+              .form-group.mb-3
+                p.mb-2 = question.body
+                - question.demo_options_for_panelist(current_panelist).each do |option|
+                  .form-check.form-check-inline
+                    label.form-check-label.mr-2
+                      = check_box_tag "demographics[#{question.label}][]", option.id, false, class: 'form-check-input checkbox-multi-click region'
+                      = option.label
+          - else
+            .col-md-6
+              .form-group.mb-3
+                p.mb-2 = t("demo_questions.#{question.slug}", default: question.body)
+                = f.collection_select(question.label, question.demo_options_for_panelist(current_panelist), :id, :translate, { prompt: t('panelist.demographic_categories.show.prompt', default: "Choose one...") }, {class: 'form-control'})
+      button.btn.btn-primary type="submit" data-disable-with=t('forms.disable_submit_with', default: "Saving...")
+        i.fas.fa-cloud-upload-alt.mr-2
+        = t('panelist.demographic_categories.show.save', default: 'Save')

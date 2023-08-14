@@ -1,0 +1,10 @@
+standard:
+  status: active
+  token: <%= SecureRandom.hex %>
+  vendor: api
+  description: "Test token: active"
+sandbox:
+  status: sandbox
+  token: <%= SecureRandom.hex %>
+  vendor: api
+  description: "Test token: sandbox"

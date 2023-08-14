@@ -1,0 +1,16 @@
+= render 'employee/cards/text_header', label: 'Sample'
+- query.sample_batches.by_first_created.each do |batch|
+  .mb-3
+    = render 'employee/sample_batches/card', batch: batch
+.mb-3
+  - if can?(:view_and_modify, SampleBatch)
+    - if query.sample_batches.empty?
+      = link_to new_query_sample_url(query), class: 'btn btn-link pl-0' do
+        i.fa.fa-plus-circle.mr-1
+        | Add batch
+    - else
+      = link_to new_query_sample_url(query), class: 'btn btn-link pl-0' do
+        i.fa.fa-plus-circle.mr-1
+        | Add another batch
+.mb-0
+  = render 'employee/cards/text_element', label: 'Invitable panelists', value: format_number(query.invitable_panelist_count(cache: false))

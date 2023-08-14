@@ -1,0 +1,28 @@
+.mb-3
+  table.table.table-sm.mb-0 data-sort='table'
+    thead
+      tr
+        th Affiliate
+        th Offer
+        th TUNE signups
+        th DB signups
+        th Opportunities
+        th Completes
+        / th Completes (%)
+        th Completers
+        / th Completers (%)
+        th Accepted Completes
+        th Affiliate payout
+        th User payout
+        th Total payout
+        th Cost per complete
+        th ROI
+    tbody#table-data
+      tr
+        td.text-center colspan='12'
+          - if params[:action] == 'show'
+            .spinner.mt-3
+              i.fa.fa-spinner.fa-pulse.fa-3x.fa-fw
+              span.sr-only Loading...
+          - else
+            .mt-3 Press 'Update' to run a new report.

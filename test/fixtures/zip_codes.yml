@@ -1,0 +1,15 @@
+standard:
+  code: 11111
+  state: idaho
+  region: northeast
+  division: standard
+standard_two:
+  code: 11112
+  state: idaho
+  region: northeast
+  division: standard
+not_linked:
+  code: 22222
+  state: california
+  region: southwest
+  division: standard

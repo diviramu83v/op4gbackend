@@ -1,0 +1,27 @@
+- content_for :breadcrumbs
+  - content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Panels', panels_url
+  li.breadcrumb-item = link_to 'Panel', panel_url(@panel)
+  li.breadcrumb-item.active Questions
+
+h2.mb-5
+  span.mr-3 Questions
+  - if can?(:view_and_modify, Panel)
+    = link_to new_panel_question_url(@panel), class: 'page-header-link' do
+        i.fa.fa-plus-circle.mr-1
+        | Add question
+
+- @panel.demo_questions_categories.by_sort_order.each do |demo_questions_category|
+  .row
+    .col-8.dashhead-subtitle.my-3 = demo_questions_category.name
+    .col-3.dashhead-subtitle.my-3 sort order
+  - demo_questions_category.demo_questions.by_sort_order.each do |demo_question|
+    .card.mb-1
+      .p-2
+        .row
+          .col-8 = demo_question.body
+          .col-3 = demo_question.sort_order
+          .col-1
+            span.mr-0 = link_to panel_question_url(@panel, demo_question), class: 'btn btn-link btn-xs' do
+              i.fa.fa-ambulance.mr-1
+              | View

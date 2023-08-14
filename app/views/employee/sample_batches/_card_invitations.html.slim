@@ -1,0 +1,9 @@
+= render 'employee/sample_batches/invitation_groups', { batch: batch }
+
+javascript:
+  var sample_batch_id = "#{batch.id}"
+
+coffee:
+  App.cable.subscriptions.create { channel: "BatchInvitationsChannel", sample_batch: sample_batch_id },
+    received: (data) ->
+      $('#' + sample_batch_id).html(data)

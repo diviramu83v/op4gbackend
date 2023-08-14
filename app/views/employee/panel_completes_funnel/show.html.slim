@@ -1,0 +1,58 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Panels', panels_url
+  li.breadcrumb-item = link_to @panel.name, panel_url(@panel)
+  li.breadcrumb-item.active = 'Panel completes funnel'
+.mb-5
+  .d-flex.justify-content-between
+    h2
+      span.mr-2 Completes funnel
+.row.mb-5
+  .col-lg-5 = render 'employee/cards/text_element', label: 'Name', value: @panel.name
+.row.mb-5
+  = form_for :report do |f|
+    .col-12
+      .row
+        .col-4
+          span.mr-1 = label :month, 'Month'
+        .col-4
+          span.mr-1 = label :year, 'Year'
+      .row
+        .col-4
+          = f.select :month, options_for_select(Date::MONTHNAMES.compact + ['All'], selected: Time.now.utc.strftime('%B')), { }, { id: 'month-field', class: 'form-control ml-1 mr-3' }
+        .col-4
+          = f.select :year, options_for_select((2019..Time.now.utc.year).reverse_each + ['All']), { }, { id: 'year-field', class: 'form-control ml-1 mr-3' }
+        .col-4
+          span#generate-button.btn.btn-outline-primary.form-control
+            i.fas.fa-cloud-download-alt.mr-2
+            | Generate
+.row
+  .col-lg-8
+    h3.mb-4 Completes
+    #row-data
+      i.fa.fa-spinner.fa-pulse.fa-3x.fa-fw
+      span.sr-only Loading...
+
+javascript:
+  var month = $('#month-field').val()
+  var year = $('#year-field').val()
+  var panel_id = "#{@panel.id}"
+  $('#month-field').change(function() {
+    month = $('#month-field').val()
+  })
+  $('#year-field').change(function() {
+    year = $('#year-field').val()
+    if (year == 'All') {
+      $('#month-field').val('All')
+    }
+  })
+coffee:
+  App.resource_report = App.cable.subscriptions.create { channel: "CompletesFunnelChannel", id: panel_id, resource: 'Panel', year: year, month: month },
+    received: (data) ->
+      $('#row-data').replaceWith(data)
+      App.resource_report.unsubscribe()
+  $('#generate-button').click ->
+    $('#row-data').html("<i class='fa fa-spinner fa-pulse fa-3x fa-fw'></i>")
+    App.resource_report = App.cable.subscriptions.create { channel: "CompletesFunnelChannel", id: panel_id, resource: 'Panel', year: year, month: month },
+      received: (data) ->
+        $('#row-data').replaceWith(data)
+        App.resource_report.unsubscribe()

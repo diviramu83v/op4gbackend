@@ -1,0 +1,4 @@
+= render 'employee/cards/text_header', label: label
+= render 'employee/cards/text_value', value: value, link: link
+- if local_assigns[:secondary_value]
+  = render 'employee/cards/text_value', value: secondary_value

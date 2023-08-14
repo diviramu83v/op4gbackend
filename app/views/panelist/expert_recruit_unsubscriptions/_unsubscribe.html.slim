@@ -1,0 +1,9 @@
+.card
+  .card-header
+    h4 Unsubscribe - #{@expert_recruit.email}
+  .card-body
+    h5 If you no longer wish to receive e-mail from Op4G, please click below to unsubscribe.
+  .row
+    .col.ml-3.mb-4
+      = link_to expert_recruit_unsubscriptions_url(email: @expert_recruit.email, unsubscribe_token: @expert_recruit.unsubscribe_token), method: :post, class: 'btn btn-primary' do
+        | Unsubscribe

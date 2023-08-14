@@ -1,0 +1,12 @@
+.bg-light {
+  background-color: #ffffff !important;
+}
+
+.btn-outline-warning {
+  color: orange !important;
+  border-color: orange !important;
+  &:hover {
+    background-color: orange !important;
+    color: white !important;
+  }
+}

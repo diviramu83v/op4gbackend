@@ -1,0 +1,6 @@
+one:
+  employee: operations
+  easy_test: false
+two:
+  employee: admin
+  easy_test: false

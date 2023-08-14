@@ -1,0 +1,11 @@
+.row
+  .col-lg-4.mb-3 = render 'panelist/accounts/navigation_card', panelist: current_panelist, payments_url: account_payments_url, account_url: account_contribution_url, demographics_url: account_demographics_url, password_url: edit_account_private_url
+  .col-lg-8
+    .mb-3 = render 'summary_card', panelist: current_panelist
+    - if @details_present
+      .card.mb-1
+        .card-header.no-card-body
+          h4 = t('panelist.payments.show.details_header', default: 'Earnings details')
+      - @years.each do |year|
+        .mb-1 = render 'yearly_card', panelist: current_panelist, year: year
+      .mb-0 = render 'legacy_card', panelist: current_panelist if current_panelist.legacy_earnings.positive?

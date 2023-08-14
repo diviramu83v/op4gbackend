@@ -1,0 +1,36 @@
+
+.mb-5
+  h2
+    span.mr-3 Projects awaiting IDs
+    .d-flex.justify-content-end.mb-1
+.mb-5
+  table.table.mb-3 data-sort='table'
+    thead
+      tr
+        th ID
+        th Name
+        th Project surveys statuses
+        th PM
+        th Close out status
+        th
+    span.mr-2
+      .pagination-xs = paginate @projects
+    tbody
+      - @projects.each do |project|
+        tr
+          td = project.id
+          td = link_to project.name, project
+          td
+            - project.surveys.each do |survey|
+              div
+                span #{survey.name}:
+                span
+                  .badge.ml-1 class="badge-#{survey_status_class(survey.status)}"
+                    = survey.status
+          td style='min-width:120px' = project.manager.name
+          td = project_close_out_label(project.close_out_status)
+          td style='min-width:150px' = link_to project_close_out_url(project) do
+            i.fas.fa-flag-checkered.mr-1
+            | Project close-out
+  span.mr-2
+    .pagination-xs = paginate @projects

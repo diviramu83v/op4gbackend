@@ -1,0 +1,4 @@
+- Can you work with a standard http status code?
+- Do you need a real UUID value or does any unique token work?
+- We usually use {{uid}} in our URLs. Does that work for you?
+- If we don't send a target attribute, can you assume we're not filtering on that attribute?

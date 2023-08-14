@@ -1,0 +1,26 @@
+#security-dashboard
+  .row
+    .col-4.dashboard-card
+      .mb-5
+        .mb-3
+          .card
+            .card-header
+              h4 = link_to 'Denylist', denylist_path
+            .card-body
+              p View all blocked IP addresses
+    .col-4.dashboard-card
+      .mb-5
+        .mb-3
+          .card
+            .card-header
+              h4 = link_to 'IP Addresses By Onboarding', ip_addresses_path(context: 'onboarding')
+            .card-body
+              p View all onboarding IP addresses
+    .col-4.dashboard-card
+      .mb-5
+        .mb-3
+          .card
+            .card-header
+              h4 = link_to 'IP Addresses By Panelist', ip_addresses_path(context: 'panelist')
+            .card-body
+              p View all panelist IP addresses

@@ -1,0 +1,34 @@
+.mb-5
+  h2 Active projects/surveys report
+  p This report consists of all surveys with a status of 'live', 'hold' or 'waiting'. These surveys are grouped by project.
+  .mb-5
+    .row
+      .col-3
+        .mt-2
+          span
+            span#download-button.btn.btn-primary.mb-2
+              i.fas.fa-cloud-download-alt.mr-2
+              | Download
+
+coffee:
+  $('#download-button').click ->
+    $(this).html("<i class='fa fa-spinner fa-pulse mr-2'></i>Generating")
+    $('#download-button').addClass('disabled');
+    $('#download-button').css('pointer-events', 'none');
+    App.active_surveys_report_download = App.cable.subscriptions.create { channel: "ActiveSurveysReportDownloadChannel" },
+      received: (data) ->
+        $('#download-button').html("<i class='fas fa-cloud-download-alt mr-2'></i>Download")
+        $('#download-button').removeClass('disabled');
+        $('#download-button').css('pointer-events', 'auto');
+        blob = new Blob([data['csv_file']['content']]);
+
+        # Create a link with the data and trigger click event to download the file
+        csv_download_link = document.createElement('a');
+        csv_download_link.href = window.URL.createObjectURL(blob);
+        csv_download_link.download = data['csv_file']['file_name'];
+        csv_download_link.click();
+
+        App.active_surveys_report_download.unsubscribe()
+        App.cable.disconnect()
+        delete App.active_surveys_report_download
+        return

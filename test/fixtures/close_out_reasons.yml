@@ -1,0 +1,9 @@
+rejected:
+  title: Test
+  definition: This is the test definition.
+  category: rejected
+
+fraud:
+  title: Test
+  definition: This is the test definition.
+  category: fraud

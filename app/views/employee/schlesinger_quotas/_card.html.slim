@@ -1,0 +1,45 @@
+.card.mb-3
+  .card-header
+    .d-flex.justify-content-between
+      h4
+        span.mr-2
+          = "Schlesinger Quota: #{schlesinger_quota.name}"
+        span.mr-2.badge class="badge-#{schlesinger_quota.status == 'live' ? 'primary' : 'secondary'}"
+          = schlesinger_quota&.status
+        span.mr-2
+          - if can?(:view_and_modify, Survey)
+            = link_to edit_schlesinger_quota_url(schlesinger_quota), class: 'card-header-link' do
+              i.fa.fa-edit.mr-1
+              | Edit
+      span
+        - if can?(:view_and_modify, Survey)
+          - if schlesinger_quota.present? && schlesinger_quota.eligible_to_activate?
+            = link_to schlesinger_quota_schlesinger_quota_activations_url(schlesinger_quota), method: :post, class: 'btn btn-xs btn-outline-primary' do
+              i.fa.fa-toggle-on.mr-1
+              | Activate
+          - elsif schlesinger_quota.present? && schlesinger_quota.status == 'live'
+            = link_to schlesinger_quota_activation_url(schlesinger_quota), method: :delete, class: 'btn btn-xs btn-outline-secondary' do
+              i.fa.fa-toggle-off.mr-1
+              | Pause
+  .card-body
+    - if schlesinger_quota.status == 'completed'
+      .alert.alert-danger.mb-3
+        p.mb-0 This quota is closed and can't be reopened
+    .row.mb-3
+      .col-lg-3
+        = render 'employee/cards/text_element', label: 'Project ID', value: schlesinger_quota.schlesinger_project_id
+      .col-lg-3
+        = render 'employee/cards/text_element', label: 'Survey ID', value: schlesinger_quota.schlesinger_survey_id
+      .col-lg-3
+        = render 'employee/cards/text_element', label: 'Quota ID', value: schlesinger_quota.schlesinger_quota_id
+    .row.mb-3
+      .col-lg-3
+        = render 'employee/cards/text_element', label: 'Payout', value: format_currency_with_zeroes(schlesinger_quota.cpi)
+      .col-lg-3
+        = render 'employee/cards/text_element', label: 'Soft Launch Completes Wanted', value: format_number(schlesinger_quota.soft_launch_completes_wanted)
+      .col-lg-3
+        = render 'employee/cards/text_element', label: 'Completes Wanted', value: format_number(schlesinger_quota.completes_wanted)
+    hr
+    .row.scroll-overflow-content
+      - schlesinger_quota.qualifications.each_key do |filter|
+        = render 'card_row', { schlesinger_quota: schlesinger_quota, filter: filter }

@@ -1,0 +1,23 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Projects', projects_url
+  li.breadcrumb-item = link_to @recontact.project.extended_name, @recontact.project
+  li.breadcrumb-item = link_to @recontact.name, recontact_url(@recontact)
+  li.breadcrumb-item.active New Invitation Batch
+.mb-5
+  h2
+    span.mr-3 New Recontact Invitation Batch
+.mb-2
+  = flash[:alert]
+.mb-0
+  .mb-3
+    h3 Upload file
+    = render 'employee/cards/text_header_with_tooltip', label: 'Upload Uids and URLs - CSV file', tooltip: '2 columns: uid, url. No headers.'
+  = form_for @recontact_invitation_batch, :url => url_for(:controller => 'employee/recontact_invitation_batches', :action => 'create'), remote:true do |f|
+    = render 'employee/form_errors', resource: @recontact_invitation_batch
+    .form-group
+      = f.file_field :uids_urls, class: 'form-control-file', accept: 'text/csv'
+    button.btn.btn-primary type="submit" data-disable="button"
+      i.fas.fa-cloud-upload-alt.mr-2
+      = 'Save'
+
+= render 'employee/recontact_invitation_batches/url_info_box'

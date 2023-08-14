@@ -1,0 +1,15 @@
+.mb-5
+  h2
+    .d-flex.justify-content-between
+      span
+        span.mr-2 = survey.name
+        span.mr-2.badge class="badge-#{survey_status_class(survey.status)}"
+          = survey.status
+        - if survey.present?
+          span
+            - if can?(:view_and_modify, Survey)
+              = link_to edit_survey_url(survey), class: 'page-header-link' do
+                i.fa.fa-edit.mr-1
+                | Edit
+      span
+        = render 'employee/survey_statuses/buttons', survey: survey

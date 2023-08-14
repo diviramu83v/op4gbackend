@@ -1,0 +1,3 @@
+standard:
+  description: 'test description'
+  happened_at: <%= Time.now.utc.beginning_of_day %>

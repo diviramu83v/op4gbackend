@@ -1,0 +1,22 @@
+.mb-5
+  .d-flex.justify-content-between
+    h2
+      span.mr-3 Cint Feasibility
+      span.mr-0
+        - if can?(:view_and_modify, Panel)
+          = link_to new_cint_feasibility_url, class: 'page-header-link' do
+            i.fa.fa-plus-circle.mr-1
+            | Add
+
+.d-flex.justify-content-end
+  .pagination-xs.mb-0 = paginate @feasibilities
+table style='width: 100%'
+  tbody
+    .mb-5
+      = render 'employee_buttons'
+    .mb-4
+      - @feasibilities.each do |feasibility|
+        tr
+          td = render 'employee/cint_feasibilities/card', feasibility: feasibility
+.d-flex.justify-content-end.mt-4
+  .pagination-xs.mb-0 = paginate @feasibilities

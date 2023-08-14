@@ -1,0 +1,9 @@
+.mb-5
+  h2 Panels
+
+- if current_employee.locked_panel?(session[:effective_role])
+  h5 Locked Panels
+  = render 'employee/panels/table', panels: @locked_panels, inactive_panels: @inactive_locked_panels
+  .mt-5
+    h5 Standard Panels
+= render 'employee/panels/table', panels: @panels, inactive_panels: @inactive_panels

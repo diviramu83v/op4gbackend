@@ -1,0 +1,17 @@
+.card
+  .card-header
+    h4 = t('panelist.support.show.header', default: 'Op4G Support is here to help')
+  .card-body
+    .mb-3
+      h5.mb-3
+         i.far.fa-clock.mr-2
+         = t('panelist.support.show.hours', default: 'Hours of operation')
+      p.mb-0 = t('panelist.support.show.mon_fri', default: 'Monday - Friday')
+      p.mb-0 = t('panelist.support.show.nine_to_five_eastern', default: '9am - 5pm US Eastern Time')
+
+      .d-none.d-md-block
+        <iframe id='zsfeedbackFrame' width='1000' height='570' name='zsfeedbackFrame' scrolling='no' allowtransparency='false' frameborder='0' border='0' src='https://desk.zoho.com/support/fbw?formType=AdvancedWebForm&fbwId=816dcbc928a86bf37a6c75066ab639767cc50d48844902f0&xnQsjsdp=R-wTHzlmWdeHvqOEPjOsyg$$&mode=showNewWidget&displayType=iframe'></iframe>
+
+      / mobile optimization
+      .d-md-none.align-content-center
+        <iframe id='zsfeedbackFrame' width='325' height='600' name='zsfeedbackFrame' scrolling='no' allowtransparency='false' frameborder='0' border='0' src='https://desk.zoho.com/support/fbw?formType=AdvancedWebForm&fbwId=816dcbc928a86bf37a6c75066ab639767cc50d48844902f0&xnQsjsdp=R-wTHzlmWdeHvqOEPjOsyg$$&mode=showNewWidget&displayType=iframe'></iframe>

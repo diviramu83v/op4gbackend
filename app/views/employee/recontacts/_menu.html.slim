@@ -1,0 +1,12 @@
+.mb-5
+  ul.nav.flex-column.step-menu
+    li.nav-item
+      = campaign_menu_link(recontact_traffic_url(@recontact), 'Traffic')
+    li.nav-item
+      = campaign_menu_link(recontact_onramps_url(@recontact), 'Onramps')
+    li.nav-item
+      = campaign_add_link(new_recontact_invitation_batch_url(@recontact), 'Upload IDs')
+    li.nav-item
+      = campaign_menu_link(recontact_id_matches_url(@recontact), 'ID Matches')
+    li.nav-item
+      = campaign_menu_link(recontact_url(@recontact), 'Invitations')

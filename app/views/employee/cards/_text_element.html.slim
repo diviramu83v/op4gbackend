@@ -1,0 +1,11 @@
+- if local_assigns[:label_clipboard]
+  = render 'employee/cards/text_header', label: label, clipboard: label_clipboard
+- else
+  = render 'employee/cards/text_header', label: label
+
+- if local_assigns[:link]
+  = render 'employee/cards/text_value', value: value, link: link
+- elsif local_assigns[:value_clipboard]
+  = render 'employee/cards/text_value', value: value, clipboard: value_clipboard
+- else
+  = render 'employee/cards/text_value', value: value

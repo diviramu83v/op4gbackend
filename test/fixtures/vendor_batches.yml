@@ -1,0 +1,6 @@
+standard:
+  vendor: batch
+  survey: standard
+  incentive_cents: 300
+  quoted_completes: 300
+  requested_completes: 300

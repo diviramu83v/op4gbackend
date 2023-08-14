@@ -1,0 +1,6 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+standard:
+  encoded_uids: "xyz\nabc"
+  employee: operations
+  decoded_at: <%= Time.now.utc - 10.minutes %>

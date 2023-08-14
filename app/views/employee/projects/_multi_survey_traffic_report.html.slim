@@ -1,0 +1,70 @@
+.card
+  .card-header
+    .d-flex.justify-content-between
+      h4 Multi-survey traffic report
+      span
+        span#download-button.btn.btn-primary.mb-2
+          i.fas.fa-cloud-download-alt.mr-1
+          | Download traffic report
+  .card-body
+    = form_for :multi_survey_traffic_report do |f|
+      = render 'employee/form_errors', resource: project
+      .row.mb-3
+        .col-lg-12
+          .form-group
+            .mb-3 = f.label 'Report type'
+            span
+            .form-check.form-check-inline
+              .mb-3
+                .mb-0
+                  = f.radio_button :report_type, 'all_traffic', id: 'all_traffic', checked: true, class: 'align-middle form-check-input mr-1 pt-2'
+                  = f.label 'All traffic'
+                  = f.radio_button :report_type, 'completes', id: 'completes', class: 'align-middle form-check-input ml-4 mr-1'
+                  = f.label 'Completes (live only)'
+      .row.mb-3
+        .col-lg-12
+          .form-group
+            .mb-3 = f.label 'Surveys to include in report'
+            span
+            = f.collection_check_boxes :survey_ids, project.surveys.standard, :id, :name, checked: project.surveys.standard.pluck(:id) do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+
+javascript:
+  surveyIds = []
+  $('#download-button').click(function() {
+    $('.checkbox-multi-click').each(function() {
+      if ($(this).is(':checked') && !surveyIds.includes($(this).val())) {
+        surveyIds.push($(this).val())
+      } else if (!$(this).is(':checked') && surveyIds.includes($(this).val())) {
+        surveyIds.splice(surveyIds.indexOf($(this).val()), 1)
+      }
+    });
+    reportType = $('input[name="multi_survey_traffic_report[report_type]"]:checked').val();
+  })
+  var surveyIds = surveyIds
+  var reportType = reportType
+
+coffee:
+  $('#download-button').click ->
+    $(this).html("<i class='fa fa-spinner fa-pulse mr-2'></i>Generating")
+    $('#download-button').addClass('disabled');
+    $('#download-button').css('pointer-events', 'none');
+    App.multi_survey_traffic_report_download = App.cable.subscriptions.create { channel: "MultiSurveyTrafficReportDownloadChannel", survey_ids: surveyIds, report_type: reportType },
+      received: (data) ->
+        $('#download-button').html("<i class='fas fa-cloud-download-alt mr-1'></i>Download traffic report")
+        $('#download-button').removeClass('disabled');
+        $('#download-button').css('pointer-events', 'auto');
+        blob = new Blob([data['csv_file']['content']]);
+
+        # Create a link with the data and trigger click event to download the file
+        csv_download_link = document.createElement('a');
+        csv_download_link.href = window.URL.createObjectURL(blob);
+        csv_download_link.download = data['csv_file']['file_name'];
+        csv_download_link.click();
+
+        App.multi_survey_traffic_report_download.unsubscribe()
+        App.cable.disconnect()
+        delete App.multi_survey_traffic_report_download
+        return

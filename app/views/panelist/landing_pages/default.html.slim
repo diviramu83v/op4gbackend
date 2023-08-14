@@ -1,0 +1,16 @@
+- content_for :flash_width
+  = 'col-lg-8'
+
+.row
+  .col-lg-8
+    .card
+      .card-header
+        h4 = t('panelist.landing_pages.default.welcome', default: 'Welcome to Opinions4Good')
+      .card-body
+        .mb-4
+          h5 = t('panelist.landing_pages.default.have_an_opinion', default: "Get Paid To Share Your Insights!")
+        .mb-4
+          p = t('panelist.landing_pages.default.explanation_one', default: "Thanks for your interest in joining Opinions4Good. Earn cash by providing feedback on a variety of different research topics. Once you reach $10 in earnings, you’ll be automatically paid out the following month directly to your verified PayPal account.")
+        .mb-4
+          p = t('panelist.landing_pages.default.explanation_two', default: "Earn your first #{format_currency(@incentive)} by filling out your member profile! This helps us to send you surveys that best match your personal interests.")
+

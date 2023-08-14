@@ -1,0 +1,7 @@
+button.btn.btn-primary type="submit" data-disable-with=t('forms.disable_submit_with', default: "Saving...")
+  - if local_assigns[:icon]
+    i.fa.mr-2 class="#{icon}"
+  - if local_assigns[:label]
+    = label
+  - else
+    = 'Save'

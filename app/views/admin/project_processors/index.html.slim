@@ -1,0 +1,10 @@
+.mb-5
+  h2 Add some columns to the project report
+.mb-5
+  .row
+    .col-6
+      = form_for :project, url: project_processors_url do |f|
+        .form-group
+          = f.label :upload, 'Project spreadsheet upload'
+          = f.file_field :upload, class: 'form-control-file'
+        = render 'employee/form_buttons'

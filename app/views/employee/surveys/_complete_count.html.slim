@@ -1,0 +1,14 @@
+- if survey.nil? || survey.draft?
+  = render 'employee/cards/text_element',
+           label: 'Completes',
+           value: "0 / #{value_or_question_mark(survey&.target)}"
+- elsif can?(:view_and_modify, Project)
+  = render 'employee/cards/text_element_with_link_and_secondary',
+           label: 'Completes',
+           value: "#{survey.adjusted_complete_count} / #{value_or_question_mark(survey&.target)}",
+           secondary_value: survey_initial_count(survey),
+           link: new_survey_adjustment_url(survey, return_url: local_assigns[:return_url] || request.original_url)
+- else
+  = render 'employee/cards/text_element',
+           label: 'Completes',
+           value: "#{survey.adjusted_complete_count} / #{value_or_question_mark(survey&.target)}"

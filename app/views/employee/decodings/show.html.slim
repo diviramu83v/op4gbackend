@@ -1,0 +1,12 @@
+.mb-5
+  h2
+    span.mr-3 UID decoder
+.spinner-wrapper
+  .spinner data-decoding-id=params[:id]
+    i.fa.fa-spinner.fa-pulse.fa-3x.fa-fw
+    span.sr-only Loading...
+coffee:
+  id = $('.spinner').data('decoding-id')
+  App.cable.subscriptions.create { channel: "UidDecodingChannel", id: id },
+    received: (data) ->
+      window.location.reload()

@@ -1,0 +1,23 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Projects', projects_url
+  li.breadcrumb-item = link_to @project.extended_name, @project
+  li.breadcrumb-item = link_to @recontact.name, recontact_url(@recontact)
+  li.breadcrumb-item = link_to "Batch #{@recontact_invitation_batch.id}", recontact_url(@recontact)
+  li.breadcrumb-item.active Edit
+.mb-5
+  h2 Edit Batch
+.mb-5
+  = form_for @recontact_invitation_batch, url: recontact_invitation_batch_url(@recontact_invitation_batch) do |f|
+    = render 'employee/form_errors', resource: @recontact_invitation_batch
+    .row
+      .col-md-6
+        .form-group
+          = f.label :incentive
+          = f.text_field :incentive, class: 'form-control'
+        .form-group
+          = f.label :subject
+          = f.text_field :subject, class: 'form-control'
+        .form-group
+          = f.label :email_body
+          = f.text_area :email_body, rows: '10', class: 'form-control'
+    = render 'employee/form_buttons'

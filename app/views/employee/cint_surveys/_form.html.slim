@@ -1,0 +1,126 @@
+= form_for @cint_survey, url: url do |f|
+  = render 'employee/form_errors', resource: @cint_survey
+  .row.mb-3
+    .col-lg-6
+      .form-group
+        .mb-3 = f.label 'LOI'
+        span
+          = f.number_field :loi, class: 'form-control'
+    .col-lg-6
+      .form-group
+        .mb-3 = f.label 'Limit'
+        span
+          = f.number_field :limit, class: 'form-control'
+  .row.mb-3
+    .col-lg-6
+      .form-group
+        .mb-3 = f.label 'Incidence rate'
+        span
+          = f.number_field :expected_incidence_rate, class: 'form-control'
+    .col-lg-6
+      .form-group
+        .mb-3 = f.label 'Name'
+        span
+          = f.text_field :name, class: 'form-control'
+  .row.mb-3
+    .col-lg-6
+      .form-group
+        .mb-3 = f.label 'Minimum Age'
+        span
+          = f.select :min_age, options_for_select(@age_range, selected: @cint_survey.min_age), { include_blank: true }, { id: 'min_age', class: 'form-control ml-1 mr-3' }
+    .col-lg-6
+      .form-group
+        .mb-3 = f.label 'Maximum Age'
+        span
+          = f.select :max_age, options_for_select(@age_range, selected: @cint_survey.max_age), { include_blank: true }, { id: 'max_age', class: 'form-control ml-1 mr-3' }
+  .row.mb-3
+    .col-lg-12
+      .form-group
+        .mb-3 = f.label 'Gender'
+    span
+     .form-check.form-check-inline
+      .mb-3
+        .mb-0
+          = f.radio_button :gender, 'male', class: 'align-middle form-check-input mr-1 pt-2'
+          = f.label 'Male'
+          = f.radio_button :gender, 'female', class: 'align-middle form-check-input ml-4 mr-1'
+          = f.label 'Female'
+          = f.radio_button :gender, 'any', class: 'align-middle form-check-input ml-4 mr-1'
+          = f.label 'Any'
+  .row.mb-3
+    button.btn.btn-primary.mr-2#add_regions
+      = 'Add Regions'
+    button.btn.btn-primary#add_postal_codes
+      = 'Add Postal Codes'
+  .row.mb-3.d-none#state_options
+    .col-lg-12
+      .form-group
+        .mb-3.d-inline = f.label 'States'
+        .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+          i.fa.mr-1
+          | Select all
+        div
+          - @states.each do |state|
+            .form-check.form-check-inline
+              .checkbox
+                = check_box_tag 'cint_survey[region_ids][]', "#{state[:id]}", @cint_survey.region_ids.present? && @cint_survey.region_ids.include?("#{state[:id]}"), class: 'form-check-input checkbox-multi-click region'
+                = label_tag "#{state[:name]}", nil, class: 'pt-2 text-label'
+  .row.mb-3.d-none#city_options
+    .col-lg-12
+      .form-group
+        .mb-3.d-inline = f.label 'Cities'
+        .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+          i.fa.mr-1
+          | Select all
+        div
+          - @cities.each do |city|
+            .form-check.form-check-inline
+              .checkbox
+                = check_box_tag 'cint_survey[region_ids][]', "#{city[:id]}", @cint_survey.region_ids.present? && @cint_survey.region_ids.include?("#{city[:id]}"), class: 'form-check-input checkbox-multi-click region'
+                = label_tag "#{city[:name]}", nil, class: 'pt-2 text-label'
+  .row.mb-3.d-none#postal_codes
+    .col-lg-6
+      .form-group
+        .col-3 = render 'employee/cards/text_element_with_tooltip', label: 'Postal codes', value: '', tooltip: 'Separate each postal code with a comma.'
+        span
+          = f.text_area :postal_codes, class: 'form-control', id: 'postal_codes_text'
+  .row.mb-3
+    #options
+  button.btn.btn-primary.d-none#submit type="submit"
+    i.fas.fa-cloud-upload-alt.mr-2
+    = 'Save'
+
+
+javascript:
+  var action = "#{action_name}"
+
+  function build_options(url) {
+    $.ajax({
+      url: url,
+      type: 'post',
+      data: {country_id: 22, url: "#{url}"},
+      complete: function () {
+          $('#submit').removeClass('d-none');
+      }
+    });
+  }
+
+  $(document).ready(function() {
+    build_options("/cint_country_options");
+
+    $('#add_regions').click(function (e){
+        e.preventDefault();
+        $('#postal_codes').addClass('d-none');
+        $('#postal_codes_text').val(null);
+        $('#state_options').removeClass('d-none');
+        $('#city_options').removeClass('d-none');
+    })
+
+    $('#add_postal_codes').click(function (e) {
+        e.preventDefault();
+        $('#state_options').addClass('d-none');
+        $('#city_options').addClass('d-none');
+        $('.region').prop( "checked", false );
+        $('#postal_codes').removeClass('d-none');
+    })
+  })

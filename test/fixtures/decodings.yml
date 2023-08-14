@@ -1,0 +1,4 @@
+standard:
+  employee: operations
+  encoded_uids: "xyz\nabc"
+  decoded_at: <%= Time.now.utc - 10.minutes %>

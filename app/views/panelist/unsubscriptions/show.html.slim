@@ -1,0 +1,6 @@
+- if @panelist.blank? || @invitation.blank? || @invitation.invalid_unsubscription?(@panelist.email)
+  = render 'panelist/unsubscriptions/not_found'
+- elsif @unsubscription.blank?
+  = render 'panelist/unsubscriptions/unsubscribe'
+- else
+  = render 'panelist/unsubscriptions/already_unsubscribed'

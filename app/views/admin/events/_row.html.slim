@@ -1,0 +1,6 @@
+tr
+  td = simple_format(event.description)
+  td = event.employee.try(:name)
+  td
+    span data-utc-time=event.happened_at data-timezone-converted='false' data-format='stacked'
+      = event.happened_at

@@ -1,0 +1,18 @@
+.card
+  .card-header
+    h4
+      span.mr-3 Keys
+      - if can?(:view_and_modify, Project)
+        span.mr-0
+          = link_to survey_keys_url(survey), class: 'card-header-link' do
+            i.fa.fa-list-ul.mr-1
+            | Details
+  .card-body
+    - if survey.keys.any?
+      .row
+        .col-6
+          = render 'employee/cards/text_element', label: 'Used', value: survey.used_keys.count
+        .col-6
+          = render 'employee/cards/text_element', label: 'Unused', value: survey.unused_keys.count
+    - else
+      p.mb-0 No keys added.

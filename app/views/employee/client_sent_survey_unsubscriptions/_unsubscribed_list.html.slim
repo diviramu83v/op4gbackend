@@ -1,0 +1,27 @@
+span.mr-2.pb-5
+  = link_to survey_client_sent_surveys_url(@survey), class: 'btn btn-link pl-0 mr-3' do
+    i.fa.fa-angle-left.mr-1
+    | Back to client sent surveys
+  .card
+    .card-header
+      .d-flex.justify-content-between
+        span
+          h4
+            span.mr-2 Unsubscribed emails
+            span.mr-2
+              .badge.badge-secondary = ClientSentUnsubscription.count
+        span
+          = link_to survey_client_sent_survey_unsubscriptions_url(@survey, format: :csv), class: 'btn btn-outline-primary' do
+            i.fas.fa-cloud-download-alt.mr-1
+            | Download
+    .card-body
+      table.table.table-sm.table-wrapped-with-header.mb-0
+        thead
+          tr
+            th style=("width: 70%") Email
+            th Unsubscribe date
+        tbody
+        - ClientSentUnsubscription.order(created_at: :desc).each do |unsubscription|
+          tr
+            td = unsubscription.email
+            td = unsubscription.created_at.strftime('%m/%d/%Y')

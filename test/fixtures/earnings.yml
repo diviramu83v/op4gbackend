@@ -1,0 +1,11 @@
+one:
+  earnings_batch: one
+  panelist: standard
+  onboarding: standard
+  sample_batch: standard
+  nonprofit: one
+  period: '2020-01'
+  period_year: '2020'
+  total_amount_cents: 300
+  panelist_amount_cents: 150
+  nonprofit_amount_cents: 150

@@ -1,0 +1,43 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Projects', projects_url
+  li.breadcrumb-item = link_to @project.extended_name, @project
+  li.breadcrumb-item.active Add vendor to all surveys
+.mb-5
+  h1 Add vendor to all project surveys
+.mb-5
+  = form_for [@project_vendor], url: project_vendors_url(@project) do |f|
+    = render 'employee/form_errors', resource: @project_vendor
+    .row
+      .col-6.mb-4
+        .form-group
+          = f.label :vendor_id, 'Vendor'
+          = f.collection_select(:vendor_id, Vendor.active.by_name, :id, :name_and_abbreviation,
+            { prompt: 'Select vendor...' }, class: 'form-control')
+        = render 'forms/text_field', form: f, field: :incentive
+        = render 'forms/text_field', form: f, field: :quoted_completes
+        = render 'forms/text_field', form: f, field: :requested_completes
+    .row
+      .col-6.mb-4
+        .mb-3
+          h3 Redirects
+        = render 'forms/text_field',
+          form: f,
+          field: :complete_url,
+          label: 'Complete URL',
+          hint: "Overrides the vendor's default complete URL"
+        = render 'forms/text_field',
+          form: f,
+          field: :terminate_url,
+          label: 'Terminate URL',
+          hint: "Overrides the vendor's default terminate URL"
+        = render 'forms/text_field',
+          form: f,
+          field: :overquota_url,
+          label: 'Overquota URL',
+          hint: "Overrides the vendor's default overquota URL"
+        = render 'forms/text_field',
+          form: f,
+          field: :security_url,
+          label: 'Security URL',
+          hint: "Overrides the vendor's default security URL"
+    = render 'employee/form_buttons'

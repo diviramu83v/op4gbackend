@@ -1,0 +1,13 @@
+script src="https://www.google.com/recaptcha/api.js" async defer
+
+.card
+  .card-header
+    h4 Verify your humanity
+  .card-body
+    = form_for :recaptcha_check, url: survey_onboarding_recaptcha_checks_url(@onboarding.onboarding_token) do |f|
+      = f.hidden_field :token, value: @completion_token
+      .form-group
+        .g-recaptcha data-sitekey="#{ENV['RECAPTCHA_SITE_KEY_TRAFFIC']}"
+      button.btn.btn-primary type="submit"
+        i.fas.fa-cloud-upload-alt.mr-2
+        = 'Verify'

@@ -1,0 +1,44 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Projects', projects_url
+  li.breadcrumb-item = link_to @survey.project.extended_name, @survey.project
+  li.breadcrumb-item.active = @survey.name
+  li.breadcrumb-item.active = @step.to_s.titlecase
+.mb-5
+  = render 'employee/surveys/header', survey: @survey
+.mb-5
+  .row
+    .col-12
+      = render 'employee/surveys/details', survey: @survey
+    .col-2
+      = render 'employee/surveys/menu'
+    .col-10
+      .mb-3 = render 'employee/traffic/mini_nav', survey: @survey
+
+      .mb-3 = render 'employee/onramps/traffic_card', onramp: @survey.testing_onramp
+
+      - @survey.panel_onramps.order(:panel_id).each do |onramp|
+        .mb-3 = render 'employee/onramps/traffic_card', onramp: onramp
+
+      - @survey.vendor_batches.by_first_created.each do |batch|
+        .mb-3 = render 'employee/vendor_batches/traffic_card', batch: batch
+
+      - @survey.onramps.disqo.each do |onramp|
+        .mb-3 = render 'employee/onramps/traffic_card', onramp: onramp
+
+      - @survey.onramps.cint.each do |onramp|
+        .mb-3 = render 'employee/onramps/traffic_card', onramp: onramp
+
+      - @survey.onramps.schlesinger.each do |onramp|
+        .mb-3 = render 'employee/onramps/traffic_card', onramp: onramp
+
+      - @survey.onramps.expert_recruit.each do |onramp|
+        .mb-3 = render 'employee/onramps/traffic_card', onramp: onramp
+
+      - @survey.onramps.client_sent.each do |onramp|
+        .mb-3 = render 'employee/onramps/traffic_card', onramp: onramp
+
+      - @survey.onramps.api.each do |onramp|
+        .mb-3 = render 'employee/survey_api_targets/traffic_card', onramp: onramp
+
+      - @survey.router_onramps.each do |onramp|
+        .mb-3 = render 'employee/survey_routers/traffic_card', onramp: onramp

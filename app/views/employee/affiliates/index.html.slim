@@ -1,0 +1,15 @@
+.mb-5
+  .mb-3
+    .d-flex
+      h2
+        span.mr-3 Affiliates
+  table.table.table-sm.mb-0 data-sort='table'
+    thead
+      tr
+        th Name
+        th Code
+    tbody
+      - @affiliates.each do |affiliate|
+        tr
+          td = link_to affiliate.name, affiliate_url(affiliate)
+          td = affiliate.code

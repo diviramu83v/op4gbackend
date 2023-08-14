@@ -1,0 +1,7 @@
+- disabled = local_assigns.fetch :disabled, false
+- complete_label = local_assigns.fetch :label, 'Wait for ID\'s'
+
+span.mr-1
+  = link_to project_statuses_url(@project, id: 'waiting'), method: :post, data: { confirm: confirm_message }, class: "btn btn-outline-warning #{'disabled' if disabled}" do
+    i.fa.fa-check-square class="#{'mr-2' unless disabled}"
+    = complete_label unless disabled

@@ -1,0 +1,20 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Cint API', api_cint_index_url
+  li.breadcrumb-item #{@year} Cint API completes
+.mb-4
+  .d-flex.justify-content-between.align-items-center
+    h2
+      span.mr-3 #{@year} Cint API completes
+  span#table-data
+    .d-flex.flex-column.align-items-center
+      .spinner.mt-3
+        i.fa.fa-spinner.fa-pulse.fa-3x.fa-fw
+        span.sr-only Loading...
+
+javascript:
+  var onboardingIds = #{@onboarding_ids}
+  var url = "#{request.host_with_port}"
+coffee:
+  App.cable.subscriptions.create { channel: "ApiCintSingleYearCompletesChannel", onboarding_ids: onboardingIds },
+    received: (data) ->
+      $('#table-data').html(data.replace /admin.example.org/g, url)

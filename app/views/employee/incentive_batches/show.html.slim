@@ -1,0 +1,28 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Incentive Batches', incentive_batches_url
+  li.breadcrumb-item.active = 'Confirm send'
+.mb-5
+  h2 Are you sure you want to send this incentive batch?
+.row
+  .col-lg-2
+    = render 'employee/cards/text_element', label: 'Survey name', value: @incentive_batch.survey_name
+  .col-lg-2
+    = render 'employee/cards/text_element', label: 'Reward', value: format_currency_with_zeroes(@incentive_batch.reward)
+  .col-lg-2
+    = render 'employee/cards/text_element', label: 'Recipient count', value: @incentive_batch.incentive_recipients.count
+  - unless @incentive_batch.sent?
+    .col-lg-4
+      span.mr-5
+        = link_to incentive_batches_url, class: 'btn btn-outline-danger btn-xs' do
+          i.fa.fa-chevron-left.mr-1
+          | No, go back
+      span.mr-2
+        = link_to incentive_batch_sends_url(@incentive_batch), method: :post, class: "btn btn-outline-primary btn-xs #{@incentive_batch.sent? ? 'disabled' : ''}", data: { disable_with: "<i class='far fa-envelope mr-1'></i>Sending..." } do
+          i.far.fa-envelope.mr-1
+          | Yes, send
+.row.mt-5
+  .col
+    = render 'employee/cards/text_header', label: 'Recipients'
+    - @incentive_batch.incentive_recipients.each do |incentive_recipient|
+      = incentive_recipient.email_address
+      br

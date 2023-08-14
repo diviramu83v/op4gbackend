@@ -1,0 +1,24 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Affiliates', affiliates_url
+  li.breadcrumb-item = link_to @affiliate.name, affiliate_url(@affiliate)
+  li.breadcrumb-item.active = 'Affiliate completes funnel'
+.mb-5
+  .d-flex.justify-content-between
+    h2
+      span.mr-2 Completes funnel
+.row.mb-5
+  .col-lg-5 = render 'employee/cards/text_element', label: 'Name', value: @affiliate.name
+.row
+  .col-lg-8
+    h3.mb-4 Completes
+    .spinner#row-data
+      i.fa.fa-spinner.fa-pulse.fa-3x.fa-fw
+      span.sr-only Loading...
+
+javascript:
+  var affiliate_id = "#{@affiliate.id}"
+
+coffee:
+  App.cable.subscriptions.create { channel: "CompletesFunnelChannel", id: affiliate_id, resource: 'Affiliate' },
+    received: (data) ->
+      $('#row-data').replaceWith(data)

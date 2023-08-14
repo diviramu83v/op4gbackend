@@ -1,0 +1,5 @@
+- if @survey_warnings.any?
+  - @survey_warnings.order(created_at: :desc).each do |warning|
+    = render 'card', warning: warning
+- else
+  p.mb-0 = 'No survey warnings to be found. 🎉'

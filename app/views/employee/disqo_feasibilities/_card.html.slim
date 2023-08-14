@@ -1,0 +1,31 @@
+.card.mb-3
+  .card-header
+    .d-flex.justify-content-between
+      h4
+        span.mr-3 Feasibility
+
+  .card-body
+    .row
+      .col-3
+        .mb-3
+          = render 'employee/cards/text_element', label: 'Expected Number of Completes', value: format_number(feasibility.number_of_panelists)
+    .row
+      .col-3
+        .mb-3
+          = render 'employee/cards/text_element', label: 'Days in Field', value: feasibility.days_in_field
+      .col-3
+        .mb-3
+          = render 'employee/cards/text_element', label: 'Incidence Rate', value: "#{feasibility.incidence_rate}%"
+      .col-2
+        .mb-3
+          = render 'employee/cards/text_element', label: 'LOI', value: feasibility.loi
+      .col-2
+        .mb-3
+          = render 'employee/cards/text_element', label: 'CPI', value: format_currency_with_zeroes(feasibility.cpi.to_f / 100)
+      .col-2
+        .mb-3
+          = render 'employee/cards/text_element', label: 'Completes Wanted', value: format_number(feasibility.completes_wanted)
+    hr
+    .row.scroll-overflow-content
+      - feasibility.all_present_qualifications.each_key do |filter|
+        = render 'card_row', { feasibility: feasibility, filter: filter }

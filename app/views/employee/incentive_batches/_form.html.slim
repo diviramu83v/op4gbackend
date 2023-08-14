@@ -1,0 +1,17 @@
+= form_for @incentive_batch, url: url do |f|
+  .row.mb-3
+    .col-12
+      .form-group
+        = render 'employee/cards/text_header_with_tooltip', label: 'Upload Completed IDs - CSV file', tooltip: '3 columns: email, first name, last name. No headers.'
+        = f.file_field :csv_data, class: 'form-control-file', accept: 'text/csv'
+  .row.mb-3
+    .col-6
+      .form-group
+        = render 'employee/cards/text_header_with_tooltip', label: 'Survey name', tooltip: 'Do not include the word "survey".'
+        = f.text_field :survey_name, class: 'form-control'
+  .row.mb-3
+    .col-6
+      .form-group
+        = f.label :reward
+        = f.text_field :reward, class: 'form-control', placeholder: 'eg. 100.00'
+  = render 'employee/form_buttons'

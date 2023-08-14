@@ -1,0 +1,49 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Projects', projects_url
+  li.breadcrumb-item = link_to @survey.project.extended_name, @survey.project
+  li.breadcrumb-item = link_to @survey.name, survey_url(@survey)
+  li.breadcrumb-item = link_to 'Panel', survey_vendors_url(@survey)
+  li.breadcrumb-item.active Edit survey vendor
+.mb-5
+  h2 Edit survey vendor
+.mb-5
+  = form_for @batch do |f|
+    = render 'employee/form_errors', resource: @batch
+    .row
+      .col-6.mb-4
+        .form-group
+          = f.label :vendor_id, 'Vendor'
+          = render 'employee/cards/text_value', value: @batch.vendor.name
+        = render 'forms/text_field', form: f, field: :incentive
+        = render 'forms/text_field', form: f, field: :quoted_completes
+        = render 'forms/text_field', form: f, field: :requested_completes
+    - if @batch.using_redirects?
+      .row
+        .col-6.mb-4
+          .mb-3
+            h3 Redirects
+          = render 'forms/text_field',
+            form: f,
+            field: :complete_url,
+            value: @batch[:complete_url],
+            label: 'Complete URL',
+            hint: @batch.vendor.complete_url.present? ? "Overrides #{@batch.vendor.complete_url}" : nil
+          = render 'forms/text_field',
+            form: f,
+            field: :terminate_url,
+            value: @batch[:terminate_url],
+            label: 'Terminate URL',
+            hint: @batch.vendor.terminate_url.present? ? "Overrides #{@batch.vendor.terminate_url}" : nil
+          = render 'forms/text_field',
+            form: f,
+            field: :overquota_url,
+            value: @batch[:overquota_url],
+            label: 'Overquota URL',
+            hint: @batch.vendor.overquota_url.present? ? "Overrides #{@batch.vendor.overquota_url}" : nil
+          = render 'forms/text_field',
+            form: f,
+            field: :security_url,
+            value: @batch[:security_url],
+            label: 'Security URL',
+            hint: @batch.vendor.security_url.present? ? "Overrides #{@batch.vendor.security_url}" : nil
+    = render 'employee/form_buttons'

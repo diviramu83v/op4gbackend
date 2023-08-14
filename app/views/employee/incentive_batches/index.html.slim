@@ -1,0 +1,58 @@
+.mb-5
+  h2 Incentive batches
+.row
+  .col-10
+    span.mr-2.pb-5
+      = link_to new_incentive_batch_url, class: 'btn btn-link pl-0 mr-3' do
+        i.fa.fa-plus-circle.mr-1
+        | Add batch
+- @incentive_batches.order(created_at: :desc).each do |batch|
+  .row
+    .col-10
+      .card.mb-3
+        .card-header
+          .d-flex.justify-content-between
+            span
+              h4
+                span.mr-2 Incentive Batch
+                span.badge.mr-2 class="badge-#{expert_recruit_batch_status_class(batch.status)}"
+                  = batch.status
+                span.mr-2
+                  = link_to edit_incentive_batch_url(batch), class: "btn btn-outline-primary btn-xs #{batch.sent? ? 'disabled' : ''}" do
+                    i.fa.fa-edit.mr-1
+                    | Edit
+                span.mr-2
+                  = link_to incentive_batch_url(batch), id: "send-button-#{batch.id}", class: "btn btn-outline-primary btn-xs #{batch.sendable? ? '' : 'disabled'}" do
+                    i.far.fa-envelope.mr-1
+                    | Send
+        .card-body
+          .row.mb-4
+            .col-3
+              h5.mb-2.dashhead-subtitle.text-header.tiny-button-header name
+              span.mr-2 = batch.survey_name
+            .col-3
+              h5.mb-2.dashhead-subtitle.text-header.tiny-button-header Recipient count
+              span.mr-2 id="batch-#{batch.id}-count" = batch.incentive_recipients.count
+            .col-3
+              h5.mb-2.dashhead-subtitle.text-header.tiny-button-header Reward
+              span.mr-2 = format_currency_with_zeroes(batch.reward)
+          -if batch.sent?
+            .row.mb-4
+              .col-3
+                h5.mb-2.dashhead-subtitle.text-header.tiny-button-header Sent to Recipient
+                span.mr-2 = batch.incentive_recipients.sent.count
+              .col-3
+                h5.mb-2.dashhead-subtitle.text-header.tiny-button-header Failed Recipients
+                span.mr-2 = batch.incentive_recipients.error.count
+              - recipients = batch.incentive_recipients.error.pluck(:email_address).join(', ')
+              - if recipients.present?
+                .col-3
+                  h5.mb-2.dashhead-subtitle.text-header.tiny-button-header Failed Recipient Emails
+                  span.mr2 = recipients
+
+
+coffee:
+  App.cable.subscriptions.create { channel: 'CreateIncentiveRecipientsChannel' },
+    received: (data) ->
+      $("#batch-#{data['batch_id']}-count").text(data['recipient_count'])
+      $("#send-button-#{data['batch_id']}").removeClass('disabled')

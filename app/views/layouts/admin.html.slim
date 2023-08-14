@@ -1,0 +1,7 @@
+- content_for :theme
+  = stylesheet_link_tag 'bootstrap/toolkit-inverse.min', media: 'all', 'data-turbolinks-track': 'reload'
+- content_for :body_class
+  = 'admin'
+- content_for :primary_navigation
+  = render 'admin/navigation'
+= render template: 'layouts/application'

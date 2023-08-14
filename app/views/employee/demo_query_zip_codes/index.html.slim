@@ -1,0 +1,15 @@
+= render 'employee/demo_queries/breadcrumbs'
+.mb-3
+  h2 Query
+.pt-3.pb-3.mb-3.sticky-top.bg-white data-partial="demo-active-filter"
+  /= render 'shared/flash_messages'
+  = render 'employee/demo_queries/details', source: 'demo_query_zip_codes'
+.mb-0
+  h3 Edit query
+.mb-3
+  = render 'employee/demo_queries/filter_nav'
+div data-partial="demo-zip-codes"
+  = render 'employee/demo_query_zip_codes/zip_codes'
+
+coffee:
+  App.attachDemoQueryFilterRender()

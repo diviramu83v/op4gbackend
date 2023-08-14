@@ -1,0 +1,11 @@
+- SurveyWarning.project_managers.each do |pm|
+  - if pm == @selected_project_manager
+    span.mr-1.mb-1.d-inline-block
+      = link_to warnings_url, class: 'btn btn-primary btn-xs' do
+        span.mr-1.badge.badge-secondary id="#{pm.id}" = pm.warning_count
+        span.mr-0 = pm.name
+  - else
+    span.mr-1.mb-1.d-inline-block
+      = link_to employee_warnings_url(pm), class: 'btn btn-outline-primary btn-xs' do
+        span.mr-1.badge.badge-secondary id="#{pm.id}" = pm.warning_count
+        span.mr-0 = pm.name

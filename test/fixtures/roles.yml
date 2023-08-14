@@ -1,0 +1,22 @@
+admin:
+  name: 'Admin'
+nonprofits:
+  name: 'Nonprofits'
+recruitment:
+  name: 'Recruitment'
+sales:
+  name: 'Sales'
+operations:
+  name: 'Operations'
+operations_manager:
+  name: 'Operations manager'
+payment:
+  name: 'Payment'
+reporting:
+  name: 'Reporting'
+security:
+  name: 'Security'
+supply:
+  name: 'Supply'
+panelist_editor:
+  name: 'Panelist editor'

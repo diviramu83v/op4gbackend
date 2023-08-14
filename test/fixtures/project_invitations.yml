@@ -1,0 +1,6 @@
+standard:
+  project: standard
+  panelist: standard
+  batch: standard
+  survey: standard
+  token: <%= SecureRandom.hex %>

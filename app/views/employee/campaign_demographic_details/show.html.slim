@@ -1,0 +1,19 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Campaigns', recruiting_campaigns_url
+  li.breadcrumb-item = link_to @campaign.name, recruiting_campaign_url(@campaign)
+  li.breadcrumb-item.active = 'Campaign panelist demographic details'
+.mb-5
+  .d-flex.justify-content-between
+    h2
+      span.mr-2 Panelist demographic details
+.mb-3.pl-4.text-right
+  .row
+    .col
+      = link_to "Download", recruiting_campaign_demographic_details_url(@campaign, format: :csv), class: 'btn btn-sm btn-outline-primary'
+.mb-5
+  table.table
+    thead
+      th Panelist count
+      tbody
+        tr
+          td = format_number(@campaign.panelists.count)

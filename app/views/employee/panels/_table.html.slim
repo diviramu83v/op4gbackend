@@ -1,0 +1,30 @@
+.mb-5
+  table.table.table-sm.mb-3 data-sort='table'
+    thead
+      tr
+        th Name
+        th
+        th.text-right.pr-1 Projects in last 6 months
+        th.text-right.pr-1 Active Panelists
+    tbody
+      - panels.each do |panel|
+        tr
+          td
+            = link_to panel.name, panel_path(panel.id)
+          td
+            = link_to 'Utilization ', panel_utilization_url(panel)
+            = link_to '| Underutilization', panel_underutilization_url(panel)
+          td.text-right = panel.recent_project_count
+          td.text-right
+            = format_number(panel.active_panelist_count)
+      - if current_employee.try(:admin?)
+        - inactive_panels.each do |panel|
+          tr
+            td
+              = link_to panel.name, panel_path(panel.id)
+            td
+              = link_to 'Utilization ', panel_utilization_url(panel)
+              = link_to '| Underutilization', panel_underutilization_url(panel)
+            td.text-right = panel.recent_project_count
+            td.text-right
+              = format_number(panel.active_panelist_count)

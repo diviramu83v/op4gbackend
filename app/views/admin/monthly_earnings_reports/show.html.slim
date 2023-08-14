@@ -1,0 +1,24 @@
+.mb-5
+  .d-flex.justify-content-between
+    .header
+      h1 Monthly earnings
+    .actions
+      .mt-3
+        = link_to monthly_earnings_report_url(format: :csv, method: :show), class: 'btn btn-primary' do
+          i.fas.fa-cloud-download-alt.mr-1
+          | Download
+
+.mb-5
+  table.table
+    thead
+      - @results.columns.each do |header|
+        th
+          = header.capitalize
+    tbody
+      - @results.rows.sort_by(&:first).reverse.each do |row|
+        tr
+          - row.each do |cell|
+            - if cell.is_a?(String)
+              td = cell
+            - else
+              td = number_to_currency(cell)

@@ -1,0 +1,7 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Disqo Feasibility Tool', disqo_feasibilities_url
+  li.breadcrumb-item.active New Disqo Feasibility
+.mb-5
+  h2 New Feasibility
+.mb-5
+   = render 'form', url: disqo_feasibilities_url(@feasibility)

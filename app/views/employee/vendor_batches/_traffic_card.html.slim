@@ -1,0 +1,15 @@
+.card id="vendor-#{batch.vendor.id}"
+  .card-header
+    .d-flex.justify-content-between
+      h4
+        span.mr-1 = onramp_source_badge(batch.onramp)
+        = format_currency(batch.incentive)
+      - if batch.onramp.onboardings.created_in_past_year.any?
+        = link_to vendor_block_rate_report_url(batch.vendor), class: 'card-header-link' do
+          i.fa.fa-list-ul.mr-3
+          | Block rate report
+  .card-body
+    - if batch.onramp.onboardings.any?
+      = render 'employee/traffic/overview_card_body', resource: batch.onramp
+    - else
+      p.mb-0 No traffic detected.

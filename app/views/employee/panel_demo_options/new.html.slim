@@ -1,0 +1,15 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Panels', panels_url
+  li.breadcrumb-item = link_to 'Panel', panel_url(@demo_question.panel)
+  li.breadcrumb-item = link_to 'Questions', panel_questions_url(@demo_question.panel)
+  li.breadcrumb-item = link_to @demo_question.body, panel_question_url(@demo_question.panel, @demo_question)
+  li.breadcrumb-item Option
+  li.breadcrumb-item.active New
+
+h4.mb-5
+  span.mr-3 New option
+.mb-5
+  .row
+    .col-6
+       = render partial: 'form', locals: { url: panel_question_options_url(@demo_question.panel, @demo_question) }
+

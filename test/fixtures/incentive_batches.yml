@@ -1,0 +1,5 @@
+standard:
+  csv_data: "{\"test.user@testing.com\":[\"Test\",\"User\"]}"
+  reward_cents: 10000
+  survey_name: Test
+  employee: operations

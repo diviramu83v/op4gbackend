@@ -1,0 +1,58 @@
+testing:
+  category: testing
+  survey: standard
+  token: <%= SecureRandom.hex %>
+  bypass_token: <%= SecureRandom.hex %>
+testing_second:
+  category: testing
+  survey: second
+  token: <%= SecureRandom.hex %>
+  bypass_token: <%= SecureRandom.hex %>
+panel:
+  category: panel
+  panel: standard
+  survey: standard
+  token: <%= SecureRandom.hex %>
+  bypass_token: <%= SecureRandom.hex %>
+  check_recaptcha: true
+vendor:
+  category: vendor
+  vendor_batch: standard
+  survey: standard
+  token: <%= SecureRandom.hex %>
+  bypass_token: <%= SecureRandom.hex %>
+  check_recaptcha: true
+api:
+  category: api
+  api_vendor: api
+  survey: standard
+  token: <%= SecureRandom.hex %>
+  bypass_token: <%= SecureRandom.hex %>
+router:
+  category: router
+  survey: standard
+  token: <%= SecureRandom.hex %>
+  bypass_token: <%= SecureRandom.hex %>
+disqo:
+  category: disqo
+  survey: standard
+  token: <%= SecureRandom.hex %>
+  bypass_token: <%= SecureRandom.hex %>
+  disqo_quota: standard
+cint:
+  category: cint
+  survey: standard
+  token: <%= SecureRandom.hex %>
+  bypass_token: <%= SecureRandom.hex %>
+  cint_survey: standard
+schlesinger:
+  category: schlesinger
+  survey: standard
+  token: <%= SecureRandom.hex %>
+  bypass_token: <%= SecureRandom.hex %>
+  schlesinger_quota: standard
+client_sent:
+  category: client_sent
+  survey: standard
+  token: <%= SecureRandom.hex %>
+  bypass_token: <%= SecureRandom.hex %>

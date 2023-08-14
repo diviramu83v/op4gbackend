@@ -1,0 +1,13 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Panels', panels_url
+  li.breadcrumb-item = link_to 'Panel', panel_url(@demo_question.panel)
+  li.breadcrumb-item = link_to 'Questions', panel_questions_url(@demo_question.panel)
+  li.breadcrumb-item = link_to @demo_question.body, panel_question_url(@demo_question.panel, @demo_question)
+  li.breadcrumb-item.active Edit
+
+h4.mb-5
+  span.mr-3 Edit question
+.mb-5
+  .row
+    .col-6
+      = render partial: 'form', locals: { url: panel_question_url(@demo_question.panel, @demo_question) }

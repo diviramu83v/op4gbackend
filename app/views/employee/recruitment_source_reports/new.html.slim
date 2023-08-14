@@ -1,0 +1,7 @@
+= render 'report_form'
+
+.mb-0
+  = render 'table', locals: { action: :new }
+
+coffee:
+  document.getElementById('download-button').style['pointer-events'] = 'none'

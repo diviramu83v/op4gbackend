@@ -1,0 +1,11 @@
+h4.mb-3 Panelist email lists
+.row
+  .col-3
+    = link_to panel_panelists_url(@panel, panelists: 'all')
+      = render 'employee/cards/text_element', label: 'All panelists', value: format_number(@panel.panelists.active.count)
+  .col-3
+    = link_to panel_panelists_url(@panel, panelists: 'screened')
+      = render 'employee/cards/text_element', label: 'Attempted but screened out', value: format_number(@panel.panelists.have_been_screened_out_recently.count)
+  .col-3
+    = link_to panel_panelists_url(@panel, panelists: 'no_invitations')
+      = render 'employee/cards/text_element', label: 'Have not received an invitation in 5 months', value: format_number(@panel.panelists.have_not_received_an_invitation_in_5_months.count)

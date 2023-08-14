@@ -1,0 +1,6 @@
+- if @expert_recruit.blank?
+  = render 'panelist/expert_recruit_unsubscriptions/not_found'
+- elsif @unsubscription.blank?
+  = render 'panelist/expert_recruit_unsubscriptions/unsubscribe'
+- else
+  = render 'panelist/expert_recruit_unsubscriptions/already_unsubscribed'

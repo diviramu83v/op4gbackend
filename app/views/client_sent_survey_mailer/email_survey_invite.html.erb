@@ -1,0 +1,33 @@
+<p class='client-sent-survey-mailer-greeting'> Hello!</p>
+<p>Thank you again for agreeing to participate in our survey about <%= @client_sent_survey.description %>.</p>
+<p>As a reminder, this survey will take <%= @client_sent_survey.survey.loi %> minutes to complete, and we are offering an incentive of <%= @incentive %>.</p>
+<p>Participation is completely anonymous, and you will not be asked to discuss any non-public information about yourself or your company.</p>
+<p>
+  If you would like to participate, please click here to begin: <%= link_to 'Start survey', survey_onramp_url(@onramp.token) + '?uid=' + @client_sent_survey_invitation.token, class: 'client-sent-survey-mailer-link' %>
+</p>
+<p>
+  If at any time, you have questions or concerns, you can contact us at <%= @employee.phone %>, or via email at <%= mail_to "#{@employee.email}", "#{@employee.email}", class: 'client-sent-survey-mailer-link' %>.
+</p>
+<p>
+  This e-mail was sent to <%= "#{@client_sent_survey_invitation.email}" %>. If you no longer wish to receive e-mail from Op4G, please click <%= link_to 'here', survey_client_sent_unsubscribe_url(email: @client_sent_survey_invitation.email, unsubscribe_token: @client_sent_survey_invitation.unsubscribe_token), class: 'client-sent-survey-mailer-link' %> to unsubscribe.
+</p>
+<br>
+<div class="row">
+  <div class="col-3 border-right">
+    <%= image_tag('op4g-signature-logo.png', width: '100%') %>
+  </div>
+  <div class="col client-sent-survey-mailer-signature-text">
+    <p><%= @employee.name %></p>
+    <p>Executive Recruiter | Op4G</p>
+    <p>
+      <b>
+        P:
+      </b> <%= @employee.phone %>
+    </p>
+    <p>
+      <b>
+        E:
+      </b> <%= @employee.email %>
+    </p>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Panelists', panelists_url
+  li.breadcrumb-item.active = @panelist.name
+  li.breadcrumb-item.active Dashboard
+.mb-5
+  h2 Panelist
+.mb-5 = render 'employee/panelists/mini_nav', panelist: @panelist
+.mb-5
+  .mb-3
+    h3 Dashboard
+.row
+  .col-md-8
+    .mb-4 = render 'panelist/dashboard/available_surveys_card', panelist: @panelist
+    .mb-4 = render "panelist/dashboard/paid_surveys_card", panelist: @panelist
+    .mb-4 = render "panelist/dashboard/in_review_surveys_card", panelist: @panelist
+    .mb-4 = render "panelist/dashboard/rejected_surveys_card", panelist: @panelist
+  .col-md-4
+    .mb-4 = render 'panelist/dashboard/earnings_card', panelist: @panelist, url: panelist_payments_url(@panelist)
+    .mb-4 = render 'panelist/dashboard/nonprofit_card', panelist: @panelist, url: nil if @panelist.contributing_to_nonprofit?

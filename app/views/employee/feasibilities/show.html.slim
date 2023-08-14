@@ -1,0 +1,14 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Feasibility tool', feasibilities_url
+  li.breadcrumb-item.active New query
+.mb-3
+  h2 Query
+.pt-3.pb-3.mb-3.sticky-top.bg-white data-partial="demo-active-filter"
+  = render 'employee/demo_queries/details', source: 'demo_query_options'
+.mb-0
+  h3 Edit query
+.mb-0 data-partial="demo-filter-options"
+  = render 'employee/demo_queries/options'
+
+coffee:
+  App.attachDemoQueryFilterRender()

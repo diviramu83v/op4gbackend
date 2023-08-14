@@ -1,0 +1,8 @@
+.card
+  .card-header
+    h4 Error
+  .card-body
+    - if panelist_signed_in?
+      p There was a problem getting you to the right place. Please contact support if you need assistance.
+    - else
+      p There was a problem getting you to the right place.

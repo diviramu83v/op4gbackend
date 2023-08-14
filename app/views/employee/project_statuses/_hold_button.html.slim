@@ -1,0 +1,7 @@
+- disabled = local_assigns.fetch :disabled, false
+- label = local_assigns.fetch(:label, 'Hold')
+
+span.mr-1
+  = link_to project_statuses_url(@project, id: 'hold'), method: :post, data: { confirm: confirm_message }, class: "btn btn-outline-danger #{'disabled' if disabled}" do
+    i.fa.fa-pause class="#{'mr-2' unless disabled}"
+    = label unless disabled

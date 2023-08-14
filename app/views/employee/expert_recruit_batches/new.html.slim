@@ -1,0 +1,18 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Projects', projects_url
+  li.breadcrumb-item = link_to @survey.project.extended_name, @survey.project
+  li.breadcrumb-item = link_to @survey.name, @survey
+  li.breadcrumb-item = link_to 'Expert Recruits', survey_expert_recruit_batches_url(@survey)
+  li.breadcrumb-item.active New
+
+.row
+  .col-10
+    .row
+      .col-12
+        .mb-5
+          h2
+            span.mr-3 New expert traffic batch
+        .mb-0
+          .mb-3
+            h3 Upload file or paste emails and first names
+          = render 'form', url: survey_expert_recruit_batches_url(@survey)

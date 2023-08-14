@@ -1,0 +1,22 @@
+.mb-5
+  h2 IP Address
+.row.mb-5
+  .col-3
+    h5.dashhead-subtitle ADDRESS
+    h5.dashhead-title
+      = @ip_address.address
+  .col-3
+    h5.dashhead-subtitle STATUS
+    h5.dashhead-title
+      = ip_category_text(@ip_address)
+  .col-3
+    h5.dashhead-subtitle BLOCKED REASON
+    h5.dashhead-title
+      = @ip_address.blocked_reason
+  .col-3
+    - if can?(:view_and_modify, IpAddress)
+      = render 'block_button'
+.mb-0
+  = render 'panelists_table'
+.mb-0
+  = render 'traffic_details_table', onboardings: @onboardings

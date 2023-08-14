@@ -1,0 +1,31 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Projects', projects_url
+  li.breadcrumb-item = link_to @onboarding.project.extended_name, project_url(@onboarding.project)
+  - if @onboarding.survey
+    li.breadcrumb-item = link_to @onboarding.survey.name, survey_url(@onboarding.survey)
+  li.breadcrumb-item = link_to 'Traffic Details', @traffic_details_url
+  li.breadcrumb-item Traffic steps
+.card
+  .card-header
+    .d-flex.justify-content-between
+      h3 Traffic steps
+  .card-body
+    - if @onboarding.traffic_checks.blank?
+      .row
+        .col.mt-2 There are no traffic steps for this onboarding record
+    - else
+      .row
+        .col-3
+          h5.mb-2.dashhead-title.mb-1 Step category
+        .col-3
+          h5.mb-2.dashhead-title.mb-1 Controller action
+        .col-3
+          h5.mb-2.dashhead-title.mb-1 Data collected
+        .col-3
+          h5.mb-2.dashhead-title.mb-1 Step status
+      - @onboarding.traffic_checks.order('id').each do |traffic_check|
+        .row
+          .col-3 = traffic_check.traffic_step.category
+          .col-3 = traffic_check.controller_action
+          .col-3 = traffic_check.data_collected
+          .col-3 = traffic_check.traffic_step.status

@@ -1,0 +1,17 @@
+nav#sidebar.navbar.navbar-dark.justify-content-start.flex-column.align-items-start.d-none.d-lg-flex
+  h5 = link_to 'Recruitment', recruitment_dashboard_url, class: nav_link_class(recruitment_dashboard_url)
+  ul.navbar-nav
+    - if can?(:read, Panel)
+      li.nav-item.mr-3 = link_to 'Panels', panels_url, class: nav_link_class(panels_url)
+      li.nav-item.mr-3 = link_to 'Affiliates', affiliates_url, class: nav_link_class(affiliates_url)
+    - if can?(:read, Nonprofit)
+      li.nav-item.mr-3 = link_to 'Nonprofits', nonprofits_url, class: nav_link_class(nonprofits_url)
+    - if can?(:read, RecruitingCampaign)
+      li.nav-item.mr-3 = link_to 'Campaigns', recruiting_campaigns_url, class: nav_link_class(recruiting_campaigns_url)
+    - if can?(:read, TrackingPixel)
+      li.nav-item.mr-3 = link_to 'Tracking pixels', pixels_url, class: nav_link_class(pixels_url)
+    - if can?(:read, Panel)
+      li.nav-item.mr-3 = link_to 'Affiliate report', new_affiliate_report_url, class: "#{nav_link_class(new_affiliate_report_url)} #{nav_link_class(affiliate_report_url)}"
+      li.nav-item.mr-3 = link_to 'Recruitment source report', new_recruitment_source_report_url, class: "#{nav_link_class(new_recruitment_source_report_url)} #{nav_link_class(recruitment_source_report_url)}"
+      - if current_employee.effective_role_admin?(session[:effective_role])
+        li.nav-item.mr-3 = link_to 'Incentive batches', incentive_batches_url, class: "#{nav_link_class(incentive_batches_url)} #{nav_link_class(incentive_batches_url)}"

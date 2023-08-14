@@ -1,0 +1,27 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Nonprofits', nonprofits_url
+  li.breadcrumb-item = link_to 'Campaigns', recruiting_campaigns_url
+  li.breadcrumb-item.active New
+.mb-5
+  h2 New campaign
+.fluid_container
+  .mb-5
+    = form_for [@campaignable, @campaign] do |f|
+      = render 'employee/form_errors', resource: @campaign
+      .row.mb-5
+        .col-6
+          = render 'forms/text_field', form: f, field: :code
+          = render 'forms/text_area', form: f, field: :description
+          .mb-3.form-check
+            label.form-check-label
+              = f.check_box :incentive_flag, class: 'form-check-input'
+              | Incentivized?
+          = render 'forms/text_field', form: f, field: :incentive
+          = render 'employee/form_buttons'
+        .col-6
+          = render 'forms/date_field', form: f, field: :campaign_started_at, label: 'Starting date (for reference)'
+          = render 'forms/date_field', form: f, field: :campaign_stopped_at, label: 'Ending date (hides landing page)'
+          .mb-3.form-check
+            label.form-check-label
+              = f.check_box :lock_flag, class: 'form-check-input'
+              | Locked?

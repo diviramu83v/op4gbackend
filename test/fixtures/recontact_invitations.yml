@@ -1,0 +1,8 @@
+standard:
+  recontact_invitation_batch: standard
+  uid: xyz
+  original_onboarding: complete
+  token: <%= SecureRandom.hex %>
+  status: 'unsent'
+  url: 'http://www.test.com/{{uid}}/{{old_uid}}'
+

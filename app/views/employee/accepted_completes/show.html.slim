@@ -1,0 +1,38 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Project close-out', project_close_out_url(@project)
+  li.breadcrumb-item = link_to 'Accepted Completes IDs', new_project_accepted_complete_url(@project)
+  li.breadcrumb-item.active Results
+
+span#completes-data
+  .d-flex.flex-column.align-items-center
+    .mb-4
+      h1 Processing accepted completes
+    .spinner.mt-3
+      i.fa.fa-spinner.fa-pulse.fa-3x.fa-fw
+      span.sr-only Loading...
+.mb-4
+  - if can?(:destroy, Onboarding)
+    span
+      span#cancel-button
+        = link_to project_accepted_complete_url(@project, @decoding), method: :delete, class: 'btn btn-danger mr-1' do
+          i.fa.fa-times.mr-1
+          | Cancel
+  span
+    span#continue-button
+      = link_to project_close_out_url(@project), class: 'btn btn-primary' do
+        i.fa.fa-arrow-right.mr-1
+        | Continue
+
+javascript:
+  var decoding_id = "#{@decoding.id}"
+  var project_id = "#{@project.id}"
+  var url = "#{request.host_with_port}"
+  $(function(){
+    $('#cancel-button').hide();
+    $('#continue-button').hide()
+  });
+coffee:
+  window.onload = ->
+    App.cable.subscriptions.create { channel: "AcceptedCompletesChannel", decoding_id: decoding_id, project_id: project_id },
+      received: (data) ->
+        $('#completes-data').html(data.replace /admin.example.org/g, url)

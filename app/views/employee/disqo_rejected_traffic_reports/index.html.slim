@@ -1,0 +1,44 @@
+.mb-5
+  h2 Disqo Rejected Traffic Report
+  .mb-5
+    .row
+      .col-3
+        span
+          .mt-2
+            = form_for :report do |f|
+              .d-flex.justify-content-start
+                span.mt-1.mr-3
+                  span.mr-1 = label :month, 'Month'
+                  = f.select :month, options_for_select(Date::MONTHNAMES.compact, selected: Time.now.utc.strftime('%B')), { }, { id: 'month-field', class: 'form-control ml-1 mr-3' }
+                  span.mr-1 = label :year, 'Year'
+                  = f.select :year, options_for_select((2017..Time.now.utc.year).reverse_each), { }, { id: 'year-field', class: 'form-control ml-1 mr-3' }
+                  span#download-button.btn.btn-outline-primary.mt-2
+                    i.fas.fa-cloud-download-alt.mr-1
+                    | Download
+  coffee:
+    $('#download-button').click ->
+      $(this).html("<i class='fa fa-spinner fa-pulse mr-2'></i>Downloading")
+      $('#download-button').addClass('disabled');
+      $('select').prop('disabled', true);
+      App.disqo_rejected_traffic_download = App.cable.subscriptions.create {
+        channel: "DisqoRejectedTrafficReportChannel",
+        month: $('#month-field').val(),
+        year: $('#year-field').val()
+      },
+        received: (data) ->
+          $('#download-button').html("<i class='fas fa-cloud-download-alt mr-1'></i>Download")
+          $('#download-button').removeClass('disabled');
+          $('select').prop('disabled', false);
+          $('#download-button').css('pointer-events', 'auto');
+          blob = new Blob([data['csv_file']['content']]);
+
+          # Create a link with the data and trigger click event to download the file
+          csv_download_link = document.createElement('a');
+          csv_download_link.href = window.URL.createObjectURL(blob);
+          csv_download_link.download = data['csv_file']['file_name'];
+          csv_download_link.click();
+                   
+          App.disqo_rejected_traffic_download.unsubscribe()
+          App.cable.disconnect()
+          delete App.disqo_rejected_traffic_download
+          return

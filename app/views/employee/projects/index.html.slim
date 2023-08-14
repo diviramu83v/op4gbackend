@@ -1,0 +1,31 @@
+.mb-5
+  .d-flex.justify-content-between
+    h2
+      span.mr-3 Projects
+      span.mr-0
+        - if can?(:view_and_modify, Project)
+          = link_to new_project_url, class: 'page-header-link' do
+            i.fa.fa-plus-circle.mr-1
+            | Add
+    .justify-content-end
+      = link_to personal_project_reports_path(status: @status, format: :csv), class: 'btn btn-outline-primary mr-2' do
+        i.fas.fa-cloud-download-alt.mr-2
+        | Download your projects
+      - if current_user.admin_or_ops_manager?(session[:effective_role])
+        #all-projects-buttons.d-inline
+          = render 'report_buttons', report: @project_report if current_user.admin_or_ops_manager?(session[:effective_role])
+  .mb-1
+    - if can?(:read, Project)
+      = link_to 'Your projects', request.query_parameters.merge(projects: 'mine'), class: "btn btn-outline-secondary btn-xs mr-1 #{active_class?('projects', 'mine')}"
+      = link_to 'All projects', request.query_parameters.merge(projects: 'all'), class: "btn btn-outline-secondary btn-xs mr-1 #{active_class?('projects', 'all')}"
+  .mb-0
+    = render 'filter_button', page_status: @status, button_status: 'active'
+    - Survey.statuses.values.each do |status|
+      = render 'filter_button', page_status: @status, button_status: status
+.mb-0
+  = render 'project_cards', projects: @projects
+
+coffee:
+  App.cable.subscriptions.create "ProjectReportsChannel",
+    received: (data) ->
+      $('#all-projects-buttons').html(data)

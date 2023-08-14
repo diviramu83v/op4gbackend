@@ -1,0 +1,11 @@
+label = question.name
+= qual_form.fields_for question.slug.to_sym do |range_form|
+  .row.mb-3
+    .col-lg-4
+      .form-group
+        = range_form.label 'Minimum'
+        = range_form.select "min_#{question.name.downcase}".to_sym, options_for_select(DisqoQuota::MIN_AGE..DisqoQuota::MAX_AGE, selected: @schlesinger_quota.qualifications[question.slug]&.min), { include_blank: true }, { class: 'form-control' }
+    .col-lg-4
+      .form-group
+        = range_form.label "Maximum"
+        = range_form.select "max_#{question.name.downcase}".to_sym, options_for_select(DisqoQuota::MIN_AGE..DisqoQuota::MAX_AGE, selected: @schlesinger_quota.qualifications[question.slug]&.max), { include_blank: true }, { class: 'form-control' }

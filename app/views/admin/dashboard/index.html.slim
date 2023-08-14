@@ -1,0 +1,30 @@
+.mb-5
+  h1 Dashboard
+.row
+  .col-4
+    .mb-5
+      h2 = link_to 'Earnings reports', reports_url
+      p View overall earnings by month and nonprofit earnings.
+    .mb-5
+      h2 = link_to 'Payment upload', payments_url
+      p Upload a batch of payments.
+    .mb-5
+      h2 = link_to 'Panelist suspension', new_panelist_suspension_url
+      p Suspend a batch of panelists.
+  .col-4
+    .mb-5
+      h2 = link_to 'Data', table_data_dashboard_url
+      p View and manage system data.
+    .mb-5
+      h2 = link_to 'API tokens', api_tokens_url
+      p Manage API access.
+    .mb-5
+      h2 = link_to 'Traffic step lookup', new_traffic_step_lookup_url
+      p Find traffic step links for a group of UIDs.
+  .col-4
+    .mb-5
+      h2 = link_to 'Jobs', jobs_url
+      p View system job queue activity.
+    .mb-5
+      h2 = link_to 'Project processor', project_processors_url
+      p Process project spread sheets

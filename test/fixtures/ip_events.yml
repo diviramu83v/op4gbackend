@@ -1,0 +1,3 @@
+standard:
+  ip: ip_addresses(:standard)
+  message: 'Fake Message'

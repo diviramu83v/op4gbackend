@@ -1,0 +1,46 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Project close-out', project_close_out_url(@project)
+  li.breadcrumb-item = link_to 'Rejected Completes IDs', new_project_rejected_complete_url(@project)
+  li.breadcrumb-item.active Results
+
+.mb-4
+  h2
+    span.mr-3 Total UIDs uploaded
+    span.badge.badge-secondary = @decoding.decoded_uids.size
+- @decoding.unique_projects.each do |project|
+  .card.mb-3
+    .card-header
+      .d-flex.justify-content-between
+        h4 = @project.name
+        = link_to "Download", completes_decoder_surveys_url(@decoding, format: :csv), class: 'btn btn-sm btn-outline-primary'
+    .card-body
+      - project.surveys.sort_by(&:name).each do |survey|
+        - if @decoding.matched_uids_for_survey(survey).any?
+          h5.mb-3 #{survey.name}: #{@decoding.matched_uids_for_survey(survey).count}/#{survey.complete_count} recorded
+          table.table.table-sm.table-wrapped-with-header.mb-3
+            thead
+              tr
+                th Source
+                th Count
+            tbody
+              - @decoding.unique_sources_for_survey(survey).each do |traffic_source|
+                tr
+                  td = traffic_source&.name
+                  td = @decoding.matched_uids_for_survey_and_source(survey, traffic_source).count
+
+      - if @decoding.decoded_uids.unmatched.any?
+        .mb-4
+          h4
+            span.mr-3 Not found
+            span.badge.badge-secondary = @decoding.decoded_uids.unmatched.size
+          p.text-danger Check on these and determine what the issue is before continuing
+          - @decoding.decoded_uids.unmatched.each do |decoded_uid|
+            div = decoded_uid.uid
+.mb-4
+  - if can?(:destroy, Onboarding)
+    = link_to project_rejected_complete_url(@project, @decoding), method: :delete, class: 'btn btn-danger mr-1' do
+      i.fa.fa-times.mr-1
+      | Cancel
+  = link_to project_close_out_url(@project), class: 'btn btn-primary' do
+    i.fa.fa-arrow-right.mr-1
+    | Continue

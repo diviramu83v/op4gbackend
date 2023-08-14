@@ -1,0 +1,33 @@
+.card
+  .card-header
+    .d-flex.justify-content-between
+      h4
+        span.mr-2 Prescreener Library Questions
+        span.mr-0
+          - if can?(:view_and_modify, PrescreenerLibraryQuestion)
+            = link_to new_prescreener_library_question_url, class: 'card-header-link' do
+              i.fa.fa-plus-circle.mr-1
+              | Add
+  .card-body
+    - if @prescreener_library_questions.any?
+      table.table.table-sm.table-wrapped-with-header.mb-0
+        thead
+          tr
+            th Question
+            th Answers
+        tbody
+          - @prescreener_library_questions.each do |prescreener_library_question|
+            tr
+              td.p-3 = prescreener_library_question.question
+              td.p-3 = prescreener_library_question.answers.join(', ')
+              td.p-3 style='width: 15%'
+                - if can?(:destroy, PrescreenerLibraryQuestion)
+                  = link_to prescreener_library_question_url(prescreener_library_question), method: :delete, class: 'btn-xs btn-link pl-2 float-right' do
+                    i.far.fa-trash-alt.mr-1
+                    | Delete
+                - if can?(:view_and_modify, PrescreenerLibraryQuestion)
+                  = link_to edit_prescreener_library_question_url(prescreener_library_question), class: 'btn-xs btn-link pl-2 float-right' do
+                    i.fa.fa-edit.mr-1
+                    | Edit
+    - else
+      p.mb-0 No prescreener library questions have been added yet.

@@ -1,0 +1,36 @@
+- case survey.status
+- when 'draft'
+  = render 'employee/survey_statuses/launch_button', survey: survey
+  = render 'employee/survey_statuses/hold_button', survey: survey, disabled: true
+  = render 'employee/survey_statuses/wait_button', survey: survey, disabled: true
+  = render 'employee/survey_statuses/archive_button', survey: survey
+- when 'live'
+  - if current_employee.effective_role_admin?(session[:effective_role])
+    = render 'employee/survey_statuses/draft_button', survey: survey
+  = render 'employee/survey_statuses/launch_button', survey: survey, disabled: true
+  = render 'employee/survey_statuses/hold_button', survey: survey
+  = render 'employee/survey_statuses/wait_button', survey: survey
+  - if current_employee.effective_role_admin?(session[:effective_role])
+    = render 'employee/survey_statuses/archive_button', survey: survey
+- when 'hold'
+  = render 'employee/survey_statuses/launch_button', survey: survey, label: 'Re-launch'
+  = render 'employee/survey_statuses/hold_button', survey: survey, disabled: true
+  = render 'employee/survey_statuses/wait_button', survey: survey, disabled: true
+  - if current_employee.effective_role_admin?(session[:effective_role])
+    = render 'employee/survey_statuses/archive_button', survey: survey
+- when 'waiting'
+  = render 'employee/survey_statuses/launch_button', survey: survey, label: 'Re-launch'
+  = render 'employee/survey_statuses/hold_button', survey: survey, disabled: true
+  = render 'employee/survey_statuses/finish_button', survey: survey, disabled: false
+  - if current_employee.effective_role_admin?(session[:effective_role])
+    = render 'employee/survey_statuses/archive_button', survey: survey
+- when 'finished'
+  - if current_employee.admin_or_ops_manager?(session[:effective_role])
+    = render 'employee/survey_statuses/launch_button', survey: survey, label: 'Re-launch'
+  - else
+    = render 'employee/survey_statuses/launch_button', survey: survey, disabled: true
+  = render 'employee/survey_statuses/hold_button', survey: survey, disabled: true
+  = render 'employee/survey_statuses/finish_button', survey: survey, disabled: true
+  - if current_employee.effective_role_admin?(session[:effective_role])
+    = render 'employee/survey_statuses/archive_button', survey: survey
+- when 'archived'

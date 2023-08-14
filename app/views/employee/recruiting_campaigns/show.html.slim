@@ -1,0 +1,83 @@
+- content_for :breadcrumbs
+  - if @campaign.campaignable.present?
+    li.breadcrumb-item = link_to 'Nonprofits', nonprofits_url
+    li.breadcrumb-item = link_to @campaign.campaignable.name, @campaign.campaignable
+  li.breadcrumb-item = link_to 'Campaigns', recruiting_campaigns_url
+  li.breadcrumb-item.active = @campaign.code
+.mb-5
+  h2
+    span.mr-2 Campaign
+    span.mr-0
+      - if can?(:view_and_modify, RecruitingCampaign)
+        = link_to edit_recruiting_campaign_url(@campaign), class: 'btn btn-link page-header-link pl-0' do
+          i.fa.fa-edit.mr-1
+          | Edit
+.row.mb-5
+  .col-6
+    .mb-4
+      = render 'employee/cards/text_element', label: 'Code', value: @campaign.code
+    .mb-0
+      = render 'employee/cards/text_header', label: 'Landing page', value: landing_page_url(code: @campaign.code), clipboard: landing_page_url(code: @campaign.code)
+      = link_to landing_page_url(code: @campaign.code), landing_page_url(code: @campaign.code)
+  .col-6 = render 'employee/cards/text_element', label: 'Description', value: simple_format(@campaign.description)
+.row
+  .col-6
+    .mb-4 = render 'employee/cards/text_element', label: 'Starting date (for reference)', value: format_long_date(@campaign.campaign_started_at)
+    .mb-4 = render 'employee/cards/text_element', label: 'Ending date (hides landing page)', value: format_long_date(@campaign.campaign_stopped_at)
+    = link_to recruiting_campaign_panelists_url(@campaign)
+      = render 'employee/cards/text_element', label: 'Active panelists', value: format_number(@campaign.signup_started_count)
+  .col-6
+    .mb-4 = render 'employee/cards/text_element', label: 'Incentivized?', value: format_bool_as_yes_no(@campaign.incentive_flag)
+    - if @campaign.incentivized?
+      .mb-4 = render 'employee/cards/text_element', label: 'Incentive', value: format_currency(@campaign.incentive)
+    .mb-4 = render 'employee/cards/text_element', label: 'Locked?', value: format_bool_as_yes_no(@campaign.lock_flag)
+    .mb-4 = render 'employee/cards/text_element', label: 'Require business name?', value: format_bool_as_yes_no(@campaign.business_name_flag?)
+.row
+  .col-6
+    .mb-3
+      h3
+        span.mr-2 Signups by month
+    - if @campaign.panelists.active.empty?
+      p.mb-0 No signups yet.
+    - else
+      table.table.table-sm.mb-3 data-sort='table'
+        thead
+          tr
+            th Month
+            th Signups
+        tbody
+          - @campaign.active_panelists_grouped_by_month.order("month desc").each do |group|
+            tr
+              td = group.month.strftime('%b %Y')
+              td = format_number(group.count)
+  .col-6
+    .mb-2
+      span.mr-0
+        = link_to recruiting_campaign_earnings_url(@campaign), class: 'btn btn-link pl-0' do
+          i.fa.fa-credit-card.mr-1
+          | View Earnings Data
+    .row.mb-2
+        .col-3
+          = link_to recruiting_campaign_profit_url(@campaign), class: 'btn btn-link pl-0' do
+            i.fas.fa-dollar-sign.mr-1
+            | View Panelist Net Incentive Margin
+    .row.mb-2
+        .col-3
+          = link_to recruiting_campaign_stats_url(@campaign), class: 'btn btn-link pl-0' do
+            i.fa.fa-filter.mr-1
+            | View Signup Stats
+    .row.mb-2
+        .col-3
+          = link_to recruiting_campaign_completes_url(@campaign), class: 'btn btn-link pl-0' do
+            i.fa.fa-check.mr-1
+            | View Completes Funnel
+    .row.mb-2
+        .col-3
+          = link_to recruiting_campaign_lifecycle_url(@campaign), class: 'btn btn-link pl-0' do
+            i.fa.fa-chart-bar.mr-1
+            | View Panelist Lifecycle Stats
+    .row.mb-5
+      .col-3
+        = link_to recruiting_campaign_demographic_details_url(@campaign), class: 'btn btn-link pl-0' do
+          i.fa.fa-users.mr-1
+          | View Panelist Demographic Details

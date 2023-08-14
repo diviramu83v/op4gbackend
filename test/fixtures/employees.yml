@@ -1,0 +1,58 @@
+operations:
+  first_name: Jerry
+  last_name: Seinfeld
+  email: standard@123.com
+no_role:
+  first_name: George
+  last_name: Costanza
+  email: art@vandelayindustries.com
+admin:
+  first_name: Elaine
+  last_name: Benes
+  email: elaine@pedant.com
+nonprofits:
+  first_name: Cosmo
+  last_name: Kramer
+  email: cosmo@pbandjs.com
+recruitment:
+  first_name: Ruthie
+  last_name: Cohen
+  email: ruthie@monkscafe.com
+sales:
+  first_name: Mr
+  last_name: Newman
+  email: newman@postoffice.gov
+operations_manager:
+  first_name: Frank
+  last_name: Costanza
+  email: frank@festivus.com
+payment:
+  first_name: Estelle
+  last_name: Costanza
+  email: estelle@mojang.com
+reporting:
+  first_name: Uncle
+  last_name: Leo
+  email: uncleleo@parksdept.gov
+security:
+  first_name: Susan
+  last_name: Ross
+  email: susan@nbc.com
+supply:
+  first_name: Morty
+  last_name: Seinfeld
+  email: morty@pbandjs.com
+panelist_editor:
+  first_name: Helen
+  last_name: Seinfeld
+  email: helen@pbandjs.com
+locked_panel:
+  first_name: Jenny
+  last_name: Smith
+  email: jenny@testing.com
+  phone: 555-867-5309
+null:
+  id: 0
+  first_name: None
+  last_name: None
+  email: none@op4g.com

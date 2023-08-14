@@ -1,0 +1,8 @@
+- if onramp.check_prescreener?
+  = link_to onramp_prescreener_url(onramp), method: :delete, remote: true, class: 'btn btn-outline-primary btn-xs ml-1' do
+    i.fa.fa-minus.mr-1
+    | Turn off
+- else
+  = link_to onramp_prescreener_url(onramp), method: :post, remote: true, class: 'btn btn-outline-primary btn-xs ml-1' do
+    i.fa.fa-plus.mr-1
+    | Turn on

@@ -1,0 +1,31 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Projects', projects_url
+  li.breadcrumb-item = link_to @survey.project.extended_name, @survey.project
+  li.breadcrumb-item = @survey.name
+  li.breadcrumb-item = link_to 'Prescreener', survey_prescreener_questions_url(@survey)
+  li.breadcrumb-item.active Prescreener Questions Library
+.card
+  .card-header
+    .d-flex.justify-content-between
+      h4
+        span.mr-2 Prescreener Questions Library
+  .card-body
+    - if @library_question_selections.any?
+      table.table.table-sm.table-wrapped-with-header.mb-0
+        thead
+          tr
+            th Question
+            th Answers
+            th
+        tbody
+          - @library_question_selections.each do |library_question|
+            tr
+              td.p-3 = library_question.question
+              td.p-3 = library_question.answers.join(', ')
+              td.p-3
+                - if can?(:view_and_modify, PrescreenerLibraryQuestion)
+                  = link_to new_survey_library_question_selection_url(@survey, library_question: library_question.id), class: 'btn btn-primary pl-2' do
+                    i.fa.fa-plus.mr-1
+                    | Add
+    - else
+      p.mb-0 No prescreener library questions have been added yet.

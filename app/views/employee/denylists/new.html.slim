@@ -1,0 +1,15 @@
+.mb-5
+  h2 New denylist entry
+.mb-5
+  .row
+    .col-6
+      = form_for @denylist, url: denylist_path(@denylist) do |f|
+        = render 'employee/form_errors', resource: @denylist
+        .form-group
+          .mb-2
+            = f.label :address, "IP Addresses (comma or line separated)"
+            = f.text_area :address, class: 'form-control', size: '30x15'
+          .mb-2
+            = f.label :blocked_reason
+            = f.text_field :blocked_reason, required: true, class: 'form-control'
+        = render 'employee/form_buttons'

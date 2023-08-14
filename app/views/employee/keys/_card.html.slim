@@ -1,0 +1,56 @@
+.card
+  .card-header
+    .d-flex.justify-content-between
+      h4
+        span.mr-2 Keys
+        span.mr-2
+          .badge.badge-secondary = @keys.total_count
+        span.mr-0
+          - if can?(:view_and_modify, Key)
+            = link_to new_survey_key_url(@survey), class: 'card-header-link' do
+              i.fa.fa-edit.mr-1
+              | Add
+      span
+        - if @survey.downloadable_keys?
+          = link_to survey_keys_url(@survey, format: :csv), class: 'btn btn-outline-primary' do
+            i.fas.fa-cloud-download-alt.mr-1
+            | Download
+        - if can?(:destroy, Key)
+          - if @survey.removable_keys?
+            = link_to survey_keysets_url(@survey), method: :delete, data: { confirm: "Are you sure you want to delete all unused keys?" }, class: 'btn btn-outline-danger ml-1' do
+              i.far.fa-trash-alt.mr-1
+              | Remove unused keys
+  .card-body
+    - if @survey.keys?
+      .d-flex.justify-content-between.mb-3
+        ul.nav.nav-pills
+          li.nav-item = link_to 'all', survey_keys_url, class: activate_class(survey_keys_url, 'nav-link btn btn-outline-primary btn-xs mr-1')
+          li.nav-item = link_to "#{@survey.used_keys.count} used", survey_keys_url(status: 'used'), class: activate_class(survey_keys_url(status: 'used'), 'nav-link btn btn-outline-primary btn-xs mr-1')
+          li.nav-item = link_to "#{@survey.unused_keys.count} unused", survey_keys_url(status: 'unused'), class: activate_class(survey_keys_url(status: 'unused'), 'nav-link btn btn-outline-primary btn-xs mr-1')
+        .pagination-xs = paginate @keys
+      - if @keys.any?
+        table.table.table-sm.table-wrapped-with-header.mb-3
+          thead
+            tr
+              th Key
+              th Used
+              th
+          tbody
+            - @keys.each do |key|
+              tr
+                td.w-25 = key.value
+                td
+                  - if key.used_at.present?
+                    span data-utc-time=key.used_at data-timezone-converted='false'
+                      = key.used_at
+                td.text-right
+                  - if key.removable? && can?(:destroy, key)
+                    = link_to key_url(key), method: :delete, class: 'btn btn-outline-danger btn-xs', data: { disable_with: "Please wait..." } do
+                      i.far.fa-trash-alt.mr-1
+                      | Remove
+      - else
+        p.mb-0 No matching keys found.
+      .d-flex.justify-content-end
+        .pagination-xs.mb-0 = paginate @keys
+    - else
+      p.mb-0 No keys have been added yet.

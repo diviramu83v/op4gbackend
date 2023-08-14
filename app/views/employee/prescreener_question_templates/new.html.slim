@@ -1,0 +1,18 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Projects', projects_url
+  li.breadcrumb-item = link_to @survey.project.extended_name, @survey.project
+  li.breadcrumb-item = @survey.name
+  li.breadcrumb-item.active = link_to 'Prescreener', survey_prescreener_questions_url(@survey)
+  li.breadcrumb-item.active New
+.mb-5
+  h2 New screener question
+.mb-5
+  .row
+    .col-8
+      = form_for :prescreener_question, url: survey_prescreener_questions_url(@survey) do |f|
+        = render 'employee/form_errors', resource: @prescreener_question
+        = render 'form', f: f
+        = render 'employee/form_buttons'
+        button.btn.btn-primary.ml-2 type='submit' name='add_answers' value='true'
+          i.fas.fa-cloud-upload-alt.mr-2
+          = 'Save and add answers'

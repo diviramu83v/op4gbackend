@@ -1,0 +1,21 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Panelists', panelists_url
+  li.breadcrumb-item.active = @panelist.name
+  li.breadcrumb-item.active Payments
+.mb-5
+  h2 Panelist
+.mb-5 = render 'employee/panelists/mini_nav', panelist: @panelist
+.mb-5
+  .mb-3
+    h3 Payments
+.row
+  .col-md-4 = render "panelist/accounts/navigation_card", panelist: @panelist, payments_url: panelist_payments_url(@panelist), account_url: nil, demographics_url: nil, password_url: nil
+  .col-md-8
+    .mb-3 = render 'panelist/payments/summary_card', panelist: @panelist
+    - if @details_present
+      .card.mb-1
+        .card-header.no-card-body
+          h4 = t('.details_header', default: 'Earnings details')
+      - @years.each do |year|
+        .mb-1 = render 'panelist/payments/yearly_card', panelist: @panelist, year: year
+      .mb-0 = render 'panelist/payments/legacy_card', panelist: @panelist if @panelist.legacy_earnings.positive?

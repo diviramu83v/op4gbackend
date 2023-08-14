@@ -1,0 +1,13 @@
+.mb-5
+  h2
+    span.mr-3 Demographic data
+.mb-0
+  .mb-3
+    h3 Paste UIDs or emails
+  = form_for @demographic_detail , url: demographic_details_url do |f|
+    = render 'employee/form_errors', resource: @demographic_detail
+    .form-group
+      = f.text_area :upload_data, rows: '20', class: 'form-control'
+    button.btn.btn-primary type="submit" data-disable="button"
+      i.fas.fa-cloud-upload-alt.mr-2
+      = 'Save'

@@ -1,0 +1,9 @@
+nav#sidebar.navbar.navbar-dark.justify-content-start.flex-column.align-items-start.d-none.d-lg-flex
+  h5 = link_to 'Reporting', reporting_dashboard_url, class: nav_link_class(reporting_dashboard_url)
+  ul.navbar-nav
+    li.nav-item.mr-3 = link_to 'Panel complete by source', new_panel_completes_by_sources_url, class: nav_link_class(new_panel_completes_by_sources_url)
+    li.nav-item.mr-3 = link_to 'Active projects/surveys report', new_active_surveys_report_url, class: nav_link_class(new_active_surveys_report_url)
+    li.nav-item.mr-3 = link_to 'Vendor performance report', new_vendor_performance_report_url, class: nav_link_class(new_vendor_performance_report_url)
+    li.nav-item.mr-3 = link_to 'Completes by source', new_completes_report_url, class: nav_link_class(new_completes_report_url)
+    li.nav-item.mr-3 = link_to 'Block rate by source', new_block_rate_by_sources_url, class: nav_link_class(new_block_rate_by_sources_url)
+    li.nav-item.mr-3 = link_to 'Block reasons for all traffic', new_block_reasons_report_url, class: nav_link_class(new_block_reasons_report_url)

@@ -1,0 +1,7 @@
+- if survey.try(:base_link).blank?
+  = render 'employee/cards/text_element', label: 'Link', value: '?'
+- else
+  h6.mb-2.dashhead-subtitle.text-header.tiny-button-header
+    span = 'Link'
+    span.ml-2 = render 'shared/copy_button', label: 'Copy', text: survey.base_link
+    = render 'employee/cards/text_value', value: survey.base_link

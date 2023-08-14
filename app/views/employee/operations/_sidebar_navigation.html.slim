@@ -1,0 +1,18 @@
+nav#sidebar.navbar.navbar-dark.justify-content-start.flex-column.align-items-start.d-none.d-lg-flex
+  h5 = link_to 'Operations', operations_dashboard_url, class: nav_link_class(operations_dashboard_url)
+  ul.navbar-nav
+    - if can?(:read, Project)
+      li.nav-item.mr-3 = link_to 'Projects', projects_url, class: nav_link_class(projects_url)
+    - if can?(:view_and_modify, Project)
+      li.nav-item.mr-3 = link_to 'Project close-outs', project_close_outs_url, class: nav_link_class(project_close_outs_url)
+      li.nav-item.mr-3 = link_to 'Warnings', warnings_url, class: nav_link_class(warnings_url)
+      li.nav-item.mr-3 = link_to 'UID decoder', new_decoding_url, class: nav_link_class(new_decoding_url)
+      li.nav-item.mr-3 = link_to 'Disqo Rejected Traffic Report', disqo_rejected_traffic_reports_url, class: nav_link_class(disqo_rejected_traffic_reports_url)
+      - if current_employee.effective_role_admin?(session[:effective_role])
+        li.nav-item.mr-3 = link_to 'Demographic data', new_demographic_detail_url, class: nav_link_class(new_demographic_detail_url)
+      li.nav-item.mr-3 = link_to 'Clients', clients_url, class: nav_link_class(clients_url)
+      li.nav-item.mr-3 = link_to 'Vendors', vendors_url, class: nav_link_class(vendors_url)
+      li.nav-item.mr-3 = link_to 'Unsubscribed list', unsubscriptions_url, class: nav_link_class(unsubscriptions_url)
+    - if current_employee.admin_or_ops_manager?(session[:effective_role])
+      li.nav-item.mr-3 = link_to 'Closed-out projects', closed_out_projects_url, class: nav_link_class(closed_out_projects_url)
+      li.nav-item.mr-3 = link_to 'Prescreener Questions Library', prescreener_library_questions_url, class: nav_link_class(prescreener_library_questions_url)

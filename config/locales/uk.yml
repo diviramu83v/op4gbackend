@@ -1,0 +1,20 @@
+uk:
+  panelist:
+    landing_pages:
+      default:
+        welcome: "Welcome to Opinions4Good"
+        have_an_opinion: "Get Paid To Share Your Insights!"
+        explanation_one: "Thanks for your interest in joining Opinions4Good. Earn cash by providing feedback on a variety of different research topics. Once you reach the payout threshold (equivalent of US $10), you’ll be automatically paid out the following month directly to your verified PayPal account."
+        explanation_two: "Earn your first incentive (equivalent of US $2) by filling out your member profile! This helps us to send you surveys that best match your personal interests."
+        join_button: "Join now!"
+    demographic_categories:
+      show:
+        employee_count: "Approximately how many employees work for your organisation?"
+  demo_options:
+    african_american: "Black/Black British"
+    asian: "Asian/Asian British"
+    caucasian: "Caucasian"
+    hispanic_latino: "Hispanic/Latino"
+    mixed_race: "Mixed Race"
+    native_american_pacific_islander: "Pacific Islander"
+    other: "Other/Prefer not to say"

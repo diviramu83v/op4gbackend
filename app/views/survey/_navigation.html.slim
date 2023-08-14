@@ -1,0 +1,15 @@
+.mb-5
+  nav.navbar.bg-light.header-nav
+    .container.justify-content-between
+      span
+        - if panelist_signed_in?
+          = link_to panelist_dashboard_url, class: 'navbar-brand pt-4 pb-4' do
+            = image_tag('op4g-logo.png', height: '30px')
+        - else
+          .navbar-brand.pt-4.pb-4
+            = image_tag('op4g-logo.png', height: '30px')
+      .navbar-nav.flex-row
+        - if panelist_signed_in?
+          = link_to support_url, class: 'nav-link font-weight-bold ml-5' do
+            i.far.fa-question-circle.mr-2
+            = 'Support'

@@ -1,0 +1,23 @@
+.mb-5
+  h2 Panelists
+.mb-0
+  .d-flex.justify-content-between.mb-3
+    span
+      = form_tag(panelists_url, method: :get, class: 'form-inline form-table-search mr-3') do
+        = text_field_tag :term, @search_term, placeholder: 'email or name', class: 'form-control mr-1'
+        = submit_tag 'Search', class: 'btn btn-outline-primary btn-sm', name: nil
+      - if @search_term.present?
+        = link_to panelists_url do
+          i.fa.fa-undo.mr-2
+          | back to active panelists
+    - unless @search_term.present?
+      .pagination-xs = paginate @panelists
+  - if @panelists.empty?
+    p.mb-0 No panelists found.
+  - else
+    table.table.table-sm
+      thead = render 'employee/panelists/table_header'
+      tbody = render partial: 'employee/panelists/table_row', collection: @panelists, as: :panelist
+  - unless @search_term.present?
+    .d-flex.justify-content-end
+      .pagination-xs.mb-0 = paginate @panelists

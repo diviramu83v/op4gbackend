@@ -1,0 +1,37 @@
+.mb-5
+  h2
+    span.mr-2 Client
+    span.mr-0
+      - if can?(:view_and_modify, Client)
+        = link_to edit_client_url(@client), class: 'btn btn-link page-header-link pl-0' do
+          i.fa.fa-edit.mr-1
+          | Edit
+.mb-5
+  = render 'employee/cards/text_element', label: 'Name', value: @client.name
+.mb-5
+  = render 'employee/cards/button_header', text: 'Projects' do
+    - if can?(:view_and_modify, Client)
+      = link_to new_client_project_url(@client), class: 'btn btn-link btn-xs' do
+        i.fa.fa-plus-circle.mr-1
+        | Add
+  - if @projects.any?
+    table.table.mb-3 data-sort='table'
+      thead
+        tr
+          th ID
+          th Name
+          th Status
+      tbody
+        - @projects.order(created_at: :desc).each do |project|
+          tr
+            td = link_to project.id, project
+            td = link_to project.name, project
+            td
+              - project.surveys.each do |survey|
+                div
+                  span #{survey.name}:
+                  span
+                    .badge.ml-1 class="badge-#{survey_status_class(survey.status)}"
+                      = survey.status
+  - else
+    p No projects have been added for this client.

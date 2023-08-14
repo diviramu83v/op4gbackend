@@ -1,0 +1,23 @@
+p
+  'We've detected a repricing event from the Cint system. This means that the IR or LOI aren't lining up with the expected values provided.
+
+p
+  'From Cint:
+
+p
+  '25% rule for repricing: IF measured IR is more than 25% lower than Survey IR, OR if measured LOI is more than 25% higher than Survey LOI, AND the applicable rate card stipulates a higher CPI than the current effective Survey CPI, THEN a repricing event is triggered
+
+p
+  'We recommend adjusting the IR and/or LOI values and submitting a new quota.
+
+p
+  'Old IR: #{@cint_event.events_data.dig('message', 'changes', 'incidenceRate', 'old')}, New IR: #{@cint_event.events_data.dig('message', 'changes', 'incidenceRate', 'new')}
+
+p
+  'Old CPI: #{@cint_event.events_data.dig('message', 'changes', 'cpi', 'old')}, New CPI: #{@cint_event.events_data.dig('message', 'changes', 'cpi', 'new')}
+
+p
+  'Project #{@survey.project.id} / Survey #{@survey.id} / #{link_to 'Quota page', survey_cint_surveys_url(@survey)}
+
+
+p - automated platform message

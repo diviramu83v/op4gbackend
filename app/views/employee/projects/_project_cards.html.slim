@@ -1,0 +1,9 @@
+.d-flex.justify-content-end.mb-1
+  span.mr-2
+    .pagination-xs = paginate projects
+
+- projects.each do |project|
+  = render 'card', project: project
+
+.d-flex.justify-content-end
+  .pagination-xs = paginate projects

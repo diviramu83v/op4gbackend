@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# This model initially had no columns defined. If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+one:
+  cpi: 1
+  loi: 10
+  incidence_rate: 75
+  days_in_field: 60
+  completes_wanted: 5000
+  qualifications:
+    and: [
+      equals: {
+        values: ['US'],
+        question: 'geocountry'
+      }
+    ]

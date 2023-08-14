@@ -1,0 +1,32 @@
+.card.mb-5
+  .card-header
+    h4.mb-3 Block Reasons Glossary
+
+    .font-weight-bold = 'Clean id: score too high'
+    p Clean id assigns an evaluation score. The score assigned is considered too high.
+
+    .font-weight-bold = 'Clean id: OR score too high'
+    .mb-1 This score is based on several other score inputs:
+    ul
+      li The device's transactional score, "Score"
+      li The contextual frequency scores, "DailyFrequencyScore" and "WeeklyFrequencyScore"
+      li The QCRate based on both the PanelistId and device's ID
+    p This should be considered the overall score for that transaction as it takes into consideration all known scores and data points.
+
+    .font-weight-bold = 'Clean id: score is missing'
+    p This means that the CleanID score was not recorded. This should not be able to happen through regular use, so we consider it to indicate that someone is intentionally trying to bypass CleanID.
+
+    .font-weight-bold = 'Recaptcha: check failed'
+    p This means that Google marked the ReCaptcha attempt as a failure.
+
+    .font-weight-bold = 'Clean id: not unique'
+    p If TRUE, this device or panelistID has already been processed for this particular EventId.
+
+    .font-weight-bold = 'Clean id: tampering check'
+    p This means that CleanID indicated that browser properties, or request data has been manipulated.
+
+    .font-weight-bold = 'Recaptcha: too much time spent on step'
+    p This means that Google indicated that the process for a ReCaptcha step took longer than the maximum allowed time.
+
+    .font-weight-bold = 'Recaptcha: repeat visit'
+    p This means that someone revisited the ReCaptcha page somehow. Likely they hit back on their browser.

@@ -1,0 +1,27 @@
+span.mr-2.pb-5
+  = link_to survey_expert_recruit_batches_url(@survey), class: 'btn btn-link pl-0 mr-3' do
+    i.fa.fa-angle-left.mr-1
+    | Back to expert recruit batches
+  .card
+    .card-header
+      .d-flex.justify-content-between
+        span
+          h4
+            span.mr-2 Complete emails
+            span.mr-2
+              .badge.badge-secondary = @completes.count
+        span
+          = link_to survey_expert_recruit_completes_url(@survey, format: :csv), class: 'btn btn-outline-primary' do
+            i.fas.fa-cloud-download-alt.mr-1
+            | Download
+    .card-body
+      table.table.table-sm.table-wrapped-with-header.mb-0
+        thead
+          tr
+            th style=("width: 70%") Email
+            th Survey finished date
+        tbody
+        - @completes.order(created_at: :desc).each do |complete|
+          tr
+            td = complete.expert_recruit_email
+            td = complete.survey_finished_at.strftime('%m/%d/%Y')

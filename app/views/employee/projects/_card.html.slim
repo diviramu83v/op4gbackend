@@ -1,0 +1,51 @@
+.card.mb-3
+  .card-header.pt-1.pb-1.pl-4
+    .d-flex.align-items-center
+      h6.mr-3 = project_link(project)
+      span.mr-3 = render 'shared/copy_button', label: '', text: project.name
+      - if project.live? && can?(:view_and_modify, Project)
+        span.ml-auto
+          span.ml-3 = link_to project_statuses_url(project, id: 'finished'), method: :post, class: "btn btn-success btn-xs" do
+            | Complete
+
+  .card-body.pb-2.pt-3
+    .row
+      .col-12.col-md-6.col-xl-2
+        .mb-2
+          h5.mb-1.dashhead-subtitle.text-header.tiny-button-header
+            span.mr-2 ID:
+            strong #{project.id}
+          h5.mb-1.dashhead-subtitle.text-header.tiny-button-header
+            span.mr-2 WO:
+            strong #{project.work_order}
+        hr.d-xl-none
+      .col-12.col-md-6.col-xl-3
+        .mb-2
+          h5.mb-1.dashhead-subtitle.text-header.tiny-button-header
+            span.mr-2 Client:
+            strong #{client_link(project.client)}
+          h5.mb-1.dashhead-subtitle.text-header.tiny-button-header
+            span.mr-2 Type:
+            strong #{product_abbreviation(project.product_name)}
+        hr.d-lg-none
+      .col-12.col-md-6.col-xl-2
+        .mb-2
+          h5.mb-1.dashhead-subtitle.text-header.tiny-button-header
+            span.mr-2 Sales:
+            strong #{employee_initials_link(project.salesperson)}
+          h5.mb-1.dashhead-subtitle.text-header.tiny-button-header
+            span.mr-2 Ops:
+            strong #{employee_initials_link(project.manager)}
+        hr.d-md-none
+      .col-12.col-md-6.col-lg-12.col-xl-5.mb-1
+        hr.d-none.d-lg-block.d-xl-none
+        - project.surveys.each do |survey|
+          .row.bg-light.pt-2.pb-2.pl-0.pr-0.mb-1.rounded
+            .col-4.col-lg-3.col-xl-6 style="min-width: 150px !important"
+              h5.dashhead-subtitle.text-header.tiny-button-header.mb-0
+                span.badge.mr-2 class="badge-#{survey_status_class(survey.status)}"
+                  = survey.status
+                strong.mr-1
+                  = link_to "#{survey.name}", survey_url(survey)
+            .col-4.col-lg-3.col-xl-6 style="min-width: 125px !important"
+              h5.dashhead-subtitle.text-header.tiny-button-header.mb-0 #{survey.adjusted_complete_count} / #{value_or_question_mark(survey&.target)} completes

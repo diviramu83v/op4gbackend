@@ -1,0 +1,7 @@
+- disabled = local_assigns.fetch :disabled, false
+- finish_label = local_assigns.fetch :label, 'Close'
+
+span.mr-1
+  = link_to project_statuses_url(@project, id: 'finished'), method: :post, data: (@project.earnings.any? ? { confirm: confirm_message } : { confirm:  "Some surveys don't have any IDs, are you sure..." }), class: "btn btn-outline-success #{'disabled' if disabled}" do
+    i.fa.fa-check-square class="#{'mr-2' unless disabled}"
+    = finish_label unless disabled

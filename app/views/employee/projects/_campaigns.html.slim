@@ -1,0 +1,11 @@
+.mb-3 = render 'employee/projects/links', project: project
+- if project.surveys_waiting_or_finished?
+  .mb-3 = render 'employee/projects/close_out_summary', project: project
+- if project.multiple_surveys?
+  .mb-3 = render 'employee/projects/multi_survey_traffic_report', project: project
+- project.surveys.standard.order(:created_at).each do |survey|
+  .mb-3 = render 'employee/surveys/main_card', survey: survey
+- project.surveys.recontact.order(:created_at).each do |recontact|
+  .mb-3 = render 'employee/recontacts/main_card', recontact: recontact
+- if can?(:view_and_modify, Project)
+  .mb-3 = render 'employee/projects/links', project: project

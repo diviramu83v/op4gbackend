@@ -1,0 +1,27 @@
+#supply-dashboard
+  .row
+    - if can?(:read, ApiToken)
+      .col-4.dashboard-card
+        .mb-5
+          .mb-3
+            .card
+              .card-header
+                h4 = link_to_if can?(:read, ApiToken), 'Survey API', api_vendors_path
+              .card-body
+                p View the Survey API report overview
+    .col-4.dashboard-card
+      .mb-5
+        .mb-3
+          .card
+            .card-header
+              h4 = link_to 'Disqo API', api_disqo_index_path
+            .card-body
+              p View the Disqo report overview
+    .col-4.dashboard-card
+      .mb-5
+        .mb-3
+          .card
+            .card-header
+              h4 = link_to 'Cint API', api_cint_index_path
+            .card-body
+              p View the Cint report overview

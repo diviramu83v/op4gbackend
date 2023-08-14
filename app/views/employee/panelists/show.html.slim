@@ -1,0 +1,104 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Panelists', panelists_url
+  li.breadcrumb-item.active = @panelist.name
+.mb-5
+  .d-flex.justify-content-between
+    h2
+      span.mr-2 Panelist
+      span.mr-2
+        = panelist_status(@panelist)
+      span.mr-0
+        - if can?(:view_and_modify, Panelist)
+          = link_to edit_panelist_url(@panelist), class: 'btn btn-link page-header-link pl-0' do
+            i.fa.fa-edit.mr-1
+            | Edit
+    span
+      - if can?(:view_and_modify, Panelist)
+        - if @panelist.suspended?
+          = link_to panelist_suspension_url(@panelist), method: :delete, class: 'btn btn-outline-primary' do
+            i.fa.fa-undo.mr-2
+            | Unsuspend
+        - else
+          = link_to new_panelist_suspension_note_url(@panelist), class: 'btn btn-outline-danger' do
+            i.fa.fa-ban.mr-2
+            | Suspend
+          = link_to new_panelist_suspend_and_pay_note_url(@panelist), class: 'btn btn-outline-danger ml-2' do
+            i.fa.fa-ban.mr-2
+            i.fa.fa-dollar-sign.mr-2
+            | Suspend and pay
+.mb-5 = render 'employee/panelists/mini_nav', panelist: @panelist
+.row.mb-5
+  .col-4
+    = render 'employee/cards/text_element', label: 'Name', value: @panelist.name
+  .col-4
+    = render 'employee/cards/text_element', label: 'Email', value: @panelist.email
+  .col-2
+    = render 'employee/cards/text_element', label: 'Verified?', value: format_bool_as_yes_no(@panelist.verified_flag)
+.row.mb-5
+  .col-6
+    .mb-3
+      h5.mb-2.dashhead-subtitle.text-header
+        span.mr-2 Notes
+        span.untransformed
+          - if can?(:view_and_modify, Panelist)
+            = link_to new_panelist_note_url(@panelist) do
+              i.fa.fa-plus-circle.mr-1
+              | Add
+    .mb-0
+      - if @panelist.notes.any?
+        - @panelist.notes.by_last_created.each do |note|
+          .card.mb-2
+            .card-body
+              = simple_format(note.body)
+            .card-footer.d-flex.justify-content-between
+              = note.employee.name
+              = format_long_date(note.updated_at)
+      - else
+        p.mb-0 No notes yet for this panelist.
+.row
+  .col-12.mb-5
+    = render 'employee/panelists/stats_card'
+.row
+  .col-12.mb-5
+    .d-flex.justify-content-between.mb-3
+      h3.mb-3 History
+      .pagination-xs = paginate @invitations
+    - if @invitations.any?
+      table.table.table-sm.mb-3
+        thead
+          tr
+            th ID
+            th Sent
+            th Email subject
+            th Clicked
+            th Security / fraud
+            th Response
+            th Close Out Reason
+        tbody
+          - @invitations.each do |invitation|
+            tr
+              td = invitation.project.id
+              td = format_stacked_date(invitation.sent_at)
+              td.w-50
+                - if current_employee.admin_or_ops_manager?(session[:effective_role])
+                  = link_to invitation.project.name, survey_queries_url(invitation.survey)
+                - else
+                  = invitation.project.name
+                br
+                = invitation.batch.email_subject
+              td = format_stacked_date(invitation.clicked_at)
+              td
+                = format_onboarding_security(invitation.onboarding)
+                - if invitation.onboarding.present?
+                  - if invitation.onboarding.error_message.present?
+                    br
+                    = invitation.onboarding.error_message
+                  - if invitation.onboarding.events.any?
+                    - invitation.onboarding.events.by_id.each do |event|
+                      br
+                      = "#{event.category.humanize}: #{event.message}"
+              td = format_onboarding_response(invitation.onboarding)
+              td = invitation.onboarding&.close_out_reason&.title
+    - else
+      p.mb-0 No invitations found.
+    .pagination-xs.mb-0 = paginate @invitations

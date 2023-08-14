@@ -1,0 +1,26 @@
+.card
+  .card-header
+    h4 = t('panelist.dashboard.show.earnings_snapshot', default: 'Earnings snapshot')
+  .card-body
+    - if panelist.met_minimum_balance_last_month?
+      table.table.table-sm.table-wrapped-no-header.mb-4
+        = render 'panelist/dashboard/earnings_row', label: t('panelist.dashboard.show.last_month', default: 'Last month')
+        = render 'panelist/dashboard/earnings_row', label: t('panelist.dashboard.show.balance', default: 'Balance'), value: number_to_currency(panelist.balance_through_last_month)
+        = render 'panelist/dashboard/earnings_row', label: t('panelist.dashboard.show.payout_date', default: 'Payout date'), value: format_payment_date(Payment.next_payout_date)
+      table.table.table-sm.table-wrapped-no-header.mb-3
+        = render 'panelist/dashboard/earnings_row', label: t('panelist.dashboard.show.this_month', default: 'This month')
+        = render 'panelist/dashboard/earnings_row', label: t('panelist.dashboard.show.balance', default: 'Balance'), value: number_to_currency(panelist.earnings_this_month)
+        = render 'panelist/dashboard/earnings_row', label: t('panelist.dashboard.show.additional_funds_needed', default: 'Additional funds needed'), value: number_to_currency(panelist.monthly_earnings_needed)
+        = render 'panelist/dashboard/earnings_row', label: t('panelist.dashboard.show.payout_date', default: 'Payout date'), value: format_payment_date(Payment.current_months_payout_date)
+
+    - else
+      table.table.table-sm.table-wrapped-no-header.mb-3
+        = render 'panelist/dashboard/earnings_row', label: t('panelist.dashboard.show.balance', default: 'Balance'), value: number_to_currency(panelist.balance)
+        = render 'panelist/dashboard/earnings_row', label: t('panelist.dashboard.show.additional_funds_needed', default: 'Additional funds needed'), value: number_to_currency(panelist.payout_funds_needed)
+        = render 'panelist/dashboard/earnings_row', label: t('panelist.dashboard.show.payout_date', default: 'Payout date'), value: format_payment_date(Payment.current_months_payout_date)
+    - if FeatureManager.panelist_paypal_verification? && !panelist.paypal_verified_at
+      p.mb-3
+        = button_to panelist_paypal_oauth2_omniauth_authorize_path(panelist_email: panelist.email), method: :post, class: 'btn btn-primary btn-facebook'
+          i.fab.fa-paypal.mr-2
+          = t('panelist.dashboard.show.verify_paypal', default: 'Verify PayPal Account')
+    p.mb-0 = link_to t('panelist.dashboard.show.view_earnings_details', default: 'View earnings details'), url

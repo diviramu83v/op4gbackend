@@ -1,0 +1,43 @@
+.card
+  .card-header
+    .d-flex.justify-content-between
+      h4
+        span.mr-2 Return keys
+        span.mr-2
+          - unless params[:loading_keys] == 'true'
+            .badge.badge-secondary = @survey.return_keys.count
+        span.mr-0
+          - if can?(:view_and_modify, ReturnKey)
+            = link_to new_survey_return_key_url(@survey), class: 'card-header-link' do
+              i.fa.fa-edit.mr-1
+              | Add
+      span.float-right
+        - if can?(:view_and_modify, ReturnKey)
+          = link_to survey_return_keys_url(@survey, format: :csv), class: 'btn btn-outline-primary' do
+            i.fas.fa-cloud-download-alt.mr-1
+            | Download
+  .card-body
+    - if params[:loading_keys] == 'true'
+      .d-flex.justify-content-center
+        i.fa.fa-spinner.fa-pulse.fa-3x.fa-fw
+          span.sr-only Loading...
+    - elsif @survey.return_keys.present?
+      table.table.table-sm.table-wrapped-with-header.mb-3
+        thead
+          tr
+            th Key
+            th Used
+            th
+        tbody
+          - @return_keys.each do |return_key|
+              tr
+                td.w-25 = return_key.token
+                td
+                  - if return_key.used_at.present?
+                    span data-utc-time=return_key.used_at data-timezone-converted='false'
+                      = return_key.used_at
+    - else
+      p.mb-0 No keys have been generated.
+    - unless params[:loading_keys] == 'true'
+      .d-flex.justify-content-end
+        .pagination-xs.mb-0 = paginate @return_keys

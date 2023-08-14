@@ -1,0 +1,28 @@
+- content_for :flash_width
+  | col-lg-6
+
+script src="https://www.google.com/recaptcha/api.js?hl=#{Locale.recaptcha_session(session[:locale])}" async defer
+
+.row
+  .col-lg-6
+    .card
+      .card-header
+        h4 = t('panelist.registrations.new.sign_up', default: 'Sign up')
+      .card-body
+        = devise_error_messages!
+        = form_for(resource, as: resource_name, url: registration_url(resource_name)) do |f|
+          = hidden_field_tag :locale, session[:locale]
+          .row
+            .col-lg-6 = render 'forms/text_field', form: f, field: :first_name, label: t('panelist.registrations.new.form.first_name_label', default: 'First name')
+            .col-lg-6 = render 'forms/text_field', form: f, field: :last_name, label: t('panelist.registrations.new.form.last_name_label', default: 'Last name')
+          = render 'forms/email_field', form: f, field: :email, label: t('panelist.registrations.new.form.email_label', default: 'Email')
+          .mb-4
+            = render 'forms/password_field', form: f, field: :password, label: t('panelist.registrations.new.form.password_label', default: 'Password')
+          .mb-4
+            .g-recaptcha data-sitekey="#{ENV['RECAPTCHA_SITE_KEY_REGISTRATION']}"
+            = flash[:recaptcha_error]
+          .mb-0
+            = render 'forms/submit_button', form: f, label: t('panelist.registrations.new.sign_up', default: 'Sign up'), icon: 'fa-user-plus'
+      .card-footer
+        .d-flex.flex-column
+          = render "panelist/devise/links"

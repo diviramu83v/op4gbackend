@@ -1,0 +1,9 @@
+- content_for :theme
+  = stylesheet_link_tag 'bootstrap/toolkit-light.min', media: 'all', 'data-turbolinks-track': 'reload'
+  = stylesheet_link_tag 'public', media: 'all', 'data-turbolinks-track': 'reload'
+- content_for :primary_navigation
+  = render 'survey/navigation'
+- content_for :tracking_code
+  = render 'tracking/google', property_code: ENV['ANALYTICS_PROPERTY_CODE_FOR_PANELIST_AREA'].presence
+
+= render template: 'layouts/application'

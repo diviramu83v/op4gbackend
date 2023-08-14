@@ -1,0 +1,20 @@
+- if !@ip_address.blocked?
+  #block-button.btn.btn-danger
+    | Block
+- else
+  = link_to ip_address_ip_block_url(@ip_address), class: "btn btn-success", method: :delete do
+    | Unblock
+
+#block-reason-form.d-none
+  = form_for @ip_address, url: ip_address_ip_block_url(@ip_address), method: :post do |f|
+    = render 'employee/form_errors', resource: @ip_address
+    .form-group.mb-1
+      = f.label :blocked_reason
+      = f.text_field :blocked_reason, required: true, class: 'form-control'
+    = render 'employee/form_buttons'
+
+javascript:
+  $('#block-button').click(function() {
+    $('#block-reason-form').removeClass('d-none');
+    $('#block-button').addClass('d-none');
+  })

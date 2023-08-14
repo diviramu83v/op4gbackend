@@ -1,0 +1,24 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Nonprofits', nonprofits_url
+  li.breadcrumb-item = link_to @nonprofit.name, nonprofit_url(@nonprofit)
+  li.breadcrumb-item.active = 'Nonprofit completes funnel'
+.mb-5
+  .d-flex.justify-content-between
+    h2
+      span.mr-2 Completes funnel
+.row.mb-5
+  .col-lg-5 = render 'employee/cards/text_element', label: 'Name', value: @nonprofit.name
+.row
+  .col-lg-8
+    h3.mb-4 Completes
+    .spinner#row-data
+      i.fa.fa-spinner.fa-pulse.fa-3x.fa-fw
+      span.sr-only Loading...
+
+javascript:
+  var nonprofit_id = "#{@nonprofit.id}"
+
+coffee:
+  App.cable.subscriptions.create { channel: "CompletesFunnelChannel", id: nonprofit_id, resource: 'Nonprofit' },
+    received: (data) ->
+      $('#row-data').replaceWith(data)

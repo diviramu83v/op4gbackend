@@ -1,0 +1,39 @@
+.card-header
+    h4
+      .d-flex.justify-content-between
+        span
+          span.mr-2 Batch
+          - if can?(:view_and_modify, SampleBatch)
+            - if batch.editable?
+              span.mr-2
+                = link_to edit_sample_batch_url(batch), class: 'btn btn-outline-primary btn-xs' do
+                  i.fa.fa-edit.mr-1
+                  | Edit
+            span.mr-2
+              = link_to sample_batch_launch_url(batch), method: :post, name: 'sample-batch-launch-btn', class: "btn btn-outline-primary btn-xs #{'disabled' unless batch.startable?}", data: { disable_with: "<i class='far fa-envelope mr-1'></i>Sending..." } do
+                i.far.fa-envelope.mr-1
+                | Send
+            span.mr-0 style='display:inline-block;'
+              div data-tooltip="#{sample_batch_reminders_tooltip_on?(batch)}" title="#{sample_batch_reminders_tooltip(batch)}"
+                = link_to sample_batch_remind_url(batch), method: :post, class: "btn btn-outline-primary btn-xs #{'disabled' unless batch.remindable?}", data: { disable_with: "<i class='fa fa-bell mr-1'></i>Sending..." }
+                  i.fa.fa-bell.mr-1
+                  | Remind
+        span
+          - if can?(:view_and_modify, SampleBatch)
+            - if batch.closable?
+              = link_to sample_batch_close_url(batch), method: :post, data: { confirm: "Are you sure you want to close this batch?\n\nThis will block all the panelists from this batch who haven't already started the survey." }, class: 'btn btn-outline-danger btn-xs ml-2' do
+                i.fa.fa-ban.mr-1
+                | Close
+          - if batch.reopenable?
+            = link_to sample_batch_close_url(batch), method: :delete, class: 'btn btn-outline-success btn-xs ml-2' do
+              i.fa.fa-undo.mr-1
+              | Re-open
+          - if can?(:destroy, SampleBatch)
+            - if batch.removable?
+              = link_to sample_batch_url(batch), method: :delete, data: { confirm: "Are you sure you want to delete this batch?\n\nThis will remove all survey invitations associated with this batch." }, class: 'btn btn-outline-danger btn-xs ml-2' do
+                i.far.fa-trash-alt.mr-1
+                | Remove
+          - if batch.closed?
+            span
+              .badge.badge-danger.ml-2
+                | Closed

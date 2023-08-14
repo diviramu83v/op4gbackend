@@ -1,0 +1,9 @@
+standard:
+  name: Test project
+  manager: operations
+  salesperson: operations
+  client: standard
+  payment_token: <%= SecureRandom.hex %>
+  work_order: 123
+  relevant_id_token: <%= SecureRandom.hex %>
+  product_name: sample_only

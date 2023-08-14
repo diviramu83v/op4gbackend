@@ -1,0 +1,27 @@
+.mb-5
+  h2
+    span.mr-3 Tracking pixels
+    span.mr-0
+      - if can?(:view_and_modify, TrackingPixel)
+        = link_to new_pixel_url, class: 'page-header-link' do
+          i.fa.fa-plus-circle.mr-1
+          | Add
+.mb-0
+  table.table.table-sm.mb-3 data-sort='table'
+    thead
+      tr
+        th URL
+        th Page
+        th Description
+        th
+    tbody
+      - @pixels.each do |pixel|
+        tr
+          td = pixel.url
+          td = pixel.category_description
+          td = pixel.description
+          td.text-right
+            - if can?(:view_and_modify, TrackingPixel)
+              = link_to edit_pixel_url(pixel), class: 'btn btn-outline-primary btn-xs' do
+                i.fa.fa-pencil-alt.mr-1
+                | Edit

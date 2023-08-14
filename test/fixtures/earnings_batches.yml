@@ -1,0 +1,5 @@
+one:
+  employee: operations
+  survey: standard
+  amount_cents: 300
+  ids: "abc\r\nxyz"

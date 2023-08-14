@@ -1,0 +1,23 @@
+.mb-5 = render 'page_headers/title_with_add_button',
+               title: 'Payment upload batches',
+               url: new_payment_url
+.mb-5
+  table.table
+    thead
+      th Period
+      th Payment date
+      th Uploaded by
+      th.text-right Record count
+      th.text-right Total payout
+    tbody
+      - @payment_upload_batches.each do |batch|
+        tr
+          td = batch.period
+          td = format_payment_date_with_year(batch.paid_at)
+          td = batch.employee_name
+          td.text-right
+            - if batch.error_data.present?
+              span.mr-1.text-danger title=convert_newlines_to_br_tags(batch.error_data) data-tooltip='true' data-trigger='click' data-html='true' data-width='500px' data-template='<div class="tooltip" role="tooltip"><div class="arrow"></div><div class="tooltip-inner" style="max-width: none;"></div></div>'
+                i.fa.fa-exclamation-circle.mr-1
+            span = batch.payment_count
+          td.text-right = format_currency(batch.payment_total)

@@ -1,0 +1,19 @@
+.card.mb-3
+  .card-header
+    .d-flex.justify-content-between
+      h4
+        span.mr-2 Complete milestones
+  .card-body
+    table.table.table-sm.table-wrapped-with-header.mb-0
+      thead
+        tr
+          th Progress
+          th Status
+      tbody
+        - @survey.complete_milestones.order(created_at: :desc).each do |milestone|
+          tr
+            td.w-75
+              .progress.mt-1
+                .progress-bar class="#{milestone_bar_color(milestone)}" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:#{milestone_bar_width(milestone)}%"
+                  span = milestone.target_completes
+            td = milestone_status(milestone)

@@ -1,0 +1,6 @@
+.col-lg-4.mb-3
+  = render 'employee/cards/text_header', label: 'Postal codes'
+  div
+    - postal_codes.each do |postal_code|
+      = postal_code
+      br

@@ -1,0 +1,68 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Panels', panels_url
+  li.breadcrumb-item.active = @panel.name
+.row.mb-5
+  .col-3
+    = render 'employee/cards/text_element', label: 'Name', value: @panel.name
+  .col-3
+    = render 'employee/cards/text_element', label: 'Active panelists', value: format_number(@panel.active_panelist_count)
+  .col-3
+    = link_to panel_questions_url(@panel)
+      = render 'employee/cards/text_element', label: 'Demo questions', value: format_number(@panel.demo_questions.count)
+h4.mb-3 Inactive Panelists
+.row.mb-5
+  .col-3
+    = render 'employee/cards/text_element', label: 'In progress', value: format_number(@panel.in_progress_signups.count)
+  .col-3
+    = render 'employee/cards/text_element', label: 'Dead signups', value: format_number(@panel.dead_signups.count)
+  .col-3
+    = render 'employee/cards/text_element', label: 'Suspended', value: format_number(@panel.suspended_accounts.count)
+  .col-3
+    = render 'employee/cards/text_element', label: 'Deleted', value: format_number(@panel.deleted_accounts.count)
+- if current_employee.can_view_panelist_data?(session[:effective_role])
+  #email-lists
+    h5
+      = link_to panel_email_lists_url(@panel), remote: true, id: 'list-button' do
+        | Show panelist email lists
+        i.fa.fa-angle-right.ml-2
+.row.mb-0
+      .col-3
+        = link_to panel_combined_url(@panel), class: 'btn btn-link pl-0' do
+          i.fa.fa-user.mr-1
+          | View Panelist Reporting
+.row.mb-0
+      .col-3
+        = link_to panel_profit_url(@panel), class: 'btn btn-link pl-0' do
+          i.fas.fa-dollar-sign.mr-1
+          | View Panelist Net Incentive Margin
+.row.mb-0
+      .col-3
+        = link_to panel_stats_url(@panel), class: 'btn btn-link pl-0' do
+          i.fa.fa-filter.mr-1
+          | View Signup Stats
+.row.mb-0
+      .col-3
+        = link_to panel_completes_url(@panel), class: 'btn btn-link pl-0' do
+          i.fa.fa-check.mr-1
+          | View Completes Funnel
+.row.mb-0
+      .col-3
+        = link_to panel_lifecycle_url(@panel), class: 'btn btn-link pl-0' do
+          i.fa.fa-chart-bar.mr-1
+          | View Panelist Lifecycle Stats
+.row.mb-0
+      .col-3
+        = link_to panel_utilization_url(@panel), class: 'btn btn-link pl-0' do
+          i.fa.fa-user-plus.mr-1
+          | View Panel Utilization
+.row.mb-5
+      .col-3
+        = link_to panel_underutilization_url(@panel), class: 'btn btn-link pl-0' do
+          i.fa.fa-user-minus.mr-1
+          | View Panel Underutilization
+
+javascript:
+  $('#list-button').click(function() {
+    $(this).html("<i class='fa fa-spinner fa-pulse mr-2'></i>Loading");
+  })
+

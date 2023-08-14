@@ -1,0 +1,53 @@
+.card
+  .card-header
+    .d-flex.justify-content-between
+      h4
+        span.mr-2 Questions
+        - if can?(:view_and_modify, PrescreenerQuestionTemplate)
+          span.mr-0
+            = link_to new_survey_prescreener_question_url(@survey), class: 'card-header-link' do
+              i.fa.fa-plus-circle.mr-1
+              | Add manually
+          span.ml-3
+            = link_to survey_library_question_selections_url(@survey), class: 'card-header-link' do
+                i.fa.fa-plus-circle.mr-1
+                | Add from library
+          span.ml-3
+            = link_to survey_prescreener_clones_url(@survey), class: 'card-header-link' do
+              i.fa.fa-plus-circle.mr-1
+              | Clone prescreener
+  .card-body
+    - if @survey.prescreener_question_templates.active.any?
+      table.table.table-sm.table-wrapped-with-header.mb-0
+        thead
+          tr
+            th Question
+            th Question type
+            th Passing criteria
+            th Answer options
+        tbody.sortable
+          - @prescreener_question_templates.active.each_with_sortable_id do |prescreener_question, sortable_id|
+            tr id=sortable_id
+              td.p-3 = prescreener_question.body.humanize
+              td.p-3 = prescreener_question.question_type.humanize
+              td.p-3 = prescreener_question.passing_criteria.humanize
+              td.p-3 = prescreener_question.prescreener_answer_templates.count
+              td.p-3
+                - if can?(:destroy, PrescreenerQuestionTemplate)
+                  = link_to prescreener_question_url(prescreener_question), method: :delete, class: 'btn-xs btn-link pl-2 float-right' do
+                    i.far.fa-trash-alt.mr-1
+                    | Delete
+                - if can?(:view_and_modify, PrescreenerQuestionTemplate)
+                  = link_to edit_prescreener_question_url(prescreener_question), class: 'btn-xs btn-link pl-2 float-right' do
+                    i.fa.fa-edit.mr-1
+                    | Edit
+                = link_to prescreener_question_answers_url(prescreener_question), class: 'btn-xs btn-link pl-0 float-right' do
+                  i.fa.fa-arrow-right.mr-1
+                  | Answers
+    - else
+      p.mb-0 No prescreener questions have been added yet.
+
+javascript:
+  $(function() {
+    $('.sortable').railsSortable();
+  });

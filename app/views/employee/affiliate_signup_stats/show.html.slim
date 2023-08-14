@@ -1,0 +1,18 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Affiliates', affiliates_url
+  li.breadcrumb-item = link_to @affiliate.name, affiliate_url(@affiliate)
+  li.breadcrumb-item.active = 'Affiliate signup stats'
+.mb-5
+  .d-flex.justify-content-between
+    h2
+      span.mr-2 Signup stats
+.row.mb-5
+  .col-lg-5 = render 'employee/cards/text_element', label: 'Name', value: @affiliate.name
+.row
+  .col-lg-8
+    h3.mb-4 Panelists
+    .row.mb-5
+      .col-3 = render 'employee/cards/text_element', label: 'Started Signing Up', value: format_number(@affiliate.started_signing_up_count)
+      .col-3 = render 'employee/cards/text_element', label: 'Confirmed Email Address (DOI)', value: format_number(@affiliate.confirmed_email_address_count)
+      .col-3 = render 'employee/cards/text_element', label: 'Completed Demos', value: format_number(@affiliate.completed_demos_count)
+      .col-3 = render 'employee/cards/text_element', label: 'Still Active', value: format_number(@affiliate.still_active_count)

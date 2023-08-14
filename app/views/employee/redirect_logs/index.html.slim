@@ -1,0 +1,29 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Projects', projects_url
+  li.breadcrumb-item = link_to @project.name, @project
+  li.breadcrumb-item.active = 'Redirect Issues'
+
+.mb-5
+  h2
+    span.mr-3 Redirect Issues Log
+- if @logs.empty?
+  p.mb-0 No issues found.
+- else
+  .d-flex.justify-content-end.mb-1
+    span.mr-2
+      .pagination-xs = paginate @logs
+  .mb-3
+    table.table.table-sm.mb-0
+      thead
+        tr
+          th Entry date & time
+          th Project
+          th Survey response url status
+          th URL
+      tbody
+        - @logs.most_recent_first.each do |log|
+          tr
+            td = format_date(log.created_at)
+            td = log.project.name
+            td = log.survey_response_url.slug
+            td = log.url

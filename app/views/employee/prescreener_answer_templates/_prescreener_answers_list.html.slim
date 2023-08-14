@@ -1,0 +1,13 @@
+- if prescreener_answers.present?
+  .d-flex.justify-content-end.mb-3
+    .pagination-xs.mb-0 = paginate prescreener_answers
+  table.table.table-sm.table-wrapped-with-header.mb-3
+    thead
+      tr
+        th Target
+        th Body
+    tbody
+      - prescreener_answers.order_by_targets_first.each do |prescreener_answer|
+        tr
+          td = prescreener_answer.target&.to_s&.humanize
+          td = prescreener_answer.body&.humanize

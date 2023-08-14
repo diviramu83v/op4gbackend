@@ -1,0 +1,9 @@
+.card
+  .card-header
+    .d-flex.justify-content-between
+      h4
+        span.mr-3 = recontact.name
+        span.mr-3
+          = link_to recontact_traffic_url(recontact), class: 'card-header-link' do
+            i.fa.fa-list-ul.mr-1
+            | Details

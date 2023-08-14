@@ -1,0 +1,23 @@
+.mb-5
+  .d-flex.justify-content-between
+    h2
+      span Edit tracking pixel
+    span
+      = link_to pixel_url(@pixel.id), method: :delete, class: 'btn btn-outline-danger btn-xs' do
+        i.far.fa-trash-alt.mr-1
+        | Remove
+.mb-5
+  .row
+    .col-6
+      = form_for @pixel, url: pixel_path(@pixel) do |f|
+        = render 'employee/form_errors', resource: @pixel
+        .form-group
+          = f.label :url
+          = f.text_field :url, class: 'form-control'
+        .form-group
+          = f.label :category
+          = f.select :category, options_from_collection_for_select(TrackingPixel::CATEGORIES, :first, :last, selected: @pixel.category), {}, { class: 'form-control' }
+        .form-group
+          = f.label :description
+          = f.text_field :description, class: 'form-control'
+        = render 'employee/form_buttons'

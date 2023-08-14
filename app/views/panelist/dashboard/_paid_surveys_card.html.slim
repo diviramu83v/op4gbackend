@@ -1,0 +1,22 @@
+.card
+  .card-header
+    h4 = t('panelist.dashboard.show.paid_surveys', default: 'Credited surveys')
+  .card-body
+    - if @paid_completions.empty?
+      p.mb-0 = t('panelist.dashboard.show.no_surveys_paid', default: "No credited surveys to show yet.")
+    - else
+      table.table.table-sm.table-wrapped-with-header.mb-0
+        thead
+          tr
+            th = t('panelist.dashboard.show.title_column_header', default: 'Title')
+            th = t('panelist.dashboard.show.payout_column_header', default: 'Payout')
+            th.text-right = t('panelist.dashboard.show.completed_column_header', default: 'Completed')
+        tbody
+          - @paid_completions.each do |invitation|
+            tr
+              - if current_employee&.effective_role_admin?(session[:effective_role])
+                td = link_to invitation.batch.email_subject, survey_url(invitation.survey)
+              - else
+                td = invitation.batch.email_subject
+              td = format_currency_with_zeroes(invitation.batch.incentive)
+              td.text-right = format_long_date(invitation.finished_at)

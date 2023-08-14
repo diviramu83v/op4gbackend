@@ -1,0 +1,8 @@
+.card
+  .card-header
+    h4 #{@email} has already been unsubscribed.
+  .card-body
+    h5
+      span> If you have additional questions, please
+      = mail_to 'support@op4g.com', 'contact support'
+      | .

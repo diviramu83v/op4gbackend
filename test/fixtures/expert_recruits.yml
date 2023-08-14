@@ -1,0 +1,6 @@
+standard:
+  email: expert_test@test.com
+  token: expert_recruit_123
+  unsubscribe_token: unsubscribe_123
+  survey: standard
+  description: plumber

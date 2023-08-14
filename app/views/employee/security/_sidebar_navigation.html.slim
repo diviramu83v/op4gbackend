@@ -1,0 +1,6 @@
+nav#sidebar.navbar.navbar-dark.justify-content-start.flex-column.align-items-start.d-none.d-lg-flex
+  h5 = link_to 'Security', security_dashboard_url, class: nav_link_class(security_dashboard_url)
+  ul.navbar-nav
+      li.nav-item.mr-3 = link_to 'Denylist', denylist_url, class: nav_link_class(denylist_url)
+      li.nav-item.mr-3 = link_to 'IP Addresses By Onboarding', ip_addresses_url(context: 'onboarding'), class: nav_link_class(ip_addresses_url(context: 'onboarding'))
+      li.nav-item.mr-3 = link_to 'IP Addresses By Panelist', ip_addresses_url(context: 'panelist'), class: nav_link_class(ip_addresses_url(context: 'panelist'))

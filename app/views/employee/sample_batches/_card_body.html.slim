@@ -1,0 +1,14 @@
+.card-body
+    .row
+      - if batch.label.present?
+        .col-12
+          .mb-3 = render 'employee/cards/text_element', label: 'Label', value: batch.label
+    .mb-4 = render 'employee/cards/text_element', label: 'Subject', value: "New survey available: #{batch.email_subject}"
+    - if batch.description.present?
+      = render 'employee/cards/text_header', label: 'Description'
+      = simple_format(batch.description)
+    .row.mb-3
+      .col-3 = render 'employee/cards/text_element', label: 'Incentive', value: format_currency(batch.incentive)
+      .col-3 = render 'employee/cards/text_element', label: 'Clicks', value: batch.invitation_clicked_count
+      .col-3 = render 'employee/cards/text_element', label: 'Completes', value: batch.invitation_completed_count
+    = render 'employee/sample_batches/card_invitations', { batch: batch }

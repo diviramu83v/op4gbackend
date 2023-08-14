@@ -1,0 +1,19 @@
+.mb-1
+  h4 Panelists
+.mb-5
+  .d-flex.justify-content-end.mb-3
+    .pagination-xs.mb-0 = paginate @panelists, param_name: :panelists
+  table.table.table-sm.mb-3 data-sort='table'
+    thead
+      tr
+        th Name
+        th Email
+        th.text-right.pr-1 Status
+    tbody
+      - @panelists.each do |panelist|
+        tr
+          td = link_to panelist.name, panelist_path(panelist)
+          td = panelist.email
+          td.text-right = panelist.status.humanize
+  .d-flex.justify-content-end
+    .pagination-xs.mb-0 = paginate @panelists, param_name: :panelists

@@ -1,0 +1,13 @@
+.row
+  .col-lg-4.mb-3 = render 'panelist/accounts/navigation_card', panelist: current_panelist, payments_url: account_payments_url, account_url: account_contribution_url, demographics_url: account_demographics_url, password_url: edit_account_private_url
+  .col-lg-8
+    .card
+      .card-header
+        h4 = t('panelist.account_demographics.show.demographic_header', default: 'Your demographic information')
+      .card-body
+        - current_panelist.answered_question_categories.each do |category| # only one panel, only categories with an answer
+          - current_panelist.answers_for_category(category).each do |answer|
+            p
+              = "#{t("demo_questions.#{answer.demo_question.slug}", default: answer.demo_question.body)} "
+              br
+              b = t("demo_options.#{answer.demo_option.label.downcase.parameterize.underscore}", default: answer.demo_option.label)

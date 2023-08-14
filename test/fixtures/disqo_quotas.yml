@@ -1,0 +1,19 @@
+standard:
+  quota_id: 1
+  cpi: 1
+  loi: 10
+  conversion_rate: 30
+  soft_launch_completes_wanted: 10
+  completes_wanted: 200
+  survey: standard
+  qualifications:
+    and: [range: { unit: "years", values: [gte: 20, lte: 50] }]
+second:
+  quota_id: 1
+  cpi: 2
+  loi: 10
+  conversion_rate: 30
+  completes_wanted: 200
+  survey: standard
+  qualifications:
+    and: [range: { unit: "years", values: [gte: 20, lte: 50] }]

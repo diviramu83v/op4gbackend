@@ -1,0 +1,6 @@
+standard:
+  value: key-value
+  survey: standard
+second:
+  value: key-value-two
+  survey: standard

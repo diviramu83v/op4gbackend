@@ -1,0 +1,39 @@
+.card
+  .card-header
+    h4 = t('panelist.accounts.show.navigation_header', default: 'Account')
+  .card-body
+    nav.account-nav
+      .nav-text.text-secondary.pb-2
+        i.far.fa-envelope.mr-2.w-10
+        = panelist.email
+      = link_to payments_url, class: 'nav-link pl-0' do
+        i.fa.fa-money-bill-alt.mr-2.w-10
+        = t('panelist.accounts.show.view_earnings', default: 'View your earnings')
+      - if panelist.nonprofit.present?
+        = link_to account_url, class: 'nav-link pl-0' do
+          i.fa.fa-balance-scale.mr-2.w-10
+          = t('panelist.accounts.show.adjust_contribution', default: 'Adjust your contribution')
+      - else
+        = link_to account_url, class: 'nav-link pl-0' do
+          i.fa.fa-balance-scale.mr-2.w-10
+          = t('panelist.accounts.show.donate', default: 'Donate to a nonprofit')
+      = link_to demographics_url, class: 'nav-link pl-0' do
+        i.fa.fa-list.mr-2.w-10
+        = t('panelist.accounts.show.view_demographics', default: 'View your demographics')
+      = link_to edit_account_email_path, class: 'nav-link pl-0' do
+        i.fa.fa-edit.mr-2.w-10
+        = t('panelist.accounts.show.change_email', default: 'Change your email')
+      = link_to password_url, class: 'nav-link pl-0' do
+        i.fa.fa-lock.mr-2.w-10
+        = t('panelist.accounts.show.change_password', default: 'Change your password')
+      = link_to edit_account_birthdate_path, class: 'nav-link pl-0' do
+        i.fa.fa-birthday-cake.mr-2.w-10
+        = t('panelist.accounts.show.change_birthdate', default: 'Change your birthdate')
+      / = link_to 'Notification Preferences', account_notification_preferences_url, class: 'nav-link pl-0'
+      - if panelist.facebook_data?
+        = link_to facebook_deauthorization_path, method: :post, class: 'nav-link pl-0' do
+          i.fa.fa-facebook.mr-2.w-10
+          = t('panelist.accounts.show.delete_facebook_info', default: 'Remove Facebook information')
+      = link_to account_giveup4good_url, class: 'nav-link pl-0 pb-0'
+        i.fa.fa-exclamation-triangle.mr-2.w-10
+        = t('panelist.accounts.show.delete_account', default: 'Delete your account')

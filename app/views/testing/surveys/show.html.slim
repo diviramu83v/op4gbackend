@@ -1,0 +1,32 @@
+.mb-5
+  h2 Test survey
+  p This page only shows up for Op4G employees, and only before a survey link is added.
+.mb-5
+  .row
+    .col-6
+      = render 'employee/cards/text_header', label: 'Project'
+      h4 = link_to @project.name, project_url(@project)
+    - if @onboarding.present?
+      .col-6
+        = render 'employee/cards/text_header', label: 'Panelist'
+        h4 = "UID: #{@onboarding.uid} => #{@onboarding.token}"
+.mb-0
+  - if @onboarding.present?
+    .mb-3 = render 'employee/cards/text_header', label: 'Test responses'
+    .mb-3
+      .card
+        .card-body
+          .mb-3 = render 'employee/cards/text_header', label: 'Complete'
+          = link_to survey_response_url(@project.complete_response, uid: @onboarding.token), survey_response_url(@project.complete_response, uid: @onboarding.token)
+    .mb-3
+      .card
+        .card-body
+          .mb-3 = render 'employee/cards/text_header', label: 'Terminate'
+          = link_to survey_response_url(@project.terminate_response, uid: @onboarding.token), survey_response_url(@project.terminate_response, uid: @onboarding.token)
+    .mb-3
+      .card
+        .card-body
+          .mb-3 = render 'employee/cards/text_header', label: 'Quotafull'
+          = link_to survey_response_url(@project.quotafull_response, uid: @onboarding.token), survey_response_url(@project.quotafull_response, uid: @onboarding.token)
+  - else
+      h2 No onboarding record found.

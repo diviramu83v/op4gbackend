@@ -1,0 +1,5 @@
+standard:
+  body: Are you well?
+  survey: standard
+  question_type: single_answer
+  passing_criteria: pass_if_any_selected

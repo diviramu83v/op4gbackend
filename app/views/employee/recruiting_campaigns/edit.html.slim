@@ -1,0 +1,37 @@
+- content_for :breadcrumbs
+  - if @campaign.campaignable.present?
+    li.breadcrumb-item = link_to 'Nonprofits', nonprofits_url
+    li.breadcrumb-item = link_to @campaign.campaignable.name, @campaign.campaignable
+  li.breadcrumb-item = link_to 'Campaigns', recruiting_campaigns_url
+  li.breadcrumb-item = link_to @campaign.code, @campaign
+  li.breadcrumb-item.active Edit
+.mb-5
+  h2 Edit campaign
+.fluid_container
+  .mb-5
+    = form_for @campaign do |f|
+      = render 'employee/form_errors', resource: @campaign
+      .row.mb-5
+        .col-6
+          = render 'forms/text_field', form: f, field: :code
+          = render 'forms/text_area', form: f, field: :description
+          .mb-3.form-check
+            label.form-check-label
+              = f.check_box :incentive_flag, class: 'form-check-input'
+              | Incentivized?
+          = render 'forms/text_field', form: f, field: :incentive
+          = render 'employee/form_buttons'
+        .col-6
+          = render 'forms/date_field', form: f, field: :campaign_started_at, label: 'Starting date (for reference)', value: @campaign.campaign_started_at
+          = render 'forms/date_field', form: f, field: :campaign_stopped_at, label: 'Ending date (hides landing page)', value: @campaign.campaign_stopped_at
+          .row
+            .col-6
+              .mb-3.form-check
+                label.form-check-label
+                  = f.check_box :lock_flag, class: 'form-check-input'
+                  | Locked?
+            .col-6
+              .mb-3.form-check
+                label.form-check-label
+                  = f.check_box :business_name_flag, class: 'form-check-input'
+                  | Require business name?

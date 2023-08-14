@@ -1,0 +1,22 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Projects', projects_url
+  li.breadcrumb-item = link_to @project.extended_name, @project
+  li.breadcrumb-item = link_to @recontact.name, recontact_url(@recontact)
+  li.breadcrumb-item.active Edit
+.mb-5
+  h2 Edit Recontact
+.mb-5
+  = form_for @recontact, url: recontact_url(@recontact) do |f|
+    = render 'employee/form_errors', resource: @recontact
+    .row
+      .col-md-6
+        .form-group
+          = f.label :name, 'Name'
+          = f.text_field :name, class: 'form-control'
+        .form-group
+          = f.label :loi, 'Expected length of interview (in minutes)'
+          = f.text_field :loi, class: 'form-control'
+        .form-group
+          = f.label :cpi, 'CPI'
+          = f.text_field :cpi, class: 'form-control'
+    = render 'employee/form_buttons'

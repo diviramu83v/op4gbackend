@@ -1,0 +1,28 @@
+nav.navbar.navbar-dark.bg-dark
+  #header-top.container.justify-content-between
+    ul.navbar-nav.nav-left.flex-row
+      = link_to employee_dashboard_url, class: 'navbar-brand' do
+        i.fa.fa-th-large.mr-2
+        = 'Op4G'
+      - if can?(:read, Project)
+        = form_for(:project_search, url: project_search_url, html: { class: "form-inline" }) do |f|
+          .mr-1
+            = f.text_field :project_work_order_or_survey_number, placeholder: 'Project, WO or Survey #', required: true, class: "form-control"
+          = f.submit "Go", class: "btn btn-outline-primary btn-sm"
+    ul.navbar-nav.flex-row
+      / li.nav-item.ml-3 = link_to 'Sign in ', '', class: 'nav-link' unless employee_signed_in?
+      / li.nav-item.ml-3 = link_to 'Account', '', class: 'nav-link' if employee_signed_in?
+      - if employee_signed_in?
+        li.nav-item.ml-3
+          span.navbar-text = current_employee.email
+        li.nav-item.ml-3 = link_to 'Sign out', destroy_employee_session_url, method: :delete, class: 'nav-link'
+nav.navbar.navbar-dark.bg-dark.pt-0
+  #header-nav.container
+    ul.navbar-nav.d-flex.flex-row
+      li.nav-item.mr-3.order-2 = link_to 'Security', security_dashboard_url, class: "nav-link #{active_employee_nav('security', @active_nav_section)}"
+      li.nav-item.mr-3.order-2 = link_to 'Recruitment', recruitment_dashboard_url, class: "nav-link #{active_employee_nav('recruitment', @active_nav_section)}"
+      li.nav-item.mr-3.order-2 = link_to 'Sales', sales_dashboard_url, class: "nav-link #{active_employee_nav('sales', @active_nav_section)}"
+      li.nav-item.mr-3.order-1 = link_to 'Operations', operations_dashboard_url, class: "nav-link #{active_employee_nav('operations', @active_nav_section)}"
+      li.nav-item.mr-3.order-1 = link_to 'Supply', supply_dashboard_url, class: "nav-link #{active_employee_nav('supply', @active_nav_section)}"
+      li.nav-item.mr-3.order-2 = link_to 'Membership', membership_dashboard_url, class: "nav-link #{active_employee_nav('membership', @active_nav_section)}"
+      li.nav-item.mr-3.order-2 = link_to 'Reporting', reporting_dashboard_url, class: "nav-link #{active_employee_nav('reporting', @active_nav_section)}"

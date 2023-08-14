@@ -1,0 +1,14 @@
+standard:
+  name: Op4G
+  slug: op4g-us
+  country: standard
+diabetes:
+  name: Diabetes
+  slug: diabetes
+random:
+  name: <%= Faker::Name.unique.first_name %>
+  slug: <%= Faker::Name.unique.first_name.downcase %>
+  country: standard
+expert_panel:
+  name: Expert panel
+  slug: expert-panel

@@ -1,0 +1,14 @@
+div id="#{batch.id}"
+  .row.mb-1
+    .col-3 = render 'employee/cards/text_element_with_tooltip',
+                    label: 'Invitations',
+                    value: "#{batch.invitation_sent_count} / #{batch.count}",
+                    tooltip: 'The invitation groups are ranked by priority based on the quality of the panelists. The first invitation group that has invitations is sent immediately, and each subsequent group with invitations is sent at 1-hour intervals.'
+
+  .row.mb-0
+    .col-3
+      p.mb-1 = "Group 1: #{batch.invitations.has_been_sent.where(group: 1).count} / #{batch.invitations.where(group: 1).count}"
+      p.mb-1 = "Group 2: #{batch.invitations.has_been_sent.where(group: 2).count} / #{batch.invitations.where(group: 2).count}"
+      p.mb-1 = "Group 3: #{batch.invitations.has_been_sent.where(group: 3).count} / #{batch.invitations.where(group: 3).count}"
+      p.mb-1 = "Group 4: #{batch.invitations.has_been_sent.where(group: 4).count} / #{batch.invitations.where(group: 4).count}"
+      p.mb-1 = "Group 5: #{batch.invitations.has_been_sent.where(group: 5).count} / #{batch.invitations.where(group: 5).count}"

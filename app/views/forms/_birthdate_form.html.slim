@@ -1,0 +1,15 @@
+.mb-2
+  .row
+    .col-3.col-xl-2
+      label = t('date.month')
+    .col-3.col-xl-2
+      label = t('date.day')
+    .col-4.col-xl-3
+      label = t('date.year')
+  .row
+    .col-3.col-xl-2
+      == f.number_field :month, class: 'form-control', value: current_panelist.birthdate&.month
+    .col-3.col-xl-2
+      == f.number_field :day, class: 'form-control', value: current_panelist.birthdate&.day
+    .col-4.col-xl-3
+      == f.number_field :year, class: 'form-control', value: current_panelist.birthdate&.year

@@ -1,0 +1,34 @@
+.card
+  .card-header
+    .d-flex.justify-content-between
+      h4
+        span.mr-2 Gate survey data
+      - if @survey.gate_surveys.any?
+        = link_to survey_gate_surveys_url(@survey, format: :csv), class: 'btn btn-outline-primary' do
+          i.fas.fa-cloud-download-alt.mr-1
+          | Download
+  .card-body
+    - if @survey.gate_surveys.empty?
+      p.mb-0 No data collected yet.
+    - else
+      table.table.table-sm.table-wrapped-with-header.mb-0
+        thead
+          tr
+            th UID / Encoded UID
+            th State
+            th ZIP
+            th Birthdate
+            th Age
+            th Income
+            th Ethnicity
+        tbody
+          - @survey.gate_surveys.each do |gate_survey|
+            tr
+              td = "#{gate_survey.onboarding.uid} / #{gate_survey.onboarding.token}"
+              td = gate_survey.state
+              td = gate_survey.zip
+              td = gate_survey.birthdate
+              td = gate_survey.age
+              td = gate_survey.gender
+              td = gate_survey.income
+              td = gate_survey.ethnicity

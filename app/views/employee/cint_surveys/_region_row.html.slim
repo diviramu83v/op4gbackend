@@ -1,0 +1,6 @@
+.col-lg-4.mb-3
+  = render 'employee/cards/text_header', label: type
+  div
+    - regions.each do |city_or_state|
+      = city_or_state
+      br

@@ -1,0 +1,6 @@
+nav#sidebar.navbar.navbar-dark.justify-content-start.flex-column.align-items-start.d-none.d-lg-flex
+  h5 = link_to 'Supply', supply_dashboard_url, class: nav_link_class(supply_dashboard_url)
+  ul.navbar-nav
+    li.nav-item.mr-3 = link_to 'Survey API', api_vendors_url, class: nav_link_class(api_vendors_url)
+    li.nav-item.mr-3 = link_to 'Disqo API', api_disqo_index_url, class: nav_link_class(api_disqo_index_url)
+    li.nav-item.mr-3 = link_to 'Cint API', api_cint_index_url, class: nav_link_class(api_cint_index_url)

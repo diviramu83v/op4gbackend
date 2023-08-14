@@ -1,0 +1,6 @@
+one:
+  panelist: standard
+  amount_cents: 100
+  paid_at: <%= Time.now.utc %>
+  period: '2020-01'
+  period_year: '2020'

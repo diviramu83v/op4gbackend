@@ -1,0 +1,101 @@
+.row.mb-3
+  .col-lg-12
+    .form-group
+      .mb-3 = qual_form.label 'Country'
+      span
+        = qual_form.radio_button :geocountry, 'US', class: 'mr-2', checked: @disqo_quota.find_in_qualifications('geocountry')&.first == 'US' || true, required: true
+        = qual_form.label 'US', class: 'mb-0 mr-4'
+        = qual_form.radio_button :geocountry, 'CA', class: 'mr-2', checked: @disqo_quota.find_in_qualifications('geocountry')&.first == 'CA', required: true
+        = qual_form.label 'CA', class: 'mb-0 mr-4'
+        = qual_form.radio_button :geocountry, 'AU', class: 'mr-2', checked: @disqo_quota.find_in_qualifications('geocountry')&.first == 'AU', required: true
+        = qual_form.label 'AU', class: 'mb-0'
+#united-states
+  .row.mb-3
+    .col-lg-12
+      .form-group
+        .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:geousregion]
+        .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+          i.fa.mr-1
+          | Select all
+        div
+          = qual_form.collection_check_boxes :geousregion, DisqoQuota::GEOUSREGION_OPTIONS, :first, :last, { checked: @disqo_quota.find_in_qualifications('geousregion') } do |b|
+            .form-check.form-check-inline
+              = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+              = b.label(class: 'pt-2 text-label')
+  .row.mb-3
+    .col-lg-12
+      .form-group
+        .mb-3.d-inline = qual_form.label DisqoQuota::LABEL_OPTIONS[:georegion]
+        .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+          i.fa.mr-1
+          | Select all
+        div
+          = qual_form.collection_check_boxes :georegion, DisqoQuota::GEO_US_REGION_OPTIONS, :first, :first, { checked: @disqo_quota.find_in_qualifications('georegion') } do |b|
+            .form-check.form-check-inline
+              = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+              = b.label(class: 'pt-2 text-label')
+#canada
+  .row.mb-3
+    .col-lg-12
+      .form-group
+        .mb-3 = qual_form.label DisqoQuota::LABEL_OPTIONS[:georegion]
+        .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+          i.fa.mr-1
+          | Select all
+        div
+          = qual_form.collection_check_boxes :georegion, DisqoQuota::GEO_CANADA_REGION_OPTIONS, :first, :first, { checked: @disqo_quota.find_in_qualifications('georegion') } do |b|
+            .form-check.form-check-inline
+              = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+              = b.label(class: 'pt-2 text-label')
+#australia
+  .row.mb-3
+    .col-lg-12
+      .form-group
+        .mb-3 = qual_form.label DisqoQuota::LABEL_OPTIONS[:georegion]
+        .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+          i.fa.mr-1
+          | Select all
+        div
+          = qual_form.collection_check_boxes :georegion, DisqoQuota::GEO_AUSTRALIA_REGION_OPTIONS, :first, :first, { checked: @disqo_quota.find_in_qualifications('georegion') } do |b|
+            .form-check.form-check-inline
+              = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+              = b.label(class: 'pt-2 text-label')
+
+javascript:
+  function show_united_states() {
+    $('#united-states').show();
+    $('#canada').hide();
+    $('#australia').hide();
+  }
+  function show_canada() {
+    $('#united-states').hide();
+    $('#canada').show();
+    $('#australia').hide();
+  }
+  function show_australia() {
+    $('#united-states').hide();
+    $('#canada').hide();
+    $('#australia').show();
+  }
+  function show_correct_georegion() {
+    if ($('#disqo_quota_qualifications_geocountry_us').is(':checked')) {
+      show_united_states()
+    }
+    if ($('#disqo_quota_qualifications_geocountry_ca').is(':checked')) {
+      show_canada()
+    }
+    if ($('#disqo_quota_qualifications_geocountry_au').is(':checked')) {
+      show_australia()
+    }
+  }
+
+  $(document).ready(function() {
+    show_correct_georegion()
+    $('input[name="disqo_quota[qualifications][geocountry]"]').click(function() {
+      show_correct_georegion()
+    })
+    $('input[name="disqo_quota[qualifications][geocountry]"]').change(function() {
+      $('input[name="disqo_quota[qualifications][georegion][]"]').val([]);
+      $('input[name="disqo_quota[qualifications][geousregion][]"]').val([]);
+    })
+  })

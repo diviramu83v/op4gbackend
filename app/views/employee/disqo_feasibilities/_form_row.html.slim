@@ -1,0 +1,11 @@
+.col-lg-12
+  .form-group
+    .mb-3.d-inline = qual_form.label DisqoFeasibility::LABEL_OPTIONS[field.to_sym]
+    .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+      i.fa.mr-1
+      | Select all
+    div
+      = qual_form.collection_check_boxes field.to_sym, DisqoQuotaSelections.find_in_hash(field), :first, :last, { checked: feasibility.find_in_qualifications(field) } do |b|
+        .form-check.form-check-inline
+          = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+          = b.label(class: 'pt-2 text-label')

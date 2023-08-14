@@ -1,0 +1,44 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Projects', projects_url
+  li.breadcrumb-item = link_to @survey.project.extended_name, @survey.project
+  li.breadcrumb-item = link_to @survey.name, survey_url(@survey)
+  - if @onramp.vendor?
+    li.breadcrumb-item = link_to 'Vendors', survey_vendors_url(@survey)
+    li.breadcrumb-item = @onramp.vendor.name
+  - else
+    li.breadcrumb-item = link_to 'Onramps', survey_onramps_url(@survey)
+  li.breadcrumb-item.active Onramp
+  li.breadcrumb-item.active Edit
+.mb-5
+  h2 Edit onramp
+.mb-5
+  = form_for @onramp do |f|
+    = render 'employee/form_errors', resource: @onramp
+    .row
+      - if current_employee.admin_or_ops_manager?(session[:effective_role])
+        .col-2
+          .mb-3
+            .form-check
+              = f.check_box :check_clean_id, class: 'form-check-input'
+              = f.label :check_clean_id, 'Use CleanID', class: 'form-check-label'
+        .col-2
+          .mb-3
+            .form-check
+              = f.check_box :check_recaptcha, class: 'form-check-input'
+              = f.label :check_recaptcha, 'Use Recaptcha', class: 'form-check-label'
+        .col-2
+          .mb-3
+            .form-check
+              = f.check_box :ignore_security_flags, class: 'form-check-input'
+              = f.label :ignore_security_flags, 'Ignore security flags', class: 'form-check-label'
+      .col-2
+        .mb-3
+          .form-check
+            = f.check_box :check_prescreener, class: 'form-check-input'
+            = f.label :check_prescreener, 'Use prescreener', class: 'form-check-label'
+      .col-2
+        .mb-3
+          .form-check
+            = f.check_box :check_gate_survey, class: 'form-check-input'
+            = f.label :check_gate_survey, 'Use gate survey', class: 'form-check-label'
+    = render 'employee/form_buttons'

@@ -1,0 +1,19 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Demographic Data', new_demographic_detail_url
+  li.breadcrumb-item.active Results
+.mb-5
+  h2
+    span.mr-3 Demographic data
+.mb-3.pl-4.text-right
+  .row
+    .col
+      = link_to "Download", demographic_detail_url(@demographic_detail, format: :csv), class: 'btn btn-sm btn-outline-primary'
+.mb-5
+  table.table
+    thead
+      th IDs Processed
+      tbody
+        - @demographic_detail.panelists.each do |panelist|
+          tr
+            td = panelist.demographic_detail_results.find_by(demographic_detail: @demographic_detail).uid
+

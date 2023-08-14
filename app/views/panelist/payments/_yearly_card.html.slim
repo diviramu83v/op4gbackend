@@ -1,0 +1,25 @@
+.card
+  .card-header
+    h4 = year
+  .card-body
+    table.table.table-sm.table-wrapped-with-header.mb-0
+      thead
+        tr
+          th = t('panelist.payments.show.period_header', default: 'Period')
+          th = t('panelist.payments.show.description_header', default: 'Description')
+          - if panelist.supporting_nonprofit?
+            th.text-right = t('panelist.payments.show.personal_header', default: 'Personal')
+            th.text-right = t('panelist.payments.show.nonprofit_header', default: 'Nonprofit')
+          - else
+            th.text-right = t('panelist.payments.show.amount_header', default: 'Amount')
+      tbody
+        - panelist.combined_earnings_and_payments_for_year(year).each do |entry|
+          tr
+            td.period-column = entry.period
+            - if entry.class == Payment
+              td = entry.description || entry.ledger_description
+            - else
+              td = entry.ledger_description
+            td.text-right = number_to_currency(entry.ledger_amount)
+            - if panelist.supporting_nonprofit?
+              td.text-right = number_to_currency(entry.try(:nonprofit_amount))

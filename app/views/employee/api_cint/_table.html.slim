@@ -1,0 +1,33 @@
+- years.sort.reverse.each do |year|
+    - onboardings = Onboarding.complete.for_cint.for_year(year)
+    - projects = onboardings.map(&:project).uniq
+    - total_revenue = onboardings.sum { |onboarding| onboarding.survey.cpi.to_f || 0 }
+    - total_payout = onboardings.sum do |onboarding|
+      - if onboarding.cint_survey.present?
+        - onboarding.cint_survey&.cpi.to_f || 0
+      - else
+        - onboarding.survey.cint_surveys.first&.cpi.to_f || 0
+
+    - total_profit = total_revenue - total_payout
+    .d-flex
+      h3
+        span.mr-3 = link_to year, api_cint_single_year_completes_url(year: year)
+    table.mb-5.table.table-sm.mb-0 data-sort='table'
+      thead
+        tr
+          th Total Projects
+          th Live Projects
+          th Closed Projects
+          th Hold Projects
+          th Total Revenue
+          th Total Payout
+          th Total Profit
+      tbody
+        tr
+          td = projects.count
+          td = projects.select { |project| project.live? }.count
+          td = projects.select { |project| project.finished? || project.archived? }.count
+          td = projects.select { |project| project.hold? }.count
+          td = number_to_currency(total_revenue)
+          td = number_to_currency(total_payout)
+          td = number_to_currency(total_profit)

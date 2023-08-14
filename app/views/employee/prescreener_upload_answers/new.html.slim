@@ -1,0 +1,34 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Projects', projects_url
+  li.breadcrumb-item = link_to @prescreener_question.survey.project.extended_name, @prescreener_question.survey.project
+  li.breadcrumb-item.active = @prescreener_question.survey.name
+  li.breadcrumb-item.active = link_to 'Prescreener', survey_prescreener_questions_url(@prescreener_question.survey)
+  li.breadcrumb-item.active Upload Answers
+.mb-4
+  h3
+    span.mr-3 Upload Answers
+.row
+  .col-10
+    .mb-4
+      = form_for :upload, url: prescreener_question_prescreener_upload_answers_url(@prescreener_question) do |f|
+        = f.hidden_field :upload_tool, value: true
+        - tooltip = 'CSV file with two columns, no headers. Enter "true" in second column to indicate a target answer'
+        .form-group
+          h5.mb-2.dashhead-subtitle.text-header.tiny-button-header
+            | Target answer upload
+            i.far.fa-question-circle.ml-1 title=tooltip data-tooltip='true' data-html='true' data-width='500px' data-template='<div class="tooltip" role="tooltip"><div class="arrow"></div><div class="tooltip-inner" style="max-width: none;"></div></div>'
+          = f.file_field :answer_upload, class: 'form-control-file'
+        span#download-button
+          = render 'employee/form_buttons'
+.spinner-wrapper.d-none style='z-index: 1'
+  i.fa.fa-spinner.fa-pulse.fa-3x.fa-fw
+    span.sr-only Loading...
+javascript:
+  var question_id = "#{@prescreener_question.id}"
+  var questions_path = "#{prescreener_question_answers_url(@prescreener_question)}"
+coffee:
+  App.cable.subscriptions.create { channel: 'PrescreenerAnswerUploadChannel', prescreener_question: question_id },
+    received: (data) ->
+      window.location.href = questions_path
+    $('#download-button').click ->
+      $('.spinner-wrapper').removeClass('d-none');

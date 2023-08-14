@@ -1,0 +1,21 @@
+.mb-5
+  .d-flex.justify-content-end.mb-3
+    .pagination-xs.mb-0 = paginate @denylisted_ips
+  table.table.table-sm.mb-3 data-sort='table'
+    thead
+      tr
+        th Address
+        th Category
+        th
+    tbody
+      - @denylisted_ips.each do |ip|
+        tr
+          td = link_to ip.address, ip_address_path(ip.id)
+          td = ip_category_badge(ip)
+          td.text-right
+            - if can?(:view_and_modify, IpAddress)
+              = link_to denylist_path(ip: ip.address), class: "btn btn-success btn-xs", method: :delete do
+                i.fa.fa-undo.mr-2
+                | Unblock
+  .d-flex.justify-content-end
+    .pagination-xs.mb-0 = paginate @denylisted_ips

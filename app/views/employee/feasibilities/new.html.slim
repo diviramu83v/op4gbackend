@@ -1,0 +1,16 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Feasibility tool', feasibilities_url
+  li.breadcrumb-item.active New query
+.mb-5
+  h2 New query
+.mb-5
+  .row
+    .col-6
+      = form_for :feasibility, url: feasibilities_url do |f|
+        .form-group
+          .mb-2 = f.label :select_a_panel
+          .mb-3 = f.select :panel_id, options_for_select(@panels.pluck(:name, :id), selected: "thing"), { prompt: 'Please select...' }, { class: 'form-control' }
+        .form-group
+          .mb-2 = f.label "select a client(optional)"
+          .mb-3 = f.select :client_id, options_for_select(@clients.pluck(:name, :id), selected: "thing"), { prompt: 'Please select...' }, { class: 'form-control' }
+        = render 'employee/form_buttons'

@@ -1,0 +1,17 @@
+.mt-5
+  h5
+    span.mr-3 Project found
+    span.badge.badge-secondary = @decoding.decoded_disqo_projects.with_survey.size
+.mb-4
+  table.table.table-sm.table-no-header-border data-sort='table'
+    thead
+      tr
+        th Disqo campaign id
+        th Survey id
+        th Project id
+    tbody
+      - @decoding.decoded_disqo_projects.with_survey.ordered_by_id.each do |decoding|
+        tr
+          td = decoding.disqo_campaign_id
+          td = link_to decoding.survey_id, survey_disqo_quotas_url(decoding.survey) if decoding.survey
+          td = link_to decoding.survey.project.id, project_url(decoding.survey.project) if decoding.survey

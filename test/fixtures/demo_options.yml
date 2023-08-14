@@ -1,0 +1,6 @@
+standard:
+  demo_question: standard
+  label: test-label
+one:
+  demo_question: standard
+  label: one-test-label

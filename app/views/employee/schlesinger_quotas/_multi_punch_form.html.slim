@@ -1,0 +1,4 @@
+= qual_form.collection_check_boxes question.slug.to_sym, question.qualification_answers, :answer_id, :text do |b|
+  .form-check.form-check-inline
+    = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click', checked: @schlesinger_quota.qualifications[question.slug]&.include?(b.value.to_s))
+    = b.label(class: 'pt-2 text-label')

@@ -1,0 +1,4 @@
+standard:
+  panelist: standard
+  employee: operations
+  body: Faker::String

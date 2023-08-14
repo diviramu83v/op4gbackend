@@ -1,0 +1,13 @@
+gender:
+  name: GENDER
+  slug: gender
+  text: What is your gender?
+  qualification_category_id: 5
+  qualification_type_id: 1
+age:
+  name: Age
+  slug: age
+  text: What is your age?
+  qualification_category_id: 5
+  qualification_type_id: 6
+

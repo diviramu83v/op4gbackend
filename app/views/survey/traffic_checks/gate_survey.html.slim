@@ -1,0 +1,31 @@
+.card
+  .card-header
+    h4 Quick Response Info
+  .card-body
+    .mb-3 Please complete the following form to enter the survey:
+    .mb-5.col-lg-6
+      = form_for :step, url: survey_step_check_url do |f|
+        = f.hidden_field :token, value: @traffic_step.token
+        .form-group
+          = f.label :state
+          = f.select :state, State::GATE, { prompt: 'Please select...' }, { class: 'form-control' }
+        .form-group
+          = f.label :zip
+          = f.text_field :zip, class: 'form-control'
+        .form-group
+          = f.label :birthdate
+          = f.text_field :birthdate, class: 'form-control', data: { type: 'date' }
+        .form-group
+          = f.label :age
+          = f.text_field :age, class: 'form-control'
+        .form-group
+          = f.label :gender
+          = f.select :gender, GateSurvey::GENDERS, { prompt: 'Please select...' }, { class: 'form-control' }
+        .form-group
+          = f.label :income
+          = f.select :income, GateSurvey::INCOMES, { prompt: 'Please select...' }, { class: 'form-control' }
+        .form-group
+          = f.label :ethnicity
+          = f.select :ethnicity, GateSurvey::ETHNICITIES, { prompt: 'Please select...' }, { class: 'form-control' }
+        .row.col-2 style='min-width:80px'
+          = submit_tag 'Enter', class: 'form-control btn btn-primary btn-block'

@@ -1,0 +1,51 @@
+.mb-5
+  .row
+    .col-2
+      = render 'employee/cards/text_element', label: 'Panel', value: @query.panel.name
+    - if @query.filtered?
+      .col-10
+        = render 'employee/cards/text_header', label: 'Filters'
+        - @query.options.each do |option|
+          = link_to option.button_label, query_option_url(@query, option), method: :delete, remote: true, 'data-demo-filter': 'button', class: 'btn btn-outline-dark btn-xs mr-1 mb-1'
+        - @query.demo_query_state_codes.each do |obj|
+          - code = obj.code
+          = link_to "State : #{code}", query_state_code_url(@query, code), method: :delete, remote: true, 'data-demo-filter': 'button', class: 'btn btn-outline-dark btn-xs mr-1 mb-1'
+        - @query.ages.order_by_value.each do |age|
+          = link_to age.button_label, query_age_url(@query, age), method: :delete, remote: true, 'data-demo-filter': 'button', class: 'btn btn-outline-dark btn-xs mr-1 mb-1'
+        - @query.regions.each do |region|
+          = link_to region.button_label, query_region_url(@query, region), method: :delete, remote: true, 'data-demo-filter': 'button', class: 'btn btn-outline-dark btn-xs mr-1 mb-1'
+        - @query.divisions.each do |division|
+          = link_to division.button_label, query_division_url(@query, division), method: :delete, remote: true, 'data-demo-filter': 'button', class: 'btn btn-outline-dark btn-xs mr-1 mb-1'
+        - @query.states.each do |state|
+          = link_to state.button_label, query_state_url(@query, state), method: :delete, remote: true, 'data-demo-filter': 'button', class: 'btn btn-outline-dark btn-xs mr-1 mb-1'
+        - @query.dmas.each do |dma|
+          = link_to dma.button_label, query_dma_url(@query, dma), method: :delete, remote: true, 'data-demo-filter': 'button', class: 'btn btn-outline-dark btn-xs mr-1 mb-1'
+        - @query.msas.each do |msa|
+          = link_to msa.button_label, query_msa_url(@query, msa), method: :delete, remote: true, 'data-demo-filter': 'button', class: 'btn btn-outline-dark btn-xs mr-1 mb-1'
+        - @query.pmsas.each do |pmsa|
+          = link_to pmsa.button_label, query_pmsa_url(@query, pmsa), method: :delete, remote: true, 'data-demo-filter': 'button', class: 'btn btn-outline-dark btn-xs mr-1 mb-1'
+        - @query.counties.each do |county|
+          = link_to county.button_label, query_county_url(@query, county), method: :delete, remote: true, 'data-demo-filter': 'button', class: 'btn btn-outline-dark btn-xs mr-1 mb-1'
+        - @query.zip_codes.each do |zip|
+          = link_to zip.button_label, query_zip_url(@query, zip), method: :delete, remote: true, 'data-demo-filter': 'button', class: 'btn btn-outline-dark btn-xs mr-1 mb-1'
+        - @query.project_inclusions.each do |inclusion|
+          = link_to inclusion.button_label, query_project_inclusion_url(@query, inclusion), method: :delete, remote: true, 'data-demo-filter': 'button', class: 'btn btn-outline-dark btn-xs mr-1 mb-1'
+        - @query.encoded_uid_onboardings.each do |onboarding|
+          = link_to onboarding.button_label, query_onboarding_url(@query, onboarding), method: :delete, remote: true, 'data-demo-filter': 'button', class: 'btn btn-outline-dark btn-xs mr-1 mb-1'
+.mb-0
+  h3
+    span.mr-3
+      span#panelist-count = format_number(@query.panelist_count)
+      span = " #{'panelist'.pluralize(@query.panelist_count)}"
+    - if @query.survey.present?
+      = link_to survey_queries_url(@query.survey), class: 'btn btn-link pl-0' do
+        i.fa.fa-chevron-right.mr-1
+        | Back to project
+    - else
+      = link_to feasibilities_url, class: 'btn btn-primary mr-1' do
+        i.fas.fa-cloud-upload-alt.mr-2
+        = 'Save'
+    - if @query.filtered?
+      = link_to query_filter_url(query_id: @query.id, source: source), method: :delete, remote: true, 'data-demo-filter': 'button', class: 'btn btn-primary' do
+        i.fa.fa-plus-circle.mr-2
+        | Clear filters

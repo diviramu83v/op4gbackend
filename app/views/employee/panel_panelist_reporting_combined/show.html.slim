@@ -1,0 +1,46 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Panels', panels_url
+  li.breadcrumb-item = link_to @panel.name, panel_url(@panel)
+  li.breadcrumb-item.active = 'Panel panelist reporting'
+.mb-5
+  .d-flex.justify-content-between
+    h2
+      span.mr-2 Panelist reporting
+.row.mb-5
+  .col-lg-5 = render 'employee/cards/text_element', label: 'Name', value: @panel.name
+.row
+  .col-lg-8
+    h3.mb-4 Sign up
+    .row.mb-5
+      .col-3 = render 'employee/cards/text_element', label: 'Started Signing Up', value: format_number(@panel.started_signing_up_count)
+      .col-3 = render 'employee/cards/text_element', label: 'Confirmed Email Address (DOI)', value: format_number(@panel.confirmed_email_address_count)
+      .col-3 = render 'employee/cards/text_element', label: 'Completed Demos', value: format_number(@panel.completed_demos_count)
+      .col-3 = render 'employee/cards/text_element', label: 'Still Active', value: format_number(@panel.still_active_count)
+.row
+  .col-lg-8
+    h3.mb-4 Net incentive margin
+    .row.mb-5
+      .col-4 = render 'employee/cards/text_element', label: 'Accepted Completes x CPI', value: format_currency(@panel.calculate_total_cpi)
+      .col-4 = render 'employee/cards/text_element', label: 'Panelist earnings', value: format_currency(@panel.calculate_total_earnings)
+      .col-4 = render 'employee/cards/text_element', label: 'ROI', value: format_currency(@panel.calculate_net_profit)
+.row
+  .col-lg-8
+    h3.mb-4 Lifecycle
+    .row.mb-4
+      .col-3 = render 'employee/cards/text_element', label: 'Active', value: format_number(@panel.active_panelists_count)
+      .col-3 = render 'employee/cards/text_element', label: 'Suspended due to fraud or manually by support team', value: format_number(@panel.suspended_panelists_count)
+      .col-3 = render 'employee/cards/text_element', label: 'Deactivated due to inactivity', value: format_number(@panel.deactivated_panelists_count)
+      .col-3 = render 'employee/cards/text_element', label: 'Deleted themself', value: format_number(@panel.deleted_panelists_count)
+.row
+  .col-lg-8
+    h3.mb-4 Completes funnel
+    .spinner#row-data
+      i.fa.fa-spinner.fa-pulse.fa-3x.fa-fw
+      span.sr-only Loading...
+
+javascript:
+  var panel_id = "#{@panel.id}"
+coffee:
+  App.cable.subscriptions.create { channel: "CompletesFunnelChannel", id: panel_id, resource: 'Panel' },
+    received: (data) ->
+      $('#row-data').replaceWith(data)

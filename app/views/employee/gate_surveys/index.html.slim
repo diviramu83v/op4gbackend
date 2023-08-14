@@ -1,0 +1,14 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Projects', projects_url
+  li.breadcrumb-item = link_to @survey.project.extended_name, @survey.project
+  li.breadcrumb-item.active = @survey.name
+.mb-5
+  = render 'employee/surveys/header', survey: @survey
+.mb-5
+  .row
+    .col-12
+      = render 'employee/surveys/details', survey: @survey
+    .col-2
+      = render 'employee/surveys/menu'
+    .col-10
+      = render "employee/surveys/gate_surveys", survey: @survey

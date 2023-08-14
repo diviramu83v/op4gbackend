@@ -1,0 +1,19 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Projects', projects_url
+  li.breadcrumb-item = link_to @survey.project.extended_name, @survey.project
+  li.breadcrumb-item = link_to @survey.name, survey_traffic_details_url(@survey)
+  li.breadcrumb-item.active traffic record
+
+.mb-5
+  h2
+    .d-flex.justify-content-between
+      span
+        span.mr-2 Traffic record #{@onboarding.id}
+.row
+  .col-xl-4.col-lg-6.mb-3 = render 'employee/cards/text_element', label: 'Status', value: @onboarding.status
+  .col-xl-4.col-lg-6.mb-3 = render 'employee/cards/text_element', label: 'UID', value: @onboarding.uid
+  .col-xl-4.col-lg-6.mb-3 = render 'employee/cards/text_element', label: 'Token', value: @onboarding.token
+.row
+  .col-xl-4.col-lg-6.mb-3 = render 'employee/cards/text_element', label: 'Security status', value: @onboarding.security_status
+  .col-xl-4.col-lg-6.mb-3 = link_to 'View steps', onboarding_traffic_steps_url(@onboarding)
+  .col-xl-4.col-lg-6.mb-3 = link_to 'View traffic events', onboarding_traffic_events_url(@onboarding)

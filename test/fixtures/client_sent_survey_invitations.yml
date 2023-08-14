@@ -1,0 +1,6 @@
+standard:
+  email: client_sent_test@test.com
+  token: expert_recruit_123
+  unsubscribe_token: unsubscribe_123
+  onramp: client_sent
+  status: initialized

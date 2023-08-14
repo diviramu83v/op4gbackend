@@ -1,0 +1,6 @@
+- if controller_name != 'sessions'
+  = link_to t('devise.links.sign_in', default: 'Sign in'), new_panelist_session_path
+- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
+  = link_to t('devise.links.forgot_password', default: 'Forgot your password?'), new_panelist_password_path
+- if devise_mapping.confirmable? && controller_name != 'confirmations'
+  = link_to t('devise.links.missing_confirmation', default: 'Missing email confirmation instructions?'), new_panelist_confirmation_path

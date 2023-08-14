@@ -1,0 +1,8 @@
+.card
+  .card-header
+    h4 Thanks!
+  .card-body
+    p Thank you for your participation, but unfortunately you did not qualify for this survey.
+    / - if current_panelist.present?
+      / Panelist specific text goes here.
+      p = link_to 'Return to your dashboard', panelist_dashboard_url

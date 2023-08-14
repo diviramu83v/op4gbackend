@@ -1,0 +1,21 @@
+- if @survey.present?
+  - content_for :breadcrumbs
+    li.breadcrumb-item = link_to 'Projects', projects_url
+    li.breadcrumb-item = link_to @survey.project.extended_name, @survey.project
+    li.breadcrumb-item = link_to @survey.name, survey_url(@survey)
+    li.breadcrumb-item = link_to 'Sample', survey_queries_url(@survey)
+    li.breadcrumb-item.active New query
+.mb-5
+  h2 New query
+.mb-5
+  .mb-3
+    h3 Select a panel
+  .row
+    - @panels.each do |panel|
+      .col-md-3
+        .card.mb-3
+          .card-header
+            h4 = panel.name
+          .card-body
+            p = "#{number_with_delimiter(panel.active_panelist_count)} panelists"
+            = link_to 'Select', queries_url(panel_id: panel.id, survey_id: @survey.try(:id)), method: :post, class: 'btn btn-block btn-primary mr-1', data: { disable_with: "<i class='fa fa-spinner fa-pulse mr-2'></i>Generating query..." }

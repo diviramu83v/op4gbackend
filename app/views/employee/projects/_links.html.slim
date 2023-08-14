@@ -1,0 +1,12 @@
+- if can?(:view_and_modify, Survey)
+  = link_to project_surveys_url(project), method: :post, class: 'btn btn-link pl-0 mr-3' do
+    i.fa.fa-plus-circle.mr-1
+    | Add another survey
+  = link_to project_recontacts_url(project), method: :post, class: 'btn btn-link pl-0 mr-3' do
+    i.fa.fa-plus-circle.mr-1
+    | Add recontact
+- if project.multiple_surveys?
+  - if can?(:view_and_modify, Vendor)
+    = link_to new_project_vendor_url(project), class: 'btn btn-link pl-0' do
+      i.fa.fa-plus-circle.mr-1
+      | Add vendor to all surveys

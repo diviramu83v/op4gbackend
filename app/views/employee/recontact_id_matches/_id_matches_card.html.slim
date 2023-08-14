@@ -1,0 +1,24 @@
+.card.mb-3
+  .card-header
+    h4 = 'ID Matches'
+  .card-body
+    table.table.table-sm.table-wrapped-with-header.mb-0
+      thead
+        tr
+          th New
+          th Previous
+          th Email
+          th Source
+          th Payout
+      tbody
+        - @recontact.recontacted_onboardings.complete.each do |onboarding|
+          tr
+            td = onboarding.token
+            td = onboarding.recontact_invitation.uid
+            td = onboarding.recontact_invitation.original_onboarding.find_email_address
+            td = onboarding.recontact_invitation.original_onboarding.source_name
+            td = format_currency_with_zeroes(onboarding.recontact_invitation.recontact_invitation_batch.incentive)
+  .mb-3.pl-4
+    .row
+      .col
+        = link_to "Download", recontact_id_matches_url(@recontact, format: :csv), class: 'btn btn-sm btn-outline-primary'

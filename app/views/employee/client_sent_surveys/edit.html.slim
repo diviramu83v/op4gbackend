@@ -1,0 +1,15 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Projects', projects_url
+  li.breadcrumb-item = link_to @survey.project.extended_name, @survey.project
+  li.breadcrumb-item = link_to @survey.name, @survey
+  li.breadcrumb-item = link_to 'Client sent survey', survey_client_sent_surveys_url(@survey)
+  li.breadcrumb-item.active Edit
+
+.row
+  .col-10
+    .row
+      .col-12
+        .mb-5
+          h2
+            span.mr-3 Edit client sent survey
+        = render 'employee/client_sent_surveys/form', url: client_sent_survey_url(@client_sent_survey)

@@ -1,0 +1,41 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Affiliates', affiliates_url
+  li.breadcrumb-item.active = @affiliate.name
+.mb-5
+  .d-flex.justify-content-between
+    h2
+      span.mr-2 Affiliate
+.row.mb-5
+  .col-lg-5 = render 'employee/cards/text_element', label: 'Name', value: @affiliate.name
+.row
+  .col-lg-7
+    h3.mb-4 Panelists
+    .row.mb-5
+      .col-3 = render 'employee/cards/text_element', label: 'Total panelists', value: format_number(@affiliate.panelists.count)
+      .col-3 = render 'employee/cards/text_element', label: 'Active panelists', value: format_number(@affiliate.panelists.active.count)
+      .col-3 = render 'employee/cards/text_element', label: 'Panelists with incomplete demos', value: format_number(@affiliate.panelists.signing_up.where.not(confirmed_at: nil).count)
+    .row.mb-2
+      .col-3
+        = link_to affiliate_earnings_url(@affiliate), class: 'btn btn-link pl-0' do
+          i.fa.fa-credit-card.mr-1
+          | View Earnings Data
+    .row.mb-2
+      .col-3
+        = link_to affiliate_profit_url(@affiliate), class: 'btn btn-link pl-0' do
+          i.fas.fa-dollar-sign.mr-1
+          | View Panelist Net Incentive Margin
+    .row.mb-2
+      .col-3
+        = link_to affiliate_stats_url(@affiliate), class: 'btn btn-link pl-0' do
+          i.fa.fa-filter.mr-1
+          | View Signup Stats
+    .row.mb-2
+      .col-3
+        = link_to affiliate_completes_url(@affiliate), class: 'btn btn-link pl-0' do
+          i.fa.fa-check.mr-1
+          | View Completes Funnel
+    .row.mb-5
+      .col-3
+        = link_to affiliate_lifecycle_url(@affiliate), class: 'btn btn-link pl-0' do
+          i.fa.fa-chart-bar.mr-1
+          | View Panelist Lifecycle Stats

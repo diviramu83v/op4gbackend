@@ -1,0 +1,9 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Cint API', api_cint_index_url
+  li.breadcrumb-item = link_to "#{@date.year} Cint API completes", api_cint_single_year_completes_url(year: @date.year)
+  li.breadcrumb-item Cint completes | #{format_month_year_date(@date)}
+.mb-4
+  .d-flex.justify-content-between.align-items-center
+    h2
+      span.mr-3 Cint API completes for #{format_month_year_date(@date)}
+= render 'table'

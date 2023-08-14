@@ -1,0 +1,16 @@
+.card.mb-3
+  .card-header
+    .d-flex.justify-content-between
+      h4
+        span.mr-2 Survey warnings
+  .card-body
+    table.table.table-sm.table-wrapped-with-header.mb-0
+      thead
+        tr.row
+          th.col-10 Warning
+          th.col-2 Type
+      tbody
+        - @survey.survey_warnings.order(created_at: :desc).each do |survey_warning|
+          tr.row
+            td.col-10 = link_to(edit_sample_batch_url(survey_warning.sample_batch), edit_sample_batch_url(survey_warning.sample_batch))
+            td.col-2 = survey_warning.category.humanize

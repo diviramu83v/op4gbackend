@@ -1,0 +1,7 @@
+.row.mb-5#row-data
+  .col-4.mb-2 = render 'employee/cards/text_element', label: 'Opportunities / invitations', value: format_number(resource.total_invitations(year: year, month: month))
+  .col-4.mb-2 = render 'employee/cards/text_element', label: 'Clicks', value: format_number(resource.total_clicks(year: year, month: month))
+  .col-4.mb-2 = render 'employee/cards/text_element', label: 'Completes', value: format_number(resource.total_completes(year: year, month: month))
+  .col-4.mb-2 = render 'employee/cards/text_element', label: 'Accepted completes', value: format_number(resource.total_accepted_completes(year: year, month: month))
+  .col-4.mb-2 = render 'employee/cards/text_element', label: 'Completers', value: format_number(resource.total_completers(year: year, month: month))
+  .col-4.mb-2 = render 'employee/cards/text_element', label: 'Uninvited panelists', value: format_number(resource.total_uninvited_panelists(year: year, month: month))

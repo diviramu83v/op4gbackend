@@ -1,0 +1,9 @@
+.row
+  .col-lg-8
+    .mb-4 = render "available_surveys_card", panelist: current_panelist
+    .mb-4 = render "paid_surveys_card", panelist: current_panelist
+    .mb-4 = render "in_review_surveys_card", panelist: current_panelist
+    .mb-4 = render "rejected_surveys_card", panelist: current_panelist
+  .col-lg-4
+    .mb-4 = render 'earnings_card', panelist: current_panelist, url: account_payments_url
+    .mb-4 = render 'nonprofit_card', panelist: current_panelist, url: account_contribution_url if current_panelist.contributing_to_nonprofit?

@@ -1,0 +1,17 @@
+.mb-3
+  h3
+    span.mr-2 Signups by month
+
+- if @nonprofit.active_original_panelists.empty?
+  p.mb-0 No signups yet.
+- else
+  table.table.table-sm.mb-3
+    thead
+      tr
+        th Month
+        th.text-right Signed up
+    tbody
+      - @nonprofit.original_panelists_grouped_by_month.order("month desc").each do |group|
+        tr
+          td = group.month.strftime('%b %Y')
+          td.text-right = format_number(group.count)

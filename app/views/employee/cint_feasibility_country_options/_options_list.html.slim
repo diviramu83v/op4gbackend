@@ -1,0 +1,29 @@
+= fields_for :options, url: @url do |field|
+  - @options&.each do |option|
+    .row.mt-3
+      .col-lg-12
+        .form-group
+          .mb-1.d-inline = field.label option['text']
+          .btn.btn-outline-primary.btn-xs.ml-2.d-inline.select-all
+            i.fa.mr-1
+            | Select all
+          div
+            = field.collection_check_boxes option['name']&.downcase&.parameterize&.underscore, option['variables'].collect{|o| [o['id'], o['name']]}, :first, :last, { checked: false } do |b|
+              .form-check.form-check-inline
+                = b.check_box(multiple: true, class: 'form-check-input checkbox-multi-click')
+                = b.label(class: 'pt-2 text-label')
+
+javascript:
+  $('.select-all').click(function() {
+    if ($(this).text() == 'Select all') {
+      $(this).text('Unselect all')
+      $(this).siblings('div')
+           .find("input[type='checkbox']")
+           .prop('checked', true);
+    } else {
+      $(this).text('Select all')
+      $(this).siblings('div')
+           .find("input[type='checkbox']")
+           .prop('checked', false);
+    }
+  })

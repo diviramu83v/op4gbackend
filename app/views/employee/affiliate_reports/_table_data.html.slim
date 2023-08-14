@@ -1,0 +1,17 @@
+- records.each do |record|
+  tr
+    td = "#{record.affiliate&.code}: #{record.affiliate&.name}"
+    td = "#{record.offer&.code}: #{record.offer&.name}"
+    td.text-right = value_or_zero(record.tune_signup_count)
+    td.text-right = value_or_zero(record.db_signup_count)
+    td.text-right = value_or_zero(record.opportunity_count)
+    td.text-right = value_or_zero(record.completes_count)
+    / td = completes_percentage(record.offer, record.affiliate)
+    td.text-right = value_or_zero(record.completers_count)
+    / td = completers_percentage(record.offer, record.affiliate)
+    td.text-right = value_or_zero(record.accepted_completes)
+    td.text-right = format_currency_with_zeroes(value_or_zero(record.affiliate_payout))
+    td.text-right = format_currency_with_zeroes(tune_signup_count(record))
+    td.text-right = format_currency_with_zeroes(total_payout(record))
+    td.text-right = format_currency_with_zeroes(cost_per_complete(record))
+    td.text-right = format_currency_with_zeroes(record.roi_dollars)

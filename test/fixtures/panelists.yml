@@ -1,0 +1,39 @@
+standard:
+  email: panelist@op4g.com
+  first_name: Testy
+  last_name: Testerson
+  token: <%= SecureRandom.hex %>
+  original_panel: standard
+  country: standard
+  welcomed_at: <%= Time.now.utc - 1.day %>
+  status: <%= Panelist.statuses[:active] %>
+  primary_panel: standard
+  clean_id_data:
+    data: blank
+  address: 1 Herb Street
+  city: Dallas
+  state: TX
+  postal_code: '75001'
+  birthdate: Mon, 10 Apr 1989
+  age: 32
+  update_age_at: <%= Time.now.utc + 1.day %>
+active:
+  email: panelist2@op4g.com
+  first_name: Testy
+  last_name: Testerson
+  token: <%= SecureRandom.hex %>
+  original_panel: standard
+  country: standard
+  welcomed_at: <%= Time.now.utc - 1.day %>
+  status: <%= Panelist.statuses[:active] %>
+  primary_panel: standard
+  nonprofit: one
+  clean_id_data:
+    data: blank
+  affiliate_code: affiliate_code
+  offer_code: offer_code
+  address: 1 Herb Street
+  city: Dallas
+  state: TX
+  postal_code: '75001'
+  birthdate: Mon, 10 Apr 1989

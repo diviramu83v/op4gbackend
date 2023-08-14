@@ -1,0 +1,7 @@
+- disabled = local_assigns.fetch :disabled, false
+- label = local_assigns.fetch(:label, 'Draft')
+
+span.mr-1
+  = link_to survey_statuses_url(survey, status: 'draft'), method: :post, class: "btn btn-outline-dark #{'disabled' if disabled}" do
+    i.fa.fa-undo class="#{'mr-2' unless disabled}"
+    = label unless disabled

@@ -1,0 +1,22 @@
+- content_for :breadcrumbs
+  li.breadcrumb-item = link_to 'Panelists', panelists_url
+  li.breadcrumb-item.active = @panelist.name
+  li.breadcrumb-item.active Demographic Information
+.mb-5
+  h2 Panelist
+.mb-5 = render 'employee/panelists/mini_nav', panelist: @panelist
+.mb-5
+  .mb-3
+    h3 Demographic Information
+.row
+  .col-lg-8
+    .card
+      .card-header
+        h4 = "#{@panelist.name} demographic information"
+      .card-body
+        - @panelist.answered_question_categories.each do |category|
+          - @panelist.answers_for_category(category).each do |answer|
+            p
+              = answer.demo_question.body
+              br
+              b = answer.demo_option.label
